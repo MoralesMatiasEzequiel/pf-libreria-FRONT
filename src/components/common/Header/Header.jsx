@@ -1,5 +1,5 @@
-import Nav from "../Nav/Nav";
-import Menu from "../Menu/Menu";
+import Nav from "./Nav/Nav";
+import Menu from "./Menu/Menu";
 
 const Header = () => {
 
