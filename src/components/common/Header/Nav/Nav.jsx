@@ -1,9 +1,9 @@
+// import { NavLink } from "react-router-dom"
+
 const Nav = () => {
 
     return(
-        <div>
-            <p>Soy el menú principal</p>
-        </div>
+        <nav></nav>
     )
 
 }
