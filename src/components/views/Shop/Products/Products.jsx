@@ -1,9 +1,14 @@
+import React, { useEffect } from "react";
+
+
 const Products = () => {
 
-    return(
+    
+    return (
         <div>
             <p>Soy el equivalente al componente Cards</p>
             <p>Cada Card debería llamarse Product</p>
+            
         </div>
     )
 

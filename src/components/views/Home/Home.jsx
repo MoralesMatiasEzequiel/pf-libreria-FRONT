@@ -1,8 +1,12 @@
+import React from "react";
+
 const Home = () => {
 
-    return(
+
+    return (
         <div>
             <p>Soy el home</p>
+       
         </div>
     )
 
