@@ -15,6 +15,10 @@ const Nav = () => {
             <div className={style.div}>
                 <ul className={style.ul}>
                     <li>
+                        <NavLink to={"/"} className={style.navLink}>Home</NavLink>
+                    </li>
+
+                    <li>
                         <NavLink to={"/about"} className={style.navLink}>Contacto</NavLink>
                     </li>
 
