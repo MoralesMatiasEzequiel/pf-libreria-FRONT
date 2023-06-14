@@ -7,6 +7,9 @@ import { Provider } from 'react-redux';
 import store from "./redux/store"
 import axios from "axios"
 
+import 'bootstrap-icons/font/bootstrap-icons.css';
+
+
 axios.defaults.baseURL = "http://localhost:3001";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
