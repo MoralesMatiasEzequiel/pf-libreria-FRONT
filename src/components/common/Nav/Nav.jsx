@@ -16,7 +16,7 @@ const Nav = () => {
             <div className={style.div2}>
                 <ul className={style.ul}>
 
-                    <li className={style.li}>
+                    {/* <li className={style.li}> */}
 
                     <li>
                         <NavLink to={"/"} className={style.navLink}>Home</NavLink>
