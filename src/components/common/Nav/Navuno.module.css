@@ -23,7 +23,7 @@
     text-decoration: none;
     font-size: 1.2rem;
     font-weight: 500;
-transition: .3s;
+    transition: .3s;
 }
 
 .navLink:hover {
@@ -35,7 +35,10 @@ transition: .3s;
 /* 
 .nav {
     margin: 0;
+
     width: 100%;
+
+    padding: 5px;
     display: flex;
     background-color: var(--backNav1);
     color: var(--colorFonts);
