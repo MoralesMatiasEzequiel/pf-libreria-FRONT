@@ -14,7 +14,7 @@ const About = () => {
     <div className="container">
       <div className="row">
         <div className="col-md-6">
-          <h2>Formulario de contacto</h2>
+          <h2>Contacto</h2>
           <form>
             <div className="mb-3">
               <label htmlFor="nombre" className="form-label">Nombre:</label>
@@ -35,19 +35,21 @@ const About = () => {
           <h2>Información de ubicación</h2>
           <p>Dirección: {localAddress}</p>
           <p>Teléfono: Número de teléfono</p>
+
+          <h2>Encontranos en nuestras redes</h2>
           <ul className="list-inline">
             <li className="list-inline-item">
               <a href="enlace-a-red-social-1" className="text-decoration-none">
-                <i className="bi bi-facebook" onClick={() => window.open("enlace-a-red-social-1", "_blank")}> Facebook</i>
+                <i className="bi bi-facebook text-primary cursor-pointer" onClick={() => window.open("enlace-a-red-social-1", "_blank")}> Facebook</i>
               </a>
             </li>
             <li className="list-inline-item">
               <a href="enlace-a-red-social-2" className="text-decoration-none">
-                <i className="bi bi-instagram" onClick={() => window.open("enlace-a-red-social-2", "_blank")}> Instagram</i>
+                <i className="bi bi-instagram text-purple cursor-pointer" onClick={() => window.open("enlace-a-red-social-2", "_blank")}> Instagram</i>
               </a>
             </li>
             <li className="list-inline-item">
-              <i className="bi bi-geo-alt" onClick={openGoogleMaps}> Google Maps</i>
+              <i className="bi bi-geo-alt text-success" style={{ cursor: "pointer" }} onClick={openGoogleMaps}> Google Maps</i>
             </li>
           </ul>
         </div>
