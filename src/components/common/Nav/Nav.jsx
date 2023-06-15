@@ -1,44 +1,52 @@
 import { NavLink } from "react-router-dom"
 import style from "./Nav.module.css"
 
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
 
-const Nav = () => {
+const Navuno = () => {
 
     return (
+        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+            <Container>
+                <Navbar.Brand >
+                    <NavLink to={"/"}>
+                        <img className={style.logo} src="https://images.emojiterra.com/google/noto-emoji/unicode-15/color/512px/1f4da.png" alt="lilbrito" />
+                    </NavLink>
 
-        <nav className={style.nav}>
-            <div className={style.div}>
-                <NavLink to={"/"}>
-                    <img className={style.logo} src="https://images.emojiterra.com/google/noto-emoji/unicode-15/color/512px/1f4da.png" alt="lilbrito" />
-                </NavLink>
-            </div>
+                </Navbar.Brand>
 
-            <div className={style.div2}>
-                <ul className={style.ul}>
 
-                    <li className={style.li}>
+                <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                <Navbar.Collapse id="responsive-navbar-nav">
 
-                        <NavLink to={"/"} className={style.navLink}>Home</NavLink>
-                    </li>
+                    <Nav className="me-auto">
 
-                    <li>
+                    </Nav>
+                    <Nav>
+                        <Nav.Link eventKey={2}>
+                            <NavLink to={"/about"} className={style.navLink}>Contacto</NavLink>
+                        </Nav.Link>
 
-                        <NavLink to={"/about"} className={style.navLink}>Contacto</NavLink>
-                    </li>
+                        <Nav.Link eventKey={2} >
+                            <NavLink to={""} className={style.navLink}>Ingresar / Registrarse</NavLink>
+                        </Nav.Link>
 
-                    <li className={style.li} >
-                        <NavLink to={""} className={style.navLink}>Ingresar / Registrarse</NavLink>
-                    </li>
+                        <Nav.Link eventKey={2}>
+                            <NavLink to={"/cart"} className={style.navLink}>Carrito</NavLink>
+                        </Nav.Link>
+                    </Nav>
 
-                    <li className={style.li} >
-                        <NavLink to={"/cart"} className={style.navLink}>Carrito</NavLink>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+                </Navbar.Collapse>
+            </Container>
+        </Navbar>
+
 
     )
 
 }
 
-export default Nav;
+export default Navuno;
+
+
