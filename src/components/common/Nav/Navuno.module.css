@@ -1,6 +1,6 @@
 :root {
     --backNav1: #6e6e92;
-    --colorFonts: #000000;
+    --colorFonts: #ffffff;
 
     --colorBtn1: #0400ffa2;
     --colorBtn2: #00e1ff;
@@ -9,7 +9,30 @@
     --colorBtn5: #ff000000;
 }
 
+.logo {
+    width: 60px;
+    height: 60px;
+    background-image: url("../../../assets/lilbrito.png");
+    background-size: cover;
+    background-repeat: no-repeat;
 
+}
+
+.navLink {
+    color: var(--colorFonts);
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: 500;
+transition: .3s;
+}
+
+.navLink:hover {
+
+    font-size: 1.5rem;
+
+}
+
+/* 
 .nav {
     margin: 0;
     width: 100%;
@@ -37,23 +60,8 @@
 margin: auto;
 }
 
-.logo {
-    width: 60px;
-    height: 60px;
-    /* background-image: url("../../../assets/lilbrito.png");
-    background-size: cover;
-    background-repeat: no-repeat; */
-
-}
 
 
-.navLink {
-    color: var(--colorFonts);
-    text-decoration: none;
-    font-size: 1.2rem;
-    font-weight: 500;
-
-}
 
 .li {
     position: relative;
@@ -105,4 +113,4 @@ margin: auto;
 .li:hover::before {
 
     background-position: 100%;
-}
+} */
