@@ -1,6 +1,6 @@
 import './App.css';
 import { Routes, Route, useLocation } from 'react-router-dom';
-import Nav from './components/common/Nav/Nav';
+import Navuno from './components/common/Nav/Nav';
 import Menu from './components/common/Menu/Menu';
 import Footer from './components/common/Footer/Footer';
 import Home from './components/views/Home/Home'
@@ -16,7 +16,7 @@ function App() {
 
   return (
     <div className="App">
-      <Nav />
+      <Navuno />
       {!hideMenu && <Menu />}
       <Routes>
         <Route path='/' element={<Home />} />
