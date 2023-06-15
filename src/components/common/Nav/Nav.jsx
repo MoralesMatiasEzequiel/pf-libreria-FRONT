@@ -18,7 +18,6 @@ const Nav = () => {
 
                     <li className={style.li}>
 
-                    <li>
                         <NavLink to={"/"} className={style.navLink}>Home</NavLink>
                     </li>
 

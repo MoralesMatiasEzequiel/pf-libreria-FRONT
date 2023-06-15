@@ -1,16 +1,16 @@
-import Filters from "./Filters/Filters";
-import Products from "./Products/Products";
+import React from "react";
+import Product from "./Products/Product";
+
+
 
 const Shop = () => {
-
-    return(
-        <div>
-            <p>Soy la tienda</p>
-            <Filters />
-            <Products />
-        </div>
-    )
-
-}
+	
+	return (
+    <>
+		<h1 className="text-primary">Shop</h1>
+      <Product />
+    </>
+  );
+};
 
 export default Shop;
