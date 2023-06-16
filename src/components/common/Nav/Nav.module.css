@@ -1,6 +1,6 @@
 :root {
     --backNav1: #6e6e92;
-    --colorFonts: #ffffff;
+    --colorFonts: #c0c0c0;
 
     --colorBtn1: #0400ffa2;
     --colorBtn2: #00e1ff;
@@ -28,6 +28,5 @@
 
 .navLink:hover {
 
-    font-size: 1.5rem;
-
+    color: #ffffff;
 }
