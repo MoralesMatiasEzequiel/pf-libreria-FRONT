@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getAllProducts, getProductById } from "./productSlice";
+import { getAllProducts, getProductById, getProductsByName } from "./productSlice";
 
 
 export const getProducts = () => {
@@ -13,5 +13,12 @@ export const getProducts = () => {
 export const getById = (id) => {
     return (dispatch) => {
         dispatch(getProductById(id));
+    };
+};
+
+export const getAllProductsByName = (name) => {
+    return async (dispatch) => {
+        const { data } = await axios.get(`/product?name=${name}`);
+        dispatch(getProductsByName(data));
     };
 };

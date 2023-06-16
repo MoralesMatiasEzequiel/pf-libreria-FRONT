@@ -1,11 +1,11 @@
-// import { useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
+import { getAllProductsByName } from "../../../redux/productActions";
 
-//NOTA >>>> LO QUE ESTA COMENTADO TOCA ESPERAR A QUE ESTE LISTO EL REDUCER PARA QUE FUNCIONE
 
 const SearchBar = () => {
-    // const dispatch = useDispatch()
+    const dispatch = useDispatch()
     const [ name, setName ] = useState("")
 
     const handleChange = (event) => {
@@ -13,9 +13,8 @@ const SearchBar = () => {
     }
 
     const onSearch = (name) => {
-        // if(name) dispatch(getProductsByName(name))                //ESPERAR HACER EL REDUCER PARA QUE FUNCIONE
+        if(name) dispatch(getAllProductsByName(name))                
     }
-
 
     return (
         <div>
