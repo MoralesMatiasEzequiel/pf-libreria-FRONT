@@ -18,7 +18,7 @@ const Products = () => {
           return (
             <div key={index} className="col-md-4">
 							<div className="card" >
-              <Link to={'/shop/' + base.id}>
+              <Link to={'/shop/' + base._id}>
                 <img className="card-img-top" src={base.image} alt="Card image cap"/>
                 <div className="card-body">
 									<h5 className="card-title">{base.name}</h5>
