@@ -7,18 +7,15 @@ const Footer = () => {
       <div className="container">
         <div className="row">
           <div className="col-md-4">
-            <h4>Información de contacto</h4>
             <p>Correo electrónico: info@example.com</p>
             <p>Teléfono: 123-456-7890</p>
           </div>
           <div className="col-md-4">
-            <h4>Términos y condiciones</h4>
             <Link to="/terminos" className="text-light text-decoration-none">
               <button className="btn btn-outline-light">Ver términos y condiciones</button>
             </Link>
           </div>
           <div className="col-md-4">
-            <h4>Arrepentimiento de compra</h4>
             <button className="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#arrepentimientoModal">
               Arrepentirse de la compra
             </button>
