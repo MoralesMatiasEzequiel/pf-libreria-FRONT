@@ -1,6 +1,5 @@
 import SearchBar from "../SearchBar/SearchBar";
 import style from "./Menu.module.css"
-import Dropdown from 'react-bootstrap/Dropdown';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -40,9 +39,7 @@ const Menu = () => {
                                 menuVariant="dark"
                             >
                                 <NavDropdown.Item href="#action/3.1">Rapuncels</NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.2">
-                                    Negras
-                                </NavDropdown.Item>
+                                
                                 <NavDropdown.Item href="#action/3.3">Fionas</NavDropdown.Item>
                                 
                             </NavDropdown>
