@@ -15,7 +15,6 @@ const Shop = () => {
 
     return (
         <div>
-            <p>Soy la tienda</p>
             <Filters />
             <Products />
             <Paginado cantPages={cantPages} />

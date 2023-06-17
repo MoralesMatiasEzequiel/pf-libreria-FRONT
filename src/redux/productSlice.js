@@ -5,12 +5,14 @@ export const productSlice = createSlice({
     initialState: {
         products: [],
         productsByName: [],
+        productSee: [],
         detail: {},
         pag: 1
     },
     reducers: {
         getAllProducts: (state, action) => {
             state.products = action.payload
+            state.productSee = action.payload
         },
         getProductById: (state, action) => {
             state.detail = state.products.filter(pro => pro.id === action.payload)
@@ -29,10 +31,44 @@ export const productSlice = createSlice({
         },
         backTwoPageState: (state, action) => {
             state.pag = state.pag - 2
-        }
+        },
+        orderByAzState: (state, action) => {
+            state.productSee = state.products.sort((a, b) => {
+                const noa = a.name.toLowerCase();
+                const noe = b.name.toLowerCase();
+
+                if (noa < noe) {
+                    return -1;
+                }
+                if (noa > noe) {
+                    return 1;
+                }
+                return 0;
+            })
+        },
+        orderByZaState: (state, action) => {
+            state.productSee = state.products.sort((a, b) => {
+                const noa = a.name.toLowerCase();
+                const noe = b.name.toLowerCase();
+
+                if (noa < noe) {
+                    return 1;
+                }
+                if (noa > noe) {
+                    return -1;
+                }
+                return 0;
+            })
+        },
+        orderPriceToLowState: (state, action) => {
+            state.productSee = state.products.sort((a, b) => a.price - b.price)
+        },
+        orderPriceToUpState: (state, action) => {
+            state.productSee = state.products.sort((a, b) => b.price - a.price)
+        },
     }
 })
 
-export const { getAllProducts, getProductById, getProductsByName, nextpageState, backPageState, nextTwopageState, backTwoPageState } = productSlice.actions
+export const { getAllProducts, getProductById, getProductsByName, nextpageState, backPageState, nextTwopageState, backTwoPageState, orderByAzState, orderByZaState, orderPriceToLowState, orderPriceToUpState } = productSlice.actions
 
 export default productSlice.reducer 

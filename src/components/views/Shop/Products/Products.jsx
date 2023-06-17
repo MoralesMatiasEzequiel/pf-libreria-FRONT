@@ -6,7 +6,7 @@ import {Link} from "react-router-dom";
 
 const Products = () => {
 	const dispatch = useDispatch();
-	const {products} = useSelector( state=> state.products)
+	const {productSee} = useSelector( state=> state.products)
 	useEffect(() => {
 		dispatch(getProducts());
 	},[dispatch])
@@ -14,12 +14,12 @@ const Products = () => {
   return (
     <div className="container">
       <div className="row">
-        {products.map((base, index) => {
+        {productSee.map((base, index) => {
           return (
             <div key={index} className="col-md-4">
 							<div className="card" >
               <Link to={'/shop/' + base._id}>
-                <img className="card-img-top" src={base.image} alt="Card image cap"/>
+                <img className="card-img-top" src={base.image} alt={base.name}/>
                 <div className="card-body">
 									<h5 className="card-title">{base.name}</h5>
                 	<p className="card-text text-secondary">$ {base.price}</p>

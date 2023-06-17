@@ -1,0 +1,34 @@
+.div {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.nada {
+    width: 50%;
+}
+
+.order {
+    display: flex;
+    margin: auto;
+}
+
+
+/* responsive desing */
+@media screen and (max-width:650px) {
+
+
+    .nada {
+        display: none;
+    }
+    .order {
+        width: 120px;
+    }
+
+    .orderres {
+        display: flex;
+        flex-direction: row;
+        gap: 3%;
+    }
+
+}
