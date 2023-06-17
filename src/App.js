@@ -1,6 +1,7 @@
 import './App.css';
 import { Suspense, lazy } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
+
 const Navuno = lazy(() => import('./components/common/Nav/Nav'));
 const Menu = lazy(() => import('./components/common/Menu/Menu'));  
 const Footer = lazy(() => import('./components/common/Footer/Footer'));  
