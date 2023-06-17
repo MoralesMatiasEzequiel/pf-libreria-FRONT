@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getAllProducts, getProductById, getProductsByName } from "./productSlice";
+import { getAllProducts, getProductById, getProductsByName, removeProductsCopy } from "./productSlice";
 
 
 export const getProducts = () => {
@@ -20,5 +20,11 @@ export const getAllProductsByName = (name) => {
     return async (dispatch) => {
         const { data } = await axios.get(`/product?name=${name}`);
         dispatch(getProductsByName(data));
+    };
+};
+
+export const cleanProductsCopy = () => {
+    return (dispatch) => {
+        dispatch(removeProductsCopy());
     };
 };

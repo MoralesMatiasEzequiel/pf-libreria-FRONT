@@ -8,6 +8,8 @@ const SearchBar = () => {
     const dispatch = useDispatch()
     const [ name, setName ] = useState("")
 
+    // const isDisabled = name === ""                   //  disabled={isDisabled}   <<-- ponerle este attribute al button
+
     const handleChange = (event) => {
         setName(event.target.value)
     }
