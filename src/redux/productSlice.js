@@ -4,7 +4,6 @@ export const productSlice = createSlice({
     name: "products",
     initialState: {
         products: [],
-        productsByName: [],
         productSee: [],
         detail: {},
         pag: 1
@@ -18,7 +17,7 @@ export const productSlice = createSlice({
             state.detail = state.products.filter(pro => pro.id === action.payload)
         },
         getProductsByName: (state, action) => {
-            state.productsByName = action.payload
+            state.productSee = action.payload
         },
         nextpageState: (state, action) => {
             state.pag = state.pag + 1
@@ -33,7 +32,7 @@ export const productSlice = createSlice({
             state.pag = state.pag - 2
         },
         orderByAzState: (state, action) => {
-            state.productSee = state.products.sort((a, b) => {
+            state.productSee = state.productSee.sort((a, b) => {
                 const noa = a.name.toLowerCase();
                 const noe = b.name.toLowerCase();
 
@@ -47,7 +46,7 @@ export const productSlice = createSlice({
             })
         },
         orderByZaState: (state, action) => {
-            state.productSee = state.products.sort((a, b) => {
+            state.productSee = state.productSee.sort((a, b) => {
                 const noa = a.name.toLowerCase();
                 const noe = b.name.toLowerCase();
 
@@ -61,10 +60,10 @@ export const productSlice = createSlice({
             })
         },
         orderPriceToLowState: (state, action) => {
-            state.productSee = state.products.sort((a, b) => a.price - b.price)
+            state.productSee = state.productSee.sort((a, b) => a.price - b.price)
         },
         orderPriceToUpState: (state, action) => {
-            state.productSee = state.products.sort((a, b) => b.price - a.price)
+            state.productSee = state.productSee.sort((a, b) => b.price - a.price)
         },
     }
 })
