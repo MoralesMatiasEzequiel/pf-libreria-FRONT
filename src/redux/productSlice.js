@@ -5,7 +5,8 @@ export const productSlice = createSlice({
     initialState: {
         products: [],
         productsByName: [],
-        detail: {}
+        detail: {},
+        pag: 1
     },
     reducers: {
         getAllProducts: (state, action) => {
@@ -16,10 +17,22 @@ export const productSlice = createSlice({
         },
         getProductsByName: (state, action) => {
             state.productsByName = action.payload
+        },
+        nextpageState: (state, action) => {
+            state.pag = state.pag + 1
+        },
+        backPageState: (state, action) => {
+            state.pag = state.pag - 1
+        },
+        nextTwopageState: (state, action) => {
+            state.pag = state.pag + 2
+        },
+        backTwoPageState: (state, action) => {
+            state.pag = state.pag - 2
         }
     }
 })
 
-export const { getAllProducts, getProductById, getProductsByName } = productSlice.actions
+export const { getAllProducts, getProductById, getProductsByName, nextpageState, backPageState, nextTwopageState, backTwoPageState } = productSlice.actions
 
 export default productSlice.reducer 
