@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getAllProducts, getProductById, getProductsByName } from "./productSlice";
+import { getAllProducts, getProductById, getProductsByName, nextpageState, backPageState, nextTwopageState, backTwoPageState } from "./productSlice";
 
 
 export const getProducts = () => {
@@ -20,5 +20,27 @@ export const getAllProductsByName = (name) => {
     return async (dispatch) => {
         const { data } = await axios.get(`/product?name=${name}`);
         dispatch(getProductsByName(data));
+    };
+};
+
+export const nextPage = () => {
+    return (dispatch) => {
+        dispatch(nextpageState());
+    };
+};
+export const backPage = () => {
+    return (dispatch) => {
+        dispatch(backPageState());
+    };
+};
+
+export const nextTwoPage = () => {
+    return (dispatch) => {
+        dispatch(nextTwopageState());
+    };
+};
+export const backTwoPage = () => {
+    return (dispatch) => {
+        dispatch(backTwoPageState());
     };
 };
