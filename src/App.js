@@ -30,6 +30,7 @@ function App() {
           <Route path='/shop/:id' element={<Detail />} />
           <Route path='/cart' />
           <Route path='/payment' />
+          <Route path="/arrepentimiento" element={<Arrepentimiento />} />
         </Routes>
         <Footer />
       </Suspense>
