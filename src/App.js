@@ -6,7 +6,8 @@ import Footer from './components/common/Footer/Footer';
 import Home from './components/views/Home/Home';
 import About from './components/views/About/About';
 import Shop from './components/views/Shop/Shop';
-import Detail from './components/views/Shop/Detail/Detail'
+import Detail from './components/views/Shop/Detail/Detail';
+import Arrepentimiento from './components/views/Arrepentimiento/Arrepentimiento';
 
 function App() {
 
@@ -26,6 +27,7 @@ function App() {
         <Route path='/shop/:id' element={<Detail />} />
         <Route path='/cart' />
         <Route path='/payment' />
+        <Route path="/arrepentimiento" element={<Arrepentimiento />} />
       </Routes>
       <Footer />
     </div>
