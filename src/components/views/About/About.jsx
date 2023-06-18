@@ -11,7 +11,7 @@ const About = () => {
   };
 
   return (
-    <div className="container">
+    <div className="container text-start">
       <div className="row">
         <div className="col-md-6">
           <h2>Contacto</h2>
