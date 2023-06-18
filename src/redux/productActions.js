@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getAllProducts, getProductById, getProductsByName, nextpageState, backPageState, nextTwopageState, backTwoPageState } from "./productSlice";
+import { getAllProducts, getProductById, getProductsByName, nextpageState, backPageState, nextTwopageState, backTwoPageState ,orderByAzState, orderByZaState, orderPriceToLowState, orderPriceToUpState} from "./productSlice";
 
 
 export const getProducts = () => {
@@ -22,7 +22,7 @@ export const getAllProductsByName = (name) => {
         dispatch(getProductsByName(data));
     };
 };
-
+// --------------------------paginado
 export const nextPage = () => {
     return (dispatch) => {
         dispatch(nextpageState());
@@ -42,5 +42,26 @@ export const nextTwoPage = () => {
 export const backTwoPage = () => {
     return (dispatch) => {
         dispatch(backTwoPageState());
+    };
+};
+// ------------------------ordenamiento
+export const orderByAZ = () => {
+    return (dispatch) => {
+        dispatch(orderByAzState());
+    };
+};
+export const orderByZA = () => {
+    return (dispatch) => {
+        dispatch(orderByZaState());
+    };
+};
+export const orderPriceToLow = () => {
+    return (dispatch) => {
+        dispatch(orderPriceToLowState());
+    };
+};
+export const orderPriceToUp = () => {
+    return (dispatch) => {
+        dispatch(orderPriceToUpState());
     };
 };
