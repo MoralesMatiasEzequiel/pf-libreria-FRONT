@@ -9,7 +9,10 @@ const Home = lazy(() => import('./components/views/Home/Home'));
 const About = lazy(() => import('./components/views/About/About'));  
 const Shop = lazy(() => import('./components/views/Shop/Shop'));  
 const Detail = lazy(() => import('./components/views/Shop/Detail/Detail'));  
+
 const Arrepentimiento = lazy(() => import('./components/views/Arrepentimiento/Arrepentimiento'));
+=======
+
 
 function App() {
 
@@ -30,7 +33,9 @@ function App() {
           <Route path='/shop/:id' element={<Detail />} />
           <Route path='/cart' />
           <Route path='/payment' />
+
           <Route path="/arrepentimiento" element={<Arrepentimiento />} />
+
         </Routes>
         <Footer />
       </Suspense>

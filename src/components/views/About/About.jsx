@@ -11,7 +11,7 @@ const About = () => {
   };
 
   return (
-    <div className="container text-start">
+    <div className="container">
       <div className="row">
         <div className="col-md-6">
           <h2>Contacto</h2>
@@ -40,12 +40,12 @@ const About = () => {
           <ul className="list-inline">
             <li className="list-inline-item">
               <a href="enlace-a-red-social-1" className="text-decoration-none">
-                <i className="bi bi-facebook text-primary cursor-pointer"> Facebook</i>
+                <i className="bi bi-facebook text-primary cursor-pointer" onClick={() => window.open("enlace-a-red-social-1", "_blank")}> Facebook</i>
               </a>
             </li>
             <li className="list-inline-item">
               <a href="enlace-a-red-social-2" className="text-decoration-none">
-                <i className="bi bi-instagram text-purple cursor-pointer" style={{ color: "purple" }}> Instagram</i>
+                <i className="bi bi-instagram text-purple cursor-pointer" onClick={() => window.open("enlace-a-red-social-2", "_blank")}> Instagram</i>
               </a>
             </li>
             <li className="list-inline-item">
