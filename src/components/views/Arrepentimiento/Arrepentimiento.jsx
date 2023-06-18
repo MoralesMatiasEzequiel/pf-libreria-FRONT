@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Modal } from "bootstrap/dist/js/bootstrap.bundle.min";
 
 const Arrepentimiento = () => {
   const [nombre, setNombre] = useState("");
@@ -54,10 +53,6 @@ const Arrepentimiento = () => {
     setModoDevolucion("");
     setMotivoDevolucion("");
     setComentario("");
-    // Cerrar el modal
-    const modal = document.getElementById("arrepentimientoModal");
-    const modalInstance = Modal.getInstance(modal);
-    modalInstance.hide();
   };
 
   return (
@@ -164,8 +159,7 @@ const Arrepentimiento = () => {
           <textarea id="comentario" name="comentario" className="form-control" value={comentario} onChange={(e) => setComentario(e.target.value)} rows="3" required></textarea>
         </div>
 
-        <div className="modal-footer">
-          <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <div className="text-start">
           <button type="submit" className="btn btn-primary">Enviar</button>
         </div>
       </form>
