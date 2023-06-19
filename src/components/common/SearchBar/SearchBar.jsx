@@ -2,9 +2,11 @@ import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { getAllProductsByName } from "../../../redux/productActions";
 import style from "../SearchBar/SearchBar.module.css"
+import { useDispatch } from "react-redux";
 
 const SearchBar = () => {
   const [name, setName] = useState("");
+  const dispatch = useDispatch();
 
   const handleChange = (event) => {
     setName(event.target.value);
@@ -12,7 +14,7 @@ const SearchBar = () => {
 
   const onSearch = async (name) => {
     if (name) {
-      getAllProductsByName(name);
+      dispatch(getAllProductsByName(name));
     }
   };
 

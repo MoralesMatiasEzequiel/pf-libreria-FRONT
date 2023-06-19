@@ -5,8 +5,6 @@ import "./Products.css";
 const Products = () => {
   const { productSee, productsExist } = useSelector(state => state.products);
 
-const Products = () => {
-
   return (
     <div className="container">
       <div className="row">
