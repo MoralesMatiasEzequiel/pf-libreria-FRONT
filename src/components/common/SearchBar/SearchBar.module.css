@@ -1,7 +1,6 @@
 .containerSearch {
     width: 30%;
     display: flex;
-    margin: 10px;
 }
 
 .input {
@@ -15,14 +14,19 @@
     color: white;
 }
 
-.button {
+.navlink {
+    text-decoration: none;
+}
+
+.p {
     background: none;
     border: none;
     font-size: 20px;
     cursor: pointer;
+    padding: 2px;
     transition: all 0.3s;
 }
 
-.button:hover {
+.p:hover {
     transform: scale(1.1);
 }
