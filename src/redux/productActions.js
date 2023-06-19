@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getAllProducts, getProductById, getProductsByName, nextpageState, backPageState, nextTwopageState, backTwoPageState ,orderByAzState, orderByZaState, orderPriceToLowState, orderPriceToUpState} from "./productSlice";
+import { getAllProducts, getProductById, getProductsByName, getProductsBySubcategory, nextpageState, backPageState, nextTwopageState, backTwoPageState ,orderByAzState, orderByZaState, orderPriceToLowState, orderPriceToUpState} from "./productSlice";
 
 
 export const getProducts = () => {
@@ -22,6 +22,13 @@ export const getAllProductsByName = (name) => {
         dispatch(getProductsByName(data));
     };
 };
+
+export const getAllProductsBySubcategory = (subcategory) => {
+    return async (dispatch) => {
+        const { data } = await axios.get(`/product?subcategories=${subcategory}`);
+        dispatch (getProductsBySubcategory(data));
+    }
+}
 // --------------------------paginado
 export const nextPage = () => {
     return (dispatch) => {
