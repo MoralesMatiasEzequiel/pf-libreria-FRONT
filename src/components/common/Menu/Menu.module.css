@@ -4,3 +4,8 @@
     align-items: center;
     background-color: #232425;
 }
+
+.navLink {
+    text-decoration: none;
+    color: white;
+}

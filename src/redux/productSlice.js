@@ -19,6 +19,9 @@ export const productSlice = createSlice({
         getProductsByName: (state, action) => {
             state.productSee = action.payload
         },
+        getProductsBySubcategory: (state, action) => {
+            state.productSee = action.payload
+        },
         nextpageState: (state, action) => {
             state.pag = state.pag + 1
         },
@@ -68,6 +71,6 @@ export const productSlice = createSlice({
     }
 })
 
-export const { getAllProducts, getProductById, getProductsByName, nextpageState, backPageState, nextTwopageState, backTwoPageState, orderByAzState, orderByZaState, orderPriceToLowState, orderPriceToUpState } = productSlice.actions
+export const { getAllProducts, getProductById, getProductsByName, getProductsBySubcategory, nextpageState, backPageState, nextTwopageState, backTwoPageState, orderByAzState, orderByZaState, orderPriceToLowState, orderPriceToUpState } = productSlice.actions
 
 export default productSlice.reducer 

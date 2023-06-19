@@ -5,11 +5,15 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
+import { NavLink } from "react-router-dom";
+import { getAllProductsBySubcategory } from "../../../redux/productActions";
 import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 const Menu = () => {
   const [categories, setCategories] = useState([]);
   const [subcategories, setSubcategories] = useState([]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const getCategories = async () => {
@@ -60,9 +64,14 @@ const Menu = () => {
                       return (
                         <NavDropdown.Item
                           key={subcategory.name}
-                          href="#action/3.1"
+                          href=""
+                          onClick={() => {
+                            dispatch(getAllProductsBySubcategory(subcategory._id));
+                          }}
                         >
-                          {subcategory.name}
+                          <NavLink to='/shop' className={style.navLink}>
+                            {subcategory.name}
+                          </NavLink>
                         </NavDropdown.Item>
                       );
                     } else {
