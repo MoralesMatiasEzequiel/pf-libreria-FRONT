@@ -1,7 +1,6 @@
 import axios from "axios";
 import { getAllProducts, getProductById, getProductsByName, getProductsBySubcategory, nextpageState, backPageState, nextTwopageState, backTwoPageState ,orderByAzState, orderByZaState, orderPriceToLowState, orderPriceToUpState} from "./productSlice";
 
-
 export const getProducts = () => {
     return async (dispatch) => {
         const dataApi = await axios.get("/product/");
@@ -18,15 +17,27 @@ export const getById = (id) => {
 
 export const getAllProductsByName = (name) => {
     return async (dispatch) => {
+      try {
         const { data } = await axios.get(`/product?name=${name}`);
         dispatch(getProductsByName(data));
+      } catch (error) {
+        const data = false;
+        dispatch(getProductsByName(data));
+        console.log('no hay data');
+      }
     };
 };
 
 export const getAllProductsBySubcategory = (subcategory) => {
     return async (dispatch) => {
-        const { data } = await axios.get(`/product?subcategories=${subcategory}`);
-        dispatch (getProductsBySubcategory(data));
+        try {
+            const { data } = await axios.get(`/product?subcategories=${subcategory}`);
+            dispatch (getProductsBySubcategory(data));
+        } catch (error) {
+            const data = false;
+            dispatch(getProductsBySubcategory(data));
+            console.log('no hay data');
+        }
     }
 }
 // --------------------------paginado
