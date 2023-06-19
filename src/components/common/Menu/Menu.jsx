@@ -45,7 +45,6 @@ const Menu = () => {
     getSubcategories();
   }, []);
 
-  console.log(categories, subcategories);
 
   return (
     <div className={style.div}>
