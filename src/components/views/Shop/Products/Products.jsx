@@ -3,12 +3,14 @@ import { Link } from "react-router-dom";
 import "./Products.css";
 
 const Products = () => {
+  const { productSee, productsExist } = useSelector(state => state.products);
 
-	const { productSee } = useSelector( state=> state.products)
+const Products = () => {
 
   return (
     <div className="container">
       <div className="row">
+        {!productsExist && <p>No hay productos asociados a esa búsqueda o categoría.</p>}
         {productSee.map((base, index) => {
           return (
             <div key={index} className="col-md-3 ">

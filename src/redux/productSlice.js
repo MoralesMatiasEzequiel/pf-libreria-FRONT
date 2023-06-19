@@ -5,6 +5,7 @@ export const productSlice = createSlice({
     initialState: {
         products: [],
         productSee: [],
+        productsExist: false,
         detail: {},
         pag: 1
     },
@@ -12,15 +13,27 @@ export const productSlice = createSlice({
         getAllProducts: (state, action) => {
             state.products = action.payload
             state.productSee = action.payload
+            state.productsExist = true
         },
         getProductById: (state, action) => {
             state.detail = state.products.filter(pro => pro.id === action.payload)
+            state.productsExist = true
         },
         getProductsByName: (state, action) => {
-            state.productSee = action.payload
+            if(!action.payload){
+                state.productsExist = false;
+            } else{
+                state.productSee = action.payload
+                state.productsExist = true;
+            }
         },
         getProductsBySubcategory: (state, action) => {
-            state.productSee = action.payload
+            if(!action.payload){
+                state.productsExist = false;
+            } else{
+                state.productSee = action.payload
+                state.productsExist = true;
+            }
         },
         nextpageState: (state, action) => {
             state.pag = state.pag + 1
