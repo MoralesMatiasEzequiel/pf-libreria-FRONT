@@ -15,6 +15,10 @@ const Menu = () => {
   const [subcategories, setSubcategories] = useState([]);
   const dispatch = useDispatch();
 
+  const onClick = (id) => {
+    dispatch(getAllProductsBySubcategory(id));
+  }
+
   useEffect(() => {
     const getCategories = async () => {
       try {
@@ -65,9 +69,7 @@ const Menu = () => {
                         <NavDropdown.Item
                           key={subcategory.name}
                           href=""
-                          onClick={() => {
-                            dispatch(getAllProductsBySubcategory(subcategory._id));
-                          }}
+                          onClick={() => onClick(subcategory._id)}
                         >
                           <NavLink to='/shop' className={style.navLink}>
                             {subcategory.name}
