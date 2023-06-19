@@ -1,5 +1,9 @@
 .contLi{
-    background-color: aqua;
     display: flex;
     flex-direction: column;
+}
+
+.listDispatch{
+    display: flex;
+    gap: .5em;
 }

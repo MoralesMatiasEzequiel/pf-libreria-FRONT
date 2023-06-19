@@ -1,4 +1,5 @@
 import style from "./SideStyle.module.css"
+import Form from 'react-bootstrap/Form';
 
 import Accordion from 'react-bootstrap/Accordion';
 
@@ -11,9 +12,22 @@ const Side = () => {
                 <Accordion.Header>Marcas</Accordion.Header>
                 <Accordion.Body>
                     <div className={style.contLi}>
-                        <b>secso</b>
-                        <b>mazorca</b>
-                        <b>peron</b>
+                        <div className={style.listDispatch}>
+                            <Form.Check aria-label="option 1" />
+                            <b>secso</b>
+                        </div>
+
+                        <div className={style.listDispatch}>
+                            <Form.Check aria-label="option 1" />
+                            <b>mazorca</b>
+                        </div>
+
+                        <div className={style.listDispatch}>
+                            <Form.Check aria-label="option 1" />
+                            <b>peron</b>
+                        </div>
+
+
                     </div>
                 </Accordion.Body>
             </Accordion.Item>
