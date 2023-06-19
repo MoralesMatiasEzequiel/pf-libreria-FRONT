@@ -2,6 +2,7 @@ import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { getAllProductsByName } from "../../../redux/productActions";
+import style from "../SearchBar/SearchBar.module.css"
 
 
 const SearchBar = () => {
@@ -19,10 +20,10 @@ const SearchBar = () => {
     }
 
     return (
-        <div>
-            <input type="search" onChange={handleChange} value={name} placeholder="Buscar productos" />
+        <div className={style.containerSearch}>
+            <input type="search" onChange={handleChange} value={name} placeholder="Buscar productos" className={style.input} />
             <NavLink to={"/shop"}>
-                <button onClick={() => { onSearch(name); setName("")}}>🔍</button>
+                <button onClick={() => { onSearch(name); setName("")}} className={style.button}>🔍</button>
             </NavLink>
         </div>
     )
