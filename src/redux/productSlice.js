@@ -16,21 +16,24 @@ export const productSlice = createSlice({
             state.productsExist = true
         },
         getProductById: (state, action) => {
+            state.pag = 1
             state.detail = state.productSee.filter(pro => pro.id === action.payload)
             state.productsExist = true
         },
         getProductsByName: (state, action) => {
-            if(!action.payload){
+            state.pag = 1
+            if (!action.payload) {
                 state.productsExist = false;
-            } else{
+            } else {
                 state.productSee = action.payload
                 state.productsExist = true;
             }
         },
         getProductsBySubcategory: (state, action) => {
-            if(!action.payload){
+            state.pag = 1
+            if (!action.payload) {
                 state.productsExist = false;
-            } else{
+            } else {
                 state.productSee = action.payload
                 state.productsExist = true;
             }
@@ -48,6 +51,7 @@ export const productSlice = createSlice({
             state.pag = state.pag - 2
         },
         orderByAzState: (state, action) => {
+            state.pag = 1
             state.productSee = state.productSee.sort((a, b) => {
                 const noa = a.name.toLowerCase();
                 const noe = b.name.toLowerCase();
@@ -62,6 +66,7 @@ export const productSlice = createSlice({
             })
         },
         orderByZaState: (state, action) => {
+            state.pag = 1
             state.productSee = state.productSee.sort((a, b) => {
                 const noa = a.name.toLowerCase();
                 const noe = b.name.toLowerCase();
@@ -76,9 +81,11 @@ export const productSlice = createSlice({
             })
         },
         orderPriceToLowState: (state, action) => {
+            state.pag = 1
             state.productSee = state.productSee.sort((a, b) => a.price - b.price)
         },
         orderPriceToUpState: (state, action) => {
+            state.pag = 1
             state.productSee = state.productSee.sort((a, b) => b.price - a.price)
         },
     }
