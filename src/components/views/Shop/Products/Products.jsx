@@ -1,16 +1,9 @@
-import React, { useEffect } from "react";
-import { getProducts } from "../../../../redux/productActions";
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
 
 
 const Products = () => {
-	const dispatch = useDispatch();
 	const { productSee } = useSelector( state=> state.products)
-
-	useEffect(() => {
-		dispatch(getProducts());
-	},[dispatch])
 
   return (
     <div className="container">
