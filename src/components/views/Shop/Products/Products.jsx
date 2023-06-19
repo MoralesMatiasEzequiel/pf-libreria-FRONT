@@ -4,12 +4,17 @@ import "./Products.css";
 
 const Products = () => {
 
-	const { productSee } = useSelector( state=> state.products)
+	const { productSee,pag } = useSelector( state=> state.products)
+
+  let desde = (pag - 1) * 12;
+  let hasta = pag * 12;
+
+  const viewsProducts = productSee.slice(desde, hasta);
 
   return (
     <div className="container">
       <div className="row">
-        {productSee.map((base, index) => {
+        {viewsProducts.map((base, index) => {
           return (
             <div key={index} className="col-md-3 ">
               <div className="card">
@@ -18,7 +23,7 @@ const Products = () => {
                     <img
                       className="card-img-top"
                       src={base.image}
-                      alt="Card image cap"
+                      alt={base.name}
                     />
 										<h5 className="card-title text-decoration-none">
                       {base.name}
