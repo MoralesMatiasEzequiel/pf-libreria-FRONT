@@ -5,8 +5,8 @@ import { useParams, Link } from "react-router-dom";
 const Detail = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const { products } = useSelector(state => state.products);
-  const product = products.find(item => item._id === id);
+  const { productSee } = useSelector(state => state.products);
+  const product = productSee.find(item => item._id === id);
 
   useEffect(() => {
     // Aquí puedes agregar la lógica para obtener los detalles del producto según su id

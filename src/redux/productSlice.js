@@ -16,7 +16,7 @@ export const productSlice = createSlice({
             state.productsExist = true
         },
         getProductById: (state, action) => {
-            state.detail = state.products.filter(pro => pro.id === action.payload)
+            state.detail = state.productSee.filter(pro => pro.id === action.payload)
             state.productsExist = true
         },
         getProductsByName: (state, action) => {
