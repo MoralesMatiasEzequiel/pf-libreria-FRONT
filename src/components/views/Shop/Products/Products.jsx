@@ -4,6 +4,7 @@ import "./Products.css";
 
 const Products = () => {
 
+
 	const { productSee,pag } = useSelector( state=> state.products)
 
   let desde = (pag - 1) * 12;
@@ -11,10 +12,18 @@ const Products = () => {
 
   const viewsProducts = productSee.slice(desde, hasta);
 
+  const { productSee, productsExist } = useSelector(state => state.products);
+
+
   return (
     <div className="container">
       <div className="row">
+
         {viewsProducts.map((base, index) => {
+
+        {!productsExist && <p>No hay productos asociados a esa búsqueda o categoría.</p>}
+        {productSee.map((base, index) => {
+
           return (
             <div key={index} className="col-md-3 ">
               <div className="card">
