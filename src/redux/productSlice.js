@@ -18,6 +18,8 @@ export const productSlice = createSlice({
             state.products = action.payload
             state.productSee = action.payload
             state.productsExist = true
+            state.branes = []
+            state.brandSelected = []
         },
         getProductById: (state, action) => {
 
@@ -28,7 +30,9 @@ export const productSlice = createSlice({
             state.pag = 1
             state.branes = []
             state.brandSelected = []
+
             if (!action.payload) {
+                state.productSee = []
                 state.productsExist = false;
             } else {
                 state.productSee = action.payload
