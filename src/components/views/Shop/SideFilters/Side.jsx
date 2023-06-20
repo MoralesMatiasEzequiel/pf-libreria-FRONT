@@ -48,29 +48,18 @@ const Side = () => {
     }
 
     const handlerOnClick = (event) => {
-
-        let marquite = event.target.value;
-
-        let trash2 = [];
-
-        if (brandsSelected.find(bra => bra == marquite)) {
-
-            console.log("lo saco: " + marquite);
-
-            setBrandsSelecteds(brandsSelected.filter(bra => bra !== marquite))
-
-
+        const marquite = event.target.value;
+      
+        if (brandsSelected.includes(marquite)) {
+          console.log("lo saco: " + marquite);
+          setBrandsSelecteds(brandsSelected.filter((bra) => bra !== marquite));
         } else {
-
-            console.log("lo meto :" + marquite);
-
-            trash2.push(marquite)
-            setBrandsSelecteds([...brandsSelected, trash2])
-
+          console.log("lo meto :" + marquite);
+          setBrandsSelecteds([...brandsSelected, marquite]);
         }
-
+      
         dispatch(upperBrandsSelected(brandsSelected));
-    }
+      };
 
     return (
         <Accordion defaultActiveKey="0">
