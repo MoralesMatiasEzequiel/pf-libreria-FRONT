@@ -1,50 +1,113 @@
 import style from "./SideStyle.module.css"
-import Form from 'react-bootstrap/Form';
 import { useState, useEffect } from "react";
-import { useSelector } from 'react-redux';
-
+import { useDispatch, useSelector } from 'react-redux';
 import Accordion from 'react-bootstrap/Accordion';
+import { upperBrands, upperBrandsSelected } from "../../../../redux/productActions";
+
 
 const Side = () => {
 
-    const [marcas, setMarcas] = useState([]);
+    const dispatch = useDispatch();
+    const [brands, setBrands] = useState([]);
 
-    const { productSee } = useSelector(state => state.products);
+    const [brandsSelected, setBrandsSelecteds] = useState([]);
+
+    const { productSee, branes } = useSelector(state => state.products);
 
     useEffect(() => {
 
-        let mapeoMarcas = () => {
-            let almacen = [];
+        let mapBrands = () => {
+            let almacini = [];
 
             for (let i = 0; i < productSee.length; i++) {
 
-                if (!almacen.includes(productSee[i].brand)) {
-                    almacen.push(productSee[i].brand);
+                if (!almacini.includes(productSee[i].brand)) {
+                    almacini.push(productSee[i].brand);
                 }
             }
-            console.log(almacen);
-            return almacen;
+
+            return almacini;
         }
 
-        setMarcas(mapeoMarcas)
-    }, [productSee]);
+        setBrands(mapBrands)
+    }, [productSee, branes]);
+
+    useEffect(() => {
+
+        console.log("STATE : " + brandsSelected);
+    }, [brandsSelected]);
 
 
+    const handlerClick = () => {
+
+        dispatch(upperBrands(brands))
+
+        console.log("brands fijos:" + brands);
+
+
+    }
+
+    const handlerOnClick = (event) => {
+
+        let marquite = event.target.value;
+
+        let trash2 = [];
+
+        if (brandsSelected.find(bra => bra == marquite)) {
+
+            console.log("lo saco: " + marquite);
+
+            setBrandsSelecteds(brandsSelected.filter(bra => bra !== marquite))
+
+
+        } else {
+
+            console.log("lo meto :" + marquite);
+
+            trash2.push(marquite)
+            setBrandsSelecteds([...brandsSelected, trash2])
+
+        }
+
+        dispatch(upperBrandsSelected(brandsSelected));
+    }
 
     return (
         <Accordion defaultActiveKey="0">
             <Accordion.Item eventKey="0">
-                <Accordion.Header>Marcas</Accordion.Header>
+                <Accordion.Header><b>Marca</b></Accordion.Header>
+
                 <Accordion.Body>
                     <div className={style.contLi}>
-                        {marcas.map((base) => {
-                            return (
-                                <div className={style.listDispatch}>
-                                    <Form.Check aria-label="option 1" />
-                                    <p>{base}</p>
-                                </div>
-                            );
-                        })}
+                        {!branes.length
+                            ? brands.map((brand, i) => {
+                                return (
+                                    <div key={i} className={style.listDispatch}
+                                    >
+                                        <input type="checkbox"
+
+                                            value={brand}
+
+                                            onChange={handlerClick}
+                                        />
+                                        <p>{brand}</p>
+                                    </div>
+                                );
+                            })
+                            : branes[0].map((brand) => {
+                                return (
+                                    <div className={style.listDispatch}
+                                    >
+                                        <input type="checkbox"
+
+                                            value={brand}
+                                            onClick={handlerOnClick}
+                                        />
+                                        <p>{brand}</p>
+                                    </div>
+                                );
+                            })
+                        }
 
                     </div>
                 </Accordion.Body>

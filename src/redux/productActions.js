@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getAllProducts, getProductById, getProductsByName, getProductsBySubcategory, nextpageState, backPageState, nextTwopageState, backTwoPageState ,orderByAzState, orderByZaState, orderPriceToLowState, orderPriceToUpState} from "./productSlice";
+import { getAllProducts, getProductById, getProductsByName, getProductsBySubcategory, nextpageState, backPageState, nextTwopageState, backTwoPageState, orderByAzState, orderByZaState, orderPriceToLowState, orderPriceToUpState, upperBrandsState , upperBrandsSelectedState } from "./productSlice";
 
 export const getProducts = () => {
     return async (dispatch) => {
@@ -17,14 +17,14 @@ export const getById = (id) => {
 
 export const getAllProductsByName = (name) => {
     return async (dispatch) => {
-      try {
-        const { data } = await axios.get(`/product?name=${name}`);
-        dispatch(getProductsByName(data));
-      } catch (error) {
-        const data = false;
-        dispatch(getProductsByName(data));
-        console.log('no hay data');
-      }
+        try {
+            const { data } = await axios.get(`/product?name=${name}`);
+            dispatch(getProductsByName(data));
+        } catch (error) {
+            const data = false;
+            dispatch(getProductsByName(data));
+            console.log('no hay data');
+        }
     };
 };
 
@@ -32,7 +32,7 @@ export const getAllProductsBySubcategory = (subcategory) => {
     return async (dispatch) => {
         try {
             const { data } = await axios.get(`/product?subcategories=${subcategory}`);
-            dispatch (getProductsBySubcategory(data));
+            dispatch(getProductsBySubcategory(data));
         } catch (error) {
             const data = false;
             dispatch(getProductsBySubcategory(data));
@@ -83,3 +83,17 @@ export const orderPriceToUp = () => {
         dispatch(orderPriceToUpState());
     };
 };
+// -------------------------Filtrado por marca
+export const upperBrands = (brand) => {
+    return (dispatch) => {
+        dispatch(upperBrandsState(brand));
+    };
+};
+export const upperBrandsSelected = (brandes) => {
+    return (dispatch) => {
+        dispatch(upperBrandsSelectedState(brandes));
+    };
+};
+
+
+// 
