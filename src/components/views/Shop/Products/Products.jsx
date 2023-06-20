@@ -1,7 +1,9 @@
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { addToFavList } from "../../../../redux/favoriteSlice";
-import "./Products.css";
+import React, { useState } from "react";
+import {  useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+//import { addToFavList } from "../../../../redux/favoriteSlice";
+import ModalCart from "../../../common/Modals/ModalCart/ModalCart";
+import style from "./Products.module.css";
 
 const Products = () => {
   const { productSee, pag, productsExist } = useSelector(
@@ -11,83 +13,57 @@ const Products = () => {
   let desde = (pag - 1) * 12;
   let hasta = pag * 12;
   const viewsProducts = productSee.slice(desde, hasta);
-  const dispatch = useDispatch();
 
-  const favoriteHandler = (viewsProducts) => {
-    dispatch(addToFavList(viewsProducts));
-  };
+  const navigate = useNavigate();
+  const [modalShow, setModalShow] = useState(false);
+
+  //------------------------------------FAVORITE STAT
+  //const dispatch = useDispatch();
+  // const favoriteHandler = (viewsProducts) => {
+  //   dispatch(addToFavList(viewsProducts));
+  // };
 
   return (
-    <div class="container">
-      <div class="row">
+    
+      <div className={style.container}>
         {!productsExist && (
           <p>No hay productos asociados a esa búsqueda o categoría.</p>
         )}
         {viewsProducts.map((base, index) => {
           return (
-            <div key={index} class="col-md-3 ">
-              <div class="card">
-                <Link to={"/shop/" + base._id}>
-                  <div class="card-body">
-                    <img
-                      className="card-img-top"
-                      src={base.image}
-                      alt={base.name}
-                    />
-                    <h5 class="card-title text-decoration-none">{base.name}</h5>
-                    <p class="card-text text-secondary text-decoration-none">
-                      $ {base.price}
-                    </p>
-                  </div>
+            <div key={index} className={style.productCard}>
+              <Link to={"/shop/" + base._id}>
+                <div className={style.productTumb}>
+                  <img src={base.image} alt={base.name} />
+                </div>
+              </Link>
+              <div className={style.productDetails}>
+                <Link className={style.link} to={"/shop/" + base._id}>
+                  <h4 className={style.title}>{base.name}</h4>
                 </Link>
-                <div class="d-grid gap-2 d-md-block">
-                  <button class="btn btn-primary">
-                    <i class="bi bi-cart"></i> Agregar al carrito
-                  </button>
-                  <button
-                    onClick={() => {
-                      favoriteHandler(viewsProducts);
-                    }}
-                    class="btn btn-outline-danger"
-                  >
-                    <i class="bi bi-heart"></i> Favoritos
-                  </button>
+                <div className={style.productBottomDetails}>
+                  <div className={style.productPrice}>
+                    <small>${base.price}</small>
+                  </div>
+                  <div className={style.productLinks}>
+                    <button> 	{/*onClick={()=> navigate('/home')}*/}
+                      <i className="bi bi-heart"></i>
+                    </button>
+                    <button onClick={() => setModalShow(true)}>
+                      <i className="bi bi-cart"></i>
+                    </button>
+                  </div>
                 </div>
               </div>
-              ;
             </div>
           );
         })}
+      {/* <ModalCart show={modalShow} onHide={() => setModalShow(false)} /> */}
       </div>
-    </div>
+    
   );
 };
 
 export default Products;
 
-{
-  /* <div class="card">
-  <Link to={"/shop/" + base._id}>
-    <div class="card-body">
-      <img className="card-img-top" src={base.image} alt={base.name} />
-      <h5 class="card-title text-decoration-none">{base.name}</h5>
-      <p class="card-text text-secondary text-decoration-none">
-        $ {base.price}
-      </p>
-    </div>
-  </Link>
-  <div class="d-grid gap-2 d-md-block">
-    <button class="btn btn-primary">
-      <i class="bi bi-cart"></i> Agregar al carrito
-    </button>
-    <button
-      onClick={() => {
-        favoriteHandler(viewsProducts);
-      }}
-      class="btn btn-outline-danger"
-    >
-      <i class="bi bi-heart"></i> Favoritos
-    </button>
-  </div>
-</div>; */
-}
+
