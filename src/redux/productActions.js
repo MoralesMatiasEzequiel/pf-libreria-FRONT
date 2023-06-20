@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getAllProducts, getProductById, getProductsByName, getProductsBySubcategory, nextpageState, backPageState, nextTwopageState, backTwoPageState ,orderByAzState, orderByZaState, orderPriceToLowState, orderPriceToUpState} from "./productSlice";
+import { getAllProducts, getProductById, getProductsByName, getProductsBySubcategory, nextpageState, backPageState, nextTwopageState, backTwoPageState ,orderByAzState, orderByZaState, orderPriceToLowState, orderPriceToUpState, getProductsOnSale, getProductsOnRating } from "./productSlice";
 
 export const getProducts = () => {
     return async (dispatch) => {
@@ -81,5 +81,18 @@ export const orderPriceToLow = () => {
 export const orderPriceToUp = () => {
     return (dispatch) => {
         dispatch(orderPriceToUpState());
+    };
+};
+// ------------------------ACTIONS PARA LOS CAROUSELS
+export const getProductsSales = () => {
+    return async (dispatch) => {
+        const { data } = await axios.get("/product/sale");
+        dispatch(getProductsOnSale(data));
+    };
+};
+export const getProductsRating = () => {
+    return async (dispatch) => {
+        const { data } = await axios.get("/product/rating");
+        dispatch(getProductsOnRating(data));
     };
 };
