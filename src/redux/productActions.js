@@ -1,4 +1,4 @@
-import axios from "axios;
+import axios from "axios";
 
 import { getAllProducts, getProductById, getProductsByName, getProductsBySubcategory, nextpageState, backPageState, nextTwopageState, backTwoPageState, orderByAzState, orderByZaState, orderPriceToLowState, orderPriceToUpState, getProductsOnSale, getProductsOnRating, upperBrandsState , upperBrandsSelectedState } from "./productSlice";
 
