@@ -6,7 +6,7 @@ export const productSlice = createSlice({
         products: [],
         productSee: [],
         branes: [],
-        brandSelected: ["stanbull", "fraganti"],
+        brandSelected: [],
         productsOnSale: [],
         productsOnRating: [],
         productsExist: false,
