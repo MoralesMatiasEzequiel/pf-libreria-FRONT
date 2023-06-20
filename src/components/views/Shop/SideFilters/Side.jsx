@@ -32,34 +32,39 @@ const Side = () => {
         setBrands(mapBrands)
     }, [productSee, branes]);
 
-    useEffect(() => {
-
-        console.log("STATE : " + brandsSelected);
-    }, [brandsSelected]);
-
 
     const handlerClick = () => {
 
         dispatch(upperBrands(brands))
 
-        console.log("brands fijos:" + brands);
-
-
     }
 
+    // const handlerOnClick = (event) => {
+    //     const marquite = event.target.value;
+
+    //     if (brandsSelected.includes(marquite)) {
+    //       console.log("lo saco: " + marquite);
+    //       setBrandsSelecteds(brandsSelected.filter((bra) => bra !== marquite));
+    //     } else {
+    //       console.log("lo meto :" + marquite);
+    //       setBrandsSelecteds([...brandsSelected, marquite]);
+    //     }
+    //     dispatch(upperBrandsSelected(brandsSelected));
+    //   };
+
+    // --------------------------------------------------------------
     const handlerOnClick = (event) => {
         const marquite = event.target.value;
-      
-        if (brandsSelected.includes(marquite)) {
-          console.log("lo saco: " + marquite);
-          setBrandsSelecteds(brandsSelected.filter((bra) => bra !== marquite));
-        } else {
-          console.log("lo meto :" + marquite);
-          setBrandsSelecteds([...brandsSelected, marquite]);
-        }
-      
-        dispatch(upperBrandsSelected(brandsSelected));
-      };
+
+        const estateBrand = brandsSelected.includes(marquite);
+        const updateBrand = estateBrand
+
+            ? brandsSelected.filter((bra) => bra !== marquite)
+            : [...brandsSelected, marquite];
+
+        setBrandsSelecteds(updateBrand);
+        dispatch(upperBrandsSelected(updateBrand));
+    };
 
     return (
         <Accordion defaultActiveKey="0">
