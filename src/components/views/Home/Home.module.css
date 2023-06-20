@@ -11,3 +11,12 @@
     color: red;
     margin-top: 4px;
 }
+
+.contianerCarr {
+    display: flex;
+    flex-direction: row;
+}
+
+.buttons {
+    background-color: black;
+}
