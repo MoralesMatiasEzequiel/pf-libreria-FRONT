@@ -20,9 +20,7 @@ div.card{
 	border-radius: 30px;
 	
 }
-div.card :hover{
-	border: 5px solid #f7f7f7;
-}
+
 .col-md-3{
 	margin: 0 !important;
 	padding: 15px;
