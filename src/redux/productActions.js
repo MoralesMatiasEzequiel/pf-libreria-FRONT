@@ -1,5 +1,6 @@
-import axios from "axios";
-import { getAllProducts, getProductById, getProductsByName, getProductsBySubcategory, nextpageState, backPageState, nextTwopageState, backTwoPageState, orderByAzState, orderByZaState, orderPriceToLowState, orderPriceToUpState, upperBrandsState , upperBrandsSelectedState } from "./productSlice";
+import axios from "axios;
+
+import { getAllProducts, getProductById, getProductsByName, getProductsBySubcategory, nextpageState, backPageState, nextTwopageState, backTwoPageState, orderByAzState, orderByZaState, orderPriceToLowState, orderPriceToUpState, getProductsOnSale, getProductsOnRating, upperBrandsState , upperBrandsSelectedState } from "./productSlice";
 
 export const getProducts = () => {
     return async (dispatch) => {
@@ -83,6 +84,7 @@ export const orderPriceToUp = () => {
         dispatch(orderPriceToUpState());
     };
 };
+
 // -------------------------Filtrado por marca
 export const upperBrands = (brand) => {
     return (dispatch) => {
@@ -96,4 +98,17 @@ export const upperBrandsSelected = (brandes) => {
 };
 
 
-// 
+// ------------------------ACTIONS PARA LOS CAROUSELS
+export const getProductsSales = () => {
+    return async (dispatch) => {
+        const { data } = await axios.get("/product/sale");
+        dispatch(getProductsOnSale(data));
+    };
+};
+export const getProductsRating = () => {
+    return async (dispatch) => {
+        const { data } = await axios.get("/product/rating");
+        dispatch(getProductsOnRating(data));
+    };
+};
+
