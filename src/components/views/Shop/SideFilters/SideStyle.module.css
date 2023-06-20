@@ -9,3 +9,6 @@
     display: flex;
     gap: .5em;
 }
+.listDispatch input{
+    margin-bottom: 15px;
+}

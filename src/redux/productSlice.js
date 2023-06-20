@@ -5,6 +5,8 @@ export const productSlice = createSlice({
     initialState: {
         products: [],
         productSee: [],
+        branes: [],
+        brandSelected: ["stanbull", "fraganti"],
         productsOnSale: [],
         productsOnRating: [],
         productsExist: false,
@@ -18,12 +20,14 @@ export const productSlice = createSlice({
             state.productsExist = true
         },
         getProductById: (state, action) => {
-            state.pag = 1
+
             state.detail = state.productSee.filter(pro => pro.id === action.payload)
             state.productsExist = true
         },
         getProductsByName: (state, action) => {
             state.pag = 1
+            state.branes = []
+            state.brandSelected = []
             if (!action.payload) {
                 state.productsExist = false;
             } else {
@@ -33,6 +37,8 @@ export const productSlice = createSlice({
         },
         getProductsBySubcategory: (state, action) => {
             state.pag = 1
+            state.branes = []
+            state.brandSelected = []
             if (!action.payload) {
                 state.productsExist = false;
             } else {
@@ -54,6 +60,7 @@ export const productSlice = createSlice({
         },
         orderByAzState: (state, action) => {
             state.pag = 1
+
             state.productSee = state.productSee.sort((a, b) => {
                 const noa = a.name.toLowerCase();
                 const noe = b.name.toLowerCase();
@@ -69,6 +76,7 @@ export const productSlice = createSlice({
         },
         orderByZaState: (state, action) => {
             state.pag = 1
+
             state.productSee = state.productSee.sort((a, b) => {
                 const noa = a.name.toLowerCase();
                 const noe = b.name.toLowerCase();
@@ -84,11 +92,21 @@ export const productSlice = createSlice({
         },
         orderPriceToLowState: (state, action) => {
             state.pag = 1
+
             state.productSee = state.productSee.sort((a, b) => a.price - b.price)
         },
         orderPriceToUpState: (state, action) => {
             state.pag = 1
+
             state.productSee = state.productSee.sort((a, b) => b.price - a.price)
+        },
+        upperBrandsState: (state, action) => {
+            state.branes = [...state.branes, action.payload]
+
+        },
+        upperBrandsSelectedState: (state, action) => {
+            state.brandSelected = action.payload
+
         },
         getProductsOnSale: (state, action) => {
             state.productsOnSale = action.payload
@@ -99,6 +117,6 @@ export const productSlice = createSlice({
     }
 })
 
-export const { getAllProducts, getProductById, getProductsByName, getProductsBySubcategory, nextpageState, backPageState, nextTwopageState, backTwoPageState, orderByAzState, orderByZaState, orderPriceToLowState, orderPriceToUpState, getProductsOnSale, getProductsOnRating } = productSlice.actions
+export const { getAllProducts, getProductById, getProductsByName, getProductsBySubcategory, nextpageState, backPageState, nextTwopageState, backTwoPageState, orderByAzState, orderByZaState, orderPriceToLowState, orderPriceToUpState, getProductsOnSale, getProductsOnRating, upperBrandsState, upperBrandsSelectedState } = productSlice.actions
 
 export default productSlice.reducer 
