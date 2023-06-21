@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+
+import Paginado from "./../Paginado/Paginado";
 //import { addToFavList } from "../../../../redux/favoriteSlice";
 import ModalCart from "../../../common/Modals/ModalCart/ModalCart";
 import style from "./Products.module.css";
@@ -9,6 +11,9 @@ const Products = () => {
   const { productSee, pag, productsExist, brandSelected } = useSelector(
     (state) => state.products
   );
+
+
+  let cantPages = Math.floor(productSee.length / 12);
 
   let desde = (pag - 1) * 12;
   let hasta = pag * 12;
@@ -90,6 +95,7 @@ const Products = () => {
           )
         }
       })}
+      <Paginado cantPages={cantPages} />
 
       {/* <ModalCart show={modalShow} onHide={() => setModalShow(false)} /> */}
     </div>
