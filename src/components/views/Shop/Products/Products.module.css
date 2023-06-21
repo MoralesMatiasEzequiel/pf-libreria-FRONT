@@ -1,24 +1,24 @@
 .container {
-
-  display: flex;
+	display: grid;
+	grid-template-columns: repeat(4, 280px);
+	grid-row-gap: 1em;
   height: 100%;
-  width: auto;
+  width: 100%;
+	justify-items: center;
   justify-content: center;
-  flex-wrap: wrap;
   background-color: rgb(255, 255, 255);
-  gap: 2em 1.5em;
   margin-bottom: 3%;
+
 }
 
 .productCard {
-  background-color: #f1f1f1;
-  padding: 5px;
-  display: flex;
-  flex-direction: column;
-  height: 65vh;
-
+	max-height: 53vh;
+  background-color: #eee;
+  padding: 3px;
+  height: auto;
+	width: 260px;
   text-align: center;
-
+	transition: .3s;
 }
 
 .productCard:hover {
@@ -26,12 +26,13 @@
 }
 
 .productTumb img {
-  height: 45vh;
-  width: 250px;
+	padding-top: 5px;
+  height: 300px;
+  width: 95%;
 }
 
 .productDetails {
-  padding-top: 5%;
+  padding-top: 8%;
 }
 
 .link {
@@ -54,12 +55,14 @@
 
 .productBottomDetails {
   overflow: hidden;
-  border-top: 1px solid #eee;
-  padding-top: 5%;
+  border-top: 1px solid #ccc9c9;
+  padding-top: 2%;
+	padding-bottom: 5%;
   display: flex;
   align-items: center;
-  display: flex;
   justify-content: space-around;
+	align-content: center;
+	
 }
 
 .productLinks {
@@ -72,6 +75,7 @@
   font-size: 25px;
   color: #fbb72c;
   font-weight: 600;
+
 }
 
 .productLinks button {

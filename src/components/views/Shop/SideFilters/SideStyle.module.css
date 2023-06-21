@@ -1,14 +1,20 @@
+.header{
+	width: 246px;
 
+}
 
 .contLi{
     display: flex;
     flex-direction: column;
+		
 }
 
 .listDispatch{
     display: flex;
     gap: .5em;
+		
 }
 .listDispatch input{
     margin-bottom: 15px;
+		
 }
