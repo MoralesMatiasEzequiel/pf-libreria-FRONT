@@ -6,13 +6,19 @@
 
 .nada {
     width: 50%;
+    gap: .2em;
     display: flex;
+}
+.tit{
+    font-weight: 500;
+    margin-right: 5px;
 }
 .nada b{
     margin: 0 2px;
     padding: 0 2px;
     border: 1px solid #585858;
     border-radius: 5px;
+
 }
 
 .order {

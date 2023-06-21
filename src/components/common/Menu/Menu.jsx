@@ -6,7 +6,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { NavLink } from "react-router-dom";
-import { getAllProductsBySubcategory } from "../../../redux/productActions";
+import { getAllProductsBySubcategory, FiltSubCategories } from "../../../redux/productActions";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 
@@ -15,8 +15,9 @@ const Menu = () => {
   const [subcategories, setSubcategories] = useState([]);
   const dispatch = useDispatch();
 
-  const onClick = (id) => {
-    dispatch(getAllProductsBySubcategory(id));
+  const onClick = (arr) => {
+    dispatch(getAllProductsBySubcategory(arr[0]));
+    dispatch(FiltSubCategories(arr[1]));
   }
 
   useEffect(() => {
@@ -68,7 +69,7 @@ const Menu = () => {
                         <NavDropdown.Item
                           key={subcategory.name}
                           href=""
-                          onClick={() => onClick(subcategory._id)}
+                          onClick={() => onClick([subcategory._id, subcategory.name])}
                         >
                           <NavLink to='/shop' className={style.navLink}>
                             {subcategory.name}
