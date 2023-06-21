@@ -69,7 +69,7 @@ const Side = () => {
     return (
         <Accordion defaultActiveKey="0">
             <Accordion.Item eventKey="0">
-                <Accordion.Header><b>Marca</b></Accordion.Header>
+                <Accordion.Header className={style.header}><b>Marca</b></Accordion.Header>
 
                 <Accordion.Body>
                     <div className={style.contLi}>
