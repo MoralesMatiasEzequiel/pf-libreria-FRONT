@@ -3,8 +3,6 @@ import Products from "./Products/Products";
 import style from "./Shop.module.css"
 import Side from "./SideFilters/Side";
 
-import { useSelector } from 'react-redux';
-
 const Shop = () => {
 
 
