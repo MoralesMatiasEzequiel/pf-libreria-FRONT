@@ -152,7 +152,7 @@ const Arrepentimiento = () => {
           <textarea id="comentario" name="comentario" placeholder="Comentario" className="form-control" rows="1" value={comentario} onChange={(e) => setComentario(e.target.value)} required></textarea>
         </div>
 
-        <div className="text-center">
+        <div className="text-center" style={{paddingBottom: "10px"}}>
           <button type="submit" className="btn btn-primary">Enviar</button>
         </div>
       </form>
