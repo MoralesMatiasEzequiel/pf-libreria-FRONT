@@ -37,18 +37,16 @@ const Footer = () => {
               </li>
             </ul>
           </div>
-          <div className="col-md-4 text-center">
-            <Link to="/terminos" className="text-light text-decoration-none">
-              <button className="btn btn-outline-light btn-sm">Ver términos y condiciones</button>
-            </Link>
-            <Link to="/arrepentimiento" className="text-decoration-none">
-              <button className="btn btn-outline-light btn-sm ms-2">
-                Arrepentirse de la compra
-              </button>
-            </Link>
-          </div>
+          <div className="col-md-4 d-flex justify-content-center">
+  <Link to="/terminos" className="text-light text-decoration-none me-2">
+    <button className="btn btn-outline-light btn-sm">Ver términos y condiciones</button>
+  </Link>
+  <Link to="/arrepentimiento" className="text-decoration-none">
+    <button className="btn btn-outline-light btn-sm ms-2">Arrepentirse de la compra</button>
+  </Link>
+</div>
           <div className="col-md-4 text-end">
-            <p className="mb-0 small">&copy; {new Date().getFullYear()} Tu Librito</p>
+            <p className="mb-0 small">&copy; {new Date().getFullYear()} Pluma</p>
           </div>
         </div>
       </div>
