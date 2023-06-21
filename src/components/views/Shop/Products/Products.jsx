@@ -26,7 +26,7 @@ const Products = () => {
       setAllProducts(productSee)
     }
 
-    
+
   }, [brandSelected]);
 
   let desde = (pag - 1) * 12;
@@ -38,7 +38,7 @@ const Products = () => {
 
     let cantPages = Math.round(allProducts.length / 12 + 0.4);
     setPagines(cantPages)
-    
+
   }, [allProducts]);
 
 
@@ -70,9 +70,11 @@ const Products = () => {
                 <h4 className={style.title}>{base.name}</h4>
               </Link>
               <div className={style.productBottomDetails}>
+
                 <div className={style.productPrice}>
                   <small>${base.price}</small>
                 </div>
+
                 <div className={style.productLinks}>
                   <button> 	{/*onClick={()=> navigate('/home')}*/}
                     <i className="bi bi-heart"></i>
@@ -84,38 +86,39 @@ const Products = () => {
 
               </div>
             </div>
-          );
-        })}
+          </div>
+        )
+      })}
 
       {brandSelected.length > 0 && viewsProducts.map((base, index) => {
-        
-          return (
-            <div key={index} className={style.productCard}>
-                <Link to={"/shop/" + base._id}>
-                  <div className={style.productTumb}>
-                    <img src={base.image} alt={base.name} />
-                  </div>
-                </Link>
-                <div className={style.productDetails}>
-                  <Link className={style.link} to={"/shop/" + base._id}>
-                    <h4 className={style.title}>{base.name}</h4>
-                  </Link>
-                  <div className={style.productBottomDetails}>
-                    <div className={style.productPrice}>
-                      <small>${base.price}</small>
-                    </div>
-                    <div className={style.productLinks}>
-                      <button>
-                        <i className="bi bi-heart"></i>
-                      </button>
-                      <button onClick={() => setModalShow(true)}>
-                        <i className="bi bi-cart"></i>
-                      </button>
-                    </div>
-                  </div>
+
+        return (
+          <div key={index} className={style.productCard}>
+            <Link to={"/shop/" + base._id}>
+              <div className={style.productTumb}>
+                <img src={base.image} alt={base.name} />
+              </div>
+            </Link>
+            <div className={style.productDetails}>
+              <Link className={style.link} to={"/shop/" + base._id}>
+                <h4 className={style.title}>{base.name}</h4>
+              </Link>
+              <div className={style.productBottomDetails}>
+                <div className={style.productPrice}>
+                  <small>${base.price}</small>
                 </div>
+                <div className={style.productLinks}>
+                  <button>
+                    <i className="bi bi-heart"></i>
+                  </button>
+                  <button onClick={() => setModalShow(true)}>
+                    <i className="bi bi-cart"></i>
+                  </button>
+                </div>
+              </div>
             </div>
-          )
+          </div>
+        )
       })}
       <Paginado cantPages={pagines} />
 

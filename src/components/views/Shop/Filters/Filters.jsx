@@ -33,46 +33,47 @@ const Filters = () => {
             <div className={style.div}>
 
                 <div className={style.nada}>
-                {subCategories.length > 0 && brandSelected.length < 1 && <p className={style.tit}>Filtros :</p> }
-                {subCategories.length < 1 && brandSelected.length > 0 && <p className={style.tit}>Filtros :</p> }
-                {subCategories.length >0 && brandSelected.length > 0 && <p className={style.tit}>Filtros :</p> }
-                
-                {subCategories.length > 0 && <p>Por sub-categoria : <b>{subCategories}</b> </p> }
-                
-                {brandSelected.length > 0 && <p> Por marca :{brandSelected.map(bra => {
-                    return <b>{bra}</b>
-                })}</p>}
+
+                    {subCategories.length > 0 && brandSelected.length < 1 && <p className={style.tit}>Filtros :</p>}
+                    {subCategories.length < 1 && brandSelected.length > 0 && <p className={style.tit}>Filtros :</p>}
+                    {subCategories.length > 0 && brandSelected.length > 0 && <p className={style.tit}>Filtros :</p>}
+
+                    {subCategories.length > 0 && <p>Por sub-categoria : <b>{subCategories}</b> </p>}
+
+                    {brandSelected.length > 0 && <p> Por marca :{brandSelected.map(bra => {
+                        return <b>{bra}</b>
+                    })}</p>}
 
 
-           </div>
+                </div>
 
-            <Navbar >
+                <Navbar >
 
-                <Container fluid>
-                    <Nav className={style.orderres}>
-                        <p className={style.order} >Ordenar por :</p>
+                    <Container fluid>
+                        <Nav className={style.orderres}>
+                            <p className={style.order} >Ordenar por :</p>
 
-                        <NavDropdown
-                            title="Nombre"
-                        >
-                            <NavDropdown.Item onClick={orderAZ}>A - Z </NavDropdown.Item>
+                            <NavDropdown
+                                title="Nombre"
+                            >
+                                <NavDropdown.Item onClick={orderAZ}>A - Z </NavDropdown.Item>
 
-                            <NavDropdown.Item onClick={orderZA}>Z - A </NavDropdown.Item>
+                                <NavDropdown.Item onClick={orderZA}>Z - A </NavDropdown.Item>
 
-                        </NavDropdown>
-                        <NavDropdown
-                            id="nav-dropdown-dark-example"
-                            title="Precio"
-                        >
+                            </NavDropdown>
+                            <NavDropdown
+                                id="nav-dropdown-dark-example"
+                                title="Precio"
+                            >
 
-                            <NavDropdown.Item onClick={orderPriceLow}>Precio: Menor a mayor </NavDropdown.Item>
+                                <NavDropdown.Item onClick={orderPriceLow}>Precio: Menor a mayor </NavDropdown.Item>
 
-                            <NavDropdown.Item onClick={orderPriceUp}>Precio: Mayor a menor </NavDropdown.Item>
-                        </NavDropdown>
-                    </Nav>
-                </Container>
-            </Navbar >
-        </div>
+                                <NavDropdown.Item onClick={orderPriceUp}>Precio: Mayor a menor </NavDropdown.Item>
+                            </NavDropdown>
+                        </Nav>
+                    </Container>
+                </Navbar >
+            </div>
         </div >
     )
 
