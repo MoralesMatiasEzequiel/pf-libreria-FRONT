@@ -11,6 +11,7 @@ export const productSlice = createSlice({
         productsOnRating: [],
         productsExist: false,
         detail: {},
+        subCategories: [],
         pag: 1
     },
     reducers: {
@@ -20,16 +21,19 @@ export const productSlice = createSlice({
             state.productsExist = true
             state.branes = []
             state.brandSelected = []
+            state.subCategories = []
         },
         getProductById: (state, action) => {
 
             state.detail = state.productSee.filter(pro => pro.id === action.payload)
             state.productsExist = true
+            state.subCategories = []
         },
         getProductsByName: (state, action) => {
             state.pag = 1
             state.branes = []
             state.brandSelected = []
+            state.subCategories = []
 
             if (!action.payload) {
                 state.productSee = []
@@ -49,6 +53,10 @@ export const productSlice = createSlice({
                 state.productSee = action.payload
                 state.productsExist = true;
             }
+        },
+        FiltSubCategoriesState: (state, action) => {
+            state.subCategories = action.payload
+            
         },
         nextpageState: (state, action) => {
             state.pag = state.pag + 1
@@ -121,6 +129,6 @@ export const productSlice = createSlice({
     }
 })
 
-export const { getAllProducts, getProductById, getProductsByName, getProductsBySubcategory, nextpageState, backPageState, nextTwopageState, backTwoPageState, orderByAzState, orderByZaState, orderPriceToLowState, orderPriceToUpState, getProductsOnSale, getProductsOnRating, upperBrandsState, upperBrandsSelectedState } = productSlice.actions
+export const { getAllProducts, getProductById, getProductsByName, getProductsBySubcategory, nextpageState, backPageState, nextTwopageState, backTwoPageState, orderByAzState, orderByZaState, orderPriceToLowState, orderPriceToUpState, getProductsOnSale, getProductsOnRating, upperBrandsState, upperBrandsSelectedState , FiltSubCategoriesState} = productSlice.actions
 
 export default productSlice.reducer 

@@ -26,8 +26,7 @@ const Products = () => {
       setAllProducts(productSee)
     }
 
-    console.log(allProducts);
-
+    
   }, [brandSelected]);
 
   let desde = (pag - 1) * 12;
@@ -58,6 +57,9 @@ const Products = () => {
       {!productsExist && (
         <p>No hay productos asociados a esa búsqueda o categoría.</p>
       )}
+
+
+
       {!brandSelected.length && viewsProducts.map((base, index) => {
         return (
           <div key={index} className={style.productCard}>
@@ -88,7 +90,7 @@ const Products = () => {
         );
       })}
 
-      {viewsProducts.map((base, index) => {
+      {brandSelected.length > 0 && viewsProducts.map((base, index) => {
         
           return (
             <div key={index} className={style.productCard}>
