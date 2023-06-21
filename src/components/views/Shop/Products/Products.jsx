@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -12,11 +12,36 @@ const Products = () => {
     (state) => state.products
   );
 
-  let cantPages = Math.floor(productSee.length / 12);
+  const [allProducts, setAllProducts] = useState([]);
+  const [pagines, setPagines] = useState([]);
+
+
+
+  useEffect(() => {
+
+    if (brandSelected.length > 0) {
+      let papeliri = productSee.filter(pro => brandSelected.includes(pro.brand))
+      setAllProducts(papeliri)
+    } else {
+      setAllProducts(productSee)
+    }
+
+    console.log(allProducts);
+
+  }, [brandSelected]);
 
   let desde = (pag - 1) * 12;
   let hasta = pag * 12;
-  const viewsProducts = productSee.slice(desde, hasta);
+  const viewsProducts = allProducts.slice(desde, hasta);
+
+
+  useEffect(() => {
+
+    let cantPages = Math.round(allProducts.length / 12 + 0.4);
+    setPagines(cantPages)
+    
+  }, [allProducts]);
+
 
   const navigate = useNavigate();
   const [modalShow, setModalShow] = useState(false);
@@ -66,7 +91,7 @@ const Products = () => {
         })}
 
       {viewsProducts.map((base, index) => {
-        if (brandSelected.includes(base.brand)) {
+        
           return (
             <div key={index} className={style.productCard}>
                 <Link to={"/shop/" + base._id}>
@@ -93,10 +118,9 @@ const Products = () => {
                   </div>
                 </div>
             </div>
-          );
-        }
+          )
       })}
-      <Paginado cantPages={cantPages} />
+      <Paginado cantPages={pagines} />
 
       {/* <ModalCart show={modalShow} onHide={() => setModalShow(false)} /> */}
     </div>
