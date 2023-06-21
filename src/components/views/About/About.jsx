@@ -11,7 +11,7 @@ const About = () => {
   };
 
   return (
-    <div className="container text-start">
+    <div className="container text-start" style={{minHeight: "70vh"}}>
       <div className="row">
         <div className="col-md-6">
           <h2>Contacto</h2>
