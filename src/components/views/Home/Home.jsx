@@ -4,7 +4,7 @@ import 'react-multi-carousel/lib/styles.css';
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { getProductsSales, getProductsRating } from "../../../redux/productActions";
+import { getProductsSales, getProductsRating, getById, getProductsOnHome } from "../../../redux/productActions";
 import style from "../Home/Home.module.css"
 
 
@@ -20,6 +20,7 @@ const Home = () => {
     useEffect(() => {
         dispatch(getProductsSales())
         dispatch(getProductsRating())
+        dispatch(getProductsOnHome())
     }, [dispatch])
 
     const responsive = {
@@ -42,7 +43,9 @@ const Home = () => {
         }
       };
 
-    
+    const clickDispatch = (id) => {
+      dispatch(getById(id))
+    }
     
     return (
         <div>
@@ -59,7 +62,7 @@ const Home = () => {
                       <p className={style.priceBefore}>Antes: ${product.price}</p>
                       <p className={style.priceNow}>Ahora: ${product.salePrice}</p>
                       <Link to={`/shop/${product._id}`}>
-                        <button>Ver producto</button>
+                        <button onClick={() => clickDispatch(product._id)} >Ver producto</button>
                       </Link>
                     </div>
                   )
@@ -79,7 +82,7 @@ const Home = () => {
                       <p className={style.rating}>Rating: {product.rating}</p>
                       <p className={style.priceNow}>Precio: ${product.price}</p>
                       <Link to={`/shop/${product._id}`}>
-                        <button>Ver producto</button>
+                        <button onClick={() => clickDispatch(product._id)} >Ver producto</button>
                       </Link>
                     </div>
                   )

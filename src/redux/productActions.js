@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { getAllProducts, getProductById, getProductsByName, getProductsBySubcategory, nextpageState, backPageState, nextTwopageState, backTwoPageState, orderByAzState, orderByZaState, orderPriceToLowState, orderPriceToUpState, getProductsOnSale, getProductsOnRating, upperBrandsState , upperBrandsSelectedState, FiltSubCategoriesState } from "./productSlice";
+import { getAllProducts, getProductById, getProductsByName, getProductsBySubcategory, nextpageState, backPageState, nextTwopageState, backTwoPageState, orderByAzState, orderByZaState, orderPriceToLowState, orderPriceToUpState, getProductsOnSale, getProductsOnRating, upperBrandsState , upperBrandsSelectedState, FiltSubCategoriesState, saveProducts } from "./productSlice";
 
 export const getProducts = () => {
     return async (dispatch) => {
@@ -114,6 +114,13 @@ export const getProductsRating = () => {
     return async (dispatch) => {
         const { data } = await axios.get("/product/rating");
         dispatch(getProductsOnRating(data));
+    };
+};
+export const getProductsOnHome = () => {
+    return async (dispatch) => {
+        const dataApi = await axios.get("/product/");
+        const products = dataApi.data;
+        dispatch(saveProducts(products));
     };
 };
 
