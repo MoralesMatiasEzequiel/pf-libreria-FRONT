@@ -1,8 +1,9 @@
 import Pagination from 'react-bootstrap/Pagination';
 
-import { nextPage, backPage, nextTwoPage, backTwoPage } from "../../../../redux/productActions";
+import { nextPage, backPage, nextTwoPage, backTwoPage, totalPag } from "../../../../redux/productActions";
 import { useDispatch, useSelector } from "react-redux";
 
+import { useEffect } from "react";
 
 import style from "./Paginado.module.css"
 
@@ -12,7 +13,7 @@ const Paginado = ({ cantPages }) => {
 
 
     const dispatch = useDispatch();
-    const { pag } = useSelector(state => state.products);
+    const { pag ,productSee ,products } = useSelector(state => state.products);
 
     const next = () => {
         dispatch(nextPage())
@@ -26,7 +27,7 @@ const Paginado = ({ cantPages }) => {
     const backTwo = () => {
         dispatch(backTwoPage())
     }
-
+ 
     return (
         <div className={style.pagCont}>
             < Pagination >
@@ -37,8 +38,8 @@ const Paginado = ({ cantPages }) => {
                 <Pagination.Item active>{pag}</Pagination.Item>
 
                 {pag < cantPages && <Pagination.Item onClick={next} >{pag + 1}</Pagination.Item>}
-                {pag < cantPages - 1  && <Pagination.Item onClick={nextTwo} >{pag + 2}</Pagination.Item>}
-                {pag < cantPages  && <Pagination.Next onClick={next} />}
+                {pag < cantPages - 1 && <Pagination.Item onClick={nextTwo} >{pag + 2}</Pagination.Item>}
+                {pag < cantPages && <Pagination.Next onClick={next} />}
             </Pagination >
         </div>
     );

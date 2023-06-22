@@ -25,34 +25,33 @@ const Side = () => {
                     almacini.push(productSee[i].brand);
                 }
             }
+            almacini = almacini.sort((a, b) => {
+                const noa = a.toLowerCase();
+                const noe = b.toLowerCase();
 
+                if (noa < noe) {
+                    return -1;
+                }
+                if (noa > noe) {
+                    return 1;
+                }
+                return 0;
+            })
             return almacini;
         }
 
         setBrands(mapBrands)
+
+        return () => setBrandsSelecteds([]);
     }, [productSee, branes]);
 
 
     const handlerClick = () => {
 
         dispatch(upperBrands(brands))
-
     }
 
-    // const handlerOnClick = (event) => {
-    //     const marquite = event.target.value;
 
-    //     if (brandsSelected.includes(marquite)) {
-    //       console.log("lo saco: " + marquite);
-    //       setBrandsSelecteds(brandsSelected.filter((bra) => bra !== marquite));
-    //     } else {
-    //       console.log("lo meto :" + marquite);
-    //       setBrandsSelecteds([...brandsSelected, marquite]);
-    //     }
-    //     dispatch(upperBrandsSelected(brandsSelected));
-    //   };
-
-    // --------------------------------------------------------------
     const handlerOnClick = (event) => {
         const marquite = event.target.value;
 
@@ -66,40 +65,50 @@ const Side = () => {
         dispatch(upperBrandsSelected(updateBrand));
     };
 
-    return (
-        <Accordion defaultActiveKey="0">
-            <Accordion.Item eventKey="0">
-                <Accordion.Header className={style.header}><b>Marca</b></Accordion.Header>
 
-                <Accordion.Body>
-                    <div className={style.contLi}>
+
+    return (
+
+        <Accordion  >
+            <Accordion.Item eventKey="0" >
+
+                <Accordion.Header className={style.header} >
+                    <b>Marca</b>
+                </Accordion.Header>
+
+                <Accordion.Body  >
+                    <div className={style.contLi} >
                         {!branes.length
                             ? brands.map((brand, i) => {
-                                return (
-                                    <div key={i} className={style.listDispatch}
-                                    >
-                                        <input type="checkbox"
+                                if (i < 20) {
+                                    return (
+                                        <div key={i} className={style.listDispatch}
+                                        >
+                                            <input type="checkbox"
 
-                                            value={brand}
+                                                value={brand}
 
-                                            onChange={handlerClick}
-                                        />
-                                        <p>{brand}</p>
-                                    </div>
-                                );
+                                                onChange={handlerClick}
+                                            />
+                                            <p>{brand}</p>
+                                        </div>
+                                    );
+                                }
                             })
-                            : branes[0].map((brand) => {
-                                return (
-                                    <div className={style.listDispatch}
-                                    >
-                                        <input type="checkbox"
+                            : branes[0].map((brand, i) => {
+                                if (i < 20) {
+                                    return (
+                                        <div className={style.listDispatch}
+                                        >
+                                            <input type="checkbox"
 
-                                            value={brand}
-                                            onClick={handlerOnClick}
-                                        />
-                                        <p>{brand}</p>
-                                    </div>
-                                );
+                                                value={brand}
+                                                onClick={handlerOnClick}
+                                            />
+                                            <p>{brand}</p>
+                                        </div>
+                                    );
+                                }
                             })
                         }
 
@@ -107,7 +116,53 @@ const Side = () => {
                 </Accordion.Body>
             </Accordion.Item>
 
+            {brands.length > 20 && <Accordion.Item eventKey="1">
+                <Accordion.Header className={style.header}  >
+                    <b>Marca - 2</b>
+                </Accordion.Header>
+
+                <Accordion.Body >
+                    <div className={style.contLi}>
+                        {!branes.length
+                            ? brands.map((brand, i) => {
+                                if (i > 20) {
+                                    return (
+                                        <div key={i} className={style.listDispatch}
+                                        >
+                                            <input type="checkbox"
+
+                                                value={brand}
+
+                                                onChange={handlerClick}
+                                            />
+                                            <p>{brand}</p>
+                                        </div>
+                                    );
+                                }
+                            })
+                            : branes[0].map((brand, i) => {
+                                if (i > 20) {
+                                    return (
+                                        <div className={style.listDispatch}
+                                        >
+                                            <input type="checkbox"
+
+                                                value={brand}
+                                                onClick={handlerOnClick}
+                                            />
+                                            <p>{brand}</p>
+                                        </div>
+                                    );
+                                }
+                            })
+                        }
+
+                    </div>
+                </Accordion.Body>
+            </Accordion.Item>}
+
         </Accordion>
+
     )
 
 }

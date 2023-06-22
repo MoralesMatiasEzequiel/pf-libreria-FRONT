@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
+import { totalPag } from "../../../../redux/productActions";
 import Paginado from "./../Paginado/Paginado";
 //import { addToFavList } from "../../../../redux/favoriteSlice";
 import ModalCart from "../../../common/Modals/ModalCart/ModalCart";
@@ -12,6 +13,7 @@ const Products = () => {
     (state) => state.products
   );
 
+  const dispatch = useDispatch();
   const [allProducts, setAllProducts] = useState([]);
   const [pagines, setPagines] = useState([]);
 
@@ -27,7 +29,7 @@ const Products = () => {
     }
 
 
-  }, [brandSelected]);
+  }, [brandSelected ,productSee]);
 
   let desde = (pag - 1) * 12;
   let hasta = pag * 12;
@@ -38,7 +40,8 @@ const Products = () => {
 
     let cantPages = Math.round(allProducts.length / 12 + 0.4);
     setPagines(cantPages)
-
+    dispatch(totalPag(cantPages))
+        
   }, [allProducts]);
 
 

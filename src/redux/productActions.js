@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { getAllProducts, getProductById, getProductsByName, getProductsBySubcategory, nextpageState, backPageState, nextTwopageState, backTwoPageState, orderByAzState, orderByZaState, orderPriceToLowState, orderPriceToUpState, getProductsOnSale, getProductsOnRating, upperBrandsState , upperBrandsSelectedState, FiltSubCategoriesState, saveProducts } from "./productSlice";
+import { getAllProducts, getProductById, getProductsByName, getProductsBySubcategory, nextpageState, backPageState, nextTwopageState, backTwoPageState, orderByAzState, orderByZaState, orderPriceToLowState, orderPriceToUpState, getProductsOnSale, getProductsOnRating, upperBrandsState , upperBrandsSelectedState, FiltSubCategoriesState, saveProducts ,totalPagState } from "./productSlice";
 
 export const getProducts = () => {
     return async (dispatch) => {
@@ -68,7 +68,12 @@ export const backTwoPage = () => {
         dispatch(backTwoPageState());
     };
 };
-// ------------------------ordenamiento
+export const totalPag = (pags) => {
+    return (dispatch) => {
+        dispatch(totalPagState(pags));
+    };
+};
+// ------------------------ordenamiento 
 export const orderByAZ = () => {
     return (dispatch) => {
         dispatch(orderByAzState());
