@@ -57,9 +57,10 @@ const Home = () => {
     
     return (
         <div>
-          <h1>TU LIBRITO WEB</h1>
           {/*----------------- PRODUCTOS EN OFERTA -------------------*/}
-            <h2 className={style.h2}>Productos en oferta <Link to={"/shop"} className={style.link}><span onClick={() => dispatchProductsSalesToShop()} className={style.span}>Ver todas</span></Link></h2>
+
+            <h2 className={style.h2}>Productos en oferta <Link to={"/shop"} className={style.link}><span className={style.span}>Ver todos</span></Link></h2>
+
             <Carousel responsive={responsive} className={style.carousel} infinite={true} >
               {
                 productsSales && productsSales.map((product, index) => {
@@ -79,7 +80,8 @@ const Home = () => {
             </Carousel>
 
             {/*---------------- PRODUCTOS POR RATING ----------------- */}
-            <h2 className={style.h2}>Productos mas vendidos <Link to={"/shop"} className={style.link}><span onClick={() => dispatchProductsRatingToShop()} className={style.span}>Ver todas</span></Link></h2>
+            
+            <h2 className={style.h2}>Productos mas vendidos <Link to={"/shop"} className={style.link}><span className={style.span}>Ver todos</span></Link></h2>
             <Carousel responsive={responsive} className={style.carousel} infinite={true} >
               {
                 productsRating && productsRating.map((product, index) => {
