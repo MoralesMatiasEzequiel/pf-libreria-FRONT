@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom"
 import style from "./Nav.module.css"
-
+import logo from "./logo completo.png"
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -20,7 +20,7 @@ const Navuno = () => {
             <Container>
                 <Navbar.Brand >
                     <NavLink to={"/"}>
-                        <img className={style.logo} src="https://images.emojiterra.com/google/noto-emoji/unicode-15/color/512px/1f4da.png" alt="lilbrito" />
+                        <img className={style.logo} src={logo} alt="" />
                     </NavLink>
 
                 </Navbar.Brand>

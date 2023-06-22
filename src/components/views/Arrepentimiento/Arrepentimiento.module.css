@@ -1,0 +1,13 @@
+.btnPrimary{
+    background-color: #FF9E5C;
+    border-color: #FF9E5C;
+    color: white;
+    border-radius: 5px;
+    border-style: solid;
+    margin-bottom: 5px;
+}
+
+.btnPrimary:hover {
+  background-color: white;
+  color: #FF9E5C;
+}

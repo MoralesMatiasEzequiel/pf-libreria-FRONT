@@ -1,4 +1,5 @@
 import React from "react";
+import style from "./About.module.css"
 
 const About = () => {
   const localAddress = "Dirección del local"; // Inserta aquí la dirección del local
@@ -11,45 +12,70 @@ const About = () => {
   };
 
   return (
-    <div className="container text-start" style={{minHeight: "70vh"}}>
+    <div className="container text-start" style={{ minHeight: "70vh" }}>
       <div className="row">
         <div className="col-md-6">
-          <h2>Contacto</h2>
+          <h2 style={{ color: "#191919" }}>Contacto</h2>
           <form>
             <div className="mb-3">
-              <label htmlFor="nombre" className="form-label">Nombre:</label>
+              <label htmlFor="nombre" className="form-label" style={{ color: "#3F3F3F" }}>
+                Nombre:
+              </label>
               <input type="text" id="nombre" name="nombre" className="form-control" />
             </div>
             <div className="mb-3">
-              <label htmlFor="email" className="form-label">Email:</label>
+              <label htmlFor="email" className="form-label" style={{ color: "#3F3F3F" }}>
+                Email:
+              </label>
               <input type="email" id="email" name="email" className="form-control" />
             </div>
             <div className="mb-3">
-              <label htmlFor="mensaje" className="form-label">Mensaje:</label>
+              <label htmlFor="mensaje" className="form-label" style={{ color: "#3F3F3F" }}>
+                Mensaje:
+              </label>
               <textarea id="mensaje" name="mensaje" className="form-control" />
             </div>
-            <button type="submit" className="btn btn-primary">Enviar</button>
+
+            <button type="submit" className= {style.btnPrimary}>Enviar</button>
+
           </form>
         </div>
         <div className="col-md-6">
-          <h2>Información de ubicación</h2>
-          <p>Dirección: {localAddress}</p>
-          <p>Teléfono: Número de teléfono</p>
+          <h2 style={{ color: "#191919" }}>Información de ubicación</h2>
+          <p style={{ color: "#3F3F3F" }}>Dirección: {localAddress}</p>
+          <p style={{ color: "#3F3F3F" }}>Teléfono: Número de teléfono</p>
 
-          <h2>Encontranos en nuestras redes</h2>
+          <h2 style={{ color: "#191919" }}>Encontranos en nuestras redes</h2>
           <ul className="list-inline">
             <li className="list-inline-item">
               <a href="enlace-a-red-social-1" className="text-decoration-none">
-                <i className="bi bi-facebook text-primary cursor-pointer" onClick={() => window.open("enlace-a-red-social-1", "_blank")}> Facebook</i>
+                <i
+                  className="bi bi-facebook text-primary cursor-pointer"
+                  onClick={() => window.open("enlace-a-red-social-1", "_blank")}
+                  style={{ color: "#191919" }}
+                >
+                  {" "}
+                  Facebook
+                </i>
               </a>
             </li>
             <li className="list-inline-item">
               <a href="enlace-a-red-social-2" className="text-decoration-none">
-                <i className="bi bi-instagram text-purple cursor-pointer" onClick={() => window.open("enlace-a-red-social-2", "_blank")}> Instagram</i>
+                <i
+                  className="bi bi-instagram text-purple cursor-pointer"
+                  onClick={() => window.open("enlace-a-red-social-2", "_blank")}
+                  style={{ color: "#191919" }}
+                >
+                  {" "}
+                  Instagram
+                </i>
               </a>
             </li>
             <li className="list-inline-item">
-              <i className="bi bi-geo-alt text-success" style={{ cursor: "pointer" }} onClick={openGoogleMaps}> Google Maps</i>
+              <i className="bi bi-geo-alt text-success" style={{ cursor: "pointer", color: "#191919" }} onClick={openGoogleMaps}>
+                {" "}
+                Google Maps
+              </i>
             </li>
           </ul>
         </div>
