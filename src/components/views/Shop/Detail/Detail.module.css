@@ -1,0 +1,27 @@
+.btnPrimary{
+    background-color: #FF9E5C;
+    border-color: #FF9E5C;
+    color: white;
+    border-radius: 5px;
+    border-style: solid;
+    margin: 5px;
+}
+
+.btnPrimary:hover {
+  background-color: white;
+  color: #FF9E5C;
+}
+
+.btnFavorite{
+    background-color: red;
+    border-color: red;
+    color: white;
+    border-radius: 5px;
+    border-style: solid;
+    margin: 5px;
+}
+
+.btnFavorite:hover {
+    background-color: white;
+    color: red;
+  }
