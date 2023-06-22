@@ -8,8 +8,8 @@ import { useDispatch, useSelector } from 'react-redux';
 const ModalCart = (props) => {
 
     const { id } = useParams();
-    const { productSee } = useSelector(state => state.products);
-    const product = productSee.find(item => item._id === id);
+    const { products } = useSelector(state => state.products);
+    const product = products.find(item => item._id === id);
 
 
   return (

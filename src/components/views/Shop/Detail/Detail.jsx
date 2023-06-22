@@ -6,8 +6,8 @@ import ModalCart from "../../../common/Modals/ModalCart/ModalCart";
 const Detail = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const { productSee } = useSelector(state => state.products);
-  const product = productSee.find(item => item._id === id);
+  const { products } = useSelector(state => state.products);
+  const product = products.find(item => item._id === id);
 
   const [modalShow, setModalShow] = useState(false);
 
