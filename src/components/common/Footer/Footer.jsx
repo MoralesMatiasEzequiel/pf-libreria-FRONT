@@ -37,28 +37,18 @@ const Footer = () => {
               </li>
             </ul>
           </div>
-          <div className="col-md-4 d-flex justify-content-center">
+          <div className="col-md-4 d-flex justify-content-center text-center">
             <Link to="/terminos" className="text-light text-decoration-none me-2">
-              <button className="btn btn-outline-light btn-sm" style={{ borderColor: "#9E9E9E" }}>Ver términos y condiciones</button>
-            </Link>
-            <Link to="/arrepentimiento" className="text-decoration-none">
-              <button className="btn btn-outline-light btn-sm ms-2" style={{ borderColor: "#9E9E9E" }}>Arrepentirse de la compra</button>
+              <button className="btn btn-outline-light btn-sm text-nowrap" style={{ borderStyle: "none" }}>Ver términos y condiciones</button>
             </Link>
           </div>
-          <div className="col-md-4 text-end">
-            <p className="mb-0 small" style={{ color: "#9E9E9E" }}>&copy; {new Date().getFullYear()} Pluma</p>
-          </div>
-        </div>
-      </div>
-
-      {/* Modal de arrepentimiento */}
-      <div className="modal fade" id="arrepentimientoModal" tabIndex="-1" aria-labelledby="arrepentimientoModalLabel" aria-hidden="true">
-        <div className="modal-dialog">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title" id="arrepentimientoModalLabel">Arrepentimiento de la compra</h5>
-              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <div className="col-md-4 text-end align-self-end">
+            <div className="text-end">
+              <Link to="/arrepentimiento" className="text-decoration-none">
+                <button className="btn btn-outline-light btn-sm ms-2" style={{ borderStyle: "none" }}>Arrepentirse de compra</button>
+              </Link>
             </div>
+            <p className="mb-0 small" style={{ color: "#9E9E9E" }}>&copy; {new Date().getFullYear()} Pluma</p>
           </div>
         </div>
       </div>

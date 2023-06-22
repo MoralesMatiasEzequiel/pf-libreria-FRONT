@@ -12,7 +12,7 @@ const About = () => {
   };
 
   return (
-    <div className="container text-start" style={{ minHeight: "70vh" }}>
+    <div className="container text-start" style={{ minHeight: "70vh", marginTop:"15px" }}>
       <div className="row">
         <div className="col-md-6">
           <h2 style={{ color: "#191919" }}>Contacto</h2>
@@ -41,6 +41,10 @@ const About = () => {
           </form>
         </div>
         <div className="col-md-6">
+          <h2 style={{ color: "#191919" }}>Horarios</h2>
+          <p style={{ color: "#3F3F3F" }}>De Lunes a Sábado</p>
+          <p style={{ color: "#3F3F3F" }}>8:00 hs a 19:00 hs</p>
+
           <h2 style={{ color: "#191919" }}>Información de ubicación</h2>
           <p style={{ color: "#3F3F3F" }}>Dirección: {localAddress}</p>
           <p style={{ color: "#3F3F3F" }}>Teléfono: Número de teléfono</p>
