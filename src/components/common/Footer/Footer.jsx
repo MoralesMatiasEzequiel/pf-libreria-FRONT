@@ -11,16 +11,16 @@ const Footer = () => {
   };
 
   return (
-      <footer className="bg-dark text-light py-2 text-start" style={{ marginTop:"auto", bottom:"0", width:"100%"}}>
+    <footer className="bg-dark text-light py-2 text-start" style={{ marginTop: "auto", bottom: "0", width: "100%" }}>
       <div className="container">
         <div className="row align-items-center">
           <div className="col-md-4">
-            <p className="mb-0 small">Correo electrónico: info@example.com</p>
-            <p className="mb-0 small">Teléfono: 123-456-7890</p>
+            <p className="mb-0 small" style={{ color: "#9E9E9E" }}>Correo electrónico: info@example.com</p>
+            <p className="mb-0 small" style={{ color: "#9E9E9E" }}>Teléfono: 123-456-7890</p>
             <ul className="list-inline">
               <li className="list-inline-item">
                 <a href="enlace-a-red-social-1" className="text-decoration-none">
-                  <i className="bi bi-facebook text-primary cursor-pointer"> Facebook</i>
+                  <i className="bi bi-facebook text-primary cursor-pointer" style={{ color: "#191919" }}> Facebook</i>
                 </a>
               </li>
               <li className="list-inline-item">
@@ -31,22 +31,22 @@ const Footer = () => {
                 </a>
               </li>
               <li className="list-inline-item">
-                <i className="bi bi-geo-alt text-success" style={{ cursor: "pointer" }} onClick={openGoogleMaps}>
+                <i className="bi bi-geo-alt text-success" style={{ cursor: "pointer", color: "#191919" }} onClick={openGoogleMaps}>
                   Google Maps
                 </i>
               </li>
             </ul>
           </div>
           <div className="col-md-4 d-flex justify-content-center">
-  <Link to="/terminos" className="text-light text-decoration-none me-2">
-    <button className="btn btn-outline-light btn-sm">Ver términos y condiciones</button>
-  </Link>
-  <Link to="/arrepentimiento" className="text-decoration-none">
-    <button className="btn btn-outline-light btn-sm ms-2">Arrepentirse de la compra</button>
-  </Link>
-</div>
+            <Link to="/terminos" className="text-light text-decoration-none me-2">
+              <button className="btn btn-outline-light btn-sm" style={{ borderColor: "#9E9E9E" }}>Ver términos y condiciones</button>
+            </Link>
+            <Link to="/arrepentimiento" className="text-decoration-none">
+              <button className="btn btn-outline-light btn-sm ms-2" style={{ borderColor: "#9E9E9E" }}>Arrepentirse de la compra</button>
+            </Link>
+          </div>
           <div className="col-md-4 text-end">
-            <p className="mb-0 small">&copy; {new Date().getFullYear()} Pluma</p>
+            <p className="mb-0 small" style={{ color: "#9E9E9E" }}>&copy; {new Date().getFullYear()} Pluma</p>
           </div>
         </div>
       </div>
