@@ -48,7 +48,7 @@ const Footer = () => {
                 <button className="btn btn-outline-light btn-sm ms-2" style={{ borderStyle: "none" }}>Arrepentirse de compra</button>
               </Link>
             </div>
-            <p className="mb-0 small" style={{ color: "#9E9E9E" }}>&copy; {new Date().getFullYear()} Pluma</p>
+            <p className="mb-0 small" style={{ color: "#9E9E9E" }}>&copy; {new Date().getFullYear()} Pluma Libreria</p>
           </div>
         </div>
       </div>
