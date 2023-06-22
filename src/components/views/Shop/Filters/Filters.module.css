@@ -2,15 +2,21 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
+
 }
 
 .nada {
     width: 50%;
     gap: .2em;
     display: flex;
+    justify-content: space-around;
     
 }
-
+.filtrs{
+    width: 50%;
+    gap: .2em;
+    display: flex;
+}
 .tit {
     font-weight: 500;
     margin-right: 5px;
