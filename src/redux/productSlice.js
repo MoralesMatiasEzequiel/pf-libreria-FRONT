@@ -136,10 +136,18 @@ export const productSlice = createSlice({
         },
         saveProducts: (state, action) => {
             state.products = action.payload
+        },
+        productsSalesOnShop: (state, action) => {
+            state.productSee = state.productsOnSale
+            state.productsExist = true
+        },
+        productsRatingOnShop: (state, action) => {
+            state.productSee = state.productsOnRating
+            state.productsExist = true
         }
     }
 })
 
-export const { getAllProducts, getProductById, getProductsByName, getProductsBySubcategory, nextpageState, backPageState, nextTwopageState, backTwoPageState, orderByAzState, orderByZaState, orderPriceToLowState, orderPriceToUpState, getProductsOnSale, getProductsOnRating, upperBrandsState, upperBrandsSelectedState, FiltSubCategoriesState, saveProducts, totalPagState } = productSlice.actions
+export const { getAllProducts, getProductById, getProductsByName, getProductsBySubcategory, nextpageState, backPageState, nextTwopageState, backTwoPageState, orderByAzState, orderByZaState, orderPriceToLowState, orderPriceToUpState, getProductsOnSale, getProductsOnRating, upperBrandsState, upperBrandsSelectedState, FiltSubCategoriesState, saveProducts, totalPagState, productsSalesOnShop, productsRatingOnShop } = productSlice.actions
 
 export default productSlice.reducer 

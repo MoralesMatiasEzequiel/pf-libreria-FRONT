@@ -4,7 +4,7 @@ import 'react-multi-carousel/lib/styles.css';
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { getProductsSales, getProductsRating, getById, getProductsOnHome } from "../../../redux/productActions";
+import { getProductsSales, getProductsRating, getById, getProductsOnHome, showProductsSalesOnShop, showProductsRatingOnShop } from "../../../redux/productActions";
 import style from "../Home/Home.module.css"
 
 
@@ -46,11 +46,21 @@ const Home = () => {
     const clickDispatch = (id) => {
       dispatch(getById(id))
     }
+
+    const dispatchProductsSalesToShop = () => {
+      dispatch(showProductsSalesOnShop())
+    }
+
+    const dispatchProductsRatingToShop = () => {
+      dispatch(showProductsRatingOnShop())
+    }
     
     return (
         <div>
           {/*----------------- PRODUCTOS EN OFERTA -------------------*/}
+
             <h2 className={style.h2}>Productos en oferta <Link to={"/shop"} className={style.link}><span className={style.span}>Ver todos</span></Link></h2>
+
             <Carousel responsive={responsive} className={style.carousel} infinite={true} >
               {
                 productsSales && productsSales.map((product, index) => {
@@ -70,6 +80,7 @@ const Home = () => {
             </Carousel>
 
             {/*---------------- PRODUCTOS POR RATING ----------------- */}
+            
             <h2 className={style.h2}>Productos mas vendidos <Link to={"/shop"} className={style.link}><span className={style.span}>Ver todos</span></Link></h2>
             <Carousel responsive={responsive} className={style.carousel} infinite={true} >
               {
