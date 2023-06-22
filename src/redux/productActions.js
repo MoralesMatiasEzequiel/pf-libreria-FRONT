@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { getAllProducts, getProductById, getProductsByName, getProductsBySubcategory, nextpageState, backPageState, nextTwopageState, backTwoPageState, orderByAzState, orderByZaState, orderPriceToLowState, orderPriceToUpState, getProductsOnSale, getProductsOnRating, upperBrandsState , upperBrandsSelectedState, FiltSubCategoriesState, saveProducts ,totalPagState, productsSalesOnShop, productsRatingOnShop } from "./productSlice";
+import { getAllProducts, getProductById, getProductsByName, getProductsBySubcategory, nextpageState, backPageState, nextTwopageState, backTwoPageState, orderByAzState, orderByZaState, orderPriceToLowState, orderPriceToUpState, getProductsOnSale, getProductsOnRating, upperBrandsState, upperBrandsSelectedState, FiltSubCategoriesState, saveProducts, totalPagState, createProductState, productsSalesOnShop, productsRatingOnShop } from "./productSlice";
 
 export const getProducts = () => {
     return async (dispatch) => {
@@ -139,3 +139,24 @@ export const showProductsRatingOnShop = () => {
     };
 };
 
+// --------------------------- add producto
+
+export const createProduct = (product) => {
+
+    return async (dispatch) => {
+
+        try {
+            const dataApi = await axios.post("/product", product);
+
+            if (dataApi.name) {
+                console.log("creado nais" + dataApi);
+                dispatch(createProductState(product))
+            }
+
+        } catch (error) {
+            alert("NO se creó")
+            console.log(error.response.data)
+        }
+
+    };
+};
