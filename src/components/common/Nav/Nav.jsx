@@ -6,6 +6,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { getProducts } from "../../../redux/productActions";
 import { useDispatch } from "react-redux";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Navuno = () => {
 
@@ -14,6 +15,14 @@ const Navuno = () => {
     const onClick = () => {
         dispatch(getProducts());
     }
+
+    const { loginWithPopup, logout, isAuthenticated } = useAuth0();
+
+    const ingresarLink = isAuthenticated ? (
+        <NavLink to={"/profile"} className={style.navLink}>Ingresar</NavLink>
+    ) : (
+        <NavLink to={null} onClick={() => loginWithPopup()} className={style.navLink}>Ingresar</NavLink>
+    );
 
     return (
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -41,8 +50,8 @@ const Navuno = () => {
                             <NavLink to={"/about"} className={style.navLink}>Contacto</NavLink>
                         </Nav.Link>
 
-                        <Nav.Link eventKey={2} >
-                            <NavLink to={""} className={style.navLink}>Ingresar / Registrarse</NavLink>
+                        <Nav.Link eventKey={2}>
+                            {ingresarLink}
                         </Nav.Link>
 
                         <Nav.Link eventKey={2}>

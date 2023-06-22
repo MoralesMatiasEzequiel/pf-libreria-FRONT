@@ -11,6 +11,7 @@ const Shop = lazy(() => import('./components/views/Shop/Shop'));
 const Cart = lazy(() => import('./components/views/Cart/Cart'));
 const Detail = lazy(() => import('./components/views/Shop/Detail/Detail'));
 const Arrepentimiento = lazy(() => import('./components/views/Arrepentimiento/Arrepentimiento'));
+const Profile  = lazy(() => import('./components/views/Profile/Profile'))
 
 const Admin = lazy(() => import('./components/Admin/Dashboard/Dashboard'));
 const Form = lazy(() => import('./components/Admin/Form/Form'));
@@ -38,6 +39,7 @@ function App() {
           <Route path="/arrepentimiento" element={<Arrepentimiento />} />
           <Route path='/admin' element={<Admin />} />
           <Route path='/form' element={<Form />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
         {!hidenavYmenu && <Footer />}
 

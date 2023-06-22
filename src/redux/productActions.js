@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { getAllProducts, getProductById, getProductsByName, getProductsBySubcategory, nextpageState, backPageState, nextTwopageState, backTwoPageState, orderByAzState, orderByZaState, orderPriceToLowState, orderPriceToUpState, getProductsOnSale, getProductsOnRating, upperBrandsState, upperBrandsSelectedState, FiltSubCategoriesState, saveProducts, totalPagState, createProductState } from "./productSlice";
+import { getAllProducts, getProductById, getProductsByName, getProductsBySubcategory, nextpageState, backPageState, nextTwopageState, backTwoPageState, orderByAzState, orderByZaState, orderPriceToLowState, orderPriceToUpState, getProductsOnSale, getProductsOnRating, upperBrandsState, upperBrandsSelectedState, FiltSubCategoriesState, saveProducts, totalPagState, createProductState, productsSalesOnShop, productsRatingOnShop } from "./productSlice";
 
 export const getProducts = () => {
     return async (dispatch) => {
@@ -126,6 +126,16 @@ export const getProductsOnHome = () => {
         const dataApi = await axios.get("/product/");
         const products = dataApi.data;
         dispatch(saveProducts(products));
+    };
+};
+export const showProductsSalesOnShop = () => {
+    return (dispatch) => {
+        dispatch(productsSalesOnShop());
+    };
+};
+export const showProductsRatingOnShop = () => {
+    return (dispatch) => {
+        dispatch(productsRatingOnShop());
     };
 };
 
