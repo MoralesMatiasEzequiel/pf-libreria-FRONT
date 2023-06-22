@@ -11,6 +11,7 @@ const Shop = lazy(() => import('./components/views/Shop/Shop'));
 const Cart = lazy(() => import('./components/views/Cart/Cart'));
 const Detail = lazy(() => import('./components/views/Shop/Detail/Detail'));
 const Arrepentimiento = lazy(() => import('./components/views/Arrepentimiento/Arrepentimiento'));
+const Profile  = lazy(() => import('./components/views/Profile/Profile'))
 
 function App() {
 
@@ -32,6 +33,7 @@ function App() {
           <Route path='/cart' element={<Cart />}/>
           <Route path='/payment' />
           <Route path="/arrepentimiento" element={<Arrepentimiento />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
         <Footer />
       </Suspense>
