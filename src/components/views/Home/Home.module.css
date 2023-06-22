@@ -44,9 +44,10 @@
   }
   
   .productImage {
-    width: 85%;
+    padding-top: 5px;
     height: 300px;
-    object-fit: cover;
+    width: 95%;
+    padding: 40px;
   }
   
   .priceBefore {

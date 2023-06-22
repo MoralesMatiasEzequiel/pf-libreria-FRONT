@@ -64,16 +64,12 @@ const About = () => {
               </a>
             </li>
             <li className="list-inline-item">
-              <a href="enlace-a-red-social-2" className="text-decoration-none">
-                <i
-                  className="bi bi-instagram text-purple cursor-pointer"
-                  onClick={() => window.open("enlace-a-red-social-2", "_blank")}
-                  style={{ color: "#191919" }}
-                >
+                <a href="enlace-a-red-social-2" className="text-decoration-none">
+                  <i className="bi bi-instagram text-purple cursor-pointer" style={{ color: "purple" }}>
                   {" "}
                   Instagram
-                </i>
-              </a>
+                  </i>
+                </a>
             </li>
             <li className="list-inline-item">
               <i className="bi bi-geo-alt text-success" style={{ cursor: "pointer", color: "#191919" }} onClick={openGoogleMaps}>
