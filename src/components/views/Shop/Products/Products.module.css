@@ -23,6 +23,7 @@
 	width: 260px;
   text-align: center;
 	transition: .3s;
+  border-radius: 5px;
 }
 
 .productCard:hover {
