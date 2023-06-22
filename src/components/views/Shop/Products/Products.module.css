@@ -8,7 +8,7 @@
   justify-content: center;
   background-color: rgb(255, 255, 255);
   margin-bottom: 3%;
-
+  min-height: 55vh;
 }
 
 .productCard {
