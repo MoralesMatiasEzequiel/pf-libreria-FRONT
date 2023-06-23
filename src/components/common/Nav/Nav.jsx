@@ -16,12 +16,12 @@ const Navuno = () => {
         dispatch(getProducts());
     }
 
-    const { loginWithPopup, logout, isAuthenticated } = useAuth0();
+    const { isAuthenticated } = useAuth0();
 
-    const ingresarLink = isAuthenticated ? (
-        <NavLink to={"/profile"} className={style.navLink}>Ingresar</NavLink>
+    const profileLink = isAuthenticated ? (
+        <NavLink to={"/profile"} className={style.navLink}>Perfil</NavLink>
     ) : (
-        <NavLink to={null} onClick={() => loginWithPopup()} className={style.navLink}>Ingresar</NavLink>
+        <NavLink to={"/login"} className={style.navLink}>Ingresar</NavLink>
     );
 
     return (
@@ -51,7 +51,7 @@ const Navuno = () => {
                         </Nav.Link>
 
                         <Nav.Link eventKey={2}>
-                            {ingresarLink}
+                            {profileLink}
                         </Nav.Link>
 
                         <Nav.Link eventKey={2}>
