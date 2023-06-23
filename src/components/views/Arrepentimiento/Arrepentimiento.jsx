@@ -207,26 +207,42 @@ const Arrepentimiento = () => {
           />
         </div>
 
-        <div className={style.formGroup}>
-          <label htmlFor="recibido">¿Recibiste el producto?:</label>
-          <div className={style.buttonGroup}>
-            <button
-              type="button"
-              className={recibido ? style.activeButton : style.button}
-              onClick={() => setRecibido(true)}
-            >
+        <div>
+          <label htmlFor="recibido" className="form-label" style={{ color: "#3F3F3F", fontWeight: "bold" }}>
+            ¿Recibiste tu pedido?
+          </label>
+          <div className="form-check form-check-inline">
+            <input
+              type="radio"
+              id="recibido-yes"
+              name="recibido"
+              className="form-check-input"
+              value="Sí"
+              checked={recibido}
+              onChange={() => setRecibido(true)}
+              required
+            />
+            <label htmlFor="recibido-yes" className="form-check-label" style={{ color: "#3F3F3F" }}>
               Sí
-            </button>
-            <button
-              type="button"
-              className={!recibido ? style.activeButton : style.button}
-              onClick={() => setRecibido(false)}
-            >
-              No
-            </button>
+            </label>
           </div>
-          {recibido ? <p>Seleccionaste: Sí</p> : <p>Seleccionaste: No</p>}
+          <div className="form-check form-check-inline">
+            <input
+              type="radio"
+              id="recibido-no"
+              name="recibido"
+              className="form-check-input"
+              value="No"
+              checked={!recibido}
+              onChange={() => setRecibido(false)}
+              required
+            />
+            <label htmlFor="recibido-no" className="form-check-label" style={{ color: "#3F3F3F" }}>
+              No
+            </label>
+          </div>
         </div>
+
 
         <div className={style.formGroup}>
           <label htmlFor="modoDevolucion">Modo de devolución:</label>
