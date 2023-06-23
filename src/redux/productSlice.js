@@ -141,7 +141,7 @@ export const productSlice = createSlice({
         createProductState: (state, action) => {
             state.products = [...state.products, action.payload]
             state.productSee = [...state.productSee, action.payload]
-
+        },
         productsSalesOnShop: (state, action) => {
             state.productSee = state.productsOnSale
             state.productsExist = true
