@@ -12,17 +12,25 @@ const Dashboard = () => {
     const dispatch = useDispatch();
     const [errors, setErrors] = useState({});
 
-    const [newProduct, setNewProduct] = useState({
-        name: "",
-        brand: "",
-        stock: 0,
-        price: 0,
-        salePrice: 0,
-        description: "",
-        image: "",
-        rating: 0,
-        subcategories: [],
-    });
+    const lSFormContact = () => {
+        let datos = localStorage.getItem("FormAddProduct");
+        if (datos) {
+            return JSON.parse(datos)
+        } else {
+            return {
+                name: "",
+                brand: "",
+                stock: 0,
+                price: 0,
+                salePrice: 0,
+                description: "",
+                image: "",
+                rating: 0,
+                subcategories: [],
+            };
+        }
+    }
+    const [newProduct, setNewProduct] = useState(lSFormContact());
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -62,14 +70,16 @@ const Dashboard = () => {
             subcategories: [],
         });
 
-        // setImage("")
+        localStorage.removeItem("FormAddProduct")
     };
 
-    useEffect(() => { }, [newProduct]);
+    useEffect(() => {
+        localStorage.setItem("FormAddProduct", JSON.stringify(newProduct))
+    }, [newProduct]);
 
     //--------------------------------- CLOUDINARY --------------------------
-    const [ image, setImage ] = useState("")
-    const [ loading, setLoading ] = useState(false)
+    const [image, setImage] = useState("")
+    const [loading, setLoading] = useState(false)
 
     const uploadImage = async (event) => {
         const files = event.target.files;
@@ -79,7 +89,7 @@ const Dashboard = () => {
         setLoading(true);
         const response = await fetch("https://api.cloudinary.com/v1_1/dirnuoddr/image/upload", {
             method: "POST",
-            body: data,            
+            body: data,
         })
         const file = await response.json();
         setImage(file.secure_url);
@@ -165,10 +175,10 @@ const Dashboard = () => {
 
                         {/* ------------- image ---------------- */}
                         <FormGroup>
-                            <label htmlFor="image">Subir Imagen</label>                                           
+                            <label htmlFor="image">Subir Imagen</label>
                             <Input type="file" name="image" placeholder="Subir imagen" onChange={uploadImage} />
                             {
-                                loading ? (<p>Cargando imagen...</p>) : (<img src={image} style={{width: "150px"}} />)
+                                loading ? (<p>Cargando imagen...</p>) : (<img src={image} style={{ width: "150px" }} />)
                             }
                         </FormGroup>
                         {errors.image && <p className="error">{errors.image}</p>}

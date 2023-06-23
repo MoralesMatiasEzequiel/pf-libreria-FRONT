@@ -325,9 +325,20 @@ const Arrepentimiento = () => {
             </div>
           </div>
         </div>
-        {formRegret.name.length > 2 &&
-          formRegret.lastName.length > 2 && formRegret.email.length > 2 && formRegret.phone.length > 2 && formRegret.document.length > 2 && formRegret.address.length > 2 && formRegret.floor.length > 2 && formRegret.department.length > 2 && formRegret.postalCode.length > 2 && formRegret.location.length > 2 && formRegret.province.length > 2 &&
-          formRegret.returnMode.length > 2 && formRegret.returnReason.length > 2 && formRegret.comment.length > 2 && <button type="submit" className={`${style.btnPrimary}`}>Enviar</button>}
+        {
+          formRegret.name.length > 2 &&
+          formRegret.lastName.length > 2 &&
+          formRegret.email.length > 2 &&
+          formRegret.phone.length > 2 &&
+          formRegret.document.length > 2 &&
+          formRegret.address.length > 2 &&
+          formRegret.location.length > 2 &&
+          formRegret.province.length > 2 &&
+          formRegret.returnMode.length > 2 &&
+          formRegret.returnReason.length > 2 &&
+          formRegret.comment.length > 2 &&
+          <button type="submit" className={`${style.btnPrimary}`}>Enviar</button>
+        }
 
       </form>
     </div>
