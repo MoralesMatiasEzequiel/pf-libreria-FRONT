@@ -34,29 +34,30 @@ const About = () => {
       <div className="row">
         <div className="col-md-6">
           <h2 style={{ color: "#191919" }}>Contacto</h2>
+          
           <form ref={form} onSubmit={sendEmail} className={style.form}>
-  <div className={style.formGroup}>
-    <label htmlFor="user_name" className={style.formLabel}>
-      Nombre:
-    </label>
-    <input type="text" id="user_name" name="user_name" className={style.formControl} />
-  </div>
-  <div className={style.formGroup}>
-    <label htmlFor="user_email" className={style.formLabel}>
-      Email:
-    </label>
-    <input type="email" id="user_email" name="user_email" className={style.formControl} />
-  </div>
-  <div className={style.formGroup}>
-    <label htmlFor="message" className={style.formLabel}>
-      Mensaje:
-    </label>
-    <textarea id="message" name="message" className={style.formControl} />
-  </div>
-  <button type="submit" className={`${style.btnPrimary}`}>
-    Enviar
-  </button>
-</form>
+            <div className={style.formGroup}>
+              <label htmlFor="user_name" className={style.formLabel}>
+                Nombre:
+              </label>
+              <input type="text" id="user_name" name="user_name" className={style.formControl} />
+            </div>
+            <div className={style.formGroup}>
+              <label htmlFor="user_email" className={style.formLabel}>
+                Email:
+              </label>
+              <input type="email" id="user_email" name="user_email" className={style.formControl} />
+            </div>
+            <div className={style.formGroup}>
+              <label htmlFor="message" className={style.formLabel}>
+                Mensaje:
+              </label>
+              <textarea id="message" name="message" className={style.formControl} />
+            </div>
+            <button type="submit" className={`${style.btnPrimary}`}>
+              Enviar
+            </button>
+          </form>
 
         </div>
         <div className="col-md-6">
