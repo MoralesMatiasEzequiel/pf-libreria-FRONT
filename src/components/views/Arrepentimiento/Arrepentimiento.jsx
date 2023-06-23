@@ -76,98 +76,106 @@ const Arrepentimiento = () => {
         Si deseas arrepentirte de tu compra, por favor completa el siguiente formulario y nos pondremos en contacto contigo.
       </p>
 
-      <form onSubmit={handleSubmit} className={style.form} id="form">
+      <form onSubmit={handleSubmit} className={style.formArr} id="form">
       <div className="row">
       <div className="col-md-6">
-          <div className={style.formGroup}>
-            <label htmlFor="nombre" className={style.formLabel}>Nombre:</label>
+          <div className="mb-3">
             <input
               type="text"
               id="nombre"
               name="nombre"
+              className="form-control"
+              placeholder="Nombre"
               value={nombre}
               onChange={(e) => setNombre(e.target.value)}
               required
             />
           </div>
 
-          <div className={style.formGroup}>
-            <label htmlFor="apellido" className={style.formLabel}>Apellido:</label>
+          <div className="mb-3">
             <input
               type="text"
               id="apellido"
               name="apellido"
+              className="form-control"
+              placeholder="Apellido"
               value={apellido}
               onChange={(e) => setApellido(e.target.value)}
               required
             />
           </div>
 
-          <div className={style.formGroup}>
-            <label htmlFor="email">Email:</label>
+          <div className="mb-3">
             <input
               type="email"
               id="email"
               name="email"
+              className="form-control"
+              placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
             />
           </div>
 
-          <div className={style.formGroup}>
-            <label htmlFor="telefono">Teléfono:</label>
+          <div className="mb-3">
             <input
               type="tel"
               id="telefono"
               name="telefono"
+              className="form-control"
+              placeholder="Teléfono"
               value={telefono}
               onChange={(e) => setTelefono(e.target.value)}
               required
             />
           </div>
 
-          <div className={style.formGroup}>
-            <label htmlFor="numeroDocumento">Número de documento:</label>
+          <div className="mb-3">
             <input
               type="text"
               id="numeroDocumento"
               name="numeroDocumento"
+              className="form-control"
+              placeholder="Número de Documento"
               value={numeroDocumento}
               onChange={(e) => setNumeroDocumento(e.target.value)}
               required
             />
           </div>
 
-          <div className={style.formGroup}>
-            <label htmlFor="direccion">Dirección:</label>
+          <div className="mb-3">
             <input
               type="text"
               id="direccion"
               name="direccion"
+              className="form-control"
+              placeholder="Dirección"
               value={direccion}
               onChange={(e) => setDireccion(e.target.value)}
               required
             />
           </div>
 
-          <div className={style.formGroup}>
-            <label htmlFor="piso">Piso:</label>
+          <div className="mb-3">
             <input
               type="text"
               id="piso"
               name="piso"
+              className="form-control"
+              placeholder="Piso"
               value={piso}
               onChange={(e) => setPiso(e.target.value)}
             />
           </div>
 
-          <div className={style.formGroup}>
-            <label htmlFor="departamento">Departamento:</label>
+          <div className="mb-3">
             <input
               type="text"
               id="departamento"
               name="departamento"
+              className="form-control"
+              placeholder="Departamento"
               value={departamento}
               onChange={(e) => setDepartamento(e.target.value)}
             />
@@ -175,44 +183,47 @@ const Arrepentimiento = () => {
         </div>
 
         <div className="col-md-6">
-          <div className={style.formGroup}>
-            <label htmlFor="codigoPostal">Código Postal:</label>
+          <div className="mb-3">
             <input
               type="text"
               id="codigoPostal"
               name="codigoPostal"
+              className="form-control"
+              placeholder="Código Postal"
               value={codigoPostal}
               onChange={(e) => setCodigoPostal(e.target.value)}
               required
             />
           </div>
 
-          <div className={style.formGroup}>
-            <label htmlFor="localidad">Localidad:</label>
+          <div className="mb-3">
             <input
               type="text"
               id="localidad"
               name="localidad"
+              className="form-control"
+              placeholder="Localidad"
               value={localidad}
               onChange={(e) => setLocalidad(e.target.value)}
               required
             />
           </div>
 
-          <div className={style.formGroup}>
-            <label htmlFor="provincia">Provincia:</label>
+          <div className="mb-3">
             <input
               type="text"
               id="provincia"
               name="provincia"
+              className="form-control"
+              placeholder="Provincia"
               value={provincia}
               onChange={(e) => setProvincia(e.target.value)}
               required
             />
           </div>
 
-          <div>
-            <label htmlFor="recibido" className={style.formLabel} style={{ color: "#3F3F3F", fontWeight: "bold" }}>
+          <div className="mb-3 text-start">
+            <label htmlFor="recibido" className={style.formLabel} style={{ color: "#3F3F3F"}}>
               ¿Recibiste tu pedido?
             </label>
             <div className="form-check form-check-inline">
@@ -247,11 +258,12 @@ const Arrepentimiento = () => {
             </div>
           </div>
 
-          <div className={style.formGroup}>
+          <div className="mb-3 text-start">
             <label htmlFor="modoDevolucion">Modo de devolución:</label>
             <select
               id="modoDevolucion"
               name="modoDevolucion"
+              className="form-control"
               value={modoDevolucion}
               onChange={(e) => setModoDevolucion(e.target.value)}
               required
@@ -262,12 +274,13 @@ const Arrepentimiento = () => {
             </select>
           </div>
 
-          <div className={style.formGroup}>
+          <div className="mb-3 text-start">
             <label htmlFor="motivoDevolucion">Motivo de devolución:</label>
             <select
               id="motivoDevolucion"
               name="motivoDevolucion"
               value={motivoDevolucion}
+              className="form-control"
               onChange={(e) => setMotivoDevolucion(e.target.value)}
               required
             >
@@ -277,11 +290,12 @@ const Arrepentimiento = () => {
             </select>
           </div>
 
-          <div className={style.formGroup}>
-            <label htmlFor="comentario">Comentario adicional:</label>
+          <div className="mb-3">
             <textarea
               id="comentario"
               name="comentario"
+              placeholder="Comentario"
+              className="form-control"
               value={comentario}
               onChange={(e) => setComentario(e.target.value)}
             ></textarea>
@@ -289,8 +303,7 @@ const Arrepentimiento = () => {
         </div>
       </div>
 
-
-        <button type="submit">Enviar</button>
+        <button type="submit" className={`${style.btnPrimary}`}>Enviar</button>
       </form>
     </div>
 
