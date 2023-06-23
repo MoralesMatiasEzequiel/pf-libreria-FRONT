@@ -11,9 +11,9 @@ const Shop = lazy(() => import('./components/views/Shop/Shop'));
 const Cart = lazy(() => import('./components/views/Cart/Cart'));
 const Detail = lazy(() => import('./components/views/Shop/Detail/Detail'));
 const Arrepentimiento = lazy(() => import('./components/views/Arrepentimiento/Arrepentimiento'));
+const CartProducts = lazy(() => import('./components/views/CartProducts/CartProducts'));
 const Profile  = lazy(() => import('./components/views/Profile/Profile'));
 const Login = lazy(() => import('./components/common/Login/Login'));
-
 const Admin = lazy(() => import('./components/Admin/Dashboard/Dashboard'));
 const Form = lazy(() => import('./components/Admin/Form/Form'));
 
@@ -22,7 +22,7 @@ function App() {
   const location = useLocation();
 
   //acá defino en qué rutas no se verá el menú de categorías, son de prueba estas
-  const hideMenu = location.pathname.includes('/form') || location.pathname.includes('/admin') || location.pathname.includes('/cart') || location.pathname.includes('/payment');
+  const hideMenu = location.pathname.includes('/form') || location.pathname.includes('/admin') || location.pathname.includes('/cart') || location.pathname.includes('/checkout');
   const hidenavYmenu = location.pathname.includes('/admin') || location.pathname.includes('/form');
 
   return (
@@ -35,7 +35,8 @@ function App() {
           <Route path='/about' element={<About />} />
           <Route path='/shop' element={<Shop />} />
           <Route path='/shop/:id' element={<Detail />} />
-          <Route path='/cart' element={<Cart />} />
+          <Route path='/cart' element={<CartProducts />}/>
+          <Route path='/checkout' element={<Cart />}/>
           <Route path='/payment' />
           <Route path="/arrepentimiento" element={<Arrepentimiento />} />
           <Route path='/admin' element={<Admin />} />
