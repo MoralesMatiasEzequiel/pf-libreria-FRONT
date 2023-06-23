@@ -22,6 +22,8 @@ root.render(
     authorizationParams={{
       redirect_uri: window.location.origin
     }}
+    audience="5f44070c474dd9f9945cb868e4a6a7a6a220c73f7e3919c4a73f1342656b3a66"
+    scope="openid profile email"
   >
     <Provider store={store}>
       <BrowserRouter>
