@@ -25,3 +25,17 @@
     background-color: white;
     color: red;
   }
+
+  .btnCart{
+    background-color: #8a9b0f;
+    border-color: #8a9b0f;
+    color: white;
+    border-radius: 5px;
+    border-style: solid;
+    margin: 5px;
+}
+
+.btnCart:hover {
+    background-color: white;
+    color: #8a9b0f;
+  }

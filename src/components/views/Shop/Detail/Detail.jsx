@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from "react-router-dom";
 import ModalCart from "../../../common/Modals/ModalCart/ModalCart";
 import style from "./Detail.module.css";
+import { addProductOnCart } from "../../../../redux/CartActions";
 
 const Detail = () => {
   const { id } = useParams();
@@ -24,6 +25,10 @@ const Detail = () => {
     // Lógica para agregar o quitar de favoritos
   };
 
+  const addToCart = (product) => {
+    dispatch(addProductOnCart(product))
+  }
+
   return (
     <div className="container">
       <div className="row">
@@ -42,6 +47,9 @@ const Detail = () => {
             <p style={{ color: "#3F3F3F", fontSize: "18px", padding: "10px" }}>Detalle del producto: {product.description}</p>
             <h5 style={{ color: "#191919", fontFamily: "Montserrat, sans-serif", fontWeight: "bold", fontSize: "24px", padding: "10px" }}>$ {product.price}</h5>
             <button className={style.btnPrimary}  onClick={() => setModalShow(true)}>Comprar</button>
+            <button className={style.btnCart}  onClick={() => addToCart(product)}>
+              <i className="bi bi-cart"></i> Agregar al carrito
+            </button>
             <button className={style.btnFavorite}  onClick={handleFavoriteClick}>
               <i className="bi bi-heart"></i> Favoritos
             </button>
