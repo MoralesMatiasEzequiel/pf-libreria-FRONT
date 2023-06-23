@@ -56,7 +56,7 @@ const Home = () => {
     }
     
     return (
-        <div>
+        <div className={style.container}>
           {/*----------------- PRODUCTOS EN OFERTA -------------------*/}
 
             <h2 className={style.h2}>Productos en oferta <Link to={"/shop"} className={style.link}><span className={style.span}>Ver todos</span></Link></h2>

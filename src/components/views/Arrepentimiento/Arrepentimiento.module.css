@@ -1,81 +1,12 @@
-/* Estilos generales */
-.container {
-  font-family: 'Montserrat', sans-serif;
-}
-
-/* Estilos para el título */
-.title {
+.title{
   color: #FF9E5C;
-  font-weight: bold;
+  margin-top: 15px;
   font-size: 24px;
 }
 
-/* Estilos para el texto de introducción */
-.intro-text {
-  color: #3F3F3F;
+.introText{
   font-size: 18px;
 }
 
-/* Estilos para los campos del formulario */
-.formGroup {
-  margin-bottom: 16px;
-}
 
-/* Estilos para las etiquetas de los campos */
-.label {
-  color: #3F3F3F;
-  font-weight: bold;
-}
 
-/* Estilos para los campos de texto */
-.input {
-  width: 100%;
-  padding: 8px;
-  font-size: 16px;
-  border: 1px solid #CCCCCC;
-  border-radius: 4px;
-}
-
-/* Estilos para los campos de selección */
-.select {
-  width: 100%;
-  padding: 8px;
-  font-size: 16px;
-  border: 1px solid #CCCCCC;
-  border-radius: 4px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='%233F3F3F' stroke='%233F3F3F' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 8px center;
-  background-size: 12px 12px;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-}
-
-/* Estilos para el campo de texto adicional */
-.textarea {
-  width: 100%;
-  padding: 8px;
-  font-size: 16px;
-  border: 1px solid #CCCCCC;
-  border-radius: 4px;
-}
-
-/* Estilos para el botón de enviar */
-.submit-button {
-  padding: 8px 16px;
-  font-size: 16px;
-  background-color: #FF9E5C;
-  color: #FFFFFF;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.submit-button:hover {
-  background-color: #FF7D2C;
-}
-
-.submit-button:active {
-  background-color: #FF5C00;
-}
