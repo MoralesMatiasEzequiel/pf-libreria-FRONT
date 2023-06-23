@@ -1,7 +1,25 @@
-import React from "react";
+import React, { useRef } from 'react';
+import emailjs from 'emailjs-com';
 import style from "./About.module.css"
 
 const About = () => {
+  const form = useRef();
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+  
+    emailjs
+      .sendForm('service_brws95f', 'template_1eg39fw', form.current, 'CWYOCpB2Bd7P4TLB6')
+      .then((result) => {
+        console.log(result.text);
+        console.log("message sent");
+        form.current.reset(); // Restablece los valores del formulario
+      })
+      .catch((error) => {
+        console.log(error.text);
+      });
+  };  
+
   const localAddress = "Dirección del local"; // Inserta aquí la dirección del local
 
   const openGoogleMaps = () => {
@@ -16,29 +34,30 @@ const About = () => {
       <div className="row">
         <div className="col-md-6">
           <h2 style={{ color: "#191919" }}>Contacto</h2>
-          <form>
-            <div className="mb-3">
-              <label htmlFor="nombre" className="form-label" style={{ color: "#3F3F3F" }}>
-                Nombre:
-              </label>
-              <input type="text" id="nombre" name="nombre" className="form-control" />
-            </div>
-            <div className="mb-3">
-              <label htmlFor="email" className="form-label" style={{ color: "#3F3F3F" }}>
-                Email:
-              </label>
-              <input type="email" id="email" name="email" className="form-control" />
-            </div>
-            <div className="mb-3">
-              <label htmlFor="mensaje" className="form-label" style={{ color: "#3F3F3F" }}>
-                Mensaje:
-              </label>
-              <textarea id="mensaje" name="mensaje" className="form-control" />
-            </div>
+          <form ref={form} onSubmit={sendEmail} className={style.form}>
+  <div className={style.formGroup}>
+    <label htmlFor="user_name" className={style.formLabel}>
+      Nombre:
+    </label>
+    <input type="text" id="user_name" name="user_name" className={style.formControl} />
+  </div>
+  <div className={style.formGroup}>
+    <label htmlFor="user_email" className={style.formLabel}>
+      Email:
+    </label>
+    <input type="email" id="user_email" name="user_email" className={style.formControl} />
+  </div>
+  <div className={style.formGroup}>
+    <label htmlFor="message" className={style.formLabel}>
+      Mensaje:
+    </label>
+    <textarea id="message" name="message" className={style.formControl} />
+  </div>
+  <button type="submit" className={`${style.btnPrimary}`}>
+    Enviar
+  </button>
+</form>
 
-            <button type="submit" className= {style.btnPrimary}>Enviar</button>
-
-          </form>
         </div>
         <div className="col-md-6">
           <h2 style={{ color: "#191919" }}>Horarios</h2>
