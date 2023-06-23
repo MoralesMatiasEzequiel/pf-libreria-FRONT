@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
 import { totalPag } from "../../../../redux/productActions";
+import { addProductOnCart } from "../../../../redux/CartActions"
 import Paginado from "./../Paginado/Paginado";
 //import { addToFavList } from "../../../../redux/favoriteSlice";
 import ModalCart from "../../../common/Modals/ModalCart/ModalCart";
@@ -48,6 +49,10 @@ const Products = () => {
   const navigate = useNavigate();
   const [modalShow, setModalShow] = useState(false);
 
+  const addToCart = (product) => {
+    dispatch(addProductOnCart(product))
+  }
+
   //------------------------------------FAVORITE STAT
   //const dispatch = useDispatch();
   // const favoriteHandler = (viewsProducts) => {
@@ -82,7 +87,7 @@ const Products = () => {
                   <button> 	{/*onClick={()=> navigate('/home')}*/}
                     <i className="bi bi-heart"></i>
                   </button>
-                  <button onClick={() => setModalShow(true)}>
+                  <button onClick={() => {setModalShow(true); addToCart(base)}}>
                     <i className="bi bi-cart"></i>
                   </button>
                 </div>
@@ -114,7 +119,7 @@ const Products = () => {
                   <button>
                     <i className="bi bi-heart"></i>
                   </button>
-                  <button onClick={() => setModalShow(true)}>
+                  <button onClick={() => {setModalShow(true); addToCart(base)}}>
                     <i className="bi bi-cart"></i>
                   </button>
                 </div>

@@ -14,7 +14,7 @@ const Cart = () => {
     return (
         <div className={style.container}>
             <div className={style.containerInfo}>
-                <Link to={"/shop"} className={style.linkBack}>{"< Volver a la tienda"}</Link> 
+                <Link to={"/cart"} className={style.linkBack}>{"< Volver al carrito"}</Link> 
                 <h5 className={style.title}>Tu librito - Librería & Papelería</h5>   
                 <button className={style.boton} onClick={() => {setFormInfo(true); setFormShipment(false); setFormPay(false);}} disabled={formInfo}>Cliente</button>
                 <button className={style.boton} onClick={() => {setFormInfo(false); setFormShipment(true); setFormPay(false);}} disabled={formShipment}>Envío</button>
