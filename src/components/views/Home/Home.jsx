@@ -1,12 +1,12 @@
 import React from "react";
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
-import axios from "axios";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import { getProductsSales, getProductsRating, getById, getProductsOnHome, showProductsSalesOnShop, showProductsRatingOnShop } from "../../../redux/productActions";
+import { postUserToBack } from "../../../redux/UserActions";
 import style from "../Home/Home.module.css"
 
 
@@ -15,6 +15,7 @@ const Home = () => {
     const dispatch = useDispatch()
     const { productsOnSale } = useSelector(state => state.products)
     const { productsOnRating } = useSelector(state => state.products)
+    const { postedUser } = useSelector(state => state.user);
 
     const { isAuthenticated, user } = useAuth0();
 
@@ -26,39 +27,11 @@ const Home = () => {
         dispatch(getProductsRating())
         dispatch(getProductsOnHome())
         if (isAuthenticated) {
-          sendUserToBack(user);
+          dispatch(postUserToBack(user));
         }
-    }, [dispatch, isAuthenticated])
+        console.log(postedUser);
+    }, [dispatch, isAuthenticated, postedUser])
 
-    const sendUserToBack = async (user) => {
-      let newUser = {};
-    
-      if (user.sub && user.sub.includes('google')) {
-        newUser = {
-          name: user.given_name,
-          nickname: user.nickname,
-          email: user.email,
-          picture: user.picture,
-          emailVerified: user.email_verified
-        };
-      } else {
-        newUser = {
-          name: user.name,
-          nickname: user.nickname,
-          email: user.email,
-          picture: user.picture,
-          emailVerified: user.email_verified
-        };
-      }
-    
-      try {
-        const userCreated = await axios.post("/user", newUser);
-        
-        console.log(userCreated);
-      } catch (error) {
-        console.error("Error al enviar el usuario al backend:", error);
-      }
-    };
 
     const responsive = {
         superLargeDesktop: {
