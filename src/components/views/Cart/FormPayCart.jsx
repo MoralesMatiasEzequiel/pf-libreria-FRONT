@@ -5,7 +5,7 @@ import { createOrder } from "../../../redux/CartActions";
 import { useEffect } from "react";
 
 
-const FormPayCart = ({ state }) => {
+const FormPayCart = ({ state, setFormInfo, setFormShipment, setFormPay }) => {
 
     const dispatch = useDispatch();
     const { productsOnCart, paymentLink } = useSelector((state) => state.cart)
@@ -43,7 +43,7 @@ const FormPayCart = ({ state }) => {
                             <br/>
                         </div>   
                         <div>
-                            <button>Regresar a método de envío</button>
+                            <button onClick={() => {setFormInfo(false); setFormShipment(true); setFormPay(false);}}>Regresar a método de envío</button>
                             <button onClick={handleOnClick}>Realizar compra</button>
                         </div>     
                     {/* </form>             */}
