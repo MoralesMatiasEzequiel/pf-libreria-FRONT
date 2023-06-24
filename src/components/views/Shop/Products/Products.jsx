@@ -61,9 +61,10 @@ const Products = () => {
 
   return (
     <div className={style.container}>
-      {!productsExist && (
-        <p>No hay productos asociados a esa búsqueda o categoría.</p>
-      )}
+        {!productsExist && (
+        <div className={style.noProduct}>
+          {navigate("/no-product/")}
+        </div>)}
 
       {!brandSelected.length && viewsProducts.map((base, index) => {
         return (
@@ -128,9 +129,11 @@ const Products = () => {
           </div>
         )
       })}
-      <Paginado cantPages={pagines} />
 
       {/* <ModalCart show={modalShow} onHide={() => setModalShow(false)} /> */}
+
+      <Paginado cantPages={pagines} />
+
     </div>
   );
 };

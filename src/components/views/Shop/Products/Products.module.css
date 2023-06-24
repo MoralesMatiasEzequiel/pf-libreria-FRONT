@@ -3,7 +3,7 @@
 	grid-template-columns: repeat(4, 280px);
 	grid-row-gap: 1em;
   width: 100%;
-	 height: 100%; /* */
+	height: 100%; /* */
 	justify-items: center;
   justify-content: center;
   background-color: rgb(255, 255, 255);
@@ -11,6 +11,24 @@
   min-height: 55vh;
   /* margin-bottom: 3%; */
 	min-height: 55vh; /* */
+}
+
+.noProduct {
+  display: flex;
+  align-items: center;
+}
+
+.lupa {
+  width: 100%;
+  height: 100px;
+  margin-right: 20px;
+}
+
+.subtitulo{
+}
+
+.lista {
+  text-align: justify;
 }
 
 .productCard {
