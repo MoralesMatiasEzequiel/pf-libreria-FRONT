@@ -45,7 +45,7 @@ const CartProducts = () => {
 
     let data = localStorage.getItem("protucts_cart");
     let cart = JSON.parse(data)
-    if (cart.length > 0 && productsOnCart.length < 1) {
+    if (productsOnCart.length > 0 && productsOnCart.length < 1) {
 
       dispatch(newCart(cart))
     }
