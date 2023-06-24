@@ -3,12 +3,12 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 70vh;
+  min-height: 80vh;
 }
 
 .containerTitle {
   margin-top: 15px;
-  margin-bottom: 15;
+  margin-bottom: 15px;
   color: #ff9e5c;
 }
 
