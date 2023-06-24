@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setClient } from "../../../redux/CartActions";
 
 
-const FormInfoCart = ({ state }) => {
+const FormInfoCart = ({ state, setFormInfo, setFormShipment, setFormPay }) => {
 
     const dispatch = useDispatch();
     const { clientInfo } = useSelector((state) => state.cart);
@@ -40,8 +40,11 @@ const FormInfoCart = ({ state }) => {
             dni: form.dni
         } 
         dispatch(setClient(newClientInfo));
+        setFormInfo(false);
+        setFormShipment(true);
+        setFormPay(false);
     }
-    function validateNumberInput(event) {
+    const validateNumberInput = (event) => {
         const input = event.target;
         const sanitizedValue = input.value.replace(/\D/g, ''); // Elimina todos los caracteres que no sean dígitos
 
@@ -61,31 +64,31 @@ const FormInfoCart = ({ state }) => {
                 <form onSubmit={handleSubmit}>
                     <div>
                         <h5>Información de contacto</h5>
+                        <p>(*) Campos requeridos</p>
                     </div>
                     <div>
-                        <label htmlFor="email">E-mail: </label>
+                        <label htmlFor="email">*E-mail: </label>
+                        <br/>
                         <input type="text" name="email" onChange={handleInputChange} value={form.email}/>
                     </div>
-                    <br />
                     <div>
-                        <label htmlFor="name">Nombre: </label>
-
+                        <label htmlFor="name">*Nombre: </label>
+                        <br/>
                         <input type="text" name="name" onChange={handleInputChange} value={form.name}/>
                     </div>
-                    <br />
                     <div>
-                        <label htmlFor="surname">Apellido: </label>
-
+                        <label htmlFor="surname">*Apellido: </label>
+                        <br/>
                         <input type="text" name="surname" onChange={handleInputChange} value={form.surname}/>
                     </div>
                     <div>
-                        <label htmlFor="phone">Teléfono (sin ceros ni guiones): </label>
-
+                        <label htmlFor="phone">*Teléfono (sin ceros ni guiones): </label>
+                        <br/>
                         <input type="text" name="phone" onInput={validateNumberInput} onChange={handleInputChange} value={form.phone}/>
                     </div>
-                    <br/>
                     <div>
-                        <label htmlFor="dni">DNI/CUIL (sin puntos): </label>
+                        <label htmlFor="dni">*DNI/CUIL (sin puntos): </label>
+                        <br/>
                         <input type="text" name="dni" onInput={validateNumberInput} onChange={handleInputChange} value={form.dni}/>
                     </div>
                     <br />
