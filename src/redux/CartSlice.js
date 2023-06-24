@@ -24,11 +24,15 @@ export const cartSlice = createSlice({
         },
         setClientInfo: (state, action) => {
             state.clientInfo = action.payload
+        },
+        newCartState: (state, action) => {
+            state.productsOnCart = action.payload
         }
+        
     }
 })
 
 
-export const { pushProductOnCart, removeProductFromCart, postOrderCreated, setClientInfo } = cartSlice.actions
+export const { pushProductOnCart, removeProductFromCart, postOrderCreated, setClientInfo ,newCartState } = cartSlice.actions
 
 export default cartSlice.reducer 
