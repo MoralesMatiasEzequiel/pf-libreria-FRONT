@@ -5,9 +5,10 @@ import style from "./CartProducts.module.css";
 import { useState, useEffect } from "react";
 
 const CartProducts = () => {
+
   const dispatch = useDispatch();
   const { productsOnCart } = useSelector((state) => state.cart);
-  console.log(productsOnCart);
+
 
   const [selectedStock, setSelectedStock] = useState({});
 
@@ -18,6 +19,7 @@ const CartProducts = () => {
   const handleStockChange = (change, productId) => {
     const currentStock = selectedStock[productId] || 1;
     const newStock = currentStock + change;
+
 
     const product = productsOnCart.find((product) => product._id === productId);
 

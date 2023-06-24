@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import FormInfoCart from "./FormInfoCart";
 import FormShipmentCart from "./FormShipmentCart";
 import FormPayCart from "./FormPayCart";
+import CartProducts from "../CartProducts/CartProducts"; 
 
 const Cart = () => {
 
@@ -25,6 +26,7 @@ const Cart = () => {
             </div>   
             <div className={style.containerSubTotal}>
                 <h5>Resumen de la compra</h5> 
+                <CartProducts />
             </div>
         </div>
     )
