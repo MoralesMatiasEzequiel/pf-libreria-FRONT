@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { pushProductOnCart, removeProductFromCart, postOrderCreated } from "./CartSlice";
+import { pushProductOnCart, removeProductFromCart, postOrderCreated, setClientInfo } from "./CartSlice";
 
 export const addProductOnCart = (product) => {
     return (dispatch) => {
@@ -27,5 +27,11 @@ export const createOrder = (productsOnCart) => {
 export const deleteProductFromCart = (id) => {
     return (dispatch) => {
         dispatch(removeProductFromCart(id));
+    };
+};
+
+export const setClient = (clientInfo) => {
+    return (dispatch) => {
+        dispatch(setClientInfo(clientInfo));
     };
 };

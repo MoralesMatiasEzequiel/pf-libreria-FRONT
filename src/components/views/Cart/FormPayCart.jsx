@@ -5,7 +5,7 @@ import { createOrder } from "../../../redux/CartActions";
 import { useEffect } from "react";
 
 
-const FormPayCart = ({ state, setState }) => {
+const FormPayCart = ({ state }) => {
 
     const dispatch = useDispatch();
     const { productsOnCart, paymentLink } = useSelector((state) => state.cart)

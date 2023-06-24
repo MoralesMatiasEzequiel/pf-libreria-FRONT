@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import style from "./FormShipmentCart.module.css";
 
 
-const FormShipmentCart = ({ state, setState }) => {
+const FormShipmentCart = ({ state }) => {
 
     const [ form, setForm ] = useState({
         street: '',
