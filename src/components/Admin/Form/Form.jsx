@@ -6,22 +6,31 @@ import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { createProduct } from "../../../redux/productActions";
 import { NavLink } from "react-router-dom"
+import { FormGroup, Input } from "reactstrap"
 
 const Dashboard = () => {
     const dispatch = useDispatch();
     const [errors, setErrors] = useState({});
 
-    const [newProduct, setNewProduct] = useState({
-        name: "",
-        brand: "",
-        stock: 0,
-        price: 0,
-        salePrice: 0,
-        description: "",
-        image: "",
-        rating: 0,
-        subcategories: [],
-    });
+    const lSFormContact = () => {
+        let datos = localStorage.getItem("FormAddProduct");
+        if (datos) {
+            return JSON.parse(datos)
+        } else {
+            return {
+                name: "",
+                brand: "",
+                stock: 0,
+                price: 0,
+                salePrice: 0,
+                description: "",
+                image: "",
+                rating: 0,
+                subcategories: [],
+            };
+        }
+    }
+    const [newProduct, setNewProduct] = useState(lSFormContact());
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -60,9 +69,38 @@ const Dashboard = () => {
             rating: 1,
             subcategories: [],
         });
+
+        localStorage.removeItem("FormAddProduct")
     };
 
-    useEffect(() => { }, [newProduct]);
+    useEffect(() => {
+        localStorage.setItem("FormAddProduct", JSON.stringify(newProduct))
+    }, [newProduct]);
+
+    //--------------------------------- CLOUDINARY --------------------------
+    const [image, setImage] = useState("")
+    const [loading, setLoading] = useState(false)
+
+    const uploadImage = async (event) => {
+        const files = event.target.files;
+        const data = new FormData();
+        data.append("file", files[0]);
+        data.append("upload_preset", "plumaApp");
+        setLoading(true);
+        const response = await fetch("https://api.cloudinary.com/v1_1/dirnuoddr/image/upload", {
+            method: "POST",
+            body: data,
+        })
+        const file = await response.json();
+        setImage(file.secure_url);
+        console.log(file.secure_url);
+        setLoading(false);
+
+        setNewProduct({
+            ...newProduct,
+            [event.target.name]: file.secure_url
+        })
+    }
 
     return (
         <div className={style.formcont}>
@@ -135,14 +173,16 @@ const Dashboard = () => {
                         />
                         {errors.description && <p className="error">{errors.description}</p>}
 
-                        <label htmlFor="image">Imagen</label>
-                        <input
-                            name="image"
-                            value={newProduct.image}
-                            type="text"
-                            onChange={handleChange}
-                        />
+                        {/* ------------- image ---------------- */}
+                        <FormGroup>
+                            <label htmlFor="image">Subir Imagen</label>
+                            <Input type="file" name="image" placeholder="Subir imagen" onChange={uploadImage} />
+                            {
+                                loading ? (<p>Cargando imagen...</p>) : (<img src={image} style={{ width: "150px" }} />)
+                            }
+                        </FormGroup>
                         {errors.image && <p className="error">{errors.image}</p>}
+                        {/* ------------- image ---------------- */}
 
                         <label htmlFor="subcategories">ID de la Subcategoria</label>
                         <input

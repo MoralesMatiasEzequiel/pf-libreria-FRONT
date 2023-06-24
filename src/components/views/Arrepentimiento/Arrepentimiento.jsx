@@ -1,73 +1,100 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import style from "./Arrepentimiento.module.css";
 import emailjs from 'emailjs-com';
 
-const sendEmail = async () => {
-  try {
-    const result = await emailjs.sendForm('service_brws95f', 'template_f9465ua', '#form', 'CWYOCpB2Bd7P4TLB6');
-    console.log(result.text);
-    console.log("Correo electrónico enviado");
-  } catch (error) {
-    console.log(error.text);
-  }
-};
 
 const Arrepentimiento = () => {
-  const [nombre, setNombre] = useState("");
-  const [apellido, setApellido] = useState("");
-  const [email, setEmail] = useState("");
-  const [telefono, setTelefono] = useState("");
-  const [numeroDocumento, setNumeroDocumento] = useState("");
-  const [direccion, setDireccion] = useState("");
-  const [piso, setPiso] = useState("");
-  const [departamento, setDepartamento] = useState("");
-  const [codigoPostal, setCodigoPostal] = useState("");
-  const [localidad, setLocalidad] = useState("");
-  const [provincia, setProvincia] = useState("");
-  const [recibido, setRecibido] = useState(false);
-  const [modoDevolucion, setModoDevolucion] = useState("");
-  const [motivoDevolucion, setMotivoDevolucion] = useState("");
-  const [comentario, setComentario] = useState("");
+
+  // local storage
+  const lSformRegret = () => {
+    let datos = localStorage.getItem("formRegret");
+    if (datos) {
+      return JSON.parse(datos)
+    } else {
+      return {
+
+        name: "",
+        lastName: "",
+        email: "",
+        phone: "",
+        document: "",
+        address: "",
+        floor: "",
+        department: "",
+        postalCode: "",
+        location: "",
+        province: "",
+        received: false,
+        returnMode: "",
+        returnReason: "",
+        comment: ""
+
+      };
+    }
+  }
+  const [formRegret, setformRegret] = useState(lSformRegret());
+
+  const handleChangeRegret = (event) => {
+
+    setformRegret({
+      ...formRegret,
+      [event.target.name]: event.target.value
+    })
+
+  };
+
+  const setRecibido = (valu) => {
+    setformRegret({
+      ...formRegret,
+      received: valu,
+    })
+  }
+
+
+  const sendEmail = async () => {
+    try {
+      const result = await emailjs.sendForm('service_brws95f', 'template_f9465ua', '#form', 'CWYOCpB2Bd7P4TLB6');
+      console.log(result.text);
+      console.log("Correo electrónico enviado");
+    } catch (error) {
+      console.log(error.text);
+    }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log("Formulario enviado:", {
-      nombre,
-      apellido,
-      email,
-      telefono,
-      numeroDocumento,
-      direccion,
-      piso,
-      departamento,
-      codigoPostal,
-      localidad,
-      provincia,
-      recibido,
-      modoDevolucion,
-      motivoDevolucion,
-      comentario,
-    });
+    console.log("Formulario enviado:", formRegret);
+
+
     sendEmail(); // Enviar el correo electrónico
+
+
     // Restablecer los valores del formulario
-    setNombre("");
-    setApellido("");
-    setEmail("");
-    setTelefono("");
-    setNumeroDocumento("");
-    setDireccion("");
-    setPiso("");
-    setDepartamento("");
-    setCodigoPostal("");
-    setLocalidad("");
-    setProvincia("");
-    setRecibido(false);
-    setModoDevolucion("");
-    setMotivoDevolucion("");
-    setComentario("");
+    setformRegret({
+      name: "",
+      lastName: "",
+      email: "",
+      phone: "",
+      document: "",
+      address: "",
+      floor: "",
+      department: "",
+      postalCode: "",
+      location: "",
+      province: "",
+      received: false,
+      returnMode: "",
+      returnReason: "",
+      comment: ""
+
+    })
   };
 
+  useEffect(() => {
+    localStorage.setItem("formRegret", JSON.stringify(formRegret))
+
+  }, [formRegret]);
 
   return (
     <div className={style.superContainer}>
@@ -77,235 +104,247 @@ const Arrepentimiento = () => {
       </p>
 
       <form onSubmit={handleSubmit} className={style.formArr} id="form">
-      <div className="row">
-      <div className="col-md-6">
-          <div className="mb-3">
-            <input
-              type="text"
-              id="nombre"
-              name="nombre"
-              className="form-control"
-              placeholder="Nombre"
-              value={nombre}
-              onChange={(e) => setNombre(e.target.value)}
-              required
-            />
-          </div>
-
-          <div className="mb-3">
-            <input
-              type="text"
-              id="apellido"
-              name="apellido"
-              className="form-control"
-              placeholder="Apellido"
-              value={apellido}
-              onChange={(e) => setApellido(e.target.value)}
-              required
-            />
-          </div>
-
-          <div className="mb-3">
-            <input
-              type="email"
-              id="email"
-              name="email"
-              className="form-control"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </div>
-
-          <div className="mb-3">
-            <input
-              type="tel"
-              id="telefono"
-              name="telefono"
-              className="form-control"
-              placeholder="Teléfono"
-              value={telefono}
-              onChange={(e) => setTelefono(e.target.value)}
-              required
-            />
-          </div>
-
-          <div className="mb-3">
-            <input
-              type="text"
-              id="numeroDocumento"
-              name="numeroDocumento"
-              className="form-control"
-              placeholder="Número de Documento"
-              value={numeroDocumento}
-              onChange={(e) => setNumeroDocumento(e.target.value)}
-              required
-            />
-          </div>
-
-          <div className="mb-3">
-            <input
-              type="text"
-              id="direccion"
-              name="direccion"
-              className="form-control"
-              placeholder="Dirección"
-              value={direccion}
-              onChange={(e) => setDireccion(e.target.value)}
-              required
-            />
-          </div>
-
-          <div className="mb-3">
-            <input
-              type="text"
-              id="piso"
-              name="piso"
-              className="form-control"
-              placeholder="Piso"
-              value={piso}
-              onChange={(e) => setPiso(e.target.value)}
-            />
-          </div>
-
-          <div className="mb-3">
-            <input
-              type="text"
-              id="departamento"
-              name="departamento"
-              className="form-control"
-              placeholder="Departamento"
-              value={departamento}
-              onChange={(e) => setDepartamento(e.target.value)}
-            />
-          </div>
-        </div>
-
-        <div className="col-md-6">
-          <div className="mb-3">
-            <input
-              type="text"
-              id="codigoPostal"
-              name="codigoPostal"
-              className="form-control"
-              placeholder="Código Postal"
-              value={codigoPostal}
-              onChange={(e) => setCodigoPostal(e.target.value)}
-              required
-            />
-          </div>
-
-          <div className="mb-3">
-            <input
-              type="text"
-              id="localidad"
-              name="localidad"
-              className="form-control"
-              placeholder="Localidad"
-              value={localidad}
-              onChange={(e) => setLocalidad(e.target.value)}
-              required
-            />
-          </div>
-
-          <div className="mb-3">
-            <input
-              type="text"
-              id="provincia"
-              name="provincia"
-              className="form-control"
-              placeholder="Provincia"
-              value={provincia}
-              onChange={(e) => setProvincia(e.target.value)}
-              required
-            />
-          </div>
-
-          <div className="mb-3 text-start">
-            <label htmlFor="recibido" className={style.formLabel} style={{ color: "#3F3F3F"}}>
-              ¿Recibiste tu pedido?
-            </label>
-            <div className="form-check form-check-inline">
+        <div className="row">
+          <div className="col-md-6">
+            <div className="mb-3">
               <input
-                type="radio"
-                id="recibido-yes"
-                name="recibido"
-                className="form-check-input"
-                value="Sí"
-                checked={recibido}
-                onChange={() => setRecibido(true)}
+                type="text"
+                id="name"
+                name="name"
+                className="form-control"
+                placeholder="Nombre"
+                value={formRegret.name}
+                onChange={handleChangeRegret}
                 required
               />
-              <label htmlFor="recibido-yes" className="form-check-label" style={{ color: "#3F3F3F" }}>
-                Sí
-              </label>
             </div>
-            <div className="form-check form-check-inline">
+
+            <div className="mb-3">
               <input
-                type="radio"
-                id="recibido-no"
-                name="recibido"
-                className="form-check-input"
-                value="No"
-                checked={!recibido}
-                onChange={() => setRecibido(false)}
+                type="text"
+                id="lastName"
+                name="lastName"
+                className="form-control"
+                placeholder="Apellido"
+                value={formRegret.lastName}
+                onChange={handleChangeRegret}
                 required
               />
-              <label htmlFor="recibido-no" className="form-check-label" style={{ color: "#3F3F3F" }}>
-                No
-              </label>
+            </div>
+
+            <div className="mb-3">
+              <input
+                type="email"
+                id="email"
+                name="email"
+                className="form-control"
+                placeholder="Email"
+                value={formRegret.email}
+                onChange={handleChangeRegret}
+                required
+              />
+            </div>
+
+            <div className="mb-3">
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                className="form-control"
+                placeholder="Numero de teléfono"
+                value={formRegret.phone}
+                onChange={handleChangeRegret}
+                required
+              />
+            </div>
+
+            <div className="mb-3">
+              <input
+                type="text"
+                id="document"
+                name="document"
+                className="form-control"
+                placeholder="Número de Documento"
+                value={formRegret.document}
+                onChange={handleChangeRegret}
+                required
+              />
+            </div>
+
+            <div className="mb-3">
+              <input
+                type="text"
+                id="address"
+                name="address"
+                className="form-control"
+                placeholder="Dirección"
+                value={formRegret.address}
+                onChange={handleChangeRegret}
+                required
+              />
+            </div>
+
+            <div className="mb-3">
+              <input
+                type="text"
+                id="floor"
+                name="floor"
+                className="form-control"
+                placeholder="Piso"
+                value={formRegret.floor}
+                onChange={handleChangeRegret}
+              />
+            </div>
+
+            <div className="mb-3">
+              <input
+                type="text"
+                id="department"
+                name="department"
+                className="form-control"
+                placeholder="Departamento"
+                value={formRegret.department}
+                onChange={handleChangeRegret}
+              />
             </div>
           </div>
 
-          <div className="mb-3 text-start">
-            <label htmlFor="modoDevolucion">Modo de devolución:</label>
-            <select
-              id="modoDevolucion"
-              name="modoDevolucion"
-              className="form-control"
-              value={modoDevolucion}
-              onChange={(e) => setModoDevolucion(e.target.value)}
-              required
-            >
-              <option value="">Seleccione una opción</option>
-              <option value="Correo">Correo</option>
-              <option value="Retiro en tienda">Retiro en tienda</option>
-            </select>
-          </div>
+          <div className="col-md-6">
+            <div className="mb-3">
+              <input
+                type="text"
+                id="postalCode"
+                name="postalCode"
+                className="form-control"
+                placeholder="Código Postal"
+                value={formRegret.postalCode}
+                onChange={handleChangeRegret}
+                required
+              />
+            </div>
 
-          <div className="mb-3 text-start">
-            <label htmlFor="motivoDevolucion">Motivo de devolución:</label>
-            <select
-              id="motivoDevolucion"
-              name="motivoDevolucion"
-              value={motivoDevolucion}
-              className="form-control"
-              onChange={(e) => setMotivoDevolucion(e.target.value)}
-              required
-            >
-              <option value="">Seleccione una opción</option>
-              <option value="Roto">Roto</option>
-              <option value="Error">Error</option>
-            </select>
-          </div>
+            <div className="mb-3">
+              <input
+                type="text"
+                id="location"
+                name="location"
+                className="form-control"
+                placeholder="Localidad"
+                value={formRegret.location}
+                onChange={handleChangeRegret}
+                required
+              />
+            </div>
 
-          <div className="mb-3">
-            <textarea
-              id="comentario"
-              name="comentario"
-              placeholder="Comentario"
-              className="form-control"
-              value={comentario}
-              onChange={(e) => setComentario(e.target.value)}
-            ></textarea>
+            <div className="mb-3">
+              <input
+                type="text"
+                id="province"
+                name="province"
+                className="form-control"
+                placeholder="Provincia"
+                value={formRegret.province}
+                onChange={handleChangeRegret}
+                required
+              />
+            </div>
+
+            <div className="mb-3 text-start">
+              <label htmlFor="recibido" className={style.formLabel} style={{ color: "#3F3F3F" }}>
+                ¿Recibiste tu pedido?
+              </label>
+              <div className="form-check form-check-inline">
+                <input
+                  type="radio"
+                  id="received-yes"
+                  name="received"
+                  className="form-check-input"
+                  onChange={() => setRecibido(true)}
+                  required
+                />
+                <label htmlFor="recibido-yes" className="form-check-label" style={{ color: "#3F3F3F" }}>
+                  Sí
+                </label>
+              </div>
+              <div className="form-check form-check-inline">
+                <input
+                  type="radio"
+                  id="received-no"
+                  name="received"
+                  className="form-check-input"
+                  onChange={() => setRecibido(false)}
+                  required
+                />
+                <label htmlFor="recibido-no" className="form-check-label" style={{ color: "#3F3F3F" }}>
+                  No
+                </label>
+              </div>
+            </div>
+
+            <div className="mb-3 text-start">
+              <label htmlFor="modoDevolucion">Modo de devolución:</label>
+              <select
+                id="returnMode"
+                name="returnMode"
+                className="form-control"
+                value={formRegret.returnMode}
+                onChange={handleChangeRegret}
+                required
+              >
+                <option value="">Seleccione una opción</option>
+                <option value="Correo">Correo</option>
+                <option value="Retiro en tienda">Retiro en tienda</option>
+              </select>
+            </div>
+
+            <div className="mb-3 text-start">
+              <label htmlFor="motivoDevolucion">Motivo de devolución:</label>
+              <select
+                id="returnReason"
+                name="returnReason"
+                value={formRegret.returnReason}
+                className="form-control"
+                onChange={handleChangeRegret}
+                required
+              >
+                <option value="">Seleccione una opción</option>
+                <option value="Roto">Roto</option>
+                <option value="Error">Error</option>
+              </select>
+            </div>
+
+            <div className="mb-3">
+              <textarea
+                id="comment"
+                name="comment"
+                placeholder="Comentario"
+                className="form-control"
+                value={formRegret.comment}
+                onChange={handleChangeRegret}
+              ></textarea>
+            </div>
           </div>
         </div>
-      </div>
+        {
+          formRegret.name.length > 2 &&
+          formRegret.lastName.length > 2 &&
+          formRegret.email.length > 2 &&
+          formRegret.phone.length > 2 &&
+          formRegret.document.length > 2 &&
+          formRegret.address.length > 2 &&
+          formRegret.location.length > 2 &&
+          formRegret.province.length > 2 &&
+          formRegret.returnMode.length > 2 &&
+          formRegret.returnReason.length > 2 &&
+          formRegret.comment.length > 2 &&
+          <button type="submit" className={`${style.btnPrimary}`}>Enviar</button>
+        }
 
-        <button type="submit" className={`${style.btnPrimary}`}>Enviar</button>
       </form>
     </div>
+
+
+
 
   );
 };
