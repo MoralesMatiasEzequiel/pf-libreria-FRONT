@@ -29,7 +29,9 @@ const Home = () => {
         if (isAuthenticated) {
           dispatch(postUserToBack(user));
         }
-        console.log(postedUser);
+        if(postedUser){
+          alert('Tu usuario se ha creado');
+        };
     }, [dispatch, isAuthenticated, postedUser])
 
 

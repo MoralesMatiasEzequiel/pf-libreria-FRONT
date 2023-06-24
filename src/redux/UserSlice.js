@@ -3,15 +3,14 @@ import { createSlice } from "@reduxjs/toolkit";
 export const userSlice = createSlice({
     name: "user",
     initialState: {
-        postedUser: false
+        postedUser: false,
+        currentUser: {}
     },
     reducers: {
         postUser: (state, action) => {
-            if(action.payload){
-                state.postedUser = true
-            } else {
-                state.postedUser = false
-            }
+            const { userCreated, newUser } = action.payload;
+            state.postedUser = userCreated;
+            state.currentUser = newUser;
         } 
     }
 })

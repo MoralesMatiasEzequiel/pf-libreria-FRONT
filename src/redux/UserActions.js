@@ -34,6 +34,6 @@ export const postUserToBack = (user) => {
                 userCreated = false;
             }
 
-        dispatch(postUser(userCreated));
+        dispatch(postUser({userCreated, newUser}));
     }
 }
