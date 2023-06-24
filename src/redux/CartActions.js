@@ -1,6 +1,7 @@
 import axios from "axios";
 
-import { pushProductOnCart, removeProductFromCart, postOrderCreated, setClientInfo, setShipmentInfo } from "./CartSlice";
+
+import { pushProductOnCart, removeProductFromCart, postOrderCreated, setClientInfo,newCartState, setShipmentInfo } from "./CartSlice";
 
 export const addProductOnCart = (product) => {
     return (dispatch) => {
@@ -36,8 +37,16 @@ export const setClient = (clientInfo) => {
     };
 };
 
+
+export const newCart= (cart) => {
+    return (dispatch) => {
+        dispatch(newCartState(cart));
+    };
+};
+
 export const setShipment = (shipmentInfo) => {
     return (dispatch) => {
         dispatch(setShipmentInfo(shipmentInfo));
+
     };
 };

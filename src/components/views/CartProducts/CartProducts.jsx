@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { deleteProductFromCart } from "../../../redux/CartActions";
+import { deleteProductFromCart, newCart } from "../../../redux/CartActions";
 import { Link } from "react-router-dom";
 import style from "./CartProducts.module.css";
 import { useState, useEffect } from "react";
@@ -9,11 +9,16 @@ const CartProducts = () => {
   const dispatch = useDispatch();
   const { productsOnCart } = useSelector((state) => state.cart);
 
-
   const [selectedStock, setSelectedStock] = useState({});
 
   const removeProduct = (id) => {
     dispatch(deleteProductFromCart(id));
+    let datos = localStorage.getItem("protucts_cart");
+    let modify = JSON.parse(datos)
+
+    let newdatos = modify.filter(pro => pro._id !== id);
+
+    localStorage.setItem("protucts_cart", JSON.stringify(newdatos))
   };
 
   const handleStockChange = (change, productId) => {
@@ -37,6 +42,15 @@ const CartProducts = () => {
       updatedStock[product._id] = product.quantity;
     });
     setSelectedStock(updatedStock);
+
+    let data = localStorage.getItem("protucts_cart");
+    let cart = JSON.parse(data)
+    if (cart.length > 0 && productsOnCart.length < 1) {
+
+      dispatch(newCart(cart))
+    }
+
+
   }, [productsOnCart]);
 
   const totalPrice = productsOnCart.reduce((total, product) => {
