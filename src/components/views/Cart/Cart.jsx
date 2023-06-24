@@ -20,9 +20,9 @@ const Cart = () => {
                 <button className={style.boton} onClick={() => {setFormInfo(true); setFormShipment(false); setFormPay(false);}} disabled={formInfo}>Cliente</button>
                 <button className={style.boton} onClick={() => {setFormInfo(false); setFormShipment(true); setFormPay(false);}} disabled={formShipment}>Envío</button>
                 <button className={style.boton} onClick={() => {setFormInfo(false); setFormShipment(false); setFormPay(true);}} disabled={formPay}>Pago</button>
-                <FormInfoCart state={formInfo} setState={setFormInfo}/>
-                <FormShipmentCart state={formShipment} setState={setFormShipment}/>
-                <FormPayCart state={formPay} setState={setFormPay}/>
+                <FormInfoCart state={formInfo}/>
+                <FormShipmentCart state={formShipment}/>
+                <FormPayCart state={formPay}/>
             </div>   
             <div className={style.containerSubTotal}>
                 <h5>Resumen de la compra</h5> 
