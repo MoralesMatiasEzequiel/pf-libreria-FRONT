@@ -6,7 +6,7 @@ import { Link } from "react-router-dom"
 const CartProducts = () => {
     const dispatch = useDispatch();
     const { productsOnCart } = useSelector(state => state.cart)
-    console.log(productsOnCart);
+    // console.log(productsOnCart);
 
     const removeProduct = (id) => {
         dispatch(deleteProductFromCart(id))
