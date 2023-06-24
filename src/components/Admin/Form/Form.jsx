@@ -69,6 +69,7 @@ const Dashboard = () => {
             rating: 1,
             subcategories: [],
         });
+        setImage("")
 
         localStorage.removeItem("FormAddProduct")
     };
