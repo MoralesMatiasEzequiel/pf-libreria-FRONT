@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useNavigate } from "react-router-dom";
+import ProfileData from "./ProfileData";
 
 const Profile = () => {
 
@@ -15,7 +16,7 @@ const Profile = () => {
 
     return(
         <div>
-            <p>ESTE ES TU PERFIL DE USUARIO MAMITA</p>
+            <ProfileData />
             <button onClick={() => {logout()}}>Log Out</button>
         </div>
     )
