@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useNavigate } from "react-router-dom";
 import ProfileData from "./ProfileData";
+import styles from "./ProfileData.module.css"
 
 const Profile = () => {
 
@@ -17,7 +18,7 @@ const Profile = () => {
     return(
         <div>
             <ProfileData />
-            <button onClick={() => {logout()}}>Log Out</button>
+            <button className={styles["logout-button"]} onClick={() => {logout()}}>Log Out</button>
         </div>
     )
 
