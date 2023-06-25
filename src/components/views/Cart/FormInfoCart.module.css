@@ -1,0 +1,37 @@
+.form{
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 15px 20%;
+    padding: 15px 0;
+}
+
+.containerInfo{
+ margin-bottom: 15px;
+}
+
+.inputsContainer{
+    margin-bottom: 10px;
+}
+
+.inputsContainer input{
+    width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.envioBtn{
+    background-color: #ff9e5c;
+    border-color: #ff9e5c;
+    color: white;
+    border-radius: 5px;
+    border-style: solid;
+}
+.envioBtn:disabled{
+    background-color: white;
+    color: #ccc;
+    border-color: #ccc;
+}
+.envioBtn:enabled:hover{
+    background-color: white;
+    color: #ff9e5c;
+}
