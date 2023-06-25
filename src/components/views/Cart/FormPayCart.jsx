@@ -3,6 +3,7 @@ import style from "./FormPayCart.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { createOrder, sendOrder } from "../../../redux/CartActions";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 
 const FormPayCart = ({ state, setFormInfo, setFormShipment, setFormPay }) => {
@@ -10,7 +11,7 @@ const FormPayCart = ({ state, setFormInfo, setFormShipment, setFormPay }) => {
     const dispatch = useDispatch();
     const { productsOnCart, paymentLink, clientInfo, shipmentInfo } = useSelector((state) => state.cart)
     // console.log(productsOnCart);
-
+    const navigate = useNavigate();
 
     const handleOnClick = (event) => {
         event.preventDefault();
@@ -19,6 +20,7 @@ const FormPayCart = ({ state, setFormInfo, setFormShipment, setFormPay }) => {
         if (paymentLink) {
             window.open(paymentLink, "_blank");
           }
+        navigate('/')
     };
 
     useEffect(() => {
