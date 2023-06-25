@@ -9,20 +9,32 @@ import ModalCart from "../../../common/Modals/ModalCart/ModalCart";
 import style from "./Products.module.css";
 
 const Products = () => {
+
+
   const filledcart = () => {
+
     let datas = localStorage.getItem("protucts_cart");
-    let datasParse = JSON.parse(datas);
+    let datasParse = JSON.parse(datas)
     if (datas?.length > 0) {
-      let cartId = datasParse.map((pro) => pro._id);
+      let cartId = datasParse.map(pro => pro._id)
       return cartId;
     } else {
-      return ["nada"];
+      return ["nada"]
     }
   };
+
 
   const dispatch = useDispatch();
 
   const [allProducts, setAllProducts] = useState([]);
+
+  const [productsInCart, setProductsInCart] = useState(filledcart());
+
+  const { productSee, pag, productsExist, brandSelected } = useSelector(
+    (state) => state.products
+  );
+
+
 
   const [pagines, setPagines] = useState([]);
 
@@ -41,11 +53,13 @@ const Products = () => {
     } else {
       setAllProducts(productSee);
     }
+
   }, [brandSelected, productSee, productsInCart]);
 
   let desde = (pag - 1) * 12;
   let hasta = pag * 12;
   const viewsProducts = allProducts.slice(desde, hasta);
+
 
   useEffect(() => {
     let cantPages = Math.round(allProducts.length / 12 + 0.4);
@@ -56,6 +70,7 @@ const Products = () => {
   const addToCart = (product) => {
     dispatch(addProductOnCart(product));
     setProductsInCart([...productsInCart, product._id]);
+
     let datas = localStorage.getItem("protucts_cart");
     if (!datas) {
       localStorage.setItem("protucts_cart", JSON.stringify([product]));
@@ -97,6 +112,7 @@ const Products = () => {
             </ul>
           </div>
         )}
+
         {viewsProducts.map((base, index) => {
           return (
             <div key={index} className={style.productCard}>
@@ -110,11 +126,13 @@ const Products = () => {
                   <h4 className={style.title}>{base.name}</h4>
                 </Link>
                 <div className={style.productBottomDetails}>
+
                   <div className={style.productPrice}>
                     <small>${base.price}</small>
                   </div>
 
                   <div className={style.productLinks}>
+
                     <button>
                       {" "}
                       {/*onClick={()=> navigate('/home')}*/}
@@ -141,6 +159,7 @@ const Products = () => {
         {/* <ModalCart show={modalShow} onHide={() => setModalShow(false)} /> */}
       </div>
       <Paginado className={style.paginado} cantPages={pagines} />
+
     </div>
   );
 };

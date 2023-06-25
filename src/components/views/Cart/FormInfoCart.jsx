@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import style from "./FormInfoCart.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { setClient } from "../../../redux/CartActions";
+import style from "./FormInfoCart.module.css";
 
 
 const FormInfoCart = ({ state, setFormInfo, setFormShipment, setFormPay }) => {
@@ -61,39 +61,31 @@ const FormInfoCart = ({ state, setFormInfo, setFormShipment, setFormPay }) => {
     return (
         <div>
             {state &&
-                <form onSubmit={handleSubmit}>
-                    <div>
+                <form onSubmit={handleSubmit} className={style.form}>
+                    <div className={style.titles}>
                         <h5>Información de contacto</h5>
                         <p>(*) Campos requeridos</p>
                     </div>
-                    <div>
-                        <label htmlFor="email">*E-mail: </label>
-                        <br/>
-                        <input type="text" name="email" onChange={handleInputChange} value={form.email}/>
-                    </div>
-                    <div>
-                        <label htmlFor="name">*Nombre: </label>
-                        <br/>
-                        <input type="text" name="name" onChange={handleInputChange} value={form.name}/>
-                    </div>
-                    <div>
-                        <label htmlFor="surname">*Apellido: </label>
-                        <br/>
-                        <input type="text" name="surname" onChange={handleInputChange} value={form.surname}/>
-                    </div>
-                    <div>
-                        <label htmlFor="phone">*Teléfono (sin ceros ni guiones): </label>
-                        <br/>
-                        <input type="text" name="phone" onInput={validateNumberInput} onChange={handleInputChange} value={form.phone}/>
-                    </div>
-                    <div>
-                        <label htmlFor="dni">*DNI/CUIL (sin puntos): </label>
-                        <br/>
-                        <input type="text" name="dni" onInput={validateNumberInput} onChange={handleInputChange} value={form.dni}/>
-                    </div>
-                    <br />
-                    <div>
-                        <button disabled={isDisabled} type="submit">Continuar con el método de envío</button>
+                    <div className={style.containerInfo}>
+                        <div className={style.inputsContainer}>
+                            <input type="text" name="email" placeholder="*E-mail:" onChange={handleInputChange} value={form.email}/>
+                        </div>
+                        <div className={style.inputsContainer}>
+                            <input type="text" name="name" placeholder="*Nombre:" onChange={handleInputChange} value={form.name}/>
+                        </div>
+                        <div className={style.inputsContainer}>
+                            <input type="text" name="surname" placeholder="*Apellido:" onChange={handleInputChange} value={form.surname}/>
+                        </div>
+                        <div className={style.inputsContainer}>
+                            <input type="text" name="phone" placeholder="*Teléfono (sin ceros ni guiones)" onInput={validateNumberInput} onChange={handleInputChange} value={form.phone}/>
+                        </div>
+                        <div className={style.inputsContainer}>
+                            <input type="text" name="dni" placeholder="*DNI/CUIL (sin puntos):" onInput={validateNumberInput} onChange={handleInputChange} value={form.dni}/>
+                        </div>
+                        <br />
+                        <div>
+                            <button className={style.envioBtn} disabled={isDisabled} type="submit">Continuar con el método de envío</button>
+                        </div>
                     </div>
                 </form>
             }
