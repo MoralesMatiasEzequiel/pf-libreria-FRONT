@@ -9,23 +9,26 @@ const FormInfoCart = ({ state, setFormInfo, setFormShipment, setFormPay }) => {
     const dispatch = useDispatch();
     const { clientInfo } = useSelector((state) => state.cart);
 
-    useEffect(() => {
-        console.log(clientInfo);
-    }, [clientInfo])
-
-
-    const [ form, setForm ] = useState({
-        email: '',
-        name: '',
-        surname: '',
-        phone: '',
-        dni: ''
-    });
+    const lSFormContact = () => {
+        let datos = localStorage.getItem("formInfoCart");
+        if (datos) {
+            return JSON.parse(datos)
+        } else {
+            return {
+                email: '',
+                name: '',
+                surname: '',
+                phone: '',
+                dni: ''
+            };
+        }
+    }
+    const [formInfoCart, setFormInfoCart] = useState(lSFormContact());
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
-        setForm({
-            ...form,
+        setFormInfoCart({
+            ...formInfoCart,
             [name]: value
         })
     }
@@ -33,16 +36,25 @@ const FormInfoCart = ({ state, setFormInfo, setFormShipment, setFormPay }) => {
     const handleSubmit = (event) => {
         event.preventDefault();
         const newClientInfo = {
-            email: form.email,
-            name: form.name,
-            surname: form.surname,
-            phone: form.phone,
-            dni: form.dni
-        } 
+            email: formInfoCart.email,
+            name: formInfoCart.name,
+            surname: formInfoCart.surname,
+            phone: formInfoCart.phone,
+            dni: formInfoCart.dni
+        }
+        setFormInfoCart({
+            email: '',
+            name: '',
+            surname: '',
+            phone: '',
+            dni: ''
+        })
         dispatch(setClient(newClientInfo));
         setFormInfo(false);
         setFormShipment(true);
         setFormPay(false);
+        
+        localStorage.removeItem("formInfoCart")
     }
     const validateNumberInput = (event) => {
         const input = event.target;
@@ -52,12 +64,15 @@ const FormInfoCart = ({ state, setFormInfo, setFormShipment, setFormPay }) => {
     }
 
     const isDisabled =
-    form.email.trim() === '' ||
-    form.name.trim() === '' ||
-    form.surname.trim() === '' ||
-    form.phone.trim() === '' ||
-    form.dni.trim() === '';
+        formInfoCart.email.trim() === '' ||
+        formInfoCart.name.trim() === '' ||
+        formInfoCart.surname.trim() === '' ||
+        formInfoCart.phone.trim() === '' ||
+        formInfoCart.dni.trim() === '';
 
+    useEffect(() => {
+        localStorage.setItem("formInfoCart", JSON.stringify(formInfoCart))
+    }, [formInfoCart]);
     return (
         <div>
             {state &&
@@ -68,19 +83,19 @@ const FormInfoCart = ({ state, setFormInfo, setFormShipment, setFormPay }) => {
                     </div>
                     <div className={style.containerInfo}>
                         <div className={style.inputsContainer}>
-                            <input type="text" name="email" placeholder="*E-mail:" onChange={handleInputChange} value={form.email}/>
+                            <input type="text" name="email" placeholder="*E-mail:" onChange={handleInputChange} value={formInfoCart.email} />
                         </div>
                         <div className={style.inputsContainer}>
-                            <input type="text" name="name" placeholder="*Nombre:" onChange={handleInputChange} value={form.name}/>
+                            <input type="text" name="name" placeholder="*Nombre:" onChange={handleInputChange} value={formInfoCart.name} />
                         </div>
                         <div className={style.inputsContainer}>
-                            <input type="text" name="surname" placeholder="*Apellido:" onChange={handleInputChange} value={form.surname}/>
+                            <input type="text" name="surname" placeholder="*Apellido:" onChange={handleInputChange} value={formInfoCart.surname} />
                         </div>
                         <div className={style.inputsContainer}>
-                            <input type="text" name="phone" placeholder="*Teléfono (sin ceros ni guiones)" onInput={validateNumberInput} onChange={handleInputChange} value={form.phone}/>
+                            <input type="text" name="phone" placeholder="*Teléfono (sin ceros ni guiones)" onInput={validateNumberInput} onChange={handleInputChange} value={formInfoCart.phone} />
                         </div>
                         <div className={style.inputsContainer}>
-                            <input type="text" name="dni" placeholder="*DNI/CUIL (sin puntos):" onInput={validateNumberInput} onChange={handleInputChange} value={form.dni}/>
+                            <input type="text" name="dni" placeholder="*DNI/CUIL (sin puntos):" onInput={validateNumberInput} onChange={handleInputChange} value={formInfoCart.dni} />
                         </div>
                         <br />
                         <div>
