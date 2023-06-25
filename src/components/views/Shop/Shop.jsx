@@ -16,9 +16,7 @@ const Shop = () => {
           <Products className={style.products} />
         </div>
       </div>
-      <div className={style.paginadoContainer}>
-        <Paginado cantPages={6} className={style.paginado} /> {/* Ajusta el valor de cantPages según corresponda */}
-      </div>
+      
     </div>
   );
 };

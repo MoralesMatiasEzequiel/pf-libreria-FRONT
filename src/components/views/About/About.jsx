@@ -172,9 +172,9 @@ const About = () => {
               )}
             </div>
             {
-              stateForm.user_name.length > 2 &&
-              stateForm.user_email.length > 2 &&
-              stateForm.message.length > 2 &&
+              // stateForm.user_name.length > 2 &&
+              // stateForm.user_email.length > 2 &&
+              // stateForm.message.length > 2 &&
               < button type="submit" className={style.btnPrimary}>
                 Enviar
               </button>

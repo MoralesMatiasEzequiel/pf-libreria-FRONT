@@ -117,7 +117,7 @@ const Arrepentimiento = () => {
       <h1 className={style.title}>Arrepentimiento de la compra</h1>
       <p className={style.introText}>
         Si deseas arrepentirte de tu compra, por favor completa el siguiente
-        formulario y nos pondremos en contacto contigo.
+        formulario y nos pondremos en contacto contigo.<br/> Es necesario completar todos los campor que tengan (*).
       </p>
 
       <form onSubmit={handleSubmit} className={style.formArr} id="form">
@@ -129,7 +129,7 @@ const Arrepentimiento = () => {
                 id="name"
                 name="name"
                 className="form-control"
-                placeholder="Nombre"
+                placeholder="Nombre*"
                 value={formRegret.name}
                 onChange={handleChangeRegret}
                 required
@@ -142,7 +142,7 @@ const Arrepentimiento = () => {
                 id="lastName"
                 name="lastName"
                 className="form-control"
-                placeholder="Apellido"
+                placeholder="Apellido*"
                 value={formRegret.lastName}
                 onChange={handleChangeRegret}
                 required
@@ -155,7 +155,7 @@ const Arrepentimiento = () => {
                 id="email"
                 name="email"
                 className="form-control"
-                placeholder="Email"
+                placeholder="Email*"
                 value={formRegret.email}
                 onChange={handleChangeRegret}
                 required
@@ -168,7 +168,7 @@ const Arrepentimiento = () => {
                 id="phone"
                 name="phone"
                 className="form-control"
-                placeholder="Numero de teléfono"
+                placeholder="Numero de teléfono*"
                 value={formRegret.phone}
                 onChange={handleChangeRegret}
                 required
@@ -181,7 +181,7 @@ const Arrepentimiento = () => {
                 id="document"
                 name="document"
                 className="form-control"
-                placeholder="Número de Documento"
+                placeholder="Número de Documento*"
                 value={formRegret.document}
                 onChange={handleChangeRegret}
                 required
@@ -194,7 +194,7 @@ const Arrepentimiento = () => {
                 id="address"
                 name="address"
                 className="form-control"
-                placeholder="Dirección"
+                placeholder="Dirección*"
                 value={formRegret.address}
                 onChange={handleChangeRegret}
                 required
@@ -233,7 +233,7 @@ const Arrepentimiento = () => {
                 id="postalCode"
                 name="postalCode"
                 className="form-control"
-                placeholder="Código Postal"
+                placeholder="Código Postal*"
                 value={formRegret.postalCode}
                 onChange={handleChangeRegret}
                 required
@@ -246,7 +246,7 @@ const Arrepentimiento = () => {
                 id="location"
                 name="location"
                 className="form-control"
-                placeholder="Localidad"
+                placeholder="Localidad*"
                 value={formRegret.location}
                 onChange={handleChangeRegret}
                 required
@@ -259,7 +259,7 @@ const Arrepentimiento = () => {
                 id="province"
                 name="province"
                 className="form-control"
-                placeholder="Provincia"
+                placeholder="Provincia*"
                 value={formRegret.province}
                 onChange={handleChangeRegret}
                 required
@@ -273,7 +273,7 @@ const Arrepentimiento = () => {
                 className={style.formLabel}
                 style={{ color: "#3F3F3F" }}
               >
-                ¿Recibiste tu pedido?
+                ¿Recibiste tu pedido?*
               </label>
               <div className="form-check form-check-inline">
                 <input
@@ -325,7 +325,7 @@ const Arrepentimiento = () => {
                 onChange={handleChangeRegret}
                 required
               >
-                <option value="">Seleccione una opción</option>
+                <option value="">Seleccione una opción*</option>
                 <option value="Correo">Correo</option>
                 <option value="Retiro en tienda">Retiro en tienda</option>
               </select>
@@ -341,7 +341,7 @@ const Arrepentimiento = () => {
                 onChange={handleChangeRegret}
                 required
               >
-                <option value="">Seleccione una opción</option>
+                <option value="">Seleccione una opción*</option>
                 <option value="Roto">Roto</option>
                 <option value="Error">Error</option>
               </select>
@@ -351,7 +351,7 @@ const Arrepentimiento = () => {
               <textarea
                 id="comment"
                 name="comment"
-                placeholder="Comentario"
+                placeholder="Comentario*"
                 className="form-control"
                 value={formRegret.comment}
                 onChange={handleChangeRegret}
@@ -360,17 +360,17 @@ const Arrepentimiento = () => {
           </div>
         </div>
         {
-          formRegret.name.length > 2 &&
-          formRegret.lastName.length > 2 &&
-          formRegret.email.length > 2 &&
-          formRegret.phone.length > 2 &&
-          formRegret.document.length > 2 &&
-          formRegret.address.length > 2 &&
-          formRegret.location.length > 2 &&
-          formRegret.province.length > 2 &&
-          formRegret.returnMode.length > 2 &&
-          formRegret.returnReason.length > 2 &&
-          formRegret.comment.length > 2 &&
+          // formRegret.name.length > 2 &&
+          // formRegret.lastName.length > 2 &&
+          // formRegret.email.length > 2 &&
+          // formRegret.phone.length > 2 &&
+          // formRegret.document.length > 2 &&
+          // formRegret.address.length > 2 &&
+          // formRegret.location.length > 2 &&
+          // formRegret.province.length > 2 &&
+          // formRegret.returnMode.length > 2 &&
+          // formRegret.returnReason.length > 2 &&
+          // formRegret.comment.length > 2 &&
 
           <Button type="submit" className={style.btnPrimary}>
             Enviar

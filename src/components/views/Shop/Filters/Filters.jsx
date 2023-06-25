@@ -49,9 +49,9 @@ const Filters = () => {
                             return <b>{bra}</b>
                         })}</p>}
                     </div>
-                    <div className={style.pagi}>
+                    {/* <div className={style.pagi}>
                         <p>pag: {pag} - {totalpages}</p>
-                    </div>
+                    </div> */}
                 </div>
 
                 <Navbar >
