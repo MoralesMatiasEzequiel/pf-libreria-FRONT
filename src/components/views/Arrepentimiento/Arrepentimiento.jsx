@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import style from "./Arrepentimiento.module.css";
+
 import emailjs from "emailjs-com";
 import { Button, Modal } from "react-bootstrap";
 
 const Arrepentimiento = () => {
+
   // local storage
   const lSformRegret = () => {
     let datos = localStorage.getItem("formRegret");
@@ -11,6 +13,7 @@ const Arrepentimiento = () => {
       return JSON.parse(datos);
     } else {
       return {
+
         name: "",
         lastName: "",
         email: "",
@@ -25,6 +28,7 @@ const Arrepentimiento = () => {
         received: false,
         returnMode: "",
         returnReason: "",
+
         comment: "",
       };
     }
@@ -36,12 +40,14 @@ const Arrepentimiento = () => {
       ...formRegret,
       [event.target.name]: event.target.value,
     });
+
   };
 
   const setRecibido = (valu) => {
     setformRegret({
       ...formRegret,
       received: valu,
+
     });
   };
 
@@ -67,6 +73,7 @@ const Arrepentimiento = () => {
         "Hubo un error al enviar el formulario. Por favor, inténtalo nuevamente."
       );
       setShowErrorModal(true);
+
     }
   };
 
@@ -75,7 +82,9 @@ const Arrepentimiento = () => {
 
     console.log("Formulario enviado:", formRegret);
 
+
     sendEmail(); // Enviar el correo electrónico
+
 
     // Restablecer los valores del formulario
     setformRegret({
@@ -93,12 +102,14 @@ const Arrepentimiento = () => {
       received: false,
       returnMode: "",
       returnReason: "",
+
       comment: "",
     });
   };
 
   useEffect(() => {
     localStorage.setItem("formRegret", JSON.stringify(formRegret));
+
   }, [formRegret]);
 
   return (
@@ -245,7 +256,7 @@ const Arrepentimiento = () => {
             <div className="mb-3">
               <input
                 type="text"
-                id={style.province}
+                id="province"
                 name="province"
                 className="form-control"
                 placeholder="Provincia"
@@ -256,6 +267,7 @@ const Arrepentimiento = () => {
             </div>
 
             <div className="mb-3 text-start">
+
               <label
                 htmlFor="recibido"
                 className={style.formLabel}
@@ -272,11 +284,13 @@ const Arrepentimiento = () => {
                   onChange={() => setRecibido(true)}
                   required
                 />
+
                 <label
                   htmlFor="recibido-yes"
                   className="form-check-label"
                   style={{ color: "#3F3F3F" }}
                 >
+
                   Sí
                 </label>
               </div>
@@ -289,11 +303,13 @@ const Arrepentimiento = () => {
                   onChange={() => setRecibido(false)}
                   required
                 />
+
                 <label
                   htmlFor="recibido-no"
                   className="form-check-label"
                   style={{ color: "#3F3F3F" }}
                 >
+
                   No
                 </label>
               </div>
@@ -333,7 +349,7 @@ const Arrepentimiento = () => {
 
             <div className="mb-3">
               <textarea
-                id={"comment"}
+                id="comment"
                 name="comment"
                 placeholder="Comentario"
                 className="form-control"
@@ -355,10 +371,12 @@ const Arrepentimiento = () => {
           formRegret.returnMode.length > 2 &&
           formRegret.returnReason.length > 2 &&
           formRegret.comment.length > 2 &&
+
           <Button type="submit" className={style.btnPrimary}>
             Enviar
           </Button>
         }
+
       </form>
       
 			<Modal show={showSuccessModal} onHide={() => setShowSuccessModal(false)}>
@@ -371,6 +389,7 @@ const Arrepentimiento = () => {
               </div>
             </Modal.Body>
 						</Modal>
+
 
       
 			<Modal show={showErrorModal} onHide={() => setShowErrorModal(false)}>
@@ -388,6 +407,7 @@ const Arrepentimiento = () => {
             </Modal.Body>
           </Modal>
     </div>
+
   );
 };
 

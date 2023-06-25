@@ -13,10 +13,12 @@ const About = () => {
       return {
         user_name: "sdf",
         user_email: "sdf",
+
         message: "sdf",
       };
     }
   };
+
 
   const [stateForm, setStateForm] = useState(lSFormContact());
 
@@ -169,9 +171,15 @@ const About = () => {
                 <div className={style.error}>{formErrors.message}</div>
               )}
             </div>
-            <button type="submit" className={style.btnPrimary}>
-              Enviar
-            </button>
+            {
+              stateForm.user_name.length > 2 &&
+              stateForm.user_email.length > 2 &&
+              stateForm.message.length > 2 &&
+              < button type="submit" className={style.btnPrimary}>
+                Enviar
+              </button>
+            }
+
           </form>
 
           <Modal
@@ -250,7 +258,7 @@ const About = () => {
           </ul>
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 

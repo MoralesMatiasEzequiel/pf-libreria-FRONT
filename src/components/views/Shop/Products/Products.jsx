@@ -30,7 +30,7 @@ const Products = () => {
     }
 
 
-  }, [brandSelected ,productSee]);
+  }, [brandSelected, productSee]);
 
   let desde = (pag - 1) * 12;
   let hasta = pag * 12;
@@ -42,7 +42,7 @@ const Products = () => {
     let cantPages = Math.round(allProducts.length / 12 + 0.4);
     setPagines(cantPages)
     dispatch(totalPag(cantPages))
-        
+
   }, [allProducts]);
 
 
@@ -51,6 +51,14 @@ const Products = () => {
 
   const addToCart = (product) => {
     dispatch(addProductOnCart(product))
+    let datas = localStorage.getItem("protucts_cart");
+    if (!datas) {
+      localStorage.setItem("protucts_cart", JSON.stringify([product]))
+    } else {
+      let newdata = JSON.parse(datas)
+      newdata.push(product)
+      localStorage.setItem("protucts_cart", JSON.stringify(newdata))
+    }
   }
 
   //------------------------------------FAVORITE STAT
@@ -61,9 +69,10 @@ const Products = () => {
 
   return (
     <div className={style.container}>
-      {!productsExist && (
-        <p>No hay productos asociados a esa búsqueda o categoría.</p>
-      )}
+        {!productsExist && (
+        <div className={style.noProduct}>
+          {navigate("/no-product/")}
+        </div>)}
 
       {!brandSelected.length && viewsProducts.map((base, index) => {
         return (
@@ -87,7 +96,7 @@ const Products = () => {
                   <button> 	{/*onClick={()=> navigate('/home')}*/}
                     <i className="bi bi-heart"></i>
                   </button>
-                  <button onClick={() => {setModalShow(true); addToCart(base)}}>
+                  <button onClick={() => { setModalShow(true); addToCart(base) }}>
                     <i className="bi bi-cart"></i>
                   </button>
                 </div>
@@ -119,7 +128,7 @@ const Products = () => {
                   <button>
                     <i className="bi bi-heart"></i>
                   </button>
-                  <button onClick={() => {setModalShow(true); addToCart(base)}}>
+                  <button onClick={() => { setModalShow(true); addToCart(base) }}>
                     <i className="bi bi-cart"></i>
                   </button>
                 </div>
@@ -128,9 +137,11 @@ const Products = () => {
           </div>
         )
       })}
-      <Paginado cantPages={pagines} />
 
       {/* <ModalCart show={modalShow} onHide={() => setModalShow(false)} /> */}
+
+      <Paginado cantPages={pagines} />
+
     </div>
   );
 };

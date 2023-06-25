@@ -8,9 +8,11 @@ const Footer = lazy(() => import('./components/common/Footer/Footer'));
 const Home = lazy(() => import('./components/views/Home/Home'));
 const About = lazy(() => import('./components/views/About/About'));
 const Shop = lazy(() => import('./components/views/Shop/Shop'));
+const NoProduct = lazy(() => import('./components/views/Shop/NoProduct/NoProduct.jsx'));
 const Cart = lazy(() => import('./components/views/Cart/Cart'));
 const Detail = lazy(() => import('./components/views/Shop/Detail/Detail'));
 const Arrepentimiento = lazy(() => import('./components/views/Arrepentimiento/Arrepentimiento'));
+const Terminos = lazy(() => import('./components/views/Terminos/Terminos'));
 const CartProducts = lazy(() => import('./components/views/CartProducts/CartProducts'));
 const Profile  = lazy(() => import('./components/views/Profile/Profile'));
 const Login = lazy(() => import('./components/common/Login/Login'));
@@ -33,12 +35,15 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/about' element={<About />} />
+
           <Route path='/shop' element={<Shop />} />
           <Route path='/shop/:id' element={<Detail />} />
+          <Route path='/no-product' element={<NoProduct />} />
           <Route path='/cart' element={<CartProducts />}/>
           <Route path='/checkout' element={<Cart />}/>
           <Route path='/payment' />
           <Route path="/arrepentimiento" element={<Arrepentimiento />} />
+          <Route path="/terminos" element={<Terminos />} />
           <Route path='/admin' element={<Admin />} />
           <Route path='/form' element={<Form />} />
           <Route path="/profile" element={<Profile />} />
