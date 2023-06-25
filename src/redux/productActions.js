@@ -159,4 +159,4 @@ export const createProduct = (product) => {
         }
 
     };
-};
+}
