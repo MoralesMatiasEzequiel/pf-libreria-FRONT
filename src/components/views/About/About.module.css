@@ -36,4 +36,6 @@
 	border-color: #ff9e5c;
 	}
 	
-	
+	input:not(:placeholder-shown) {
+		border: 2px solid #FF9E5C; 
+	}

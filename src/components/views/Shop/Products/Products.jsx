@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-
-import { totalPag } from "../../../../redux/productActions";
+//import { totalPag } from "../../../../redux/productActions";
 import { addProductOnCart } from "../../../../redux/CartActions"
-import Paginado from "./../Paginado/Paginado";
 //import { addToFavList } from "../../../../redux/favoriteSlice";
 import ModalCart from "../../../common/Modals/ModalCart/ModalCart";
 import style from "./Products.module.css";
@@ -16,8 +14,6 @@ const Products = () => {
 
   const dispatch = useDispatch();
   const [allProducts, setAllProducts] = useState([]);
-  const [pagines, setPagines] = useState([]);
-
 
 
   useEffect(() => {
@@ -37,13 +33,7 @@ const Products = () => {
   const viewsProducts = allProducts.slice(desde, hasta);
 
 
-  useEffect(() => {
-
-    let cantPages = Math.round(allProducts.length / 12 + 0.4);
-    setPagines(cantPages)
-    dispatch(totalPag(cantPages))
-
-  }, [allProducts]);
+  
 
 
   const navigate = useNavigate();
@@ -139,8 +129,6 @@ const Products = () => {
       })}
 
       {/* <ModalCart show={modalShow} onHide={() => setModalShow(false)} /> */}
-
-      <Paginado cantPages={pagines} />
 
     </div>
   );
