@@ -28,11 +28,6 @@ const Products = () => {
 
   const [allProducts, setAllProducts] = useState([]);
 
-  const [productsInCart, setProductsInCart] = useState(filledcart());
-
-  const { productSee, pag, productsExist, brandSelected } = useSelector(
-    (state) => state.products
-  );
 
 
 
