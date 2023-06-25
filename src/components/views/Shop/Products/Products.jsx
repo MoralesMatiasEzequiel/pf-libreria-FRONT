@@ -58,78 +58,93 @@ const Products = () => {
   // };
 
   return (
-    <div className={style.container}>
-        {!productsExist && (
+    <div className={style.totalContainer}>
+      {!productsExist && (
         <div className={style.noProduct}>
-          {navigate("/no-product/")}
-        </div>)}
+        <img
+          className={style.lupa}
+          src="https://i.pinimg.com/originals/b8/d3/ed/b8d3ed745629d309fe813cb2ede52b9a.png"
+          alt=""
+        />
+        <ul className={style.lista}>
+          <h4 className={style.subtitulo}>
+            No hay productos que coincidan con tu búsqueda
+          </h4>
+          <li>Revisá la ortografía de la palabra.</li>
+          <li>Utilizá palabras más genéricas o menos palabras.</li>
+          <li>Navegá por las categorías para encontrar un producto similar</li>
+        </ul>
+      </div>)}
+      <div className={style.container}>
+          
 
-      {!brandSelected.length && viewsProducts.map((base, index) => {
-        return (
-          <div key={index} className={style.productCard}>
-            <Link to={"/shop/" + base._id}>
-              <div className={style.productTumb}>
-                <img src={base.image} alt={base.name} />
-              </div>
-            </Link>
-            <div className={style.productDetails}>
-              <Link className={style.link} to={"/shop/" + base._id}>
-                <h4 className={style.title}>{base.name}</h4>
+        {!brandSelected.length && viewsProducts.map((base, index) => {
+          return (
+            <div key={index} className={style.productCard}>
+              <Link to={"/shop/" + base._id}>
+                <div className={style.productTumb}>
+                  <img src={base.image} alt={base.name} />
+                </div>
               </Link>
-              <div className={style.productBottomDetails}>
+              <div className={style.productDetails}>
+                <Link className={style.link} to={"/shop/" + base._id}>
+                  <h4 className={style.title}>{base.name}</h4>
+                </Link>
+                <div className={style.productBottomDetails}>
 
-                <div className={style.productPrice}>
-                  <small>${base.price}</small>
-                </div>
+                  <div className={style.productPrice}>
+                    <small>${base.price}</small>
+                  </div>
 
-                <div className={style.productLinks}>
-                  <button> 	{/*onClick={()=> navigate('/home')}*/}
-                    <i className="bi bi-heart"></i>
-                  </button>
-                  <button onClick={() => { setModalShow(true); addToCart(base) }}>
-                    <i className="bi bi-cart"></i>
-                  </button>
-                </div>
+                  <div className={style.productLinks}>
+                    <button> 	{/*onClick={()=> navigate('/home')}*/}
+                      <i className="bi bi-heart"></i>
+                    </button>
+                    <button onClick={() => { setModalShow(true); addToCart(base) }}>
+                      <i className="bi bi-cart"></i>
+                    </button>
+                  </div>
 
-              </div>
-            </div>
-          </div>
-        )
-      })}
-
-      {brandSelected.length > 0 && viewsProducts.map((base, index) => {
-
-        return (
-          <div key={index} className={style.productCard}>
-            <Link to={"/shop/" + base._id}>
-              <div className={style.productTumb}>
-                <img src={base.image} alt={base.name} />
-              </div>
-            </Link>
-            <div className={style.productDetails}>
-              <Link className={style.link} to={"/shop/" + base._id}>
-                <h4 className={style.title}>{base.name}</h4>
-              </Link>
-              <div className={style.productBottomDetails}>
-                <div className={style.productPrice}>
-                  <small>${base.price}</small>
-                </div>
-                <div className={style.productLinks}>
-                  <button>
-                    <i className="bi bi-heart"></i>
-                  </button>
-                  <button onClick={() => { setModalShow(true); addToCart(base) }}>
-                    <i className="bi bi-cart"></i>
-                  </button>
                 </div>
               </div>
             </div>
-          </div>
-        )
-      })}
+          )
+        })}
 
-      {/* <ModalCart show={modalShow} onHide={() => setModalShow(false)} /> */}
+        {brandSelected.length > 0 && viewsProducts.map((base, index) => {
 
+          return (
+            <div key={index} className={style.productCard}>
+              <Link to={"/shop/" + base._id}>
+                <div className={style.productTumb}>
+                  <img src={base.image} alt={base.name} />
+                </div>
+              </Link>
+              <div className={style.productDetails}>
+                <Link className={style.link} to={"/shop/" + base._id}>
+                  <h4 className={style.title}>{base.name}</h4>
+                </Link>
+                <div className={style.productBottomDetails}>
+                  <div className={style.productPrice}>
+                    <small>${base.price}</small>
+                  </div>
+                  <div className={style.productLinks}>
+                    <button>
+                      <i className="bi bi-heart"></i>
+                    </button>
+                    <button onClick={() => { setModalShow(true); addToCart(base) }}>
+                      <i className="bi bi-cart"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )
+        })}
+
+        {/* <ModalCart show={modalShow} onHide={() => setModalShow(false)} /> */}
+
+      </div>
     </div>
   );
 };
