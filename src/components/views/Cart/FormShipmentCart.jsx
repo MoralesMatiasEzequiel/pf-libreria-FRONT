@@ -64,50 +64,38 @@ const FormShipmentCart = ({ state, setFormInfo, setFormShipment, setFormPay }) =
     return (
         <div>
             {state &&
-                <form onSubmit={handleSubmit}>
-                    <div>
+                <form onSubmit={handleSubmit} className={style.form}>
+                    <div className={style.titles}>
                         <h5>Información de envío</h5>
                         <p>(*) Campos requeridos</p>
                     </div>
-                    <div>
-                        <label htmlFor="street">*Calle: </label>                        
-                        <br/>                      
-                        <input type="text" name="street" onChange={handleInputChange} value={form.street}/>
-                    </div>
-                    <div>
-                        <label htmlFor="number">*Número: </label>
-                        <br />
-                        <input type="text" name="number" onInput={validateNumberInput}onChange={handleInputChange} value={form.number}/>
-                    </div>
-                    <div>
-                        <label htmlFor="floor">Piso: </label>                        
-                        <br/>                      
-                        <input type="text" name="floor" onChange={handleInputChange} value={form.floor}/>
-                    </div>
-                    <div>
-                        <label htmlFor="apartment">Departamento: </label>                        
-                        <br/>                      
-                        <input type="text" name="apartment" onChange={handleInputChange} value={form.apartment}/>
-                    </div>
-                    <div>
-                        <label htmlFor="province">*Provincia: </label>
-                        <br />
-                        <input type="text" name="province" onChange={handleInputChange} value={form.province}/>
-                    </div>
-                    <div>
-                        <label htmlFor="city">*Ciudad: </label>
-                        <br />
-                        <input type="text" name="city" onChange={handleInputChange} value={form.city}/>
-                    </div>
-                    <div>
-                        <label htmlFor="comentary">¿Algo más para aclarar sobre el lugar?: </label>
-                        <br />
-                        <textarea type="text" name="comentary" onChange={handleInputChange} value={form.comentary}/>
+                    <div className={style.containerInfo}>
+                        <div className={style.inputsContainer}>                   
+                            <input type="text" name="street" placeholder="*Calle:" onChange={handleInputChange} value={form.street}/>
+                        </div>
+                        <div className={style.inputsContainer}>
+                            <input type="text" name="number" placeholder="*Número:" onInput={validateNumberInput}onChange={handleInputChange} value={form.number}/>
+                        </div>
+                        <div className={style.inputsContainer}>           
+                            <input type="text" name="floor" placeholder="Piso:" onChange={handleInputChange} value={form.floor}/>
+                        </div>
+                        <div className={style.inputsContainer}>
+                            <input type="text" name="apartment" placeholder="Departamento:" onChange={handleInputChange} value={form.apartment}/>
+                        </div>
+                        <div className={style.inputsContainer}>
+                            <input type="text" name="province" placeholder="*Provincia:" onChange={handleInputChange} value={form.province}/>
+                        </div>
+                        <div className={style.inputsContainer}>
+                            <input type="text" name="city" placeholder="*Ciudad:" onChange={handleInputChange} value={form.city}/>
+                        </div>
+                        <div className={style.inputsContainer}>
+                            <textarea type="text" name="comentary" placeholder="Aclaración extra" className={style.aclaracion} onChange={handleInputChange} value={form.comentary}/>
+                        </div>
                     </div>
                     <br />
                     <div>
-                        <button onClick={() => {setFormInfo(true); setFormShipment(false); setFormPay(false);}}>Regresar a información del contacto</button>
-                        <button disabled={isDisabled} type="submit" >Continuar con el método de pago</button>
+                        <button className={style.envioBtn} onClick={() => {setFormInfo(true); setFormShipment(false); setFormPay(false);}}>Regresar a información del contacto</button>
+                        <button className={style.envioBtn} disabled={isDisabled} type="submit" >Continuar con el método de pago</button>
                     </div>
                 </form>
             }
