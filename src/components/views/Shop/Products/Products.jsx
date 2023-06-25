@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-//import { totalPag } from "../../../../redux/productActions";
-import { addProductOnCart } from "../../../../redux/CartActions"
+import { totalPag } from "../../../../redux/productActions";
+import { addProductOnCart } from "../../../../redux/CartActions";
+import Paginado from "../Paginado/Paginado";
 //import { addToFavList } from "../../../../redux/favoriteSlice";
 import ModalCart from "../../../common/Modals/ModalCart/ModalCart";
 import style from "./Products.module.css";
 
 const Products = () => {
+
 
   const filledcart = () => {
 
@@ -34,18 +36,23 @@ const Products = () => {
 
 
 
+  const [pagines, setPagines] = useState([]);
 
+  const [productsInCart, setProductsInCart] = useState(filledcart());
+
+  const { productSee, pag, productsExist, brandSelected } = useSelector(
+    (state) => state.products
+  );
 
   useEffect(() => {
-
     if (brandSelected.length > 0) {
-      let papeliri = productSee.filter(pro => brandSelected.includes(pro.brand))
-      setAllProducts(papeliri)
+      let papeliri = productSee.filter((pro) =>
+        brandSelected.includes(pro.brand)
+      );
+      setAllProducts(papeliri);
     } else {
-      setAllProducts(productSee)
+      setAllProducts(productSee);
     }
-
-
 
   }, [brandSelected, productSee, productsInCart]);
 
@@ -53,21 +60,28 @@ const Products = () => {
   let hasta = pag * 12;
   const viewsProducts = allProducts.slice(desde, hasta);
 
-  const navigate = useNavigate();
-  const [modalShow, setModalShow] = useState(false);
+
+  useEffect(() => {
+    let cantPages = Math.round(allProducts.length / 12 + 0.4);
+    setPagines(cantPages);
+    dispatch(totalPag(cantPages));
+  }, [allProducts]);
 
   const addToCart = (product) => {
-    dispatch(addProductOnCart(product))
-    setProductsInCart([...productsInCart, product._id])
+    dispatch(addProductOnCart(product));
+    setProductsInCart([...productsInCart, product._id]);
+
     let datas = localStorage.getItem("protucts_cart");
     if (!datas) {
-      localStorage.setItem("protucts_cart", JSON.stringify([product]))
+      localStorage.setItem("protucts_cart", JSON.stringify([product]));
     } else {
-      let newdata = JSON.parse(datas)
-      newdata.push(product)
-      localStorage.setItem("protucts_cart", JSON.stringify(newdata))
+      let newdata = JSON.parse(datas);
+      newdata.push(product);
+      localStorage.setItem("protucts_cart", JSON.stringify(newdata));
     }
-  }
+  };
+  const navigate = useNavigate();
+  const [modalShow, setModalShow] = useState(false);
 
   //------------------------------------FAVORITE STAT
   //const dispatch = useDispatch();
@@ -77,24 +91,28 @@ const Products = () => {
 
   return (
     <div className={style.totalContainer}>
-
+      <Paginado cantPages={pagines} />
       <div className={style.container}>
         {!productsExist && (
           <div className={style.noProduct}>
-          <img
-            className={style.lupa}
-            src="https://i.pinimg.com/originals/b8/d3/ed/b8d3ed745629d309fe813cb2ede52b9a.png"
-            alt=""
-          />
-          <ul className={style.lista}>
-            <h4 className={style.subtitulo}>
-              No hay productos que coincidan con tu búsqueda
-            </h4>
-            <li>Revisá la ortografía de la palabra.</li>
-            <li>Utilizá palabras más genéricas o menos palabras.</li>
-            <li>Navegá por las categorías para encontrar un producto similar</li>
-          </ul>
-        </div>)}
+            <img
+              className={style.lupa}
+              src="https://i.pinimg.com/originals/b8/d3/ed/b8d3ed745629d309fe813cb2ede52b9a.png"
+              alt=""
+            />
+            <ul className={style.lista}>
+              <h4 className={style.subtitulo}>
+                No hay productos que coincidan con tu búsqueda
+              </h4>
+              <li>Revisá la ortografía de la palabra.</li>
+              <li>Utilizá palabras más genéricas o menos palabras.</li>
+              <li>
+                Navegá por las categorías para encontrar un producto similar
+              </li>
+            </ul>
+          </div>
+        )}
+
         {viewsProducts.map((base, index) => {
           return (
             <div key={index} className={style.productCard}>
@@ -114,30 +132,34 @@ const Products = () => {
                   </div>
 
                   <div className={style.productLinks}>
-                    <button> 	{/*onClick={()=> navigate('/home')}*/}
+
+                    <button>
+                      {" "}
+                      {/*onClick={()=> navigate('/home')}*/}
                       <i className="bi bi-heart"></i>
                     </button>
-                    {productsInCart.includes(base._id)
-                      ? <i class="bi bi-cart-check"></i>
-                      : <button onClick={() => { setModalShow(true); addToCart(base) }}>
+                    {productsInCart.includes(base._id) ? (
+                      <i class="bi bi-cart-check"></i>
+                    ) : (
+                      <button
+                        onClick={() => {
+                          setModalShow(true);
+                          addToCart(base);
+                        }}
+                      >
                         <i className="bi bi-cart"></i>
                       </button>
-
-                    }
-
-
+                    )}
                   </div>
-
                 </div>
               </div>
             </div>
-          )
+          );
         })}
-
-
         {/* <ModalCart show={modalShow} onHide={() => setModalShow(false)} /> */}
-
       </div>
+      <Paginado className={style.paginado} cantPages={pagines} />
+
     </div>
   );
 };
