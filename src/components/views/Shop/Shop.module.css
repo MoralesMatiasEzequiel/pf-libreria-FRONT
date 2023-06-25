@@ -1,4 +1,22 @@
-.containShop{
-    display: flex;
-    
+
+.containShop {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.sideContainer {
+  width: 200px;
+}
+
+.productsContainer {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.paginadoContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
 }

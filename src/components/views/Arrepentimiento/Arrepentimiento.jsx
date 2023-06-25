@@ -382,7 +382,7 @@ const Arrepentimiento = () => {
 			<Modal show={showSuccessModal} onHide={() => setShowSuccessModal(false)}>
 			<Modal.Body closeButton>
               <div className="d-flex justify-content-between align-items-center">
-                <div> ✔ ¡El formulario se envió correctamente!.</div>
+                <div> ✔ ¡El formulario se envió correctamente!</div>
                 <Button className={style.btnPrimary} onClick={() => setShowSuccessModal(false)}>
                   Cerrar
                 </Button>
