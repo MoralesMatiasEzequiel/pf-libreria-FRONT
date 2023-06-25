@@ -1,20 +1,21 @@
 import React from "react";
 import style from "./FormPayCart.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { createOrder } from "../../../redux/CartActions";
+import { createOrder, sendOrder } from "../../../redux/CartActions";
 import { useEffect } from "react";
 
 
 const FormPayCart = ({ state, setFormInfo, setFormShipment, setFormPay }) => {
 
     const dispatch = useDispatch();
-    const { productsOnCart, paymentLink } = useSelector((state) => state.cart)
+    const { productsOnCart, paymentLink, clientInfo, shipmentInfo } = useSelector((state) => state.cart)
     // console.log(productsOnCart);
 
 
     const handleOnClick = (event) => {
         event.preventDefault();
         dispatch(createOrder(productsOnCart));
+        dispatch(sendOrder(clientInfo, shipmentInfo, productsOnCart));
         if (paymentLink) {
             window.open(paymentLink, "_blank");
           }
