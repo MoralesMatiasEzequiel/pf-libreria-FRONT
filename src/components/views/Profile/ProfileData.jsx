@@ -5,7 +5,7 @@ const ProfileData = () => {
 
     const { currentUser } = useSelector(state => state.user);
 
-    const [imgLink] = currentUser.picture.split('=');
+    const imgLink = currentUser?.picture ? currentUser.picture.split('=')[0] : '';
 
     return (
         <div className={styles.view}>
