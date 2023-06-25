@@ -10,11 +10,14 @@ import style from "./Products.module.css";
 
 const Products = () => {
 
-
+  const { productSee, pag, productsExist, brandSelected } = useSelector(
+    (state) => state.products
+  );
   const filledcart = () => {
 
     let datas = localStorage.getItem("protucts_cart");
     let datasParse = JSON.parse(datas)
+
     if (datas?.length > 0) {
       let cartId = datasParse.map(pro => pro._id)
       return cartId;
@@ -26,28 +29,43 @@ const Products = () => {
 
   const dispatch = useDispatch();
 
-  const [allProducts, setAllProducts] = useState([]);
+  const lSProductSee = () => {
+    let datos = localStorage.getItem("ProductSee");
+    let history = JSON.parse(datos)
 
+    if (history?.length > 0 && productSee.length < 1) {
 
+      return history;
+
+    } else {
+      return [];
+    }
+  }
+
+  const [allProducts, setAllProducts] = useState(lSProductSee());
 
 
   const [pagines, setPagines] = useState([]);
 
   const [productsInCart, setProductsInCart] = useState(filledcart());
 
-  const { productSee, pag, productsExist, brandSelected } = useSelector(
-    (state) => state.products
-  );
 
   useEffect(() => {
+    if (productSee.length > 0) {
+
+      localStorage.setItem("ProductSee", JSON.stringify(productSee))
+    }
+
+    console.log(allProducts);
     if (brandSelected.length > 0) {
       let papeliri = productSee.filter((pro) =>
         brandSelected.includes(pro.brand)
       );
       setAllProducts(papeliri);
-    } else {
+    } else if (productSee.length > 0) {
       setAllProducts(productSee);
     }
+
 
   }, [brandSelected, productSee, productsInCart]);
 
@@ -88,7 +106,7 @@ const Products = () => {
     <div className={style.totalContainer}>
       <Paginado cantPages={pagines} />
       <div className={style.container}>
-        {!productsExist && (
+        {!productsExist && !allProducts && (
           <div className={style.noProduct}>
             <img
               className={style.lupa}
@@ -108,7 +126,7 @@ const Products = () => {
           </div>
         )}
 
-        {viewsProducts.map((base, index) => {
+        {viewsProducts?.map((base, index) => {
           return (
             <div key={index} className={style.productCard}>
               <Link to={"/shop/" + base._id}>
