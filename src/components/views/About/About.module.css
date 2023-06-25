@@ -1,33 +1,39 @@
-.form {
-  /* Estilos generales del formulario */
-}
+/* .form {
+   Estilos generales del formulario 
+}*/
 
-.formGroup {
-  margin-bottom: 20px;
-}
-
-.formLabel {
-  color: #3f3f3f;
-  font-weight: bold;
-}
-
-.formControl {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.btnPrimary {
-  background-color: #ff9e5c;
-  border-color: #ff9e5c;
-  color: white;
-  border-radius: 5px;
-  border-style: solid;
-  margin-bottom: 5px;
-}
-
-.btnPrimary:hover {
-  background-color: white;
-  color: #ff9e5c;
-}
+.error {
+	color: red;
+	}
+	.formGroup {
+	margin-bottom: 20px;
+	}
+	
+	.formLabel {
+	color: #3f3f3f;
+	font-weight: bold;
+	}
+	
+	.formControl {
+	width: 100%;
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	}
+	
+	.btnPrimary {
+	background-color: #ff9e5c;
+	border-color: #ff9e5c;
+	color: white;
+	border-radius: 5px;
+	border-style: solid;
+	margin-bottom: 5px;
+	}
+	
+	.btnPrimary:hover {
+	background-color: white;
+	color: #ff9e5c;
+	border-color: #ff9e5c;
+	}
+	
+	

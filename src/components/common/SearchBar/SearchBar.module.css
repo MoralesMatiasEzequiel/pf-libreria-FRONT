@@ -1,6 +1,7 @@
 .containerSearch {
     width: 30%;
     display: flex;
+		color:#ff9e5c;
 }
 
 .input {
@@ -8,10 +9,10 @@
     height: 20px;
     padding: 1.1rem 1rem;
     border-radius: 0.7rem;
-    border: solid 1px white;
+    border: solid 2px #ff9e5c;;
     font-size: 1rem;
     background: none;
-    color: white;
+    color: #ffffff;
 }
 
 .navlink {

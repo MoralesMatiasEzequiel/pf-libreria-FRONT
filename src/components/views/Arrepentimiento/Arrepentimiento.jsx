@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import style from "./Arrepentimiento.module.css";
-import emailjs from 'emailjs-com';
 
+import emailjs from "emailjs-com";
+import { Button, Modal } from "react-bootstrap";
 
 const Arrepentimiento = () => {
 
@@ -9,7 +10,7 @@ const Arrepentimiento = () => {
   const lSformRegret = () => {
     let datos = localStorage.getItem("formRegret");
     if (datos) {
-      return JSON.parse(datos)
+      return JSON.parse(datos);
     } else {
       return {
 
@@ -27,19 +28,18 @@ const Arrepentimiento = () => {
         received: false,
         returnMode: "",
         returnReason: "",
-        comment: ""
 
+        comment: "",
       };
     }
-  }
+  };
   const [formRegret, setformRegret] = useState(lSformRegret());
 
   const handleChangeRegret = (event) => {
-
     setformRegret({
       ...formRegret,
-      [event.target.name]: event.target.value
-    })
+      [event.target.name]: event.target.value,
+    });
 
   };
 
@@ -47,17 +47,33 @@ const Arrepentimiento = () => {
     setformRegret({
       ...formRegret,
       received: valu,
-    })
-  }
 
+    });
+  };
+
+  //modal
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [showErrorModal, setShowErrorModal] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const sendEmail = async () => {
     try {
-      const result = await emailjs.sendForm('service_brws95f', 'template_f9465ua', '#form', 'CWYOCpB2Bd7P4TLB6');
+      const result = await emailjs.sendForm(
+        "service_brws95f",
+        "template_f9465ua",
+        "#form",
+        "CWYOCpB2Bd7P4TLB6"
+      );
       console.log(result.text);
       console.log("Correo electrónico enviado");
+      setShowSuccessModal(true);
     } catch (error) {
       console.log(error.text);
+      setErrorMessage(
+        "Hubo un error al enviar el formulario. Por favor, inténtalo nuevamente."
+      );
+      setShowErrorModal(true);
+
     }
   };
 
@@ -86,13 +102,13 @@ const Arrepentimiento = () => {
       received: false,
       returnMode: "",
       returnReason: "",
-      comment: ""
 
-    })
+      comment: "",
+    });
   };
 
   useEffect(() => {
-    localStorage.setItem("formRegret", JSON.stringify(formRegret))
+    localStorage.setItem("formRegret", JSON.stringify(formRegret));
 
   }, [formRegret]);
 
@@ -100,7 +116,8 @@ const Arrepentimiento = () => {
     <div className={style.superContainer}>
       <h1 className={style.title}>Arrepentimiento de la compra</h1>
       <p className={style.introText}>
-        Si deseas arrepentirte de tu compra, por favor completa el siguiente formulario y nos pondremos en contacto contigo.
+        Si deseas arrepentirte de tu compra, por favor completa el siguiente
+        formulario y nos pondremos en contacto contigo.
       </p>
 
       <form onSubmit={handleSubmit} className={style.formArr} id="form">
@@ -250,7 +267,12 @@ const Arrepentimiento = () => {
             </div>
 
             <div className="mb-3 text-start">
-              <label htmlFor="recibido" className={style.formLabel} style={{ color: "#3F3F3F" }}>
+
+              <label
+                htmlFor="recibido"
+                className={style.formLabel}
+                style={{ color: "#3F3F3F" }}
+              >
                 ¿Recibiste tu pedido?
               </label>
               <div className="form-check form-check-inline">
@@ -262,7 +284,13 @@ const Arrepentimiento = () => {
                   onChange={() => setRecibido(true)}
                   required
                 />
-                <label htmlFor="recibido-yes" className="form-check-label" style={{ color: "#3F3F3F" }}>
+
+                <label
+                  htmlFor="recibido-yes"
+                  className="form-check-label"
+                  style={{ color: "#3F3F3F" }}
+                >
+
                   Sí
                 </label>
               </div>
@@ -275,7 +303,13 @@ const Arrepentimiento = () => {
                   onChange={() => setRecibido(false)}
                   required
                 />
-                <label htmlFor="recibido-no" className="form-check-label" style={{ color: "#3F3F3F" }}>
+
+                <label
+                  htmlFor="recibido-no"
+                  className="form-check-label"
+                  style={{ color: "#3F3F3F" }}
+                >
+
                   No
                 </label>
               </div>
@@ -337,14 +371,42 @@ const Arrepentimiento = () => {
           formRegret.returnMode.length > 2 &&
           formRegret.returnReason.length > 2 &&
           formRegret.comment.length > 2 &&
-          <button type="submit" className={`${style.btnPrimary}`}>Enviar</button>
+
+          <Button type="submit" className={style.btnPrimary}>
+            Enviar
+          </Button>
         }
 
       </form>
+      
+			<Modal show={showSuccessModal} onHide={() => setShowSuccessModal(false)}>
+			<Modal.Body closeButton>
+              <div className="d-flex justify-content-between align-items-center">
+                <div> ✔ ¡El formulario se envió correctamente!.</div>
+                <Button className={style.btnPrimary} onClick={() => setShowSuccessModal(false)}>
+                  Cerrar
+                </Button>
+              </div>
+            </Modal.Body>
+						</Modal>
+
+
+      
+			<Modal show={showErrorModal} onHide={() => setShowErrorModal(false)}>
+            <Modal.Body closeButton>
+              <div className="d-flex justify-content-between align-items-center">
+                <div>
+                  {" "}
+                  ❌ Hubo un error al enviar tu Formulario. Por favor, inténtalo
+                  nuevamente más tarde.
+                </div>
+                <Button className={style.btnPrimary} onClick={() => setShowErrorModal(false)}>
+                  Cerrar
+                </Button>
+              </div>
+            </Modal.Body>
+          </Modal>
     </div>
-
-
-
 
   );
 };
