@@ -42,6 +42,14 @@ const Detail = () => {
   const addToCart = (product) => {
     dispatch(addProductOnCart(product))
     setProductsInCart([...productsInCart, product._id])
+    let datas = localStorage.getItem("protucts_cart");
+    if (!datas) {
+      localStorage.setItem("protucts_cart", JSON.stringify([product]))
+    } else {
+      let newdata = JSON.parse(datas)
+      newdata.push(product)
+      localStorage.setItem("protucts_cart", JSON.stringify(newdata))
+    }
   }
 
   return (
