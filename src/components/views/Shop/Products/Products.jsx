@@ -8,33 +8,12 @@ import ModalCart from "../../../common/Modals/ModalCart/ModalCart";
 import style from "./Products.module.css";
 
 const Products = () => {
-
-  const filledcart = () => {
-
-    let datas = localStorage.getItem("protucts_cart");
-    let datasParse = JSON.parse(datas)
-    if (datas?.length > 0) {
-      let cartId = datasParse.map(pro => pro._id)
-      return cartId;
-    } else {
-      return ["nada"]
-    }
-  };
-
-
-  const dispatch = useDispatch();
-
-  const [allProducts, setAllProducts] = useState([]);
-
-  const [productsInCart, setProductsInCart] = useState(filledcart());
-
   const { productSee, pag, productsExist, brandSelected } = useSelector(
     (state) => state.products
   );
 
-
-
-
+  const dispatch = useDispatch();
+  const [allProducts, setAllProducts] = useState([]);
 
   useEffect(() => {
 
@@ -45,9 +24,7 @@ const Products = () => {
       setAllProducts(productSee)
     }
 
-
-
-  }, [brandSelected, productSee, productsInCart]);
+  }, [brandSelected, productSee]);
 
   let desde = (pag - 1) * 12;
   let hasta = pag * 12;
@@ -58,7 +35,6 @@ const Products = () => {
 
   const addToCart = (product) => {
     dispatch(addProductOnCart(product))
-    setProductsInCart([...productsInCart, product._id])
     let datas = localStorage.getItem("protucts_cart");
     if (!datas) {
       localStorage.setItem("protucts_cart", JSON.stringify([product]))
@@ -76,55 +52,95 @@ const Products = () => {
   // };
 
   return (
-    <div className={style.container}>
+    <div className={style.totalContainer}>
       {!productsExist && (
         <div className={style.noProduct}>
-          {navigate("/no-product/")}
-        </div>)}
-      {viewsProducts.map((base, index) => {
-        return (
-          <div key={index} className={style.productCard}>
-            <Link to={"/shop/" + base._id}>
-              <div className={style.productTumb}>
-                <img src={base.image} alt={base.name} />
-              </div>
-            </Link>
-            <div className={style.productDetails}>
-              <Link className={style.link} to={"/shop/" + base._id}>
-                <h4 className={style.title}>{base.name}</h4>
-              </Link>
-              <div className={style.productBottomDetails}>
+        <img
+          className={style.lupa}
+          src="https://i.pinimg.com/originals/b8/d3/ed/b8d3ed745629d309fe813cb2ede52b9a.png"
+          alt=""
+        />
+        <ul className={style.lista}>
+          <h4 className={style.subtitulo}>
+            No hay productos que coincidan con tu búsqueda
+          </h4>
+          <li>Revisá la ortografía de la palabra.</li>
+          <li>Utilizá palabras más genéricas o menos palabras.</li>
+          <li>Navegá por las categorías para encontrar un producto similar</li>
+        </ul>
+      </div>)}
+      <div className={style.container}>
 
-                <div className={style.productPrice}>
-                  <small>${base.price}</small>
+        {!brandSelected.length && viewsProducts.map((base, index) => {
+          return (
+            <div key={index} className={style.productCard}>
+              <Link to={"/shop/" + base._id}>
+                <div className={style.productTumb}>
+                  <img src={base.image} alt={base.name} />
                 </div>
+              </Link>
+              <div className={style.productDetails}>
+                <Link className={style.link} to={"/shop/" + base._id}>
+                  <h4 className={style.title}>{base.name}</h4>
+                </Link>
+                <div className={style.productBottomDetails}>
 
-                <div className={style.productLinks}>
-                  <button> 	{/*onClick={()=> navigate('/home')}*/}
-                    <i className="bi bi-heart"></i>
-                  </button>
-                  {productsInCart.includes(base._id)
-                    ? <i class="bi bi-cart-check"></i>
-                    : <button onClick={() => { setModalShow(true); addToCart(base) }}>
+                  <div className={style.productPrice}>
+                    <small>${base.price}</small>
+                  </div>
+
+                  <div className={style.productLinks}>
+                    <button> 	{/*onClick={()=> navigate('/home')}*/}
+                      <i className="bi bi-heart"></i>
+                    </button>
+                    <button onClick={() => { setModalShow(true); addToCart(base) }}>
                       <i className="bi bi-cart"></i>
                     </button>
-
-                  }
-
+                  </div>
 
                 </div>
-
               </div>
             </div>
-          </div>
-        )
-      })}
+          )
+        })}
 
+        {brandSelected.length > 0 && viewsProducts.map((base, index) => {
 
-      {/* <ModalCart show={modalShow} onHide={() => setModalShow(false)} /> */}
+          return (
+            <div key={index} className={style.productCard}>
+              <Link to={"/shop/" + base._id}>
+                <div className={style.productTumb}>
+                  <img src={base.image} alt={base.name} />
+                </div>
+              </Link>
+              <div className={style.productDetails}>
+                <Link className={style.link} to={"/shop/" + base._id}>
+                  <h4 className={style.title}>{base.name}</h4>
+                </Link>
+                <div className={style.productBottomDetails}>
+                  <div className={style.productPrice}>
+                    <small>${base.price}</small>
+                  </div>
+                  <div className={style.productLinks}>
+                    <button>
+                      <i className="bi bi-heart"></i>
+                    </button>
+                    <button onClick={() => { setModalShow(true); addToCart(base) }}>
+                      <i className="bi bi-cart"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )
+        })}
 
+        {/* <ModalCart show={modalShow} onHide={() => setModalShow(false)} /> */}
+
+      </div>
     </div>
   );
 };
 
 export default Products;
+
