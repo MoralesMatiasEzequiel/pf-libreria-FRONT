@@ -1,13 +1,41 @@
- .btnPrimary{
-      background-color: #FF9E5C;
-      border-color: #FF9E5C;
-      color: white;
-      border-radius: 5px;
-      border-style: solid;
-      margin-bottom: 5px;
-  }
+/* .form {
+   Estilos generales del formulario 
+}*/
 
-  .btnPrimary:hover {
-    background-color: white;
-    color: #FF9E5C;
-  }
+.error {
+	color: red;
+	}
+	.formGroup {
+	margin-bottom: 20px;
+	}
+	
+	.formLabel {
+	color: #3f3f3f;
+	font-weight: bold;
+	}
+	
+	.formControl {
+	width: 100%;
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	}
+	
+	.btnPrimary {
+	background-color: #ff9e5c;
+	border-color: #ff9e5c;
+	color: white;
+	border-radius: 5px;
+	border-style: solid;
+	margin-bottom: 5px;
+	}
+	
+	.btnPrimary:hover {
+	background-color: white;
+	color: #ff9e5c;
+	border-color: #ff9e5c;
+	}
+	
+	input:not(:placeholder-shown) {
+		border: 2px solid #FF9E5C; 
+	}

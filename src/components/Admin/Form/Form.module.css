@@ -1,0 +1,39 @@
+.formcont {
+
+    width: 100vw;
+    height: 100vh;
+}
+
+.form {
+
+    display: flex;
+    flex-direction: column;
+
+}
+
+.contfor1y2 {
+    display: flex;
+
+}
+
+.formuno,
+.formdos {
+    width: 50%;
+    height: 65vh;
+    display: flex;
+    flex-direction: column;
+    padding: 2%;
+    background-color: #f88d7b;
+}
+
+.formdos {
+
+    background-color: #f88d7b;
+}
+.oneLine{
+    display: flex;
+    width: 90vw;
+    justify-content: space-between;
+    margin: auto;
+    align-items: center;
+}

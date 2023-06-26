@@ -1,78 +1,137 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import style from "./Arrepentimiento.module.css";
 
+import emailjs from "emailjs-com";
+import { Button, Modal } from "react-bootstrap";
+
 const Arrepentimiento = () => {
-  const [nombre, setNombre] = useState("");
-  const [apellido, setApellido] = useState("");
-  const [email, setEmail] = useState("");
-  const [telefono, setTelefono] = useState("");
-  const [numeroDocumento, setNumeroDocumento] = useState("");
-  const [direccion, setDireccion] = useState("");
-  const [piso, setPiso] = useState("");
-  const [departamento, setDepartamento] = useState("");
-  const [codigoPostal, setCodigoPostal] = useState("");
-  const [localidad, setLocalidad] = useState("");
-  const [provincia, setProvincia] = useState("");
-  const [recibido, setRecibido] = useState(false);
-  const [modoDevolucion, setModoDevolucion] = useState("");
-  const [motivoDevolucion, setMotivoDevolucion] = useState("");
-  const [comentario, setComentario] = useState("");
+
+  // local storage
+  const lSformRegret = () => {
+    let datos = localStorage.getItem("formRegret");
+    if (datos) {
+      return JSON.parse(datos);
+    } else {
+      return {
+
+        name: "",
+        lastName: "",
+        email: "",
+        phone: "",
+        document: "",
+        address: "",
+        floor: "",
+        department: "",
+        postalCode: "",
+        location: "",
+        province: "",
+        received: false,
+        returnMode: "",
+        returnReason: "",
+
+        comment: "",
+      };
+    }
+  };
+  const [formRegret, setformRegret] = useState(lSformRegret());
+
+  const handleChangeRegret = (event) => {
+    setformRegret({
+      ...formRegret,
+      [event.target.name]: event.target.value,
+    });
+
+  };
+
+  const setRecibido = (valu) => {
+    setformRegret({
+      ...formRegret,
+      received: valu,
+
+    });
+  };
+
+  //modal
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [showErrorModal, setShowErrorModal] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const sendEmail = async () => {
+    try {
+      const result = await emailjs.sendForm(
+        "service_brws95f",
+        "template_f9465ua",
+        "#form",
+        "CWYOCpB2Bd7P4TLB6"
+      );
+      console.log(result.text);
+      console.log("Correo electrónico enviado");
+      setShowSuccessModal(true);
+    } catch (error) {
+      console.log(error.text);
+      setErrorMessage(
+        "Hubo un error al enviar el formulario. Por favor, inténtalo nuevamente."
+      );
+      setShowErrorModal(true);
+
+    }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Formulario enviado:", {
-      nombre,
-      apellido,
-      email,
-      telefono,
-      numeroDocumento,
-      direccion,
-      piso,
-      departamento,
-      codigoPostal,
-      localidad,
-      provincia,
-      recibido,
-      modoDevolucion,
-      motivoDevolucion,
-      comentario,
+
+    console.log("Formulario enviado:", formRegret);
+
+
+    sendEmail(); // Enviar el correo electrónico
+
+
+    // Restablecer los valores del formulario
+    setformRegret({
+      name: "",
+      lastName: "",
+      email: "",
+      phone: "",
+      document: "",
+      address: "",
+      floor: "",
+      department: "",
+      postalCode: "",
+      location: "",
+      province: "",
+      received: false,
+      returnMode: "",
+      returnReason: "",
+
+      comment: "",
     });
-    setNombre("");
-    setApellido("");
-    setEmail("");
-    setTelefono("");
-    setNumeroDocumento("");
-    setDireccion("");
-    setPiso("");
-    setDepartamento("");
-    setCodigoPostal("");
-    setLocalidad("");
-    setProvincia("");
-    setRecibido(false);
-    setModoDevolucion("");
-    setMotivoDevolucion("");
-    setComentario("");
   };
 
+  useEffect(() => {
+    localStorage.setItem("formRegret", JSON.stringify(formRegret));
+
+  }, [formRegret]);
+
   return (
-    <div className="container">
-      <h1 style={{ color: "#FF9E5C", fontWeight: "bold", fontSize: "24px" }}>Arrepentimiento de la compra</h1>
-      <p style={{ color: "#3F3F3F", fontSize: "18px" }}>
-        Si deseas arrepentirte de tu compra, por favor completa el siguiente formulario y nos pondremos en contacto contigo.
+    <div className={style.superContainer}>
+      <h1 className={style.title}>Arrepentimiento de la compra</h1>
+      <p className={style.introText}>
+        Si deseas arrepentirte de tu compra, por favor completa el siguiente
+        formulario y nos pondremos en contacto contigo.<br/> Es necesario completar todos los campor que tengan (*).
       </p>
 
-      <form onSubmit={handleSubmit} className="text-start">
+      <form onSubmit={handleSubmit} className={style.formArr} id="form">
         <div className="row">
           <div className="col-md-6">
             <div className="mb-3">
               <input
                 type="text"
-                id="nombre"
-                name="nombre"
+                id="name"
+                name="name"
                 className="form-control"
-                placeholder="Nombre"
-                value={nombre}
-                onChange={(e) => setNombre(e.target.value)}
+                placeholder="Nombre*"
+                value={formRegret.name}
+                onChange={handleChangeRegret}
                 required
               />
             </div>
@@ -80,12 +139,12 @@ const Arrepentimiento = () => {
             <div className="mb-3">
               <input
                 type="text"
-                id="apellido"
-                name="apellido"
+                id="lastName"
+                name="lastName"
                 className="form-control"
-                placeholder="Apellido"
-                value={apellido}
-                onChange={(e) => setApellido(e.target.value)}
+                placeholder="Apellido*"
+                value={formRegret.lastName}
+                onChange={handleChangeRegret}
                 required
               />
             </div>
@@ -96,9 +155,9 @@ const Arrepentimiento = () => {
                 id="email"
                 name="email"
                 className="form-control"
-                placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Email*"
+                value={formRegret.email}
+                onChange={handleChangeRegret}
                 required
               />
             </div>
@@ -106,12 +165,12 @@ const Arrepentimiento = () => {
             <div className="mb-3">
               <input
                 type="tel"
-                id="telefono"
-                name="telefono"
+                id="phone"
+                name="phone"
                 className="form-control"
-                placeholder="Teléfono"
-                value={telefono}
-                onChange={(e) => setTelefono(e.target.value)}
+                placeholder="Numero de teléfono*"
+                value={formRegret.phone}
+                onChange={handleChangeRegret}
                 required
               />
             </div>
@@ -119,87 +178,51 @@ const Arrepentimiento = () => {
             <div className="mb-3">
               <input
                 type="text"
-                id="numeroDocumento"
-                name="numeroDocumento"
+                id="document"
+                name="document"
                 className="form-control"
-                placeholder="Número de documento"
-                value={numeroDocumento}
-                onChange={(e) => setNumeroDocumento(e.target.value)}
+                placeholder="Número de Documento*"
+                value={formRegret.document}
+                onChange={handleChangeRegret}
                 required
               />
             </div>
 
-            <div className="row">
-              <div className="col-md-6">
-                <div className="mb-3">
-                  <select
-                    id="modoDevolucion"
-                    name="modoDevolucion"
-                    className="form-select"
-                    value={modoDevolucion}
-                    onChange={(e) => setModoDevolucion(e.target.value)}
-                    required
-                  >
-                    <option value="">Seleccionar modo de devolución</option>
-                    <option value="Correo">Correo</option>
-                    <option value="Retiro en domicilio">Retiro en domicilio</option>
-                  </select>
-                </div>
-              </div>
-
-              <div className="col-md-6">
-                <div className="mb-3">
-                  <select
-                    id="motivoDevolucion"
-                    name="motivoDevolucion"
-                    className="form-select"
-                    value={motivoDevolucion}
-                    onChange={(e) => setMotivoDevolucion(e.target.value)}
-                    required
-                  >
-                    <option value="">Seleccionar motivo de devolución</option>
-                    <option value="Producto defectuoso">Producto defectuoso</option>
-                    <option value="Producto incorrecto">Producto incorrecto</option>
-                    <option value="Cambio de opinión">Cambio de opinión</option>
-                  </select>
-                </div>
-              </div>
+            <div className="mb-3">
+              <input
+                type="text"
+                id="address"
+                name="address"
+                className="form-control"
+                placeholder="Dirección*"
+                value={formRegret.address}
+                onChange={handleChangeRegret}
+                required
+              />
             </div>
 
             <div className="mb-3">
-              <label htmlFor="recibido" className="form-label" style={{ color: "#3F3F3F", fontWeight: "bold" }}>
-                ¿Recibiste tu pedido?
-              </label>
-              <div className="form-check form-check-inline">
-                <input
-                  type="radio"
-                  id="recibido-yes"
-                  name="recibido"
-                  className="form-check-input"
-                  value="Sí"
-                  checked={recibido}
-                  onChange={() => setRecibido(true)}
-                  required
-                />
-                <label htmlFor="recibido-yes" className="form-check-label" style={{ color: "#3F3F3F" }}>
-                  Sí
-                </label>
-              </div>
-              <div className="form-check form-check-inline">
-                <input
-                  type="radio"
-                  id="recibido-no"
-                  name="recibido"
-                  className="form-check-input"
-                  value="No"
-                  checked={!recibido}
-                  onChange={() => setRecibido(false)}
-                  required
-                />
-                <label htmlFor="recibido-no" className="form-check-label" style={{ color: "#3F3F3F" }}>
-                  No
-                </label>
-              </div>
+              <input
+                type="text"
+                id="floor"
+                name="floor"
+                className="form-control"
+                placeholder="Piso"
+                value={formRegret.floor}
+                onChange={handleChangeRegret}
+              />
+            </div>
+
+            <div className="mb-3">
+              <input
+                type="text"
+                id="department"
+                name="department"
+                className="form-control"
+                placeholder="Departamento"
+                value={formRegret.department}
+                onChange={handleChangeRegret}
+              />
             </div>
           </div>
 
@@ -207,12 +230,12 @@ const Arrepentimiento = () => {
             <div className="mb-3">
               <input
                 type="text"
-                id="direccion"
-                name="direccion"
+                id="postalCode"
+                name="postalCode"
                 className="form-control"
-                placeholder="Dirección"
-                value={direccion}
-                onChange={(e) => setDireccion(e.target.value)}
+                placeholder="Código Postal*"
+                value={formRegret.postalCode}
+                onChange={handleChangeRegret}
                 required
               />
             </div>
@@ -220,36 +243,12 @@ const Arrepentimiento = () => {
             <div className="mb-3">
               <input
                 type="text"
-                id="piso"
-                name="piso"
+                id="location"
+                name="location"
                 className="form-control"
-                placeholder="Piso"
-                value={piso}
-                onChange={(e) => setPiso(e.target.value)}
-              />
-            </div>
-
-            <div className="mb-3">
-              <input
-                type="text"
-                id="departamento"
-                name="departamento"
-                className="form-control"
-                placeholder="Departamento"
-                value={departamento}
-                onChange={(e) => setDepartamento(e.target.value)}
-              />
-            </div>
-
-            <div className="mb-3">
-              <input
-                type="text"
-                id="codigoPostal"
-                name="codigoPostal"
-                className="form-control"
-                placeholder="Código Postal"
-                value={codigoPostal}
-                onChange={(e) => setCodigoPostal(e.target.value)}
+                placeholder="Localidad*"
+                value={formRegret.location}
+                onChange={handleChangeRegret}
                 required
               />
             </div>
@@ -257,50 +256,158 @@ const Arrepentimiento = () => {
             <div className="mb-3">
               <input
                 type="text"
-                id="localidad"
-                name="localidad"
+                id="province"
+                name="province"
                 className="form-control"
-                placeholder="Localidad"
-                value={localidad}
-                onChange={(e) => setLocalidad(e.target.value)}
+                placeholder="Provincia*"
+                value={formRegret.province}
+                onChange={handleChangeRegret}
                 required
               />
             </div>
 
-            <div className="mb-3">
-              <input
-                id="provincia"
-                name="provincia"
+            <div className="mb-3 text-start">
+
+              <label
+                htmlFor="recibido"
+                className={style.formLabel}
+                style={{ color: "#3F3F3F" }}
+              >
+                ¿Recibiste tu pedido?*
+              </label>
+              <div className="form-check form-check-inline">
+                <input
+                  type="radio"
+                  id="received-yes"
+                  name="received"
+                  className="form-check-input"
+                  onChange={() => setRecibido(true)}
+                  required
+                />
+
+                <label
+                  htmlFor="recibido-yes"
+                  className="form-check-label"
+                  style={{ color: "#3F3F3F" }}
+                >
+
+                  Sí
+                </label>
+              </div>
+              <div className="form-check form-check-inline">
+                <input
+                  type="radio"
+                  id="received-no"
+                  name="received"
+                  className="form-check-input"
+                  onChange={() => setRecibido(false)}
+                  required
+                />
+
+                <label
+                  htmlFor="recibido-no"
+                  className="form-check-label"
+                  style={{ color: "#3F3F3F" }}
+                >
+
+                  No
+                </label>
+              </div>
+            </div>
+
+            <div className="mb-3 text-start">
+              <label htmlFor="modoDevolucion">Modo de devolución:</label>
+              <select
+                id="returnMode"
+                name="returnMode"
                 className="form-control"
-                placeholder="Provincia"
-                value={provincia}
-                onChange={(e) => setProvincia(e.target.value)}
+                value={formRegret.returnMode}
+                onChange={handleChangeRegret}
                 required
-              />
+              >
+                <option value="">Seleccione una opción*</option>
+                <option value="Correo">Correo</option>
+                <option value="Retiro en tienda">Retiro en tienda</option>
+              </select>
+            </div>
+
+            <div className="mb-3 text-start">
+              <label htmlFor="motivoDevolucion">Motivo de devolución:</label>
+              <select
+                id="returnReason"
+                name="returnReason"
+                value={formRegret.returnReason}
+                className="form-control"
+                onChange={handleChangeRegret}
+                required
+              >
+                <option value="">Seleccione una opción*</option>
+                <option value="Roto">Roto</option>
+                <option value="Error">Error</option>
+              </select>
+            </div>
+
+            <div className="mb-3">
+              <textarea
+                id="comment"
+                name="comment"
+                placeholder="Comentario*"
+                className="form-control"
+                value={formRegret.comment}
+                onChange={handleChangeRegret}
+              ></textarea>
             </div>
           </div>
         </div>
+        {
+          // formRegret.name.length > 2 &&
+          // formRegret.lastName.length > 2 &&
+          // formRegret.email.length > 2 &&
+          // formRegret.phone.length > 2 &&
+          // formRegret.document.length > 2 &&
+          // formRegret.address.length > 2 &&
+          // formRegret.location.length > 2 &&
+          // formRegret.province.length > 2 &&
+          // formRegret.returnMode.length > 2 &&
+          // formRegret.returnReason.length > 2 &&
+          // formRegret.comment.length > 2 &&
 
-        <div className="mb-3">
-          <textarea
-            id="comentario"
-            name="comentario"
-            placeholder="Comentario"
-            className="form-control"
-            rows="1"
-            value={comentario}
-            onChange={(e) => setComentario(e.target.value)}
-            required
-          ></textarea>
-        </div>
-
-        <div className="text-center" style={{ paddingBottom: "10px" }}>
-          <button type="submit" className= {style.btnPrimary} >
+          <Button type="submit" className={style.btnPrimary}>
             Enviar
-          </button>
-        </div>
+          </Button>
+        }
+
       </form>
+      
+			<Modal show={showSuccessModal} onHide={() => setShowSuccessModal(false)}>
+			<Modal.Body closeButton>
+              <div className="d-flex justify-content-between align-items-center">
+                <div> ✔ ¡El formulario se envió correctamente!</div>
+                <Button className={style.btnPrimary} onClick={() => setShowSuccessModal(false)}>
+                  Cerrar
+                </Button>
+              </div>
+            </Modal.Body>
+						</Modal>
+
+
+      
+			<Modal show={showErrorModal} onHide={() => setShowErrorModal(false)}>
+            <Modal.Body closeButton>
+              <div className="d-flex justify-content-between align-items-center">
+                <div>
+                  {" "}
+                  ❌ Hubo un error al enviar tu Formulario. Por favor, inténtalo
+                  nuevamente más tarde.
+                </div>
+                <Button className={style.btnPrimary} onClick={() => setShowErrorModal(false)}>
+                  Cerrar
+                </Button>
+              </div>
+            </Modal.Body>
+          </Modal>
     </div>
+
   );
 };
 
