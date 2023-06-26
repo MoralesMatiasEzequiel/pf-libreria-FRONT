@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import style from "./FormPayCart.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { createOrder, sendOrder } from "../../../redux/CartActions";
+import { createOrder, sendOrder, cleanPaymentLink } from "../../../redux/CartActions";
 import { useNavigate } from "react-router-dom";
 
 const FormPayCart = ({ state, setFormInfo, setFormShipment, setFormPay }) => {
@@ -26,6 +26,7 @@ const FormPayCart = ({ state, setFormInfo, setFormShipment, setFormPay }) => {
   const handlePayButton = (event) => {
     window.open(paymentLink, "_blank");
     navigate("/");
+    dispatch(cleanPaymentLink());
   };
 
   return (

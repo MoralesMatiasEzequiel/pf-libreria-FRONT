@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { pushProductOnCart, removeProductFromCart, postOrderCreated, setClientInfo,newCartState, setShipmentInfo, sendOrderToBack } from "./CartSlice";
+import { pushProductOnCart, removeProductFromCart, postOrderCreated, setClientInfo,newCartState, setShipmentInfo, sendOrderToBack, cleanPaymentLinkState } from "./CartSlice";
 
 export const addProductOnCart = (product) => {
     return (dispatch) => {
@@ -49,6 +49,12 @@ export const setShipment = (shipmentInfo) => {
 
     };
 };
+
+export const cleanPaymentLink = () => {
+    return (dispatch) => {
+        dispatch(cleanPaymentLinkState());
+    }
+}
 
 export const sendOrder = (clientInfo, shipmentInfo, productsOnCart) => {
     return async (dispatch) => {
