@@ -1,59 +1,67 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import style from "./FormPayCart.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { createOrder, sendOrder } from "../../../redux/CartActions";
-import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-
 const FormPayCart = ({ state, setFormInfo, setFormShipment, setFormPay }) => {
+  const dispatch = useDispatch();
+  const { productsOnCart, paymentLink, clientInfo, shipmentInfo } = useSelector((state) => state.cart);
+  const navigate = useNavigate();
+  const [showPayButton, setShowPayButton] = useState(false);
 
-    const dispatch = useDispatch();
-    const { productsOnCart, paymentLink, clientInfo, shipmentInfo } = useSelector((state) => state.cart)
-    // console.log(productsOnCart);
-    const navigate = useNavigate();
+  useEffect(() => {
+    console.log(paymentLink);
+    if (paymentLink) {
+      setShowPayButton(true);
+    }
+  }, [paymentLink]);
 
-    const handleOnClick = (event) => {
-        event.preventDefault();
-        dispatch(createOrder(productsOnCart));
-        dispatch(sendOrder(clientInfo, shipmentInfo, productsOnCart));
-        if (paymentLink) {
-            window.open(paymentLink, "_blank");
-          }
-        navigate('/')
-    };
+  const handleOnClick = (event) => {
+    event.preventDefault();
+    dispatch(createOrder(productsOnCart));
+    dispatch(sendOrder(clientInfo, shipmentInfo, productsOnCart));
+  };
 
-    useEffect(() => {
-        // console.log(paymentLink);s
-    }, [paymentLink])
+  const handlePayButton = (event) => {
+    window.open(paymentLink, "_blank");
+    navigate("/");
+  };
 
-    
-
-    return (
+  return (
+    <div>
+      {state && (
         <div>
-            {state &&
-                <div>
-                    <div>
-                        <h5>Elija una forma de pago</h5>
-                    </div>
-                    {/* <form onSubmit={handleSubmit}> */}
-                        <div>
-                            <input type="radio" name="opcion" value="opcion1"/> Mercado Pago
-                            <br/>
-                            <input type="radio" name="opcion" value="opcion2"/> Transferencia bancaria
-                            <br/>
-                            <input type="radio" name="opcion" value="opcion3"/> Tarjetas de crédito y débito
-                            <br/>
-                        </div>   
-                        <div>
-                            <button onClick={() => {setFormInfo(false); setFormShipment(true); setFormPay(false);}}>Regresar a método de envío</button>
-                            <button onClick={handleOnClick}>Realizar compra</button>
-                        </div>     
-                    {/* </form>             */}
-                </div>
-            }
+          <div>
+            <h5>Elija una forma de pago</h5>
+          </div>
+          {/* <form onSubmit={handleSubmit}> */}
+          <div>
+            <input type="radio" name="opcion" value="opcion1" /> Mercado Pago
+            <br />
+            <input type="radio" name="opcion" value="opcion2" /> Transferencia bancaria
+            <br />
+            <input type="radio" name="opcion" value="opcion3" /> Tarjetas de crédito y débito
+            <br />
+          </div>
+          <div>
+            <button
+              onClick={() => {
+                setFormInfo(false);
+                setFormShipment(true);
+                setFormPay(false);
+              }}
+            >
+              Regresar a método de envío
+            </button>
+            <button onClick={handleOnClick}>Terminar compra</button>
+            {showPayButton && <button onClick={handlePayButton}>Ir a pagar</button>}
+          </div>
+          {/* </form> */}
         </div>
-    )
+      )}
+    </div>
+  );
 };
 
 export default FormPayCart;
