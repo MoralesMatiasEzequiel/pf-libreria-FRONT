@@ -1,11 +1,19 @@
 import { useSelector } from "react-redux";
 import styles from './ProfileData.module.css';
+import { useAuth0 } from "@auth0/auth0-react";
 
 const ProfileData = () => {
 
     const { currentUser } = useSelector(state => state.user);
+    const { user } = useAuth0();
+    let imgLink = '';
+    console.log(user.sub);
 
-    const imgLink = currentUser?.picture ? currentUser.picture.split('=')[0] : '';
+    if(user.sub.includes('google')){
+        [imgLink] = currentUser.picture.split('=');
+    } else {
+        imgLink = currentUser.picture; 
+    }
 
     return (
         <div className={styles.view}>
