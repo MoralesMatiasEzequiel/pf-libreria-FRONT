@@ -90,17 +90,14 @@ const Cart = () => {
                 </div>
                 <button
                     className={style.boton}
-                    onClick={handleFormInfoClick}
                     disabled={formInfo}
                 >Cliente</button>
                 <button 
                     className={style.boton}
-                    onClick={handleFormShipmentClick}
                     disabled={formShipment}
                 >Envío</button>
                 <button 
                     className={style.boton}
-                    onClick={handleFormPayClick}
                     disabled={formPay}
                 >Pago</button>
                 <FormInfoCart state={formInfo} setFormInfo={setFormInfo} setFormShipment={setFormShipment} setFormPay={setFormPay}/>

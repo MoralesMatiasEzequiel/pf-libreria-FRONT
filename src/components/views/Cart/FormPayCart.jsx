@@ -33,18 +33,6 @@ const FormPayCart = ({ state, setFormInfo, setFormShipment, setFormPay }) => {
       {state && (
         <div>
           <div>
-            <h5>Elija una forma de pago</h5>
-          </div>
-          {/* <form onSubmit={handleSubmit}> */}
-          <div>
-            <input type="radio" name="opcion" value="opcion1" /> Mercado Pago
-            <br />
-            <input type="radio" name="opcion" value="opcion2" /> Transferencia bancaria
-            <br />
-            <input type="radio" name="opcion" value="opcion3" /> Tarjetas de crédito y débito
-            <br />
-          </div>
-          <div>
             <button
               onClick={() => {
                 setFormInfo(false);
