@@ -5,22 +5,22 @@ import { useAuth0 } from "@auth0/auth0-react";
 const ProfileData = () => {
 
     const { currentUser } = useSelector(state => state.user);
-    const { user } = useAuth0();
-    let imgLink = '';
-    console.log(user.sub);
+    // const { user } = useAuth0();
+    // let imgLink = '';
+    // console.log(user.sub);
 
-    if(user.sub.includes('google')){
-        [imgLink] = currentUser.picture.split('=');
-    } else {
-        imgLink = currentUser.picture; 
-    }
+    // if(user.sub.includes('google')){
+    //     [imgLink] = currentUser.picture.split('=');
+    // } else {
+    //     imgLink = currentUser.picture; 
+    // }
 
     return (
         <div className={styles.view}>
             <h1 className={styles.title}>DATOS</h1>
             <div className={styles.container}>
                 <div className={styles["image-container"]}>
-                    <img src={imgLink} alt={currentUser.name} />
+                    <img src={currentUser.picture} alt={currentUser.name} />
                 </div>
                 <div className={styles["data-container"]}>
                     <p>Usuario: {currentUser.name}</p>
