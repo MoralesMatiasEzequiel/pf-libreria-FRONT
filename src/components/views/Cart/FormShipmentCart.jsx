@@ -83,7 +83,7 @@ const FormShipmentCart = ({ state, setFormInfo, setFormShipment, setFormPay }) =
     return (
         <div>
             {state &&
-                <form onSubmit={handleSubmit} className={style.FormShipmentCart}>
+                <form onSubmit={handleSubmit} className={style.form}>
                     <div className={style.titles}>
                         <h5>Información de envío</h5>
                         <p>(*) Campos requeridos</p>

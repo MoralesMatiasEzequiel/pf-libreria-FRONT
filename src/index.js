@@ -11,7 +11,9 @@ import { Auth0Provider } from '@auth0/auth0-react';
 // import 'bootstrap-icons/font/bootstrap-icons.css';
 
 
-axios.defaults.baseURL = "https://server-libreria.onrender.com";
+axios.defaults.baseURL = "https://server-libreria.onrender.com/";
+// axios.defaults.baseURL = "http://localhost:3001";
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
