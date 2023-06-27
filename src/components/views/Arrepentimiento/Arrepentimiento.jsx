@@ -107,6 +107,20 @@ const Arrepentimiento = () => {
     });
   };
 
+  const isDisabled =
+    formRegret.name.trim() === '' ||
+    formRegret.lastName.trim() === '' ||
+    formRegret.email.trim() === '' ||
+    formRegret.phone.trim() === '' ||
+    formRegret.document.trim() === '' ||
+    formRegret.address.trim() === '' ||
+    formRegret.postalCode.trim() === '' ||
+    formRegret.location.trim() === '' ||
+    formRegret.province.trim() === '' ||
+    formRegret.returnMode.trim() === '' ||
+    formRegret.returnReason.trim() === '' ||
+    formRegret.comment.trim() === '';
+
   useEffect(() => {
     localStorage.setItem("formRegret", JSON.stringify(formRegret));
 
@@ -117,7 +131,7 @@ const Arrepentimiento = () => {
       <h1 className={style.title}>Arrepentimiento de la compra</h1>
       <p className={style.introText}>
         Si deseas arrepentirte de tu compra, por favor completa el siguiente
-        formulario y nos pondremos en contacto contigo.<br/> Es necesario completar todos los campor que tengan (*).
+        formulario y nos pondremos en contacto contigo.<br /> Es necesario completar todos los campor que tengan (*).
       </p>
 
       <form onSubmit={handleSubmit} className={style.formArr} id="form">
@@ -359,53 +373,40 @@ const Arrepentimiento = () => {
             </div>
           </div>
         </div>
-        {
-          // formRegret.name.length > 2 &&
-          // formRegret.lastName.length > 2 &&
-          // formRegret.email.length > 2 &&
-          // formRegret.phone.length > 2 &&
-          // formRegret.document.length > 2 &&
-          // formRegret.address.length > 2 &&
-          // formRegret.location.length > 2 &&
-          // formRegret.province.length > 2 &&
-          // formRegret.returnMode.length > 2 &&
-          // formRegret.returnReason.length > 2 &&
-          // formRegret.comment.length > 2 &&
 
-          <Button type="submit" className={style.btnPrimary}>
-            Enviar
-          </Button>
-        }
+        <Button type="submit" disabled={isDisabled} className={style.btnPrimary}>
+          Enviar
+        </Button>
 
       </form>
-      
-			<Modal show={showSuccessModal} onHide={() => setShowSuccessModal(false)}>
-			<Modal.Body closeButton>
-              <div className="d-flex justify-content-between align-items-center">
-                <div> ✔ ¡El formulario se envió correctamente!</div>
-                <Button className={style.btnPrimary} onClick={() => setShowSuccessModal(false)}>
-                  Cerrar
-                </Button>
-              </div>
-            </Modal.Body>
-						</Modal>
+
+      <Modal show={showSuccessModal} onHide={() => setShowSuccessModal(false)}>
+        <Modal.Body closeButton>
+          <div className="d-flex justify-content-between align-items-center">
+            <div> ✔ ¡El formulario se envió correctamente!</div>
+            <Button className={style.btnPrimary} onClick={() => setShowSuccessModal(false)}>
+              Cerrar
+            </Button>
+          </div>
+        </Modal.Body>
+      </Modal>
 
 
-      
-			<Modal show={showErrorModal} onHide={() => setShowErrorModal(false)}>
-            <Modal.Body closeButton>
-              <div className="d-flex justify-content-between align-items-center">
-                <div>
-                  {" "}
-                  ❌ Hubo un error al enviar tu Formulario. Por favor, inténtalo
-                  nuevamente más tarde.
-                </div>
-                <Button className={style.btnPrimary} onClick={() => setShowErrorModal(false)}>
-                  Cerrar
-                </Button>
-              </div>
-            </Modal.Body>
-          </Modal>
+
+      <Modal show={showErrorModal} onHide={() => setShowErrorModal(false)}>
+        <Modal.Body closeButton>
+          <div className="d-flex justify-content-between align-items-center">
+            <div>
+              {" "}
+              ❌ Hubo un error al enviar tu Formulario. Por favor, inténtalo
+              nuevamente más tarde.
+            </div>
+            <Button className={style.btnPrimary} onClick={() => setShowErrorModal(false)}>
+              Cerrar
+            </Button>
+          </div>
+        </Modal.Body>
+      </Modal>
     </div>
 
   );
