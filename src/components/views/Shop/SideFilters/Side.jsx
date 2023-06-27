@@ -6,14 +6,14 @@ import { upperBrands, upperBrandsSelected } from "../../../../redux/productActio
 
 
 const Side = () => {
-    const { productSee, branes } = useSelector(state => state.products);
+    const { productSee, branes, productsExist } = useSelector(state => state.products);
 
     const filledbrands = () => {
 
         let datas = localStorage.getItem("BrandsOfProductSee");
         let datasParse = JSON.parse(datas)
 
-        if (datasParse?.length > 0) {
+        if (datasParse?.length > 0 && productsExist) {
             let branis = datasParse.map(pro => pro)
             return branis;
         } else {
@@ -91,7 +91,7 @@ const Side = () => {
     return (
 
         <Accordion  >
-            <Accordion.Item eventKey="0" >
+            {productsExist && <Accordion.Item eventKey="0" >
 
                 <Accordion.Header className={style.header} >
                     <b>Marca</b>
@@ -135,9 +135,9 @@ const Side = () => {
 
                     </div>
                 </Accordion.Body>
-            </Accordion.Item>
+            </Accordion.Item>}
 
-            {brands.length > 20 && <Accordion.Item eventKey="1">
+            {brands.length > 20 && productsExist && <Accordion.Item eventKey="1">
                 <Accordion.Header className={style.header}  >
                     <b>Marca </b> <p>(2)</p>
                 </Accordion.Header>
