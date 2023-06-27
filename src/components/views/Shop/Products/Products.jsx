@@ -106,7 +106,7 @@ const Products = () => {
     <div className={style.totalContainer}>
       <Paginado cantPages={pagines} />
       <div className={style.container}>
-        {!productsExist && !allProducts && (
+        {!productsExist  && (
           <div className={style.noProduct}>
             <img
               className={style.lupa}
