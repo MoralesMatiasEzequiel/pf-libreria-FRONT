@@ -6,13 +6,25 @@ import { upperBrands, upperBrandsSelected } from "../../../../redux/productActio
 
 
 const Side = () => {
+    const { productSee, branes } = useSelector(state => state.products);
 
+    const filledbrands = () => {
+
+        let datas = localStorage.getItem("ProductSee");
+        let datasParse = JSON.parse(datas)
+
+        if (datas?.length > 0 && productSee.length < 1 ) {
+            let cartId = datasParse.map(pro => pro.brand)
+            return cartId;
+        } else {
+            return []
+        }
+    };
     const dispatch = useDispatch();
-    const [brands, setBrands] = useState([]);
+    const [brands, setBrands] = useState(filledbrands());
 
     const [brandsSelected, setBrandsSelecteds] = useState([]);
 
-    const { productSee, branes } = useSelector(state => state.products);
 
     useEffect(() => {
 
