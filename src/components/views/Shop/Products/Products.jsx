@@ -18,7 +18,7 @@ const Products = () => {
     let datas = localStorage.getItem("protucts_cart");
     let datasParse = JSON.parse(datas)
 
-    if (datas?.length > 0) {
+    if (datas?.length > 0 ) {
       let cartId = datasParse.map(pro => pro._id)
       return cartId;
     } else {
@@ -33,7 +33,7 @@ const Products = () => {
     let datos = localStorage.getItem("ProductSee");
     let history = JSON.parse(datos)
 
-    if (history?.length > 0 && productSee.length < 1) {
+    if (history?.length > 0 && productSee.length < 1 && productsExist) {
       dispatch(getProducts());
       return history;
 
@@ -124,7 +124,7 @@ const Products = () => {
           </div>
         )}
 
-        {viewsProducts?.map((base, index) => {
+        {productsExist && viewsProducts?.map((base, index) => {
           return (
             <div key={index} className={style.productCard}>
               <Link to={"/shop/" + base._id}>

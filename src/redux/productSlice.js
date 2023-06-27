@@ -9,7 +9,7 @@ export const productSlice = createSlice({
         brandSelected: [],
         productsOnSale: [],
         productsOnRating: [],
-        productsExist: false,
+        productsExist: true,
         detail: {},
         subCategories: [],
         pag: 1,
