@@ -10,21 +10,21 @@ const Side = () => {
 
     const filledbrands = () => {
 
-        let datas = localStorage.getItem("ProductSee");
+        let datas = localStorage.getItem("BrandsOfProductSee");
         let datasParse = JSON.parse(datas)
 
-        if (datas?.length > 0 && productSee.length < 1 ) {
-            let cartId = datasParse.map(pro => pro.brand)
-            return cartId;
+        if (datasParse?.length > 0) {
+            let branis = datasParse.map(pro => pro)
+            return branis;
         } else {
             return []
         }
     };
+
     const dispatch = useDispatch();
     const [brands, setBrands] = useState(filledbrands());
 
     const [brandsSelected, setBrandsSelecteds] = useState([]);
-
 
     useEffect(() => {
 
@@ -49,12 +49,23 @@ const Side = () => {
                 }
                 return 0;
             })
+
             return almacini;
         }
 
-        setBrands(mapBrands)
+        // console.log("useefec" + mapBrands());
+        // console.log("state" + brands);
+        let tok = mapBrands();
+        if (tok.length > 0) {
+            setBrands(mapBrands)
+        }
 
-        return () => setBrandsSelecteds([]);
+        localStorage.setItem("BrandsOfProductSee", JSON.stringify(tok));
+
+        return () => {
+            localStorage.removeItem("BrandsOfProductSee")
+            setBrandsSelecteds([])
+        };
     }, [productSee, branes]);
 
 
@@ -76,8 +87,6 @@ const Side = () => {
         setBrandsSelecteds(updateBrand);
         dispatch(upperBrandsSelected(updateBrand));
     };
-
-
 
     return (
 
@@ -130,7 +139,7 @@ const Side = () => {
 
             {brands.length > 20 && <Accordion.Item eventKey="1">
                 <Accordion.Header className={style.header}  >
-                    <b>Marca - 2</b>
+                    <b>Marca </b> <p>(2)</p>
                 </Accordion.Header>
 
                 <Accordion.Body >

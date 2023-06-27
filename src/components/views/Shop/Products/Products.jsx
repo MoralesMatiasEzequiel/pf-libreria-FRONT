@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { totalPag } from "../../../../redux/productActions";
+import { totalPag, getProducts } from "../../../../redux/productActions";
 import { addProductOnCart } from "../../../../redux/CartActions";
 import Paginado from "../Paginado/Paginado";
 //import { addToFavList } from "../../../../redux/favoriteSlice";
@@ -22,7 +22,7 @@ const Products = () => {
       let cartId = datasParse.map(pro => pro._id)
       return cartId;
     } else {
-      return ["nada"]
+      return []
     }
   };
 
@@ -34,7 +34,7 @@ const Products = () => {
     let history = JSON.parse(datos)
 
     if (history?.length > 0 && productSee.length < 1) {
-
+      dispatch(getProducts());
       return history;
 
     } else {
@@ -55,8 +55,6 @@ const Products = () => {
 
       localStorage.setItem("ProductSee", JSON.stringify(productSee))
     }
-
-    console.log(allProducts);
     if (brandSelected.length > 0) {
       let papeliri = productSee.filter((pro) =>
         brandSelected.includes(pro.brand)
