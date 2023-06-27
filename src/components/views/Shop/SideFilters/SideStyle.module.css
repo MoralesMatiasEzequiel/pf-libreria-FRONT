@@ -1,25 +1,55 @@
 .header{
-	width: 198px;
-
+	width: 218px;
+}
+.header:focus{
+    background-color: white;
 }
 
 .contLi{
     display: flex;
     flex-direction: column;
-		
+    width: 240px;
 }
 
 .listDispatch{
     display: flex;
     gap: .5em;
-		
 }
 .listDispatch input{
     margin-bottom: 15px;
-		
 }
 .dispar{
     width: 100px;
     height: 100px;
     background-color: yellow;
 }
+
+.brandsContainer {
+    max-height: 385px; /* Altura máxima del contenedor de marcas */
+    width: 198px;
+    overflow-y: auto; /* Añade una barra de desplazamiento vertical cuando se llegue al final */
+  }
+  .brandsContainer::-webkit-scrollbar {
+    width: 8px; /* Ancho de la barra de desplazamiento */
+  }
+  
+  .brandsContainer::-webkit-scrollbar-track {
+    background-color: transparent; /* Color del fondo de la barra de desplazamiento */
+  }
+  
+  .brandsContainer::-webkit-scrollbar-thumb {
+    background-color: #ccc; /* Color del relleno de la barra de desplazamiento */
+    border-radius: 4px; /* Radio de borde de la barra de desplazamiento */
+  }
+  
+  .brandsContainer::-webkit-scrollbar-thumb:hover {
+    background-color: #aaa; /* Color del relleno de la barra de desplazamiento en estado hover */
+  }
+  
+  .brandsContainer::-webkit-scrollbar-thumb:active {
+    background-color: #999; /* Color del relleno de la barra de desplazamiento en estado activo */
+  }
+  
+  .brandsContainer::-webkit-scrollbar-corner {
+    background-color: transparent; /* Color de la esquina de la barra de desplazamiento */
+  }

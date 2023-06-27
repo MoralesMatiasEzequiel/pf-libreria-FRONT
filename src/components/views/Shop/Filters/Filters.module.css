@@ -1,58 +1,92 @@
-.div {
+.totalContainer {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
+    margin: auto;
+    width: 75%;
+    padding-bottom: 10px;
+  }
 
-}
-
-.nada {
-    width: 50%;
-    gap: .2em;
+  .nada {
+    width: calc(100% - 120px);
+    gap: 0.2em;
     display: flex;
-    justify-content: space-around;
-    
-}
-.filtrs{
-    width: 50%;
-    gap: .2em;
-    display: flex;
-}
-.tit {
-    font-weight: 500;
-    margin-right: 5px;
+    justify-content: flex-start;
+    align-items: center;
+    overflow-x: auto;
+    margin-right: 50px;
+  }
+  .nada::-webkit-scrollbar {
+    width: 4px; /* Ancho de la barra de desplazamiento */
+  }
+  
+  .nada::-webkit-scrollbar-track {
+    background-color: transparent; /* Color del fondo de la barra de desplazamiento */
+  }
+  
+  .nada::-webkit-scrollbar-thumb {
+    background-color: #ccc; /* Color del relleno de la barra de desplazamiento */
+    border-radius: 5px; /* Radio de borde de la barra de desplazamiento */
+  }
+  
+  .nada::-webkit-scrollbar-thumb:hover {
+    background-color: #ccc; /* Color del relleno de la barra de desplazamiento en estado hover */
+  }
+  
+  .nada::-webkit-scrollbar-thumb:active {
+    background-color: #ccc; /* Color del relleno de la barra de desplazamiento en estado activo */
+  }
+  
+  .nada::-webkit-scrollbar-corner {
+    background-color: transparent; /* Color de la esquina de la barra de desplazamiento */
+  }
 
-}
-
-.nada b {
+  .nada b {
     margin: 0 2px;
     padding: 0 2px;
-    border: 1px solid #585858;
+    border: 1px solid #ccc;
     border-radius: 5px;
-
-}
-
-.order {
+    min-width: fit-content;
+    font-weight: 500;
+  }
+  
+  .filtrs {
     display: flex;
-    margin: auto;
-}
-
-
-/* responsive desing */
-@media screen and (max-width:650px) {
-
-
+    gap: 0.2em;
+    min-width: fit-content;
+  }
+  
+  .tit {
+    font-weight: bold;
+    margin-right: 5px;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    min-width: fit-content;
+    white-space: nowrap;
+  }
+  
+  .order {
+    display: flex;
+    align-items: center;
+    min-width: fit-content;
+    margin-top: 7.5px;
+  }
+  
+  /* responsive design */
+  @media screen and (max-width: 650px) {
     .nada {
-        display: none;
+      display: none;
     }
-
+  
     .order {
-        width: 120px;
+      width: 120px;
     }
-
+  
     .orderres {
-        display: flex;
-        flex-direction: row;
-        gap: 3%;
+      display: flex;
+      flex-direction: row;
+      gap: 3%;
     }
-
-}
+  }
+  
