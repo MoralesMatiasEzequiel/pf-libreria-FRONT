@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import Accordion from 'react-bootstrap/Accordion';
 import { upperBrands, upperBrandsSelected } from "../../../../redux/productActions";
 
-
 const Side = () => {
     const { productSee, branes, productsExist } = useSelector(state => state.products);
 
@@ -74,7 +73,6 @@ const Side = () => {
         dispatch(upperBrands(brands))
     }
 
-
     const handlerOnClick = (event) => {
         const marquite = event.target.value;
 
@@ -89,103 +87,37 @@ const Side = () => {
     };
 
     return (
-
-        <Accordion  >
-            {productsExist && <Accordion.Item eventKey="0" >
-
-                <Accordion.Header className={style.header} >
+        <Accordion >
+            <Accordion.Item eventKey="0">
+                <Accordion.Header className={style.header}  >
                     <b>Marca</b>
                 </Accordion.Header>
 
-                <Accordion.Body  >
-                    <div className={style.contLi} >
-                        {!branes.length
-                            ? brands.map((brand, i) => {
-                                if (i < 20) {
-                                    return (
-                                        <div key={i} className={style.listDispatch}
-                                        >
-                                            <input type="checkbox"
-
-                                                value={brand}
-
-                                                onChange={handlerClick}
-                                            />
-                                            <p>{brand}</p>
-                                        </div>
-                                    );
-                                }
-                            })
-                            : branes[0].map((brand, i) => {
-                                if (i < 20) {
-                                    return (
-                                        <div className={style.listDispatch}
-                                        >
-                                            <input type="checkbox"
-
-                                                value={brand}
-                                                onClick={handlerOnClick}
-                                            />
-                                            <p>{brand}</p>
-                                        </div>
-                                    );
-                                }
-                            })
-                        }
-
-                    </div>
-                </Accordion.Body>
-            </Accordion.Item>}
-
-            {brands.length > 20 && productsExist && <Accordion.Item eventKey="1">
-                <Accordion.Header className={style.header}  >
-                    <b>Marca </b> <p>(2)</p>
-                </Accordion.Header>
-
                 <Accordion.Body >
-                    <div className={style.contLi}>
+                    <div className={`${style.contLi} ${style.brandsContainer}`}>
                         {!branes.length
                             ? brands.map((brand, i) => {
-                                if (i > 20) {
                                     return (
-                                        <div key={i} className={style.listDispatch}
-                                        >
-                                            <input type="checkbox"
-
-                                                value={brand}
-
-                                                onChange={handlerClick}
-                                            />
+                                        <div key={i} className={`${style.listDispatch}`}>
+                                            <input type="checkbox" value={brand} onChange={handlerClick}/>
                                             <p>{brand}</p>
                                         </div>
                                     );
-                                }
                             })
                             : branes[0].map((brand, i) => {
-                                if (i > 20) {
                                     return (
-                                        <div className={style.listDispatch}
-                                        >
-                                            <input type="checkbox"
-
-                                                value={brand}
-                                                onClick={handlerOnClick}
-                                            />
+                                        <div className={style.listDispatch}>
+                                            <input type="checkbox" value={brand} onClick={handlerOnClick}/>
                                             <p>{brand}</p>
                                         </div>
                                     );
-                                }
                             })
                         }
-
                     </div>
                 </Accordion.Body>
-            </Accordion.Item>}
-
+            </Accordion.Item>
         </Accordion>
-
     )
-
 }
 
 export default Side;
