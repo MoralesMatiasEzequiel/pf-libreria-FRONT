@@ -5,7 +5,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { getProducts } from "../../../redux/productActions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useState } from "react";
 
@@ -18,6 +18,7 @@ const Navuno = () => {
     }
 
     const { isAuthenticated } = useAuth0();
+    const { currentUser } = useSelector(state => state.user);
 
     // COLORES PARA POSICIONAMIENTO EN EL NAV
     const [ colorTienda, setColorTienda ] = useState("")
@@ -27,7 +28,7 @@ const Navuno = () => {
     // COLORES PARA POSICIONAMIENTO EN EL NAV
 
     const profileLink = isAuthenticated ? (
-        <NavLink style={{color: `${colorLog}`}} to={"/profile"} className={style.navLink} onClick={() => changeColor("log")}>Perfil</NavLink>
+        <NavLink style={{color: `${colorLog}`}} to={"/profile"} className={style.navLink} onClick={() => changeColor("log")}><img src={currentUser.picture} alt={currentUser.name}/></NavLink>
     ) : (
         <NavLink style={{color: `${colorLog}`}} to={"/login"} className={style.navLink} onClick={() => changeColor("log")}>Ingresar</NavLink>
     );

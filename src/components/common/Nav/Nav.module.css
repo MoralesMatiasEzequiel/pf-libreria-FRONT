@@ -19,6 +19,12 @@
     transition: .3s;
 }
 
+.navLink img{
+    border-radius: 100%;
+    width: 40px;
+    height: 40px;
+}
+
 .navLink:hover {
 
     color: #ffffff;
