@@ -1,8 +1,8 @@
+import style from "./Detail.module.css";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import ModalCart from "../../../common/Modals/ModalCart/ModalCart";
-import style from "./Detail.module.css";
 import { addProductOnCart } from "../../../../redux/CartActions";
 
 const Detail = () => {
@@ -53,7 +53,7 @@ const Detail = () => {
   }
 
   return (
-    <div className="container">
+    <div className={style.container}>
       <div className="row">
         <div className="col-md-6 d-flex align-items-center">
           <div className="card" style={{ width: "100%", height: "450px", display: "flex", justifyContent: "center", alignItems: "center", marginTop: "25px", marginBottom: "25px" }}>
@@ -69,26 +69,24 @@ const Detail = () => {
               <p style={{ color: "#3F3F3F", fontSize: "18px", padding: "10px" }}>Rating: {product.rating}</p>
               <p style={{ color: "#3F3F3F", fontSize: "18px", padding: "10px" }}>Detalle del producto: {product.description}</p>
               <h5 style={{ color: "#191919", fontFamily: "Montserrat, sans-serif", fontWeight: "bold", fontSize: "24px", padding: "10px" }}>$ {product.price}</h5>
-              <button className={style.btnPrimary} onClick={() => setModalShow(true)}>Comprar</button>
 
+              <div className={style.buttons}>
+                {productsInCart.includes(product._id)
+                  ? <p className={style.enCarrito}>EN CARRITO <i class="bi bi-cart-check"></i></p>
+                  : <button className={style.btnCart} onClick={() => { setModalShow(true); addToCart(product); }}>
+                    <i className="bi bi-cart"></i> Agregar al carrito
+                  </button>
 
-              {productsInCart.includes(product._id)
-                ? "EN CARRITO" //<i class="bi bi-cart-check"></i>
-                : <button className={style.btnCart} onClick={() => addToCart(product)}>
-                  <i className="bi bi-cart"></i> Agregar al carrito
+                }
+                <button className={style.btnFavorite} onClick={handleFavoriteClick}>
+                  <i className="bi bi-heart"></i> Favoritos
                 </button>
-
-
-              }
-
-
-
-              <button className={style.btnFavorite} onClick={handleFavoriteClick}>
-                <i className="bi bi-heart"></i> Favoritos
-              </button>
+              </div>
             </div>
-
           </div>
+        </div>
+        <div className={style.linkDiv}>
+        <Link to={"/shop"} className={style.linkBack}>{"Volver a Tienda"}</Link>
         </div>
       </div>
       <ModalCart
