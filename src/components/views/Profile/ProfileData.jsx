@@ -7,7 +7,8 @@ const ProfileData = () => {
     const { currentUser } = useSelector(state => state.user);
     const { user } = useAuth0();
     let imgLink = '';
-    console.log(user.sub);
+
+    console.log(currentUser);
 
     if(user.sub.includes('google')){
         [imgLink] = currentUser.picture.split('=');

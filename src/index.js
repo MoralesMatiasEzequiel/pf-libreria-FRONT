@@ -9,16 +9,14 @@ import axios from "axios"
 import { Auth0Provider } from '@auth0/auth0-react';
 // import 'bootstrap-icons/font/bootstrap-icons.css';
 
-
-// axios.defaults.baseURL = "http://localhost:3001";
-axios.defaults.baseURL = "https://plumalibreria.onrender.com";
+axios.defaults.baseURL = "http://localhost:3001/";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   // <React.StrictMode>
   <Auth0Provider
     domain="dev-hvcwq2kzvdk8sy6d.us.auth0.com"
-    clientId="bX70VuzXC0I80rlqNQakb6FEfGK6J16X"
+    clientId="LUo5OOVw2NMw26i2IQQFPmzlrks9rcIU"
     authorizationParams={{
       redirect_uri: window.location.origin
     }}
