@@ -7,9 +7,7 @@ import { Provider } from 'react-redux';
 import store from "./redux/store"
 import axios from "axios"
 import { Auth0Provider } from '@auth0/auth0-react';
-
 // import 'bootstrap-icons/font/bootstrap-icons.css';
-
 
 axios.defaults.baseURL = "http://localhost:3001/";
 
