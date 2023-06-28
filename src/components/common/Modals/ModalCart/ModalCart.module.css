@@ -54,6 +54,52 @@
 	transition: .3s ease all;
 }
 
-.finish:hover {
-    background: #fa3535;
+.seguir{
+    border: solid 1px #FF9E5C;
+    background-color: #FF9E5C;
 }
+.seguir:hover{
+    background-color: white;
+    color: #FF9E5C;
+    border: solid 1px #FF9E5C;
+}
+
+.finish{
+    border: solid 1px red;
+}
+.finish:hover {
+    background: white;
+    color: red;
+    border: solid 1px red;
+}
+
+.stock {
+    display: flex;
+    align-items: center;
+  }
+  
+  .quantityButton {
+    padding: 4px 8px;
+    border: none;
+    background-color: #eee;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .quantityValue {
+    width: 24px;
+    text-align: center;
+  }
+  
+  .totalPriceContainer {
+    margin: 15px 0px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 15px 10px;
+
+  }
+  
+  .totalPrice {
+    display: inline-block;
+    min-width: 150px;
+  }
