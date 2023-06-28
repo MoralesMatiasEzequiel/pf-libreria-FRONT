@@ -1,15 +1,27 @@
-.btnPrimary{
-    background-color: #FF9E5C;
-    border-color: #FF9E5C;
-    color: white;
-    border-radius: 5px;
-    border-style: solid;
-    margin: 5px;
+.container{
+  margin: 20px;
 }
 
-.btnPrimary:hover {
+.buttons{
+  display: flex;
+  justify-content: center;
+}
+
+.linkDiv{
+}
+.linkBack {
+  text-decoration: none;
+  padding: 3px;
+  background-color: #ff9e5c;
+  border-color: #ff9e5c;
+  color: white;
+  border-radius: 5px;
+  border-style: solid;
+  border-width: 1px;
+}
+.linkBack:hover{
   background-color: white;
-  color: #FF9E5C;
+  color: #ff9e5c;
 }
 
 .btnFavorite{
@@ -39,3 +51,14 @@
     background-color: white;
     color: #8a9b0f;
   }
+
+.enCarrito{
+  background-color: white;
+  border-color: #8a9b0f;
+  color: #8a9b0f;
+  border-radius: 5px;
+  border-style: solid;
+  border-width: 1px;
+  margin: 5px;
+  padding: 2px;
+}

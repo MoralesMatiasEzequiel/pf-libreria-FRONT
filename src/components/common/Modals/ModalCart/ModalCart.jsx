@@ -1,29 +1,27 @@
 import style from './ModalCart.module.css';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { Link, useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { useState } from "react";
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { useState, useEffect } from "react";
 
 const ModalCart = (props) => {
-  const { id } = useParams();
-  const { products } = useSelector(state => state.products);
-  const product = products.find(item => item._id === id);
+  const cart = useSelector(state => state.cart);
+  const productsOnCart = cart.productsOnCart;
+  const [total, setTotal] = useState(0); // Estado para almacenar el precio total de todos los productos en el carrito
 
-  const [selectedStock, setSelectedStock] = useState(1); // Estado para almacenar la cantidad seleccionada
-
-  const handleStockChangeModal = (change) => {
-    const newStock = selectedStock + change;
-    const productStock = product.stock || 1;
-
-    if (newStock > 0 && newStock <= productStock) {
-      setSelectedStock(newStock);
-    }
-  };
-
-  // Calcula el precio total multiplicando el precio del producto por la cantidad seleccionada
-  const total = product.price * selectedStock;
-
+  useEffect(() => {
+    const totalPrice = productsOnCart.reduce((sum, product) => {
+      const price = parseFloat(product.price);
+      if (!isNaN(price)) {
+        return sum + price;
+      }
+      return sum;
+    }, 0);
+    setTotal(totalPrice);
+    console.log("totalPrice:", totalPrice);
+  }, [productsOnCart]);  
+  
   return (
     <Modal
       {...props}
@@ -37,33 +35,20 @@ const ModalCart = (props) => {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body className={style.bodyModal}>
-        <div className={style.containerBody}>
-          <img className={style.imagen} src={product.image} alt={product.name} />
-          <p className={style.name}>{product.name}</p>
-          <div className={style.quantityContainer}>
-            <p className={style.quantityLabel}>Cantidad:</p>
-            <div className={style.stock}>
-              <button
-                className={style.quantityButton}
-                onClick={() => handleStockChangeModal(-1)}
-                disabled={selectedStock === 1}
-              >
-                -
-              </button>
-              <span className={style.quantityValue}>{selectedStock}</span>
-              <button
-                className={style.quantityButton}
-                onClick={() => handleStockChangeModal(1)}
-                disabled={selectedStock === (product.stock || 1)}
-              >
-                +
-              </button>
+        {productsOnCart.map((product) => (
+          <div className={style.containerBody} key={product._id}>
+            <img className={style.imagen} src={product.image} alt={product.name} />
+            <div className={style.datos}>
+              <p className={style.name}>{product.name}</p>
+              <p className={style.price}>Precio: ${product.price}</p>
             </div>
           </div>
-          <p className={style.totalPrice}>Total: ${total}</p> {/* Muestra el precio total */}
-        </div>
+        ))}
       </Modal.Body>
-      <Modal.Footer>
+      <Modal.Footer className={style.footer}>
+        <div className={style.totalPriceContainer}>
+          <span className={style.totalPrice}>Total: ${total}</span>
+        </div>
         <Button onClick={props.onHide} className={style.seguir}>Seguir comprando</Button>
         <Link to={"/cart"} className={style.finish}>Finalizar compra</Link>
       </Modal.Footer>

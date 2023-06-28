@@ -33,6 +33,8 @@
     color: white;
     border-radius: 5px;
     border-style: solid;
+    padding: 3px;
+    border-width: 1px;
 }
 .linkBack:hover{
     background-color: white;
@@ -48,9 +50,6 @@
     height: 50px;
     border: none;
 }
-
-
-
 
 .containerCart {
     display: flex;
