@@ -4,27 +4,26 @@ import { useDispatch, useSelector } from 'react-redux';
 import Accordion from 'react-bootstrap/Accordion';
 import { upperBrands, upperBrandsSelected } from "../../../../redux/productActions";
 
-
 const Side = () => {
-    const { productSee, branes } = useSelector(state => state.products);
+    const { productSee, branes, productsExist } = useSelector(state => state.products);
 
     const filledbrands = () => {
 
-        let datas = localStorage.getItem("ProductSee");
+        let datas = localStorage.getItem("BrandsOfProductSee");
         let datasParse = JSON.parse(datas)
 
-        if (datas?.length > 0 && productSee.length < 1 ) {
-            let cartId = datasParse.map(pro => pro.brand)
-            return cartId;
+        if (datasParse?.length > 0 && productsExist) {
+            let branis = datasParse.map(pro => pro)
+            return branis;
         } else {
             return []
         }
     };
+
     const dispatch = useDispatch();
     const [brands, setBrands] = useState(filledbrands());
 
     const [brandsSelected, setBrandsSelecteds] = useState([]);
-
 
     useEffect(() => {
 
@@ -49,12 +48,23 @@ const Side = () => {
                 }
                 return 0;
             })
+
             return almacini;
         }
 
-        setBrands(mapBrands)
+        // console.log("useefec" + mapBrands());
+        // console.log("state" + brands);
+        let tok = mapBrands();
+        if (tok.length > 0) {
+            setBrands(mapBrands)
+        }
 
-        return () => setBrandsSelecteds([]);
+        localStorage.setItem("BrandsOfProductSee", JSON.stringify(tok));
+
+        return () => {
+            localStorage.removeItem("BrandsOfProductSee")
+            setBrandsSelecteds([])
+        };
     }, [productSee, branes]);
 
 
@@ -62,7 +72,6 @@ const Side = () => {
 
         dispatch(upperBrands(brands))
     }
-
 
     const handlerOnClick = (event) => {
         const marquite = event.target.value;
@@ -77,106 +86,38 @@ const Side = () => {
         dispatch(upperBrandsSelected(updateBrand));
     };
 
-
-
     return (
-
-        <Accordion  >
-            <Accordion.Item eventKey="0" >
-
-                <Accordion.Header className={style.header} >
+        <Accordion >
+            <Accordion.Item eventKey="0">
+                <Accordion.Header className={style.header}  >
                     <b>Marca</b>
                 </Accordion.Header>
 
-                <Accordion.Body  >
-                    <div className={style.contLi} >
+                <Accordion.Body >
+                    <div className={`${style.contLi} ${style.brandsContainer}`}>
                         {!branes.length
                             ? brands.map((brand, i) => {
-                                if (i < 20) {
                                     return (
-                                        <div key={i} className={style.listDispatch}
-                                        >
-                                            <input type="checkbox"
-
-                                                value={brand}
-
-                                                onChange={handlerClick}
-                                            />
+                                        <div key={i} className={`${style.listDispatch}`}>
+                                            <input type="checkbox" value={brand} onChange={handlerClick}/>
                                             <p>{brand}</p>
                                         </div>
                                     );
-                                }
                             })
                             : branes[0].map((brand, i) => {
-                                if (i < 20) {
                                     return (
-                                        <div className={style.listDispatch}
-                                        >
-                                            <input type="checkbox"
-
-                                                value={brand}
-                                                onClick={handlerOnClick}
-                                            />
+                                        <div className={style.listDispatch}>
+                                            <input type="checkbox" value={brand} onClick={handlerOnClick}/>
                                             <p>{brand}</p>
                                         </div>
                                     );
-                                }
                             })
                         }
-
                     </div>
                 </Accordion.Body>
             </Accordion.Item>
-
-            {brands.length > 20 && <Accordion.Item eventKey="1">
-                <Accordion.Header className={style.header}  >
-                    <b>Marca - 2</b>
-                </Accordion.Header>
-
-                <Accordion.Body >
-                    <div className={style.contLi}>
-                        {!branes.length
-                            ? brands.map((brand, i) => {
-                                if (i > 20) {
-                                    return (
-                                        <div key={i} className={style.listDispatch}
-                                        >
-                                            <input type="checkbox"
-
-                                                value={brand}
-
-                                                onChange={handlerClick}
-                                            />
-                                            <p>{brand}</p>
-                                        </div>
-                                    );
-                                }
-                            })
-                            : branes[0].map((brand, i) => {
-                                if (i > 20) {
-                                    return (
-                                        <div className={style.listDispatch}
-                                        >
-                                            <input type="checkbox"
-
-                                                value={brand}
-                                                onClick={handlerOnClick}
-                                            />
-                                            <p>{brand}</p>
-                                        </div>
-                                    );
-                                }
-                            })
-                        }
-
-                    </div>
-                </Accordion.Body>
-            </Accordion.Item>}
-
         </Accordion>
-
     )
-
 }
 
 export default Side;

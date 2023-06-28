@@ -3,6 +3,7 @@ import style from "./FormPayCart.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { createOrder, sendOrder, cleanPaymentLink } from "../../../redux/CartActions";
 import { useNavigate } from "react-router-dom";
+import mpLogo from "./mpLogo.png";
 
 const FormPayCart = ({ state, setFormInfo, setFormShipment, setFormPay }) => {
   const dispatch = useDispatch();
@@ -32,21 +33,26 @@ const FormPayCart = ({ state, setFormInfo, setFormShipment, setFormPay }) => {
   return (
     <div>
       {state && (
-        <div>
+        <div className={style.container}>
           <div>
-            <button
-              onClick={() => {
-                setFormInfo(false);
-                setFormShipment(true);
-                setFormPay(false);
-              }}
-            >
-              Regresar a método de envío
-            </button>
-            <button onClick={handleOnClick}>Terminar compra</button>
-            {showPayButton && <button onClick={handlePayButton}>Ir a pagar</button>}
+            <button className={style.finishBtn} onClick={handleOnClick}>Terminar compra</button>
           </div>
-          {/* </form> */}
+          <div>
+            {showPayButton && <button className={style.payBtn} onClick={handlePayButton}>
+              <img src={mpLogo} alt="" className={style.imgMP}/>
+              Pagar con Mercado Pago</button>}
+          </div>
+          <div>
+            <button className={style.backBtn}
+            onClick={() => {
+              setFormInfo(false);
+              setFormShipment(true);
+              setFormPay(false);
+            }}
+            >
+            Regresar a método de envío
+            </button>
+          </div>
         </div>
       )}
     </div>

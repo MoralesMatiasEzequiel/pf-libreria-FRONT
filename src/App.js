@@ -1,22 +1,20 @@
 import './App.css';
-import { Suspense, lazy } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
-
-const Navuno = lazy(() => import('./components/common/Nav/Nav'));
-const Menu = lazy(() => import('./components/common/Menu/Menu'));
-const Footer = lazy(() => import('./components/common/Footer/Footer'));
-const Home = lazy(() => import('./components/views/Home/Home'));
-const About = lazy(() => import('./components/views/About/About'));
-const Shop = lazy(() => import('./components/views/Shop/Shop'));
-const Cart = lazy(() => import('./components/views/Cart/Cart'));
-const Detail = lazy(() => import('./components/views/Shop/Detail/Detail'));
-const Arrepentimiento = lazy(() => import('./components/views/Arrepentimiento/Arrepentimiento'));
-const Terminos = lazy(() => import('./components/views/Terminos/Terminos'));
-const CartProducts = lazy(() => import('./components/views/CartProducts/CartProducts'));
-const Profile  = lazy(() => import('./components/views/Profile/Profile'));
-const Login = lazy(() => import('./components/common/Login/Login'));
-const Admin = lazy(() => import('./components/Admin/Dashboard/Dashboard'));
-const Form = lazy(() => import('./components/Admin/Form/Form'));
+import Navuno from './components/common/Nav/Nav';
+import Menu from './components/common/Menu/Menu';
+import Footer from './components/common/Footer/Footer';
+import Home from './components/views/Home/Home';
+import About from './components/views/About/About';
+import Shop from './components/views/Shop/Shop';
+import Cart from './components/views/Cart/Cart';
+import Detail from './components/views/Shop/Detail/Detail';
+import Arrepentimiento from './components/views/Arrepentimiento/Arrepentimiento';
+import Terminos from './components/views/Terminos/Terminos';
+import CartProducts from './components/views/CartProducts/CartProducts';
+import Profile from './components/views/Profile/Profile';
+import Login from './components/common/Login/Login';
+import Admin from './components/Admin/Dashboard/Dashboard';
+import Form from './components/Admin/Form/Form';
 
 function App() {
 
@@ -28,7 +26,6 @@ function App() {
 
   return (
     <div className="App">
-      <Suspense fallback={<h1>Cargando ...</h1>}>
         {!hidenavYmenu && <Navuno />}
         {!hideMenu && <Menu />}
         <Routes>
@@ -47,8 +44,6 @@ function App() {
           <Route path="/login" element={<Login />} />
         </Routes>
         {!hidenavYmenu && <Footer />}
-
-      </Suspense>
 
     </div>
   );

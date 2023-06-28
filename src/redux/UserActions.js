@@ -5,7 +5,6 @@ import { postUser } from "./UserSlice";
 export const postUserToBack = (user) => {
     return async (dispatch) => {
     
-        let userCreated = false;
         let newUser = {};
     
         if (user.sub && user.sub.includes('google')) {
@@ -27,13 +26,8 @@ export const postUserToBack = (user) => {
         }
             const { data } = await axios.post("/user", newUser);
             
-            if(data.includes('created')){
-                userCreated = true;
-            }
-            else{
-                userCreated = false;
-            }
+            const currentUser = data;
 
-        dispatch(postUser({userCreated, newUser}));
+        dispatch(postUser(currentUser));
     }
 }

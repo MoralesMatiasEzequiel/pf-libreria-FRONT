@@ -4,38 +4,45 @@
 
 .error {
 	color: red;
-	}
-	.formGroup {
+}
+
+.formGroup {
 	margin-bottom: 20px;
-	}
-	
-	.formLabel {
+}
+
+.formLabel {
 	color: #3f3f3f;
 	font-weight: bold;
-	}
-	
-	.formControl {
+}
+
+.formControl {
 	width: 100%;
 	padding: 10px;
 	border: 1px solid #ccc;
 	border-radius: 5px;
-	}
-	
-	.btnPrimary {
+}
+
+.btnPrimary {
 	background-color: #ff9e5c;
 	border-color: #ff9e5c;
 	color: white;
 	border-radius: 5px;
 	border-style: solid;
 	margin-bottom: 5px;
-	}
-	
-	.btnPrimary:hover {
+}
+
+.btnPrimary:disabled {
+	background-color: white;
+	color: #ccc;
+	border-color: #ccc;
+}
+
+.btnPrimary:enabled:hover {
 	background-color: white;
 	color: #ff9e5c;
 	border-color: #ff9e5c;
-	}
-	
-	input:not(:placeholder-shown) {
-		border: 2px solid #FF9E5C; 
-	}
+}
+
+input:not(:placeholder-shown) {
+	border: 2px solid #FF9E5C;
+}

@@ -1,17 +1,27 @@
 import style from './ModalCart.module.css';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { Link, useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { useState, useEffect } from "react";
 
 const ModalCart = (props) => {
+  const cart = useSelector(state => state.cart);
+  const productsOnCart = cart.productsOnCart;
+  const [total, setTotal] = useState(0); // Estado para almacenar el precio total de todos los productos en el carrito
 
-    const { id } = useParams();
-    const { products } = useSelector(state => state.products);
-    const product = products.find(item => item._id === id);
-
-
+  useEffect(() => {
+    const totalPrice = productsOnCart.reduce((sum, product) => {
+      const price = parseFloat(product.price);
+      if (!isNaN(price)) {
+        return sum + price;
+      }
+      return sum;
+    }, 0);
+    setTotal(totalPrice);
+    console.log("totalPrice:", totalPrice);
+  }, [productsOnCart]);  
+  
   return (
     <Modal
       {...props}
@@ -25,32 +35,21 @@ const ModalCart = (props) => {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body className={style.bodyModal}>
-        <div className={style.containerBody}>
-            <h6 className={style.titleProduct}>Producto</h6>
-            <h6 className={style.titleStock}>Cantidad</h6>
-            <h6 className={style.titlePrice}>Total</h6>
-        </div> 
-        <div className={style.containerBody}>
-        <img className={style.imagen} src={product.image} alt={product.name} />
-        <p className={style.name}>{product.name}</p>
-        {/* <Link to={`/shop/${id}`}>{product.name}</Link> */}
-        <select name="stock" id="" className={style.stock}>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
-        </select>
-        <p>${product.price}</p>
-        </div>
+        {productsOnCart.map((product) => (
+          <div className={style.containerBody} key={product._id}>
+            <img className={style.imagen} src={product.image} alt={product.name} />
+            <div className={style.datos}>
+              <p className={style.name}>{product.name}</p>
+              <p className={style.price}>Precio: ${product.price}</p>
+            </div>
+          </div>
+        ))}
       </Modal.Body>
-      <Modal.Footer>
-        <Button onClick={props.onHide}>Seguir comprando</Button>
+      <Modal.Footer className={style.footer}>
+        <div className={style.totalPriceContainer}>
+          <span className={style.totalPrice}>Total: ${total}</span>
+        </div>
+        <Button onClick={props.onHide} className={style.seguir}>Seguir comprando</Button>
         <Link to={"/cart"} className={style.finish}>Finalizar compra</Link>
       </Modal.Footer>
     </Modal>

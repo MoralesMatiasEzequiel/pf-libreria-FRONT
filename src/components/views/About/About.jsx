@@ -11,16 +11,22 @@ const About = () => {
       return JSON.parse(datos);
     } else {
       return {
-        user_name: "sdf",
-        user_email: "sdf",
+        user_name: "",
+        user_email: "",
 
-        message: "sdf",
+        message: "",
       };
     }
   };
 
 
   const [stateForm, setStateForm] = useState(lSFormContact());
+
+  const isDisabled =
+    stateForm.user_name.trim() === '' ||
+    stateForm.user_email.trim() === '' ||
+    stateForm.message.trim() === '';
+
 
   const handleChangeAbout = (event) => {
     setStateForm({
@@ -133,7 +139,7 @@ const About = () => {
                 className={style.formControl}
                 value={stateForm.user_name}
                 onChange={handleChangeAbout}
-								placeholder="Ingrese su nombre"
+                placeholder="Ingrese su nombre"
               />
               {formErrors.user_name && (
                 <div className={style.error}>{formErrors.user_name}</div>
@@ -150,7 +156,7 @@ const About = () => {
                 className={style.formControl}
                 value={stateForm.user_email}
                 onChange={handleChangeAbout}
-								placeholder="Ingrese su Email"
+                placeholder="Ingrese su Email"
               />
               {formErrors.user_email && (
                 <div className={style.error}>{formErrors.user_email}</div>
@@ -171,14 +177,12 @@ const About = () => {
                 <div className={style.error}>{formErrors.message}</div>
               )}
             </div>
-            {
-              // stateForm.user_name.length > 2 &&
-              // stateForm.user_email.length > 2 &&
-              // stateForm.message.length > 2 &&
-              < button type="submit" className={style.btnPrimary}>
-                Enviar
-              </button>
-            }
+
+
+            < button type="submit" disabled={isDisabled} className={style.btnPrimary}>
+              Enviar
+            </button>
+
 
           </form>
 
