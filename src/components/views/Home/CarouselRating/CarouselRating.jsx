@@ -6,7 +6,7 @@ import { Link } from "react-router-dom"; //
 import style from "../CarouselRating/CarouselRating.module.css"
 
 
-const CarouselRating = ({ clickDispatch }) => {
+const CarouselRating = ({ clickDispatch, dispatchProductsRatingToShop }) => {
     const { productsOnRating } = useSelector(state => state.products) //
     const productsRating = productsOnRating.slice(0, 12) //
 
@@ -33,23 +33,30 @@ const CarouselRating = ({ clickDispatch }) => {
 
 
     return (
-        <Carousel responsive={responsive} className={style.carousel} infinite={true} >
-        {
-          productsRating && productsRating.map((product, index) => {
-            return (
-              <div key={index} className={style.card} >
-                <img className={style.productImage} src={product.image} alt={product.name} />
-                <h5>{product.name}</h5>
-                <p className={style.rating}>Rating: {product.rating}</p>
-                <p className={style.priceNow}>Precio: ${product.price}</p>
-                <Link to={`/shop/${product._id}`}>
-                  <button onClick={() => clickDispatch(product._id)} >Ver producto</button>
-                </Link>
-              </div>
-            )
-          })
-        }
-      </Carousel>
+      <>
+          {
+            !!productsRating.length && <h2 className={style.h2}>Productos mas vendidos <Link to={"/shop"} className={style.link}><span onClick={() => dispatchProductsRatingToShop()} className={style.span}>Ver todos</span></Link></h2>
+          }
+
+          <Carousel responsive={responsive} className={style.carousel} infinite={true} >
+            {
+              productsRating && productsRating.map((product, index) => {
+                return (
+                  <div key={index} className={style.card} >
+                    <img className={style.productImage} src={product.image} alt={product.name} />
+                    <h5>{product.name}</h5>
+                    <p className={style.rating}>Rating: {product.rating}</p>
+                    <p className={style.priceNow}>Precio: ${product.price}</p>
+                    <Link to={`/shop/${product._id}`}>
+                      <button onClick={() => clickDispatch(product._id)} >Ver producto</button>
+                    </Link>
+                  </div>
+                )
+              })
+            }
+          </Carousel>
+                   
+      </>
     )
 };
 
