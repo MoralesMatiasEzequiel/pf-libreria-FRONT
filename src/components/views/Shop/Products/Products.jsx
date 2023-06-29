@@ -12,14 +12,17 @@ import {
 } from "../../../../redux/favoriteSlice";
 import { updateFavorites } from "../../../../redux/favoriteActions";
 
+
 const Products = () => {
   const { productSee, pag, productsExist, brandSelected } = useSelector(
     (state) => state.products
   );
 
   const { favItems } = useSelector((state) => state.favorites);
+	
+  const { currentUser } = useSelector((state) => state.user);
 
-  const userId = useSelector((state) => state.user.userId);
+	const userId = currentUser._id;
 
   const { isAuthenticated } = useAuth0();
 
@@ -95,7 +98,7 @@ const Products = () => {
 
   const handleFavoriteClick = (product) => {
     if (isAuthenticated) {
-      const isFavorite = favItems.some((item) => item._id === product._id);
+      const isFavorite = favItems?.some((item) => item._id === product._id);
       if (isFavorite) {
         dispatch(removeFromFavorites(product));
       } else {
@@ -105,6 +108,8 @@ const Products = () => {
     } else {
       alert("Debes estar autenticado para agregar productos a favoritos.");
     }
+		// console.log(favItems)
+
   };
 
   return (

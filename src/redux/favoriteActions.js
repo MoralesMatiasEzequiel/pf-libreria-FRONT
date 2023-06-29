@@ -1,13 +1,14 @@
 import axios from "axios";
-import { addToFavorites, removeFromFavorites, updatedFavorites } from "./favoriteSlice";
+import { updatedFavorites } from "./favoriteSlice";
 
-export const updateFavorites = (userId, favorites) => async (dispatch) => {
+export const updateFavorites = (userId, favItems) => async (dispatch) => {
   let userFav = {
     _id: userId,
-    favorites: favorites
+    favorites: favItems
   };
 
   const { data } = await axios.put('/user', userFav);
-  console.log(data.favorites);
+  console.log(data);
+	
   dispatch(updatedFavorites(userFav));
 };
