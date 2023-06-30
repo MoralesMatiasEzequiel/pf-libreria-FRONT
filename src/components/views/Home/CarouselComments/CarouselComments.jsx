@@ -4,11 +4,13 @@ import Carousel from 'react-multi-carousel';
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import style from "../CarouselComments/CarouselComments.module.css"
+import { useAuth0 } from "@auth0/auth0-react";
 
 
 const CarouselComments = () => {
     const { usersReviews } = useSelector(state => state.reviews)
     const reviews = usersReviews.slice(0, 15)
+    const { isAuthenticated } = useAuth0();
 
     const responsive = {
         superLargeDesktop: {
@@ -30,10 +32,14 @@ const CarouselComments = () => {
         }
       };
 
+    const profileActive = isAuthenticated 
+    ? (<Link to={"/createShopReview"} className={style.link}><span className={style.span}>Crear review</span></Link>) 
+    : (<Link to={"/login"} className={style.link}><span className={style.span}>Ingresar para dejar review</span></Link>) 
+
     return (
         <>
             {
-                !!reviews.length && <h2 className={style.h2}>Reviews de usuarios sobre la tienda <Link to={"/createShopReview"} className={style.link}><span className={style.span}>Hacer review</span></Link></h2> 
+                !!reviews.length && <h2 className={style.h2}>Reviews de usuarios sobre la tienda {profileActive}</h2> 
             }
 
             <Carousel responsive={responsive} className={style.carousel} infinite={true} >
