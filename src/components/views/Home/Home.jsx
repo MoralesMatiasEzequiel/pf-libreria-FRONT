@@ -1,13 +1,15 @@
 import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import {getProducts, getProductsSales, getProductsRating, getById, getProductsOnHome, showProductsSalesOnShop, showProductsRatingOnShop } from "../../../redux/productActions";
 import { postUserToBack } from "../../../redux/UserActions";
 import style from "../Home/Home.module.css"
 import CarouselSale from "./CarouselSale/CarouselSale";
 import CarouselRating from "./CarouselRating/CarouselRating";
+import { getReviews } from "../../../redux/ReviewsActions";
+import CarouselComments from "./CarouselComments/CarouselComments";
 
 
 
@@ -22,6 +24,7 @@ const Home = () => {
     dispatch(getProductsSales())
     dispatch(getProductsRating())
     dispatch(getProductsOnHome())
+    dispatch(getReviews())
     if (isAuthenticated) {
       dispatch(postUserToBack(user));
     }
@@ -47,16 +50,13 @@ const Home = () => {
   return (
     <div className={style.container}>
       {/*------------------------------------------- CARRUSEL PRODUCTOS EN OFERTA -----------------------------------------*/}
-      <h2 className={style.h2}>Productos en oferta <Link to={"/shop"} className={style.link}><span onClick={() => dispatchProductsSalesToShop()} className={style.span}>Ver todos</span></Link></h2>
-
-      <CarouselSale clickDispatch={clickDispatch} />
+      <CarouselSale clickDispatch={clickDispatch} dispatchProductsSalesToShop={dispatchProductsSalesToShop} />
 
       {/*------------------------------------------- CARRUSEL PRODUCTOS POR RATING ---------------------------------------- */}
-      <h2 className={style.h2}>Productos mas vendidos <Link to={"/shop"} className={style.link}><span onClick={() => dispatchProductsRatingToShop()} className={style.span}>Ver todos</span></Link></h2>
+      <CarouselRating clickDispatch={clickDispatch} dispatchProductsRatingToShop={dispatchProductsRatingToShop} />  
 
-      <CarouselRating clickDispatch={clickDispatch} />  
-
-      {/*------------------------------------------- FALTA CARRUSEL DE COMENTARIOS ---------------------------------------- */}   
+      {/*------------------------------------------- CARRUSEL DE COMENTARIOS ---------------------------------------- */}  
+      <CarouselComments />
 
     </div>
   )

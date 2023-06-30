@@ -15,6 +15,7 @@ import Profile from './components/views/Profile/Profile';
 import Login from './components/common/Login/Login';
 import Admin from './components/Admin/Dashboard/Dashboard';
 import Form from './components/Admin/Form/Form';
+import FormCreateReview from './components/common/FormCreateReview/FormCreateReview'
 
 function App() {
 
@@ -42,6 +43,7 @@ function App() {
           <Route path='/form' element={<Form />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/login" element={<Login />} />
+          <Route path='/createShopReview' element={<FormCreateReview />} />
         </Routes>
         {!hidenavYmenu && <Footer />}
 
