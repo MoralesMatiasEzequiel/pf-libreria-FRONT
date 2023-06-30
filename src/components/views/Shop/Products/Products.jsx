@@ -6,11 +6,7 @@ import { addProductOnCart } from "../../../../redux/CartActions";
 import { useAuth0 } from "@auth0/auth0-react";
 import Paginado from "../Paginado/Paginado";
 import style from "./Products.module.css";
-import {
-  addToFavorites,
-  removeFromFavorites,
-} from "../../../../redux/favoriteSlice";
-import { updateFavorites } from "../../../../redux/favoriteActions";
+import { addFavorite, removeFavorite, updateFavorites } from "../../../../redux/favoriteActions";
 
 
 const Products = () => {
@@ -30,8 +26,12 @@ const Products = () => {
     let datas = localStorage.getItem("protucts_cart");
     let datasParse = JSON.parse(datas);
 
+    
+    
     if (datas?.length > 0) {
-      let cartId = datasParse.map((pro) => pro._id);
+      
+      let cartId = datasParse.map((pro) => pro?._id);
+      //console.log(cartId);
       return cartId;
     } else {
       return [];
@@ -72,6 +72,13 @@ const Products = () => {
     }
   }, [brandSelected, productSee, productsInCart]);
 
+  useEffect(() => {
+    if(userId){
+      console.log(favItems);
+      dispatch(updateFavorites(userId, favItems));
+    }
+  }, [favItems, dispatch, userId, isAuthenticated])
+
   let desde = (pag - 1) * 12;
   let hasta = pag * 12;
   const viewsProducts = allProducts.slice(desde, hasta);
@@ -80,7 +87,7 @@ const Products = () => {
     let cantPages = Math.round(allProducts.length / 12 + 0.4);
     setPagines(cantPages);
     dispatch(totalPag(cantPages));
-  }, [allProducts]);
+  }, [allProducts, dispatch]);
 
   const addToCart = (product) => {
     dispatch(addProductOnCart(product));
@@ -96,19 +103,17 @@ const Products = () => {
     }
   };
 
-  const handleFavoriteClick = (product) => {
+  const handleFavoriteClick = (productId) => {
     if (isAuthenticated) {
-      const isFavorite = favItems?.some((item) => item._id === product._id);
+      const isFavorite = favItems?.some((item) => item === productId);
       if (isFavorite) {
-        dispatch(removeFromFavorites(product));
+        dispatch(removeFavorite(productId));
       } else {
-        dispatch(addToFavorites(product));
+        dispatch(addFavorite(productId));
       }
-      dispatch(updateFavorites(userId, favItems)); // Actualiza la lista de favoritos en el servidor
     } else {
       alert("Debes estar autenticado para agregar productos a favoritos.");
     }
-		// console.log(favItems)
 
   };
 
@@ -138,7 +143,7 @@ const Products = () => {
 
         {productsExist &&
           viewsProducts?.map((base, index) => {
-            const isFavorite = favItems.some((item) => item._id === base._id);
+            const isFavorite = favItems.some((item) => item === base._id);
             return (
               <div key={index} className={style.productCard}>
                 <Link to={"/shop/" + base._id}>
@@ -157,7 +162,7 @@ const Products = () => {
 
                     <div className={style.productLinks}>
                       <button
-                        onClick={() => handleFavoriteClick(base)}
+                        onClick={() => handleFavoriteClick(base._id)}
                         className={style.favoriteButton}
                       >
                         {isFavorite ? (

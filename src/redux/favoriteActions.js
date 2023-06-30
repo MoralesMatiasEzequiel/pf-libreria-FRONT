@@ -1,14 +1,27 @@
 import axios from "axios";
-import { updatedFavorites } from "./favoriteSlice";
+import { addToFavorites, removeFromFavorites, updatedFavorites } from "./favoriteSlice";
 
-export const updateFavorites = (userId, favItems) => async (dispatch) => {
-  let userFav = {
-    _id: userId,
-    favorites: favItems
-  };
+export const addFavorite = (productId) => {
+  return (dispatch) => {
+    dispatch(addToFavorites(productId))
+  }
+}
 
-  const { data } = await axios.put('/user', userFav);
-  console.log(data);
+export const removeFavorite = (productId) => {
+  return (dispatch) => {
+    dispatch(removeFromFavorites(productId))
+  }
+}
+
+export const updateFavorites = (userId, favItems) => {
+  return async (dispatch) => {
+    let userFav = {
+      _id: userId,
+      favorites: favItems
+    };
+
+    const { data } = await axios.put('/user', userFav);
+    console.log(data);
 	
-  dispatch(updatedFavorites(userFav));
-};
+    dispatch(updatedFavorites(userFav));
+}};
