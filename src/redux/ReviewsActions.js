@@ -12,6 +12,7 @@ export const getReviews = () => {
 export const postReviews = (review) => {
     return async (dispatch) => {
         const { data } = await axios.post("/review", review);
-        dispatch(createdReview(data));
+        console.log(data);
+        // dispatch(createdReview(data));
     };
 };
