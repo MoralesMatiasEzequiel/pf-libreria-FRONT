@@ -65,3 +65,32 @@
 .errors {
     color: red;
 }
+
+.starClass{
+    font-size: 40px;
+}
+.starClass:hover{
+    cursor: pointer;
+    color: #FF9E5C;
+}
+
+.enviarBtn {
+	background-color: #ff9e5c;
+	border-color: #ff9e5c;
+	color: white;
+	border-radius: 5px;
+	border-style: solid;
+	margin-bottom: 5px;
+}
+
+.enviarBtn:disabled {
+	background-color: white;
+	color: #ccc;
+	border-color: #ccc;
+}
+
+.enviarBtn:enabled:hover {
+	background-color: white;
+	color: #ff9e5c;
+	border-color: #ff9e5c;
+}
