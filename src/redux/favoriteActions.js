@@ -1,5 +1,12 @@
 import axios from "axios";
-import { addToFavorites, removeFromFavorites, updatedFavorites } from "./favoriteSlice";
+import { addToFavorites, removeFromFavorites, updatedFavorites, clearFavorite } from "./favoriteSlice";
+
+import { createSelector } from '@reduxjs/toolkit';
+
+export const selectFavorites = createSelector(
+  (state) => state.favorites.favItems,
+  (favItems) => favItems
+);
 
 export const addFavorite = (productId) => {
   return (dispatch) => {
@@ -10,6 +17,11 @@ export const addFavorite = (productId) => {
 export const removeFavorite = (productId) => {
   return (dispatch) => {
     dispatch(removeFromFavorites(productId))
+  }
+}
+export const clearFav = (productId) => {
+  return (dispatch) => {
+    dispatch(clearFavorite(productId))
   }
 }
 
