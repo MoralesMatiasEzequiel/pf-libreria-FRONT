@@ -15,6 +15,8 @@ import Profile from './components/views/Profile/Profile';
 import Login from './components/common/Login/Login';
 import Admin from './components/Admin/Dashboard/Dashboard';
 import Form from './components/Admin/Form/Form';
+import FormCreateReview from './components/common/FormCreateReview/FormCreateReview'
+import Favorites from './components/views/Favorites/Favorites';
 
 function App() {
 
@@ -36,12 +38,14 @@ function App() {
           <Route path='/cart' element={<CartProducts />}/>
           <Route path='/checkout' element={<Cart />}/>
           <Route path='/payment' />
+					<Route path='/favorites' element={<Favorites/>}/>
           <Route path="/arrepentimiento" element={<Arrepentimiento />} />
           <Route path="/terminos" element={<Terminos />} />
           <Route path='/admin' element={<Admin />} />
           <Route path='/form' element={<Form />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/login" element={<Login />} />
+          <Route path='/createShopReview' element={<FormCreateReview />} />
         </Routes>
         {!hidenavYmenu && <Footer />}
 

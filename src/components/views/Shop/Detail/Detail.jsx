@@ -6,6 +6,8 @@ import ModalCart from "../../../common/Modals/ModalCart/ModalCart";
 import { addProductOnCart } from "../../../../redux/CartActions";
 import { Rating } from '@mui/material';
 import { rateProduct } from "../../../../redux/productActions";
+import { useAuth0 } from "@auth0/auth0-react";
+import { addFavorite, removeFavorite, updateFavorites } from "../../../../redux/favoriteActions";
 
 const Detail = () => {
   const { id } = useParams();
@@ -13,7 +15,36 @@ const Detail = () => {
   const { products } = useSelector(state => state.products);
   const product = products.find(item => item._id === id);
 
+	const { favItems } = useSelector((state) => state.favorites);
+	
+  const { currentUser } = useSelector((state) => state.user);
+
+	const userId = currentUser._id;
+
+  const { isAuthenticated } = useAuth0();
+
   const [modalShow, setModalShow] = useState(false);
+	
+	useEffect(() => {
+    if(userId){
+      console.log(favItems);
+      dispatch(updateFavorites(userId, favItems));
+    }
+  }, [favItems, dispatch, userId, isAuthenticated])
+	
+	const handleFavoriteClick = (productId) => {
+    if (isAuthenticated) {
+      const isFavorite = favItems?.some((item) => item === productId);
+      if (isFavorite) {
+        dispatch(removeFavorite(productId));
+      } else {
+        dispatch(addFavorite(productId));
+      }
+    } else {
+      alert("Debes estar autenticado para agregar productos a favoritos.");
+    }
+
+  };
 
   const [rating, setRating] = useState(product.rating);
 
@@ -38,8 +69,13 @@ const Detail = () => {
     // Lógica para agregar o quitar de favoritos
   };
 
+  useEffect(() => {
+    // Aquí puedes agregar la lógica para obtener los detalles del producto según su id
+  }, [id, dispatch]);
+
+	
   const addToCart = (product) => {
-    dispatch(addProductOnCart(product))
+		dispatch(addProductOnCart(product))
     setProductsInCart([...productsInCart, product._id])
     let datas = localStorage.getItem("protucts_cart");
     if (!datas) {
@@ -54,7 +90,14 @@ const Detail = () => {
 
 
 
+	if (!product) {
+    return <div>Producto no encontrado</div>;
+  }
+
+	const isFavorite = favItems?.some((item) => item === product._id);
+
   return (
+		
     <div className={style.container}>
       <div className="row">
         <div className="col-md-6 d-flex align-items-center">
@@ -87,9 +130,16 @@ const Detail = () => {
                   </button>
 
                 }
-                <button className={style.btnFavorite} onClick={handleFavoriteClick}>
-                  <i className="bi bi-heart"></i> Favoritos
-                </button>
+								<button
+									onClick={() => handleFavoriteClick(product._id)}
+									className={style.btnFavorite}
+								>
+									{isFavorite ? (
+										<i className="bi bi-heart-fill">QUITAR DE FAVORITOS</i> 
+									) : (
+										<i className="bi bi-heart">AGREGAR A FAVORITOS</i>
+									)}
+								</button>
               </div>
             </div>
           </div>
