@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { getAllProducts, getProductById, getProductsByName, getProductsBySubcategory, nextpageState, backPageState, nextTwopageState, backTwoPageState, orderByAzState, orderByZaState, orderPriceToLowState, orderPriceToUpState, getProductsOnSale, getProductsOnRating, upperBrandsState, upperBrandsSelectedState, FiltSubCategoriesState, saveProducts, totalPagState, createProductState, productsSalesOnShop, productsRatingOnShop } from "./productSlice";
+import { getAllProducts, getProductById, getProductsByName, getProductsBySubcategory, nextpageState, backPageState, nextTwopageState, backTwoPageState, orderByAzState, orderByZaState, orderPriceToLowState, orderPriceToUpState, getProductsOnSale, getProductsOnRating, upperBrandsState, upperBrandsSelectedState, FiltSubCategoriesState, saveProducts, totalPagState, createProductState, productsSalesOnShop, productsRatingOnShop, changeRating } from "./productSlice";
 
 export const getProducts = () => {
     return async (dispatch) => {
@@ -159,4 +159,42 @@ export const createProduct = (product) => {
         }
 
     };
+}
+
+// ------------------------- rate product
+
+export const rateProduct = (productId, rating) => {
+
+    return async (dispatch) => {
+
+        let dataToSend = {
+            _id: productId,
+        };
+    
+        if (rating === 1) {
+            dataToSend.oneStarReviews = 1;
+        } else if (rating === 2) {
+            dataToSend.twoStarsReviews = 1;
+        } else if (rating === 3) {
+            dataToSend.threeStarsReviews = 1;
+        } else if (rating === 4) {
+            dataToSend.fourStarsReviews = 1;
+        } else if (rating === 5) {
+            dataToSend.fiveStarsReviews = 1;
+        }
+
+        try {
+            const { data } = await axios.put("/product", dataToSend);
+
+            const dataToSlice = {
+                _id: productId,
+                rating: data
+            }
+           
+            dispatch(changeRating(dataToSlice));
+        } catch (error) {
+            console.log(error.message);
+        }
+
+    }
 }
