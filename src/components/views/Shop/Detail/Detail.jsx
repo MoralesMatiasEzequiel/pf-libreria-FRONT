@@ -1,9 +1,11 @@
 import style from "./Detail.module.css";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, Link } from "react-router-dom";
 import ModalCart from "../../../common/Modals/ModalCart/ModalCart";
 import { addProductOnCart } from "../../../../redux/CartActions";
+import { Rating } from '@mui/material';
+import { rateProduct } from "../../../../redux/productActions";
 import { useAuth0 } from "@auth0/auth0-react";
 import { addFavorite, removeFavorite, updateFavorites } from "../../../../redux/favoriteActions";
 
@@ -44,6 +46,8 @@ const Detail = () => {
 
   };
 
+  const [rating, setRating] = useState(product.rating);
+
   const filledcart = () => {
 
     let datas = localStorage.getItem("protucts_cart");
@@ -57,11 +61,17 @@ const Detail = () => {
   };
   const [productsInCart, setProductsInCart] = useState(filledcart());
 
+  if (!product) {
+    return <div>Producto no encontrado</div>;
+  }
+
+  const handleFavoriteClick = () => {
+    // Lógica para agregar o quitar de favoritos
+  };
 
   useEffect(() => {
     // Aquí puedes agregar la lógica para obtener los detalles del producto según su id
   }, [id, dispatch]);
-
 
 	
   const addToCart = (product) => {
@@ -76,6 +86,9 @@ const Detail = () => {
       localStorage.setItem("protucts_cart", JSON.stringify(newdata))
     }
   }
+  
+
+
 
 	if (!product) {
     return <div>Producto no encontrado</div>;
@@ -96,9 +109,16 @@ const Detail = () => {
           <div className="card" style={{ width: "100%", height: "450px", marginTop: "25px", marginBottom: "25px" }}>
             <div className="card-body" style={{ padding: "10px" }}>
               <h5 className="card-title" style={{ color: "#191919", fontFamily: "Montserrat, sans-serif", fontWeight: "bold", fontSize: "24px", padding: "10px" }}>{product.name}</h5>
+              <p style={{ color: "#3F3F3F", fontSize: "18px", padding: "10px" }}><Rating
+                name="simple-controlled"
+                value={rating}
+                onChange={(event, newRating) => {
+                  setRating(newRating);
+                  dispatch(rateProduct(product._id, newRating));
+                }}
+              /></p>
               <p style={{ color: "#3F3F3F", fontSize: "18px", padding: "10px" }}>Marca: {product.brand}</p>
               <p style={{ color: "#3F3F3F", fontSize: "18px", padding: "10px" }}>Stock: {product.stock}</p>
-              <p style={{ color: "#3F3F3F", fontSize: "18px", padding: "10px" }}>Rating: {product.rating}</p>
               <p style={{ color: "#3F3F3F", fontSize: "18px", padding: "10px" }}>Detalle del producto: {product.description}</p>
               <h5 style={{ color: "#191919", fontFamily: "Montserrat, sans-serif", fontWeight: "bold", fontSize: "24px", padding: "10px" }}>$ {product.price}</h5>
 
