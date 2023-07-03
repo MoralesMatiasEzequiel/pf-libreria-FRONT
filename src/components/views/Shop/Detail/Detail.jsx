@@ -182,13 +182,16 @@ const Detail = () => {
                     <i className="bi bi-cart"></i> Agregar al carrito
                   </button>
                 )}
-                <button onClick={() => handleFavoriteClick(product._id)} className={style.btnFavorite}>
+                {
+                  isAuthenticated && (<button onClick={() => handleFavoriteClick(product._id)} className={style.btnFavorite}>
                   {isFavorite ? (
                     <i className="bi bi-heart-fill">QUITAR DE FAVORITOS</i>
                   ) : (
                     <i className="bi bi-heart">AGREGAR A FAVORITOS</i>
                   )}
-                </button>
+                </button>)
+                }
+                
               </div>
             </div>
           </div>

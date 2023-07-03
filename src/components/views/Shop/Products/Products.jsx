@@ -167,7 +167,8 @@ const Products = () => {
                     </div>
 
                     <div className={style.productLinks}>
-                      <button
+                      {
+                        isAuthenticated && (<button
                         onClick={() => handleFavoriteClick(base._id)}
                         className={style.favoriteButton}
                       >
@@ -176,7 +177,9 @@ const Products = () => {
                         ) : (
                           <i className="bi bi-heart"></i>
                         )}
-                      </button>
+                      </button>)
+                      }
+                      
                       {productsInCart.includes(base._id) ? (
                         <button
                           onClick={() => removeFromCart(base._id)}
