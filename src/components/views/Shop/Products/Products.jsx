@@ -2,12 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { totalPag, getProducts } from "../../../../redux/productActions";
-import { addProductOnCart } from "../../../../redux/CartActions";
+import { addProductOnCart, deleteProductFromCart } from "../../../../redux/CartActions";
 import { useAuth0 } from "@auth0/auth0-react";
 import Paginado from "../Paginado/Paginado";
 import style from "./Products.module.css";
 import { addFavorite, removeFavorite, updateFavorites } from "../../../../redux/favoriteActions";
-
 
 const Products = () => {
   const { productSee, pag, productsExist, brandSelected } = useSelector(
@@ -25,9 +24,6 @@ const Products = () => {
   const filledcart = () => {
     let datas = localStorage.getItem("protucts_cart");
     let datasParse = JSON.parse(datas);
-
-    
-    
     if (datas?.length > 0) {
       
       let cartId = datasParse.map((pro) => pro?._id);
@@ -103,6 +99,17 @@ const Products = () => {
     }
   };
 
+  const removeFromCart = (productId) => {
+    dispatch(deleteProductFromCart(productId));
+    setProductsInCart(productsInCart.filter(id => id !== productId));
+
+    let datas = localStorage.getItem("protucts_cart");
+    if (datas) {
+      let newdata = JSON.parse(datas).filter(product => product._id !== productId);
+      localStorage.setItem("protucts_cart", JSON.stringify(newdata));
+    }
+  };
+
   const handleFavoriteClick = (productId) => {
     if (isAuthenticated) {
       const isFavorite = favItems?.some((item) => item === productId);
@@ -114,7 +121,6 @@ const Products = () => {
     } else {
       alert("Debes estar autenticado para agregar productos a favoritos.");
     }
-
   };
 
   return (
@@ -172,7 +178,11 @@ const Products = () => {
                         )}
                       </button>
                       {productsInCart.includes(base._id) ? (
-                        <i className="bi bi-cart-check"></i>
+                        <button
+                          onClick={() => removeFromCart(base._id)}
+                        >
+                          <i className="bi bi-cart-check"></i>
+                        </button>
                       ) : (
                         <button
                           onClick={() => {

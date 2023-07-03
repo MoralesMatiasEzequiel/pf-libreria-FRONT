@@ -156,6 +156,12 @@
     background-color: white;
     color: #ff9e5c;
 }
+.compraBtn:disabled{
+  background-color: white;
+  color: #ccc;
+  border-color: #ccc;
+}
+
 .link{
     margin-top: 15px;
     margin-bottom: 15px;
