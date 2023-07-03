@@ -47,11 +47,15 @@ const CarouselComments = () => {
                 reviews && reviews.map((review, index) => {
                     if (review.userNickname && review.rating && review.message) {
                         return (
-                        <div key={index} className={style.card} >
-                            <h5>{review.userNickname}</h5>
-                            <p>{review.rating}</p>
-                            <p>{review.message}</p>
-                        </div>
+                          <div key={index} className={style.card}>
+                            <h5 className={style.userNickname}>{review.userNickname}</h5>
+                            <p className={style.rating}>
+                              {Array.from({ length: review.rating }).map((_, index) => (
+                                <i key={index} className="bi bi-star-fill"></i>
+                              ))}
+                            </p>
+                            <p className={style.message}>{review.message}</p>
+                          </div>
                         )
                     }
                 })

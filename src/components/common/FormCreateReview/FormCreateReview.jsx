@@ -67,7 +67,7 @@ const FormCreateReview = () => {
       };
       stars.push(
         <span key={i} className={style.starClass} data-value={i} onClick={() => handleStarClick(i)}>
-          <i className="bi bi-star" style={starStyle}> </i>
+          <i className="bi bi-star-fill" style={starStyle}> </i>
         </span>
       );
     }

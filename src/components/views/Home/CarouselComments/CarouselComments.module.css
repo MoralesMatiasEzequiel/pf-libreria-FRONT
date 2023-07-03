@@ -8,14 +8,14 @@
   background-color: #FF9E5C;
   color: white;
   font-size: 22px;
+  border: solid 2px #FF9E5C;
   border-radius: 5px;
   padding: 5px;
 }
 .span:hover{
   background-color: white;
   color:#FF9E5C;
-  border-color: #FF9E5C;
-  border-style: solid;
+  border: solid 2px #FF9E5C;
   padding: 5px;
 }
 
@@ -43,29 +43,6 @@
   height: 100%;
 }
 
-.productImage {
-  padding-top: 5px;
-  height: 300px;
-  width: 95%;
-  padding: 40px;
-}
-
-.priceBefore {
-  color: red;
-  font-size: 18px;
-}
-
-.priceNow {
-  margin-top: -15px;
-  color: green;
-  font-size: 20px;
-}
-
-.rating {
-  font-size: 20px;
-  color: #FF9E5C;
-}
-
 .card button {
   border: none;
   outline: 0;
@@ -85,4 +62,43 @@
   color:#FF9E5C;
   border-color: #FF9E5C;
   border-style: solid;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
+  max-width: 300px;
+  margin: auto 1rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.userNickname {
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 5px;
+  margin-top: 15px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 5px;
+  background-color: #FF9E5C;
+  color: white;
+}
+
+.rating {
+  font-size: 20px;
+  color: #FF9E5C;
+  margin-bottom: 5px;
+}
+
+.message {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  height: 280px;
+  padding: 15px;
+  margin: auto 15px;
+  margin-bottom: 15px;
+  text-align: justify;
 }
