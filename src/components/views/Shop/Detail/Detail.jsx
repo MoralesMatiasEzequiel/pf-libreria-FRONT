@@ -1,5 +1,5 @@
 import style from "./Detail.module.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, Link } from "react-router-dom";
 import ModalCart from "../../../common/Modals/ModalCart/ModalCart";
@@ -15,24 +15,31 @@ const Detail = () => {
   const { products } = useSelector(state => state.products);
   const product = products.find(item => item._id === id);
 
-	const { favItems } = useSelector((state) => state.favorites);
-	
+  const { favItems } = useSelector((state) => state.favorites);
+
   const { currentUser } = useSelector((state) => state.user);
 
-	const userId = currentUser._id;
+  const userId = currentUser._id;
 
   const { isAuthenticated } = useAuth0();
 
   const [modalShow, setModalShow] = useState(false);
-	
-	useEffect(() => {
-    if(userId){
+
+
+  const { oneStarReviews, twoStarsReviews, threeStarsReviews, fourStarsReviews, fiveStarsReviews } = product;
+  const total = oneStarReviews + twoStarsReviews + threeStarsReviews + fourStarsReviews + fiveStarsReviews;
+  console.log(total);
+
+  const [totalVotes, setTotalVotes] = useState(total); // Estado para almacenar el total de votos
+
+  useEffect(() => {
+    if (userId) {
       console.log(favItems);
       dispatch(updateFavorites(userId, favItems));
     }
-  }, [favItems, dispatch, userId, isAuthenticated])
-	
-	const handleFavoriteClick = (productId) => {
+  }, [favItems, dispatch, userId, isAuthenticated]);
+
+  const handleFavoriteClick = (productId) => {
     if (isAuthenticated) {
       const isFavorite = favItems?.some((item) => item === productId);
       if (isFavorite) {
@@ -43,20 +50,19 @@ const Detail = () => {
     } else {
       alert("Debes estar autenticado para agregar productos a favoritos.");
     }
-
   };
 
   const [rating, setRating] = useState(product.rating);
+  const [showDisabledRating, setShowDisabledRating] = useState(false); // Estado para controlar la visualización del componente Rating deshabilitado
 
   const filledcart = () => {
-
     let datas = localStorage.getItem("protucts_cart");
-    let datasParse = JSON.parse(datas)
+    let datasParse = JSON.parse(datas);
     if (datas?.length > 0) {
-      let cartId = datasParse.map(pro => pro._id)
+      let cartId = datasParse.map(pro => pro._id);
       return cartId;
     } else {
-      return ["nada"]
+      return ["nada"];
     }
   };
   const [productsInCart, setProductsInCart] = useState(filledcart());
@@ -65,93 +71,135 @@ const Detail = () => {
     return <div>Producto no encontrado</div>;
   }
 
-  const handleFavoriteClick = () => {
-    // Lógica para agregar o quitar de favoritos
-  };
-
-  useEffect(() => {
-    // Aquí puedes agregar la lógica para obtener los detalles del producto según su id
-  }, [id, dispatch]);
-
-	
   const addToCart = (product) => {
-		dispatch(addProductOnCart(product))
-    setProductsInCart([...productsInCart, product._id])
+    dispatch(addProductOnCart(product));
+    setProductsInCart([...productsInCart, product._id]);
     let datas = localStorage.getItem("protucts_cart");
     if (!datas) {
-      localStorage.setItem("protucts_cart", JSON.stringify([product]))
+      localStorage.setItem("protucts_cart", JSON.stringify([product]));
     } else {
-      let newdata = JSON.parse(datas)
-      newdata.push(product)
-      localStorage.setItem("protucts_cart", JSON.stringify(newdata))
+      let newdata = JSON.parse(datas);
+      newdata.push(product);
+      localStorage.setItem("protucts_cart", JSON.stringify(newdata));
     }
-  }
-  
+  };
 
-
-
-	if (!product) {
+  if (!product) {
     return <div>Producto no encontrado</div>;
   }
 
-	const isFavorite = favItems?.some((item) => item === product._id);
+  const isFavorite = favItems?.some((item) => item === product._id);
 
   return (
-		
     <div className={style.container}>
       <div className="row">
         <div className="col-md-6 d-flex align-items-center">
-          <div className="card" style={{ width: "100%", height: "450px", display: "flex", justifyContent: "center", alignItems: "center", marginTop: "25px", marginBottom: "25px" }}>
-            <img className="card-img-top" src={product.image} alt={product.name} style={{ maxWidth: "300px", maxHeight: "400px" }} />
+          <div
+            className="card"
+            style={{
+              width: "100%",
+              height: "450px",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              marginTop: "25px",
+              marginBottom: "25px"
+            }}
+          >
+            <img
+              className="card-img-top"
+              src={product.image}
+              alt={product.name}
+              style={{ maxWidth: "300px", maxHeight: "400px" }}
+            />
           </div>
         </div>
         <div className="col-md-6 d-flex align-items-center justify-content-center">
-          <div className="card" style={{ width: "100%", height: "450px", marginTop: "25px", marginBottom: "25px" }}>
+          <div
+            className="card"
+            style={{ width: "100%", height: "450px", marginTop: "25px", marginBottom: "25px" }}
+          >
             <div className="card-body" style={{ padding: "10px" }}>
-              <h5 className="card-title" style={{ color: "#191919", fontFamily: "Montserrat, sans-serif", fontWeight: "bold", fontSize: "24px", padding: "10px" }}>{product.name}</h5>
-              <p style={{ color: "#3F3F3F", fontSize: "18px", padding: "10px" }}><Rating
-                name="simple-controlled"
-                value={rating}
-                onChange={(event, newRating) => {
-                  setRating(newRating);
-                  dispatch(rateProduct(product._id, newRating));
+              <h5
+                className="card-title"
+                style={{
+                  color: "#191919",
+                  fontFamily: "Montserrat, sans-serif",
+                  fontWeight: "bold",
+                  fontSize: "24px",
+                  padding: "10px"
                 }}
-              /></p>
+              >
+                {product.name}
+              </h5>
+              {showDisabledRating && (
+                <p style={{ color: "#3F3F3F", fontSize: "18px", padding: "10px" }}>
+                  <Rating name="disabled" value={rating} disabled /> ({totalVotes})
+                </p>
+              )}
+              {!showDisabledRating && (
+                <p style={{ color: "#3F3F3F", fontSize: "18px", padding: "10px" }}>
+                  <Rating
+                    name="simple-controlled"
+                    value={rating}
+                    onChange={(event, newRating) => {
+                      setRating(newRating);
+                      setShowDisabledRating(true); // Mostrar el Rating deshabilitado después de que el usuario haya ingresado un valor
+                      dispatch(rateProduct(product._id, newRating));
+                      setTotalVotes(prevVotes => prevVotes + 1);
+                    }}
+                  /> ({totalVotes})
+                </p>
+              )}
               <p style={{ color: "#3F3F3F", fontSize: "18px", padding: "10px" }}>Marca: {product.brand}</p>
               <p style={{ color: "#3F3F3F", fontSize: "18px", padding: "10px" }}>Stock: {product.stock}</p>
               <p style={{ color: "#3F3F3F", fontSize: "18px", padding: "10px" }}>Detalle del producto: {product.description}</p>
-              <h5 style={{ color: "#191919", fontFamily: "Montserrat, sans-serif", fontWeight: "bold", fontSize: "24px", padding: "10px" }}>$ {product.price}</h5>
+              <h5
+                style={{
+                  color: "#191919",
+                  fontFamily: "Montserrat, sans-serif",
+                  fontWeight: "bold",
+                  fontSize: "24px",
+                  padding: "10px"
+                }}
+              >
+                $ {product.price}
+              </h5>
 
               <div className={style.buttons}>
-                {productsInCart.includes(product._id)
-                  ? <p className={style.enCarrito}>EN CARRITO <i class="bi bi-cart-check"></i></p>
-                  : <button className={style.btnCart} onClick={() => { setModalShow(true); addToCart(product); }}>
+                {productsInCart.includes(product._id) ? (
+                  <p className={style.enCarrito}>
+                    EN CARRITO <i className="bi bi-cart-check"></i>
+                  </p>
+                ) : (
+                  <button
+                    className={style.btnCart}
+                    onClick={() => {
+                      setModalShow(true);
+                      addToCart(product);
+                    }}
+                  >
                     <i className="bi bi-cart"></i> Agregar al carrito
                   </button>
-
-                }
-								<button
-									onClick={() => handleFavoriteClick(product._id)}
-									className={style.btnFavorite}
-								>
-									{isFavorite ? (
-										<i className="bi bi-heart-fill">QUITAR DE FAVORITOS</i> 
-									) : (
-										<i className="bi bi-heart">AGREGAR A FAVORITOS</i>
-									)}
-								</button>
+                )}
+                <button onClick={() => handleFavoriteClick(product._id)} className={style.btnFavorite}>
+                  {isFavorite ? (
+                    <i className="bi bi-heart-fill">QUITAR DE FAVORITOS</i>
+                  ) : (
+                    <i className="bi bi-heart">AGREGAR A FAVORITOS</i>
+                  )}
+                </button>
               </div>
             </div>
           </div>
         </div>
         <div className={style.linkDiv}>
-        <Link to={"/shop"} className={style.linkBack}>{"Volver a Tienda"}</Link>
+          <Link to={"/shop"} className={style.linkBack}>
+            {"Volver a Tienda"}
+          </Link>
         </div>
       </div>
-      <ModalCart
-        show={modalShow}
-        onHide={() => setModalShow(false)}
-      />
+      <ModalCart show={modalShow} onHide={() => setModalShow(false)} />
     </div>
   );
 };
