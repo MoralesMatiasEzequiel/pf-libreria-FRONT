@@ -10,6 +10,7 @@ const CartProducts = () => {
   const { productsOnCart } = useSelector((state) => state.cart);
 
   const [selectedStock, setSelectedStock] = useState({});
+  const isDisabled = !productsOnCart.length
 
   const removeProduct = (id) => {
     dispatch(deleteProductFromCart(id));
@@ -122,7 +123,7 @@ const CartProducts = () => {
       </p>
 
       <Link to={"/checkout"} className={style.link}>
-        <button className={style.compraBtn}>Hacer compra</button>
+        <button disabled={isDisabled} className={style.compraBtn}>Hacer compra</button>
       </Link>
     </div>
   );
