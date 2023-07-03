@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, Link } from "react-router-dom";
 import ModalCart from "../../../common/Modals/ModalCart/ModalCart";
-import { addProductOnCart } from "../../../../redux/CartActions";
+import { addProductOnCart, deleteProductFromCart  } from "../../../../redux/CartActions";
 import { Rating } from '@mui/material';
 import { rateProduct } from "../../../../redux/productActions";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -80,6 +80,17 @@ const Detail = () => {
     } else {
       let newdata = JSON.parse(datas);
       newdata.push(product);
+      localStorage.setItem("protucts_cart", JSON.stringify(newdata));
+    }
+  };
+
+  const removeFromCart = (productId) => {
+    dispatch(deleteProductFromCart(productId));
+    setProductsInCart(productsInCart.filter(id => id !== productId));
+  
+    let datas = localStorage.getItem("protucts_cart");
+    if (datas) {
+      let newdata = JSON.parse(datas).filter(product => product._id !== productId);
       localStorage.setItem("protucts_cart", JSON.stringify(newdata));
     }
   };
@@ -168,16 +179,11 @@ const Detail = () => {
 
               <div className={style.buttons}>
                 {productsInCart.includes(product._id) ? (
-                  <p className={style.enCarrito}>
-                    EN CARRITO <i className="bi bi-cart-check"></i>
-                  </p>
+                  <button className={style.btnCart} onClick={() => removeFromCart(product._id)}>
+                    <i className="bi bi-cart-check"></i> Eliminar del carrito
+                  </button>
                 ) : (
-                  <button
-                    className={style.btnCart}
-                    onClick={() => {
-                      setModalShow(true);
-                      addToCart(product);
-                    }}
+                  <button className={style.btnCart} onClick={() => {setModalShow(true);addToCart(product);}}
                   >
                     <i className="bi bi-cart"></i> Agregar al carrito
                   </button>
@@ -185,9 +191,9 @@ const Detail = () => {
                 {
                   isAuthenticated && (<button onClick={() => handleFavoriteClick(product._id)} className={style.btnFavorite}>
                   {isFavorite ? (
-                    <i className="bi bi-heart-fill">QUITAR DE FAVORITOS</i>
+                    <i className="bi bi-heart-fill"> Quitar de favoritos</i>
                   ) : (
-                    <i className="bi bi-heart">AGREGAR A FAVORITOS</i>
+                    <i className="bi bi-heart"> Agregar a favoritos</i>
                   )}
                 </button>)
                 }
