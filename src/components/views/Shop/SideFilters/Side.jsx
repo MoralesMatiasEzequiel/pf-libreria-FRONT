@@ -86,7 +86,10 @@ const Side = () => {
         dispatch(upperBrandsSelected(updateBrand));
     };
 
-    return (
+    // ------------------------- RENDERIZADO --------------------------
+    // si no hay productos, no se muestra el filtro por marcas
+    if (productSee.length) {
+        return (
         <Accordion >
             <Accordion.Item eventKey="0">
                 <Accordion.Header className={style.header}  >
@@ -118,6 +121,8 @@ const Side = () => {
             </Accordion.Item>
         </Accordion>
     )
+    }
+    
 }
 
 export default Side;

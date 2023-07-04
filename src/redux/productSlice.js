@@ -153,11 +153,25 @@ export const productSlice = createSlice({
             state.productSee = state.productsOnRating
             state.productsExist = true
         },
+
+        changeRating: (state, action) => {
+            const { _id, rating } = action.payload;
+          
+            state.products = state.products.map((product) => {
+              if (product._id === _id) {
+                return {
+                  ...product,
+                  rating: rating,
+                };
+              }
+              return product;
+            });
+          }
         
     }
 })
 
 
-export const { getAllProducts, getProductById, getProductsByName, getProductsBySubcategory, nextpageState, backPageState, nextTwopageState, backTwoPageState, orderByAzState, orderByZaState, orderPriceToLowState, orderPriceToUpState, getProductsOnSale, getProductsOnRating, upperBrandsState, upperBrandsSelectedState, FiltSubCategoriesState, saveProducts, totalPagState, createProductState, productsSalesOnShop, productsRatingOnShop } = productSlice.actions
+export const { getAllProducts, getProductById, getProductsByName, getProductsBySubcategory, nextpageState, backPageState, nextTwopageState, backTwoPageState, orderByAzState, orderByZaState, orderPriceToLowState, orderPriceToUpState, getProductsOnSale, getProductsOnRating, upperBrandsState, upperBrandsSelectedState, FiltSubCategoriesState, saveProducts, totalPagState, createProductState, productsSalesOnShop, productsRatingOnShop, changeRating } = productSlice.actions
 
 export default productSlice.reducer 

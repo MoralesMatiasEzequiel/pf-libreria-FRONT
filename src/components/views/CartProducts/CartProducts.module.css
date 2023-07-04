@@ -22,6 +22,7 @@
 }
 .productsContainer::-webkit-scrollbar {
   width: 8px; /* Ancho de la barra de desplazamiento */
+
 }
 
 .productsContainer::-webkit-scrollbar-track {
@@ -156,6 +157,12 @@
     background-color: white;
     color: #ff9e5c;
 }
+.compraBtn:disabled{
+  background-color: white;
+  color: #ccc;
+  border-color: #ccc;
+}
+
 .link{
     margin-top: 15px;
     margin-bottom: 15px;

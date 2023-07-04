@@ -1,6 +1,5 @@
 import Filters from "./Filters/Filters";
 import Products from "./Products/Products";
-import Paginado from "./Paginado/Paginado"; // Importa el componente Paginado
 import style from "./Shop.module.css";
 import Side from "./SideFilters/Side";
 

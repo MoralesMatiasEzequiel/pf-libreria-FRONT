@@ -1,0 +1,96 @@
+.h1 {
+    margin-top: 20px;
+}
+
+.formcont {
+
+    width: 100vw;
+    height: 100vh;
+}
+
+.form {
+
+    display: flex;
+    flex-direction: column;
+
+}
+
+.contfor1y2 {
+    display: flex;
+
+}
+
+.formuno,
+.formdos {
+    width: 50%;
+    height: 65vh;
+    display: flex;
+    flex-direction: column;
+    padding: 2%;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.oneLine{
+    display: flex;
+    width: 90vw;
+    justify-content: space-between;
+    margin: auto;
+    align-items: center;
+}
+
+.image {
+    width: 40%;
+    border-radius: 50%;
+}
+
+.label1 {
+    width: 100%;
+    font-size: 22px;
+    text-align: start;
+}
+
+.label2 {
+    width: 100%;
+    font-size: 22px;
+    text-align: start;
+    margin-top: 40px;
+}
+
+.inputRating {
+    width: 100%;
+}
+
+.errors {
+    color: red;
+}
+
+.starClass{
+    font-size: 40px;
+}
+.starClass:hover{
+    cursor: pointer;
+    color: #FF9E5C;
+}
+
+.enviarBtn {
+	background-color: #ff9e5c;
+	border-color: #ff9e5c;
+	color: white;
+	border-radius: 5px;
+	border-style: solid;
+	margin-bottom: 5px;
+}
+
+.enviarBtn:disabled {
+	background-color: white;
+	color: #ccc;
+	border-color: #ccc;
+}
+
+.enviarBtn:enabled:hover {
+	background-color: white;
+	color: #ff9e5c;
+	border-color: #ff9e5c;
+}

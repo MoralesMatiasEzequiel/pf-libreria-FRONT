@@ -13,7 +13,7 @@ import { orderByAZ, orderByZA, orderPriceToLow, orderPriceToUp } from "../../../
 const Filters = () => {
 
     const dispatch = useDispatch();
-    const { brandSelected, subCategories, pag, totalpages, productSee, products } = useSelector((state) => state.products);
+    const { brandSelected, subCategories, pag, totalpages, productSee, products, productsExist } = useSelector((state) => state.products);
 
 
     const orderAZ = () => {
@@ -53,7 +53,8 @@ const Filters = () => {
                     </div> */}
                 </div>
 
-                <Navbar >
+                {
+                    productsExist && <Navbar >
                     <Container fluid>
                         <Nav className={style.orderres}>
                             <p className={style.order} >Ordenar por:</p>
@@ -70,6 +71,8 @@ const Filters = () => {
                         </Nav>
                     </Container>
                 </Navbar >
+                }
+                
             </div>
     )
 
