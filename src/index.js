@@ -9,8 +9,8 @@ import axios from "axios"
 import { Auth0Provider } from '@auth0/auth0-react';
 // import 'bootstrap-icons/font/bootstrap-icons.css';
 
-axios.defaults.baseURL = "http://localhost:3001/";
-// axios.defaults.baseURL = "https://server-plumalibreria.onrender.com";
+//axios.defaults.baseURL = "http://localhost:3001/";
+axios.defaults.baseURL = "https://server-plumalibreria.onrender.com";
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
