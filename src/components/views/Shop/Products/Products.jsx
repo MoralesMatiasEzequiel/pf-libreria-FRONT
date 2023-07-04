@@ -151,6 +151,7 @@ const Products = () => {
           viewsProducts?.map((base, index) => {
             const isFavorite = favItems.some((item) => item === base._id);
             return (
+							
               <div key={index} className={style.productCard}>
                 <Link to={"/shop/" + base._id}>
                   <div className={style.productTumb}>

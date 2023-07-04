@@ -1,56 +1,104 @@
-    .view{
-        min-height: 70vh;
-    }
+.view {
+  min-height: 65vh;
+}
 
-    .title {
-    margin-top: 15px;
-    margin-bottom: 15px;
-  }
+.title {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  color: #ff9e5c;
+}
 
-  .data-container{
-    text-align: left;
-  }
-  
-  .container {
-    border: 1px solid #ccc;
-    padding: 40px;
-    margin: 25px auto;
-    border-radius: 5px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-width: 500px;
-  }
-  
-  .image-container {
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 15px;
-  }
-  
-  .image-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  
-  .logout-button {
-    color: white;
-    background-color: red;
-    border-radius: 5px;
-    border-style: solid;
-    border-color: red;
-    cursor: pointer;
-    margin-bottom: 15px;
-  }
-  
-  .logout-button:hover {
-    background-color: white;
-    color: red;
-  }
-  
+.data-container {
+  text-align: left;
+}
+
+.container {
+  border: 1px solid #ccc;
+  padding: 40px;
+  margin: 25px auto;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 500px;
+}
+.productsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 1000px;
+  max-height: 400px; /* Ajusta la altura máxima deseada */
+  overflow: auto; /* Habilita el desplazamiento vertical */
+}
+
+.productsContainer::-webkit-scrollbar {
+  width: 8px; /* Ancho de la barra de desplazamiento */
+
+}
+
+.productsContainer::-webkit-scrollbar-track {
+  background-color: transparent; /* Color del fondo de la barra de desplazamiento */
+}
+
+.productsContainer::-webkit-scrollbar-thumb {
+  background-color: #ccc; /* Color del relleno de la barra de desplazamiento */
+  border-radius: 4px; /* Radio de borde de la barra de desplazamiento */
+}
+
+.productsContainer::-webkit-scrollbar-thumb:hover {
+  background-color: #aaa; /* Color del relleno de la barra de desplazamiento en estado hover */
+}
+
+.productsContainer::-webkit-scrollbar-thumb:active {
+  background-color: #999; /* Color del relleno de la barra de desplazamiento en estado activo */
+}
+
+.productsContainer::-webkit-scrollbar-corner {
+  background-color: transparent; /* Color de la esquina de la barra de desplazamiento */
+}
+.image-container {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.logout-button {
+  color: white;
+  background-color: red;
+  border-radius: 5px;
+  border-style: solid;
+  border-color: red;
+  cursor: pointer;
+  margin-bottom: 15px;
+}
+
+.logout-button:hover {
+  background-color: white;
+  color: red;
+}
+
+.favoriteBtn {
+  margin-bottom: 20px;
+  background-color: #ff9e5c;
+  border-color: #ff9e5c;
+  color: rgb(255, 255, 255);
+  border-radius: 5px;
+  border-style: solid;
+  margin-left: 5px;
+  margin-right: 15px;
+}
+.favoriteBtn:hover {
+	background-color: white;
+  color: #ff9e5c;
+}

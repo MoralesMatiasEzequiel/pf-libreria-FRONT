@@ -17,16 +17,13 @@ const Profile = () => {
 
   return (
     <div>
+			
       <ProfileData />
-      <div>
-        <Link to={'/favorites'}>
-        <button
-          className={styles["logout-button"]}
-        >
-					Lista de favoritos
-        </button>
-				</Link>
-      </div>
+      
+			<Link to={"/favorites"} >
+        <button className={styles.favoriteBtn}>Lista de favoritos</button>
+      </Link>
+			<br/>
       <button
         className={styles["logout-button"]}
         onClick={() => {
