@@ -28,7 +28,7 @@
 	color: white;
 	border-radius: 5px;
 	border-style: solid;
-	margin-bottom: 5px;
+	align-items: center;
 }
 
 .btnPrimary:disabled {
