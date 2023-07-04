@@ -125,7 +125,10 @@ const Products = () => {
 
   return (
     <div className={style.totalContainer}>
-      <Paginado cantPages={pagines} />
+      {
+        productsExist && <Paginado cantPages={pagines} />
+      }
+      
       <div className={style.container}>
         {!productsExist && (
           <div className={style.noProduct}>
@@ -203,7 +206,10 @@ const Products = () => {
             );
           })}
       </div>
-      <Paginado className={style.paginado} cantPages={pagines} />
+      {
+        productsExist && <Paginado className={style.paginado} cantPages={pagines} />
+      }
+      
     </div>
   );
 };
