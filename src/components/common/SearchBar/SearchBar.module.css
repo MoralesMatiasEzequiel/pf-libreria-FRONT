@@ -19,7 +19,7 @@
     text-decoration: none;
 }
 
-.p {
+.button {
     background: none;
     border: none;
     font-size: 20px;
@@ -28,6 +28,6 @@
     transition: all 0.3s;
 }
 
-.p:hover {
+.button:hover {
     transform: scale(1.1);
 }

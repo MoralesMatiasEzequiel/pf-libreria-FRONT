@@ -11,6 +11,8 @@ import { useState } from "react";
 
 const Navuno = () => {
 
+    const { productsOnCart } = useSelector(state => state.cart)
+
     const dispatch = useDispatch();
 
     const onClick = () => {
@@ -97,7 +99,7 @@ const Navuno = () => {
                         </Nav.Link>
 
                         <Nav.Link eventKey={2}>
-                            <NavLink style={{color: `${colorCarrito}`}} to={"/cart"} className={style.navLink} onClick={() => changeColor("carrito")}>Carrito</NavLink>
+                            <NavLink style={{color: `${colorCarrito}`}} to={"/cart"} className={style.navLink} onClick={() => changeColor("carrito")}>Carrito ({productsOnCart.length})</NavLink>
                         </Nav.Link>
                     </Nav>
 
