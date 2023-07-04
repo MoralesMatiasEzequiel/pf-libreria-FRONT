@@ -148,7 +148,7 @@ const Detail = () => {
                   <Rating name="disabled" value={rating} disabled /> ({totalVotes})
                 </p>
               )}
-              {!showDisabledRating && (
+              {!showDisabledRating && isAuthenticated && (
                 <p style={{ color: "#3F3F3F", fontSize: "18px", padding: "10px" }}>
                   <Rating
                     name="simple-controlled"
