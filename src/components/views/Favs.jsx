@@ -6,9 +6,10 @@ import { removeFavorite, clearFav } from '../../redux/favoriteActions';
 
 
 
-const Favs = ({ favorites }) => {
+const Favs = ({product}) => {
 
-    const { _id, image, name, price } = favorites;
+    console.log(product);
+    const { _id, image, name, price } = product;
 
     const dispatch = useDispatch();
   
@@ -31,7 +32,7 @@ const Favs = ({ favorites }) => {
                 <h3 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{name}</h3>
                 <h4 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">$ {price}</h4>
                 <div className='flex flex-row  items-center py-1'>
-                    <button onClick={() => removeFavsHandler(favorites)} className='dark:text-rose-600'>
+                    <button onClick={() => removeFavsHandler(_id)} className='dark:text-rose-600'>
 										<i class="bi bi-trash"></i>
                     </button>
 										
