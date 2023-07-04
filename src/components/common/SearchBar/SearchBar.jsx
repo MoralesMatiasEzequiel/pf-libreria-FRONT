@@ -9,6 +9,8 @@ const SearchBar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate(); // Importa el hook useNavigate
 
+  const isDisabled = name === ""
+
   const handleChange = (event) => {
     setName(event.target.value);
   };
@@ -39,16 +41,17 @@ const SearchBar = () => {
         className={style.input}
       />
       <NavLink to={"/shop"} className={style.navlink}>
-        <p
+        <button
+        disabled={isDisabled}
           onClick={() => {
             onSearch(name);
             setName("");
             navigate("/shop"); // Navega a la página de la tienda al hacer clic en el ícono de búsqueda
           }}
-          className={style.p}
+          className={style.button}
         >
           🔍
-        </p>
+        </button>
       </NavLink>
     </div>
   );

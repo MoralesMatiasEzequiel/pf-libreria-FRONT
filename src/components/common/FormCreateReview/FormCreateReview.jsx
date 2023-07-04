@@ -99,6 +99,7 @@ const FormCreateReview = () => {
   return (
     <div>
       <h2 className={style.h1}>Deja tu opinión sobre la tienda</h2>
+      <p className={style.p}>Tu opinión es muy importante para nosotros, por eso te invitamos para que puedas dejar una review sobre la tienda en el siguiente formulario. La review creada sera visualizada en el Home de la tienda en la sección "Reviews de usuarios sobre la tienda".</p>
 
       <form action="" onSubmit={handleSubmit}>
         <div className={style.contfor1y2}>
