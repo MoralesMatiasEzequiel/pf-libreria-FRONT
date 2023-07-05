@@ -8,6 +8,7 @@ import { Rating } from '@mui/material';
 import { rateProduct, getById, getProducts } from "../../../../redux/productActions";
 import { useAuth0 } from "@auth0/auth0-react";
 import { addFavorite, removeFavorite, updateFavorites } from "../../../../redux/favoriteActions";
+import { postUserToBack } from "../../../../redux/UserActions";
 
 const Detail = () => {
   const { id } = useParams();
@@ -15,6 +16,9 @@ const Detail = () => {
   const dispatch = useDispatch();
   const { products } = useSelector(state => state.products);
   const { detail } = useSelector(state => state.products);
+  const { isAuthenticated, user } = useAuth0();
+  const [rating, setRating] = useState(0);
+  const [showEnableRating, setShowEnableRating] = useState(false); // Estado para controlar la visualización del componente Rating deshabilitado
   
   const [product, setProduct] = useState({});
 
@@ -26,14 +30,23 @@ const Detail = () => {
     if(products?.length !== 0){
       dispatch(getById(id));
       setProduct(detail);
+      setRating(detail.rating);
     }
     
   }, [dispatch, id, products, detail]);
 
+  useEffect(() => {
+    if (isAuthenticated) {
+      dispatch(postUserToBack(user));
+      setShowEnableRating(true);
+    }
+  }, [dispatch, isAuthenticated])
+
   const { favItems } = useSelector((state) => state.favorites);
   const { currentUser } = useSelector((state) => state.user);
-  const userId = currentUser._id;
-  const { isAuthenticated } = useAuth0();
+  const userId = currentUser?._id;
+  
+ 
   const [modalShow, setModalShow] = useState(false);
   
   const { oneStarReviews, twoStarsReviews, threeStarsReviews, fourStarsReviews, fiveStarsReviews } = product;
@@ -64,14 +77,14 @@ const Detail = () => {
     }
   };
 
-  const [rating, setRating] = useState(product.rating);
-  const [showDisabledRating, setShowDisabledRating] = useState(false); // Estado para controlar la visualización del componente Rating deshabilitado
-
+  
+  console.log(product.rating);
+ 
   const filledcart = () => {
     let datas = localStorage.getItem("protucts_cart");
     let datasParse = JSON.parse(datas);
     if (datas?.length > 0) {
-      let cartId = datasParse.map(pro => pro._id);
+      let cartId = datasParse.map(pro => pro?._id);
       return cartId;
     } else {
       return ["nada"];
@@ -85,7 +98,7 @@ const Detail = () => {
 
   const addToCart = (product) => {
     dispatch(addProductOnCart(product));
-    setProductsInCart([...productsInCart, product._id]);
+    setProductsInCart([...productsInCart, product?._id]);
     let datas = localStorage.getItem("protucts_cart");
     if (!datas) {
       localStorage.setItem("protucts_cart", JSON.stringify([product]));
@@ -102,7 +115,7 @@ const Detail = () => {
   
     let datas = localStorage.getItem("protucts_cart");
     if (datas) {
-      let newdata = JSON.parse(datas).filter(product => product._id !== productId);
+      let newdata = JSON.parse(datas).filter(product => product?._id !== productId);
       localStorage.setItem("protucts_cart", JSON.stringify(newdata));
     }
   };
@@ -111,7 +124,7 @@ const Detail = () => {
     return <div>Producto no encontrado</div>;
   }
 
-  const isFavorite = favItems?.some((item) => item === product._id);
+  const isFavorite = favItems?.some((item) => item === product?._id);
 
   return (
     <div className={style.container}>
@@ -155,20 +168,20 @@ const Detail = () => {
               >
                 {product.name}
               </h5>
-              {showDisabledRating && (
+              {!showEnableRating && (
                 <p style={{ color: "#3F3F3F", fontSize: "18px", padding: "10px" }}>
                   <Rating name="disabled" value={rating} disabled /> ({totalVotes})
                 </p>
               )}
-              {!showDisabledRating && isAuthenticated && (
+              {showEnableRating && (
                 <p style={{ color: "#3F3F3F", fontSize: "18px", padding: "10px" }}>
                   <Rating
                     name="simple-controlled"
                     value={rating}
                     onChange={(event, newRating) => {
                       setRating(newRating);
-                      setShowDisabledRating(true); // Mostrar el Rating deshabilitado después de que el usuario haya ingresado un valor
-                      dispatch(rateProduct(product._id, newRating));
+                      setShowEnableRating(false); // Mostrar el Rating deshabilitado después de que el usuario haya ingresado un valor
+                      dispatch(rateProduct(product?._id, newRating));
                       setTotalVotes(prevVotes => prevVotes + 1);
                     }}
                   /> ({totalVotes})
@@ -190,8 +203,8 @@ const Detail = () => {
               </h5>
 
               <div className={style.buttons}>
-                {productsInCart.includes(product._id) ? (
-                  <button className={style.btnCart} onClick={() => removeFromCart(product._id)}>
+                {productsInCart.includes(product?._id) ? (
+                  <button className={style.btnCart} onClick={() => removeFromCart(product?._id)}>
                     <i className="bi bi-cart-check"></i> Eliminar del carrito
                   </button>
                 ) : (
@@ -201,7 +214,7 @@ const Detail = () => {
                   </button>
                 )}
                 {
-                  isAuthenticated && (<button onClick={() => handleFavoriteClick(product._id)} className={style.btnFavorite}>
+                  isAuthenticated && (<button onClick={() => handleFavoriteClick(product?._id)} className={style.btnFavorite}>
                   {isFavorite ? (
                     <i className="bi bi-heart-fill"> Quitar de favoritos</i>
                   ) : (

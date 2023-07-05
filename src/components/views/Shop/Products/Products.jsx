@@ -7,8 +7,11 @@ import { useAuth0 } from "@auth0/auth0-react";
 import Paginado from "../Paginado/Paginado";
 import style from "./Products.module.css";
 import { addFavorite, removeFavorite, updateFavorites } from "../../../../redux/favoriteActions";
+import { postUserToBack } from "../../../../redux/UserActions";
 
 const Products = () => {
+
+  const dispatch = useDispatch();
   const { productSee, pag, productsExist, brandSelected } = useSelector(
     (state) => state.products
   );
@@ -17,9 +20,15 @@ const Products = () => {
 	
   const { currentUser } = useSelector((state) => state.user);
 
-	const userId = currentUser._id;
+	const userId = currentUser?._id;
 
-  const { isAuthenticated } = useAuth0();
+  const { isAuthenticated, user } = useAuth0();
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      dispatch(postUserToBack(user));
+    }
+  }, [dispatch, isAuthenticated])
 
   const filledcart = () => {
     let datas = localStorage.getItem("protucts_cart");
@@ -34,7 +43,7 @@ const Products = () => {
     }
   };
 
-  const dispatch = useDispatch();
+  
 
   const lSProductSee = () => {
     let datos = localStorage.getItem("ProductSee");
@@ -171,8 +180,7 @@ const Products = () => {
                     </div>
 
                     <div className={style.productLinks}>
-                      {
-                        isAuthenticated && (<button
+                      <button
                         onClick={() => handleFavoriteClick(base._id)}
                         className={style.favoriteButton}
                       >
@@ -181,8 +189,7 @@ const Products = () => {
                         ) : (
                           <i className="bi bi-heart"></i>
                         )}
-                      </button>)
-                      }
+                      </button>
                       
                       {productsInCart.includes(base._id) ? (
                         <button
