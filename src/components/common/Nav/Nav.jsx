@@ -7,7 +7,8 @@ import Navbar from 'react-bootstrap/Navbar';
 import { getProducts } from "../../../redux/productActions";
 import { useDispatch, useSelector } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { newCart } from "../../../redux/CartActions";
 
 const Navuno = () => {
 
@@ -67,6 +68,14 @@ const Navuno = () => {
             setColorCarrito("orange")
         } 
     }
+
+    useEffect(() => {
+        let data = localStorage.getItem("protucts_cart");
+        let cart = JSON.parse(data)
+        if (cart?.length > 0 && productsOnCart.length < 1) {
+            dispatch(newCart(cart))
+        }
+    }, [])
 
     return (
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
