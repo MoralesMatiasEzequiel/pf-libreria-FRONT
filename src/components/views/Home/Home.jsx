@@ -16,7 +16,7 @@ import CarouselComments from "./CarouselComments/CarouselComments";
 const Home = () => {
   const dispatch = useDispatch()
   const { currentUser } = useSelector(state => state.user);
-  const { isAuthenticated, user, logout } = useAuth0();
+  const { isAuthenticated, user } = useAuth0();
   const navigate = useNavigate();
 
   useEffect(() => {
