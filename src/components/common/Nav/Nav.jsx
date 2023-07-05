@@ -30,7 +30,7 @@ const Navuno = () => {
     // COLORES PARA POSICIONAMIENTO EN EL NAV
 
     const profileLink = isAuthenticated ? (
-        <NavLink style={{color: `${colorLog}`}} to={"/profile"} className={style.navLink} onClick={() => changeColor("log")}><img src={currentUser.picture} alt={currentUser.name}/></NavLink>
+        <NavLink style={{color: `${colorLog}`}} to={"/profile"} className={style.navLink} onClick={() => changeColor("log")}><img src={currentUser?.picture} alt={currentUser?.name}/></NavLink>
     ) : (
         <NavLink style={{color: `${colorLog}`}} to={"/login"} className={style.navLink} onClick={() => changeColor("log")}>Ingresar</NavLink>
     );
