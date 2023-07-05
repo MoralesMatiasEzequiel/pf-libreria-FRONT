@@ -167,7 +167,11 @@ const Products = () => {
                   </Link>
                   <div className={style.productBottomDetails}>
                     <div className={style.productPrice}>
+										{base.salePrice ? (
+                      <small>${base.salePrice}</small>
+                    ) : (
                       <small>${base.price}</small>
+                    )}
                     </div>
 
                     <div className={style.productLinks}>
