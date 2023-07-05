@@ -12,7 +12,7 @@ const ModalCart = (props) => {
 
   useEffect(() => {
     const totalPrice = productsOnCart.reduce((sum, product) => {
-      const price = parseFloat(product.price);
+      const price = parseFloat(product.salePrice ? product.salePrice : product.price);
       if (!isNaN(price)) {
         return sum + price;
       }
@@ -40,7 +40,11 @@ const ModalCart = (props) => {
             <img className={style.imagen} src={product.image} alt={product.name} />
             <div className={style.datos}>
               <p className={style.name}>{product.name}</p>
-              <p className={style.price}>Precio: ${product.price}</p>
+              <p className={style.price}>{product.salePrice ? (
+                      <small>Precio ${product.salePrice}</small>
+                    ) : (
+                      <small>Precio ${product.price}</small>
+                    )}</p>
             </div>
           </div>
         ))}
