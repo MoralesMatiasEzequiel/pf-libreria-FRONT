@@ -44,8 +44,6 @@ const Detail = () => {
     const total = oneStarReviews + twoStarsReviews + threeStarsReviews + fourStarsReviews + fiveStarsReviews;
     setTotalVotes(total);
   }, [oneStarReviews, twoStarsReviews, threeStarsReviews, fourStarsReviews, fiveStarsReviews]);
-  
-  console.log(totalVotes);
 
   useEffect(() => {
     if (userId) {
