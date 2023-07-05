@@ -19,7 +19,7 @@ const ModalCart = (props) => {
       return sum;
     }, 0);
     setTotal(totalPrice);
-    console.log("totalPrice:", totalPrice);
+    // console.log("totalPrice:", totalPrice);
   }, [productsOnCart]);  
   
   return (
