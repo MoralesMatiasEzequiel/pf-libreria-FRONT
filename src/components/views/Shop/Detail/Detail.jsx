@@ -117,7 +117,7 @@ const Detail = () => {
 
   return (
     <div className={style.container}>
-      <div className="row" style={{height: "700px"}}>
+      <div className="row">
         <div className="col-md-6 d-flex align-items-center">
           <div
             className="card"
