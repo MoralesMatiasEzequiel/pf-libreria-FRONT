@@ -3,41 +3,55 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, Link } from "react-router-dom";
 import ModalCart from "../../../common/Modals/ModalCart/ModalCart";
-import { addProductOnCart, deleteProductFromCart  } from "../../../../redux/CartActions";
+import { addProductOnCart, deleteProductFromCart } from "../../../../redux/CartActions";
 import { Rating } from '@mui/material';
-import { rateProduct } from "../../../../redux/productActions";
+import { rateProduct, getById, getProducts } from "../../../../redux/productActions";
 import { useAuth0 } from "@auth0/auth0-react";
 import { addFavorite, removeFavorite, updateFavorites } from "../../../../redux/favoriteActions";
 
 const Detail = () => {
   const { id } = useParams();
+  
   const dispatch = useDispatch();
   const { products } = useSelector(state => state.products);
-  const product = products.find(item => item._id === id);
+  const { detail } = useSelector(state => state.products);
+  
+  const [product, setProduct] = useState({});
+
+  useEffect(() => {
+    if(products?.length === 0){
+      dispatch(getProducts());
+    }
+    
+    if(products?.length !== 0){
+      dispatch(getById(id));
+      setProduct(detail);
+    }
+    
+  }, [dispatch, id, products, detail]);
 
   const { favItems } = useSelector((state) => state.favorites);
-
   const { currentUser } = useSelector((state) => state.user);
-
   const userId = currentUser._id;
-
   const { isAuthenticated } = useAuth0();
-
   const [modalShow, setModalShow] = useState(false);
-
-
+  
   const { oneStarReviews, twoStarsReviews, threeStarsReviews, fourStarsReviews, fiveStarsReviews } = product;
-  const total = oneStarReviews + twoStarsReviews + threeStarsReviews + fourStarsReviews + fiveStarsReviews;
-  console.log(total);
 
-  const [totalVotes, setTotalVotes] = useState(total); // Estado para almacenar el total de votos
+  const [totalVotes, setTotalVotes] = useState(0); // Inicializa totalVotes con 0
+
+  useEffect(() => {
+    const total = oneStarReviews + twoStarsReviews + threeStarsReviews + fourStarsReviews + fiveStarsReviews;
+    setTotalVotes(total);
+  }, [oneStarReviews, twoStarsReviews, threeStarsReviews, fourStarsReviews, fiveStarsReviews]);
+  
+  console.log(totalVotes);
 
   useEffect(() => {
     if (userId) {
-      console.log(favItems);
       dispatch(updateFavorites(userId, favItems));
     }
-  }, [favItems, dispatch, userId, isAuthenticated]);
+  }, [favItems, dispatch, userId, isAuthenticated, products]);
 
   const handleFavoriteClick = (productId) => {
     if (isAuthenticated) {
