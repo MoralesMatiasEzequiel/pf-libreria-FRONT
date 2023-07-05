@@ -9,26 +9,25 @@ const CartProducts = () => {
   const dispatch = useDispatch();
   const { productsOnCart } = useSelector((state) => state.cart);
 
-  const [selectedStock, setSelectedStock] = useState({});
+  const [ selectedStock, setSelectedStock ] = useState({});
   const isDisabled = !productsOnCart.length
-
+  
   const removeProduct = (id) => {
     dispatch(deleteProductFromCart(id));
     let datos = localStorage.getItem("protucts_cart");
     let modify = JSON.parse(datos)
-
+    
     let newdatos = modify.filter(pro => pro._id !== id);
-
+    
     localStorage.setItem("protucts_cart", JSON.stringify(newdatos))
   };
 
   const handleStockChange = (change, productId) => {
     const currentStock = selectedStock[productId] || 1;
     const newStock = currentStock + change;
-
-
+    
     const product = productsOnCart.find((product) => product._id === productId);
-
+    
     if (newStock > 0 && newStock <= product.stock) {
       setSelectedStock((prevState) => ({
         ...prevState,
@@ -36,7 +35,7 @@ const CartProducts = () => {
       }));
     }
   };
-
+  
   useEffect(() => {
     const updatedStock = {};
     productsOnCart.forEach((product) => {
@@ -87,7 +86,7 @@ const CartProducts = () => {
                 </div>
                 <div className={style.productDiv2}>
                   <p className={style.precio}>${isNaN(productTotalPrice) ? 0 : productTotalPrice}</p>
-                  <p>Stock: {product.stock}</p>
+                  <p>Stock: {product.stock - selectedStock[product._id]}</p>
                   <div className={style.quantityContainer}>
                     <p className={style.quantityLabel}>Cantidad:</p>
                     <div className={style.stock}>
