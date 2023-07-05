@@ -45,7 +45,11 @@ const CarouselRating = ({ clickDispatch, dispatchProductsRatingToShop }) => {
                   <div key={index} className={style.card} >
                     <img className={style.productImage} src={product.image} alt={product.name} />
                     <h5>{product.name}</h5>
-                    <p className={style.rating}>Rating: {product.rating}</p>
+                    <p className={style.rating}>
+                      {Array.from({ length: product.rating }).map((_, index) => (
+                        <i key={index} className="bi bi-star-fill"></i>
+                      ))}
+                    </p>
                     <p className={style.priceNow}>Precio: ${product.price}</p>
                     <Link to={`/shop/${product._id}`}>
                       <button onClick={() => clickDispatch(product._id)} >Ver producto</button>
