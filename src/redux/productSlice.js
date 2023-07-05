@@ -26,7 +26,7 @@ export const productSlice = createSlice({
         },
         getProductById: (state, action) => {
 
-            state.detail = state.products.filter(pro => pro.id === action.payload)
+            state.detail = state.products.find(pro => pro._id === action.payload)
             state.productsExist = true
             state.subCategories = []
             state.branes = []
