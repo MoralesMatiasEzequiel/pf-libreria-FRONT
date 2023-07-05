@@ -16,7 +16,7 @@ const Detail = () => {
   const dispatch = useDispatch();
   const { products } = useSelector(state => state.products);
   const { detail } = useSelector(state => state.products);
-  const { isAuthenticated, user } = useAuth0();
+  const { isAuthenticated, user, loginWithPopup } = useAuth0();
   const [rating, setRating] = useState(0);
   const [showEnableRating, setShowEnableRating] = useState(false); // Estado para controlar la visualización del componente Rating deshabilitado
   
@@ -73,12 +73,9 @@ const Detail = () => {
         dispatch(addFavorite(productId));
       }
     } else {
-      alert("Debes estar autenticado para agregar productos a favoritos.");
+      loginWithPopup();
     }
   };
-
-  
-  console.log(product.rating);
  
   const filledcart = () => {
     let datas = localStorage.getItem("protucts_cart");
@@ -222,15 +219,14 @@ const Detail = () => {
                     <i className="bi bi-cart"></i> Agregar al carrito
                   </button>
                 )}
-                {
-                  isAuthenticated && (<button onClick={() => handleFavoriteClick(product?._id)} className={style.btnFavorite}>
+                <button onClick={() => handleFavoriteClick(product?._id)} className={style.btnFavorite}>
                   {isFavorite ? (
                     <i className="bi bi-heart-fill"> Quitar de favoritos</i>
                   ) : (
                     <i className="bi bi-heart"> Agregar a favoritos</i>
                   )}
-                </button>)
-                }
+                </button>
+                
                 
               </div>
             </div>

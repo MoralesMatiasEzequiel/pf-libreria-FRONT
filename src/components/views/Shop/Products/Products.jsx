@@ -22,7 +22,7 @@ const Products = () => {
 
 	const userId = currentUser?._id;
 
-  const { isAuthenticated, user } = useAuth0();
+  const { isAuthenticated, user, loginWithPopup } = useAuth0();
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -128,7 +128,7 @@ const Products = () => {
         dispatch(addFavorite(productId));
       }
     } else {
-      alert("Debes estar autenticado para agregar productos a favoritos.");
+      loginWithPopup();
     }
   };
 
