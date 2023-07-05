@@ -35,3 +35,8 @@
     background-color: white;
     color: #ff9e5c;
 }
+
+.errors {
+    color: red;
+    font-size: 15px;
+}
