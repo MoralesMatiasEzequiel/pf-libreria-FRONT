@@ -7,12 +7,12 @@ import mpLogo from "./mpLogo.png";
 
 const FormPayCart = ({ state, setFormInfo, setFormShipment, setFormPay }) => {
   const dispatch = useDispatch();
-  const { productsOnCart, paymentLink, clientInfo, shipmentInfo } = useSelector((state) => state.cart);
   const navigate = useNavigate();
+  const { productsOnCart, paymentLink, clientInfo, shipmentInfo } = useSelector((state) => state.cart);
   const [showPayButton, setShowPayButton] = useState(false);
 
   useEffect(() => {
-    console.log(paymentLink);
+    // console.log(paymentLink);
     if (paymentLink) {
       setShowPayButton(true);
     }
@@ -26,7 +26,7 @@ const FormPayCart = ({ state, setFormInfo, setFormShipment, setFormPay }) => {
 
   const handlePayButton = (event) => {
     window.open(paymentLink, "_blank");
-    navigate("/");
+    navigate("/success");
     dispatch(cleanPaymentLink());
   };
 
