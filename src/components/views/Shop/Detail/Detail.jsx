@@ -176,10 +176,10 @@ const Detail = () => {
                   /> ({totalVotes})
                 </p>
               )}
-              <p style={{ color: "#3F3F3F", fontSize: "18px", padding: "10px" }}>Marca: {product.brand}</p>
-              <p style={{ color: "#3F3F3F", fontSize: "18px", padding: "10px" }}>Stock: {product.stock}</p>
-              <p style={{ color: "#3F3F3F", fontSize: "18px", padding: "10px" }}>Detalle del producto: {product.description}</p>
-              <h5
+              <p style={{ color: "#3F3F3F", fontSize: "18px", padding: "5px" }}>Marca: {product.brand}</p>
+              <p style={{ color: "#3F3F3F", fontSize: "18px", padding: "5px" }}>Stock: {product.stock}</p>
+              <p style={{ color: "#3F3F3F", fontSize: "18px", padding: "5px" }}>Detalle del producto: {product.description}</p>
+              <div
                 style={{
                   color: "#191919",
                   fontFamily: "Montserrat, sans-serif",
@@ -188,8 +188,17 @@ const Detail = () => {
                   padding: "10px"
                 }}
               >
-                $ {product.price}
-              </h5>
+               {product.salePrice ? (
+										<div>
+											<p style={{textDecoration: "line-through", fontSize: "14px",fontWeight:"600"}}>${product.price}</p>
+											<p style={{color: '#FF9E5C', fontSize:'24px', fontWeight:"800"}}> ${product.salePrice}</p>
+
+										</div>
+                      
+                    ) : (
+                      <p style={{color: '#FF9E5C', fontSize:'24px', padding:"10px"}}>${product.price}</p>
+                    )}
+              </div>
 
               <div className={style.buttons}>
                 {productsInCart.includes(product._id) ? (
