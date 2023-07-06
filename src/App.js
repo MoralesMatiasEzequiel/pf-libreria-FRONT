@@ -17,6 +17,7 @@ import Admin from './components/Admin/Dashboard/Dashboard';
 import Form from './components/Admin/Form/Form';
 import FormCreateReview from './components/common/FormCreateReview/FormCreateReview'
 import Favorites from './components/views/Favorites/Favorites';
+import UserBanned from './components/views/UserBanned/UserBanned';
 import Success from './components/views/Mercadopago/Success';
 
 function App() {
@@ -24,14 +25,15 @@ function App() {
   const location = useLocation();
 
   //acá defino en qué rutas no se verá el menú de categorías, son de prueba estas
-  const hideMenu = location.pathname.includes('/form') || location.pathname.includes('/admin') || location.pathname.includes('/cart') || location.pathname.includes('/checkout');
-  const hidenavYmenu = location.pathname.includes('/admin') || location.pathname.includes('/form');
+  const hideMenu = location.pathname.includes('/form') || location.pathname.includes('/admin') || location.pathname.includes('/cart') || location.pathname.includes('/checkout') || location.pathname.includes('/userBanned');
+  const hidenavYmenu = location.pathname.includes('/admin') || location.pathname.includes('/form') || location.pathname.includes('/userBanned');
 
   return (
     <div className="App">
         {!hidenavYmenu && <Navuno />}
         {!hideMenu && <Menu />}
         <Routes>
+          <Route path='/userBanned' element={<UserBanned/>}/>
           <Route path='/' element={<Home />} />
           <Route path='/about' element={<About />} />
           <Route path='/shop' element={<Shop />} />

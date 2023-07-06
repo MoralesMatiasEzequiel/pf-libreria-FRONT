@@ -14,7 +14,7 @@ const ModalCart = (props) => {
     const totalPrice = productsOnCart.reduce((sum, product) => {
       if(product.salePrice < product.price && product.salePrice > 0){
         const price = parseFloat(product.salePrice);
-
+        
         return sum + price;
       }
       if(!product.salePrice || product.salePrice === undefined || product.salePrice === null){
