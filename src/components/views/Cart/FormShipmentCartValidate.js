@@ -8,9 +8,6 @@ const FormShipmentCartValidate = (info) => {
     if (streetSplit.length > 5) {
         errors.street = "calle invalida"
     }
-    if (info.street.length < 5) {
-        errors.street = "calle invalida"
-    }
     if (!info.number) {
         errors.number = "debe ingresar un numero"
     }
