@@ -2,6 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+import "./Footer.css"
+
 const Footer = () => {
   const localAddress = "Dirección del local"; // Inserta aquí la dirección del local
 
@@ -11,7 +13,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-dark text-light py-2 text-start" style={{ marginTop: "auto", bottom: "0", width: "100%" }}>
+    <footer className="bg-dark text-light py-2 text-start footer" >
       <div className="container">
         <div className="row align-items-center">
           <div className="col-md-4">
