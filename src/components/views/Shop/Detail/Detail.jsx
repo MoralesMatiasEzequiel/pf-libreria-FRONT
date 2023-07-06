@@ -207,7 +207,6 @@ const Detail = () => {
                       <p style={{color: '#FF9E5C', fontSize:'24px', padding:"10px"}}>${product.price}</p>
                     )}
               </div>
-
               <div className={style.buttons}>
                 {productsInCart.includes(product?._id) ? (
                   <button className={style.btnCart} onClick={() => removeFromCart(product?._id)}>
