@@ -126,6 +126,7 @@ export const productSlice = createSlice({
         },
         upperBrandsSelectedState: (state, action) => {
             state.brandSelected = action.payload
+            state.pag = 1
 
         },
         getProductsOnSale: (state, action) => {
