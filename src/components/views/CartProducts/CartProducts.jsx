@@ -10,6 +10,8 @@ const CartProducts = () => {
   const { productsOnCart } = useSelector((state) => state.cart);
 
   const [ selectedStock, setSelectedStock ] = useState({});
+  const [ updatedStock, setUpdatedStock ] = useState([...productsOnCart]);
+// console.log(updatedStock);
   const isDisabled = !productsOnCart.length
   
   const removeProduct = (id) => {
@@ -55,6 +57,10 @@ const CartProducts = () => {
 
   const totalPrice = productsOnCart.reduce((total, product) => {
     const quantity = selectedStock[product._id] || product.quantity;
+
+    if(product.salePrice < product.price && product.salePrice > 0){
+      return total + product.salePrice * quantity;
+    }
     return total + product.price * quantity;
   }, 0);
 
@@ -68,6 +74,12 @@ const CartProducts = () => {
     setSelectedStock(updatedStock);
   }, [productsOnCart]);
 
+  const putStock = (stock, amount) => {
+    const result = stock - amount;
+    return result;
+  }
+  // console.log(updatedStock);
+
   return (
     <div className={style.container}>
       <h1 className={style.containerTitle}>CARRITO</h1>
@@ -75,6 +87,10 @@ const CartProducts = () => {
       <div className={style.productsContainer}>
         {productsOnCart &&
           productsOnCart.map((product, index) => {
+            // updatedStock.push({_id: product._id, stock: putStock(product.stock, selectedStock[product._id])})
+            // const robert = updatedStock[updatedStock.length - [...productsOnCart].length]
+            // // updatedStock = robert
+            // console.log(robert);
             const productTotalPrice =
               (product.price || 0) * (selectedStock[product._id] || 1);
 
@@ -85,8 +101,9 @@ const CartProducts = () => {
                   <p>{product.name}</p>
                 </div>
                 <div className={style.productDiv2}>
-                  <p className={style.precio}>${isNaN(productTotalPrice) ? 0 : productTotalPrice}</p>
-                  <p>Stock: {product.stock - selectedStock[product._id]}</p>
+                  {/* <p className={style.precio}>${isNaN(productTotalPrice) ? 0 : productTotalPrice}</p> */}
+                  <p className={style.precio}>${product.salePrice ? product.salePrice : productTotalPrice}</p>
+                  <p>Stock: {putStock(product.stock, selectedStock[product._id])}</p>
                   <div className={style.quantityContainer}>
                     <p className={style.quantityLabel}>Cantidad:</p>
                     <div className={style.stock}>

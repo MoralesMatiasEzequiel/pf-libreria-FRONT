@@ -188,7 +188,7 @@ const Detail = () => {
                   padding: "10px"
                 }}
               >
-                $ {product.price}
+                $ {product.salePrice ? product.salePrice : product.price}
               </h5>
 
               <div className={style.buttons}>

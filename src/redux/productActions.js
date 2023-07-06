@@ -197,4 +197,25 @@ export const rateProduct = (productId, rating) => {
         }
 
     }
-}
+};
+
+//EN PROCESO:
+// export const putStock = (robert) => {
+
+//     return async (dispatch) => {
+//         // const result = stock - amount;
+//         const result = {
+//             _id: robert._id,
+//             stock: robert.stock
+//         }
+
+//         try {
+//             const { data } = await axios.put("/product", result);
+           
+//             console.log(data);
+//         } catch (error) {
+//             console.log(error.message);
+//         }
+
+//     }
+// }

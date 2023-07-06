@@ -68,8 +68,12 @@ const Cart = () => {
     }, [productsOnCart]);
 
     const totalPrice = productsOnCart.reduce((total, product) => {
-    const quantity = selectedStock[product._id] || product.quantity;
-    return total + product.price * quantity;
+        const quantity = selectedStock[product._id] || product.quantity;
+    
+        if(product.salePrice < product.price && product.salePrice > 0){
+          return total + product.salePrice * quantity;
+        }
+        return total + product.price * quantity;
     }, 0);
 
     useEffect(() => {
@@ -113,9 +117,6 @@ const Cart = () => {
                             <div className={style.productsContainer}>
                                 {productsOnCart &&
                                 productsOnCart.map((product, index) => {
-                                    const productTotalPrice =
-                                    (product.price || 0) * (selectedStock[product._id] || 1);
-
                                     return (
                                     <div key={index} className={style.product}>
                                         <div className={style.productDiv1}>
@@ -123,7 +124,7 @@ const Cart = () => {
                                         <p>{product.name}</p>
                                         </div>
                                         <div className={style.productDiv2}>
-                                        <p className={style.precio}>${isNaN(productTotalPrice) ? 0 : productTotalPrice}</p>
+                                        <p className={style.precio}>${product.salePrice ? product.salePrice : product.price}</p>
                                         </div>
                                     </div>
                                     );

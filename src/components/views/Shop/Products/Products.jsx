@@ -167,7 +167,7 @@ const Products = () => {
                   </Link>
                   <div className={style.productBottomDetails}>
                     <div className={style.productPrice}>
-                      <small>${base.price}</small>
+                      <small>${base.salePrice ? base.salePrice: base.price }</small>
                     </div>
 
                     <div className={style.productLinks}>
