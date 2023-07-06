@@ -9,7 +9,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 const CarouselComments = () => {
     const { usersReviews } = useSelector(state => state.reviews)
-    const reviews = usersReviews.slice(0, 15)
+    const reviews = usersReviews
     const { isAuthenticated } = useAuth0();
 
     const responsive = {

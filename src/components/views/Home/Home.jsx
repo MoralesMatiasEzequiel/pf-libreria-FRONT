@@ -1,9 +1,9 @@
 import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
-import {getProducts, getProductsSales, getProductsRating, getById, getProductsOnHome, showProductsSalesOnShop, showProductsRatingOnShop } from "../../../redux/productActions";
+import { getProductsSales, getProductsRating, getById, getProductsOnHome, showProductsSalesOnShop, showProductsRatingOnShop } from "../../../redux/productActions";
 import { postUserToBack } from "../../../redux/UserActions";
 import style from "../Home/Home.module.css"
 import CarouselSale from "./CarouselSale/CarouselSale";
@@ -15,10 +15,9 @@ import CarouselComments from "./CarouselComments/CarouselComments";
 
 const Home = () => {
   const dispatch = useDispatch()
-  const { postedUser } = useSelector(state => state.user);
-
+  const { currentUser } = useSelector(state => state.user);
   const { isAuthenticated, user } = useAuth0();
-
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getProductsSales())
@@ -28,12 +27,13 @@ const Home = () => {
     if (isAuthenticated) {
       dispatch(postUserToBack(user));
     }
-    if (postedUser) {
-      alert('Tu usuario se ha creado');
-    }
-    
-  }, [dispatch, isAuthenticated, postedUser])
+  }, [dispatch, isAuthenticated])
 
+  useEffect(() => {
+    if (currentUser && !currentUser.active && isAuthenticated) {
+      navigate('/userBanned');
+    }
+  }, [currentUser, isAuthenticated, navigate]);
 
   const clickDispatch = (id) => {
     dispatch(getById(id))

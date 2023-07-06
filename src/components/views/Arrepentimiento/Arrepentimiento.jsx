@@ -5,7 +5,6 @@ import emailjs from "emailjs-com";
 import { Button, Modal } from "react-bootstrap";
 
 const Arrepentimiento = () => {
-
   // local storage
   const lSformRegret = () => {
     let datos = localStorage.getItem("formRegret");
@@ -13,7 +12,6 @@ const Arrepentimiento = () => {
       return JSON.parse(datos);
     } else {
       return {
-
         name: "",
         lastName: "",
         email: "",
@@ -40,14 +38,12 @@ const Arrepentimiento = () => {
       ...formRegret,
       [event.target.name]: event.target.value,
     });
-
   };
 
   const setRecibido = (valu) => {
     setformRegret({
       ...formRegret,
       received: valu,
-
     });
   };
 
@@ -73,7 +69,6 @@ const Arrepentimiento = () => {
         "Hubo un error al enviar el formulario. Por favor, inténtalo nuevamente."
       );
       setShowErrorModal(true);
-
     }
   };
 
@@ -82,9 +77,7 @@ const Arrepentimiento = () => {
 
     console.log("Formulario enviado:", formRegret);
 
-
     sendEmail(); // Enviar el correo electrónico
-
 
     // Restablecer los valores del formulario
     setformRegret({
@@ -108,22 +101,21 @@ const Arrepentimiento = () => {
   };
 
   const isDisabled =
-    formRegret.name.trim() === '' ||
-    formRegret.lastName.trim() === '' ||
-    formRegret.email.trim() === '' ||
-    formRegret.phone.trim() === '' ||
-    formRegret.document.trim() === '' ||
-    formRegret.address.trim() === '' ||
-    formRegret.postalCode.trim() === '' ||
-    formRegret.location.trim() === '' ||
-    formRegret.province.trim() === '' ||
-    formRegret.returnMode.trim() === '' ||
-    formRegret.returnReason.trim() === '' ||
-    formRegret.comment.trim() === '';
+    formRegret.name.trim() === "" ||
+    formRegret.lastName.trim() === "" ||
+    formRegret.email.trim() === "" ||
+    formRegret.phone.trim() === "" ||
+    formRegret.document.trim() === "" ||
+    formRegret.address.trim() === "" ||
+    formRegret.postalCode.trim() === "" ||
+    formRegret.location.trim() === "" ||
+    formRegret.province.trim() === "" ||
+    formRegret.returnMode.trim() === "" ||
+    formRegret.returnReason.trim() === "" ||
+    formRegret.comment.trim() === "";
 
   useEffect(() => {
     localStorage.setItem("formRegret", JSON.stringify(formRegret));
-
   }, [formRegret]);
 
   return (
@@ -131,7 +123,8 @@ const Arrepentimiento = () => {
       <h1 className={style.title}>Arrepentimiento de la compra</h1>
       <p className={style.introText}>
         Si deseas arrepentirte de tu compra, por favor completa el siguiente
-        formulario y nos pondremos en contacto contigo.<br /> Es necesario completar todos los campor que tengan (*).
+        formulario y nos pondremos en contacto contigo.
+        <br /> Es necesario completar todos los campor que tengan (*).
       </p>
 
       <form onSubmit={handleSubmit} className={style.formArr} id="form">
@@ -281,7 +274,6 @@ const Arrepentimiento = () => {
             </div>
 
             <div className="mb-3 text-start">
-
               <label
                 htmlFor="recibido"
                 className={style.formLabel}
@@ -304,7 +296,6 @@ const Arrepentimiento = () => {
                   className="form-check-label"
                   style={{ color: "#3F3F3F" }}
                 >
-
                   Sí
                 </label>
               </div>
@@ -323,7 +314,6 @@ const Arrepentimiento = () => {
                   className="form-check-label"
                   style={{ color: "#3F3F3F" }}
                 >
-
                   No
                 </label>
               </div>
@@ -374,26 +364,34 @@ const Arrepentimiento = () => {
           </div>
         </div>
 
-        <Button type="submit" disabled={isDisabled} className={style.btnPrimary}>
+        <Button
+          type="submit"
+          disabled={isDisabled}
+          className={style.btnPrimary}
+        >
           Enviar
         </Button>
-
       </form>
 
-      <Modal show={showSuccessModal} onHide={() => setShowSuccessModal(false)}>
+      <Modal
+        show={showSuccessModal}
+        onHide={() => setShowSuccessModal(false)}
+        centered
+      >
         <Modal.Body closeButton>
           <div className="d-flex justify-content-between align-items-center">
-            <div> ✔ ¡El formulario se envió correctamente!</div>
-            <Button className={style.btnPrimary} onClick={() => setShowSuccessModal(false)}>
+            <h6> ✔ ¡El formulario se envió correctamente!</h6>
+            <Button
+              className={style.btnPrimary}
+              onClick={() => setShowSuccessModal(false)}
+            >
               Cerrar
             </Button>
           </div>
         </Modal.Body>
       </Modal>
 
-
-
-      <Modal show={showErrorModal} onHide={() => setShowErrorModal(false)}>
+      <Modal show={showErrorModal} onHide={() => setShowErrorModal(false)} centered>
         <Modal.Body closeButton>
           <div className="d-flex justify-content-between align-items-center">
             <div>
@@ -401,14 +399,16 @@ const Arrepentimiento = () => {
               ❌ Hubo un error al enviar tu Formulario. Por favor, inténtalo
               nuevamente más tarde.
             </div>
-            <Button className={style.btnPrimary} onClick={() => setShowErrorModal(false)}>
+            <Button
+              className={style.btnPrimary}
+              onClick={() => setShowErrorModal(false)}
+            >
               Cerrar
             </Button>
           </div>
         </Modal.Body>
       </Modal>
     </div>
-
   );
 };
 

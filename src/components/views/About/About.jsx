@@ -19,14 +19,7 @@ const About = () => {
     }
   };
 
-
   const [stateForm, setStateForm] = useState(lSFormContact());
-
-  const isDisabled =
-    stateForm.user_name.trim() === '' ||
-    stateForm.user_email.trim() === '' ||
-    stateForm.message.trim() === '';
-
 
   const handleChangeAbout = (event) => {
     setStateForm({
@@ -76,35 +69,49 @@ const About = () => {
     return errors;
   };
 
-  const sendEmail = (e) => {
-    e.preventDefault();
-
-    const errors = validateForm();
+  const sendEmail = async () => {
+		const errors = validateForm();
 
     if (Object.keys(errors).length > 0) {
       setFormErrors(errors);
       return;
     }
-
-    emailjs
-      .sendForm(
+    try {
+      const result = await emailjs.sendForm(
         "service_brws95f",
-        "template_1eg39fw",
+        "template_f9465ua",
         form.current,
         "CWYOCpB2Bd7P4TLB6"
-      )
-      .then((result) => {
-        console.log(result.text);
-        console.log("message sent");
-        form.current.reset(); // Restablece los valores del formulario
-        setFormErrors({});
-        handleShowSuccessModal(); // Muestra el modal de éxito
-      })
-      .catch((error) => {
-        console.log(error.text);
-        handleShowErrorModal(); // Muestra el modal de error
-      });
+      );
+      console.log(result.text);
+      console.log("Correo electrónico enviado");
+      handleShowSuccessModal();// Muestra el modal de éxito
+    } catch (error) {
+      console.log(error.text);
+      handleShowErrorModal();// Muestra el modal de error
+    }
   };
+  
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    console.log("Formulario enviado:", stateForm);
+
+    sendEmail();
+
+    setStateForm({ // Restablece los valores del formulario
+      user_name: "",
+      user_email: "",
+
+      message: "",
+    });
+		setFormErrors({});
+  };
+
+  const isDisabled =
+    stateForm.user_name.trim() === "" ||
+    stateForm.user_email.trim() === "" ||
+    stateForm.message.trim() === "";
 
   const localAddress = "Dirección del local"; // Inserta aquí la dirección del local
 
@@ -121,13 +128,13 @@ const About = () => {
   return (
     <div
       className="container text-start"
-      style={{ minHeight: "70vh", marginTop: "15px" }}
+      style={{ minHeight: "82vh", marginTop: "15px" }}
     >
       <div className="row">
         <div className="col-md-6">
-          <h2 style={{ color: "#191919" }}>Contacto</h2>
+          <h1 style={{ color: "#ff9e5c"  }}>Contacto</h1>
 
-          <form ref={form} onSubmit={sendEmail} className={style.form}>
+          <form ref={form} onSubmit={handleSubmit} className={style.form}>
             <div className={style.formGroup}>
               <label htmlFor="user_name" className={style.formLabel}>
                 Nombre:
@@ -178,12 +185,13 @@ const About = () => {
               )}
             </div>
 
-
-            < button type="submit" disabled={isDisabled} className={style.btnPrimary}>
+            <button
+              type="submit"
+              disabled={isDisabled}
+              className={style.btnPrimary}
+            >
               Enviar
             </button>
-
-
           </form>
 
           <Modal
@@ -193,8 +201,11 @@ const About = () => {
           >
             <Modal.Body closeButton>
               <div className="d-flex justify-content-between align-items-center">
-                <div> ✔ Tu mensaje ha sido enviado exitosamente.</div>
-                <Button variant="secondary" onClick={handleCloseSuccessModal}>
+                <h6> ✔ Tu mensaje ha sido enviado exitosamente.</h6>
+                <Button
+                  className={style.btnPrimary}
+                  onClick={handleCloseSuccessModal}
+                >
                   Cerrar
                 </Button>
               </div>
@@ -208,7 +219,10 @@ const About = () => {
                   ❌ Hubo un error al enviar tu mensaje. Por favor, inténtalo
                   nuevamente más tarde.
                 </div>
-                <Button variant="secondary" onClick={handleCloseErrorModal}>
+                <Button
+                  className={style.btnPrimary}
+                  onClick={handleCloseErrorModal}
+                >
                   Cerrar
                 </Button>
               </div>
@@ -216,15 +230,15 @@ const About = () => {
           </Modal>
         </div>
         <div className="col-md-6">
-          <h2 style={{ color: "#191919" }}>Horarios</h2>
+          <h3 style={{ color: "#191919" }}>Horarios</h3>
           <p style={{ color: "#3F3F3F" }}>De Lunes a Sábado</p>
           <p style={{ color: "#3F3F3F" }}>8:00 hs a 19:00 hs</p>
 
-          <h2 style={{ color: "#191919" }}>Información de ubicación</h2>
+          <h3 style={{ color: "#191919" }}>Información de ubicación</h3>
           <p style={{ color: "#3F3F3F" }}>Dirección: {localAddress}</p>
           <p style={{ color: "#3F3F3F" }}>Teléfono: Número de teléfono</p>
 
-          <h2 style={{ color: "#191919" }}>Encontranos en nuestras redes</h2>
+          <h3 style={{ color: "#191919" }}>Encontranos en nuestras redes</h3>
           <ul className="list-inline">
             <li className="list-inline-item">
               <a href="enlace-a-red-social-1" className="text-decoration-none">
@@ -262,7 +276,7 @@ const About = () => {
           </ul>
         </div>
       </div>
-    </div >
+    </div>
   );
 };
 

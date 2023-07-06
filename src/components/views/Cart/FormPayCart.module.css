@@ -8,7 +8,8 @@
 }
 
 .finishBtn {
-    margin-top: 1.5em;
+    margin-top: 15px;
+    margin-bottom: 15px;
     background-color: #5cff8d;
     border-color: #5cff8d;
     color: white;
@@ -35,20 +36,34 @@
     margin-right: 10px;
 }
 
-.imgMP:hover {
-
-}
-
 .backBtn {
     background-color: #ff9e5c;
     border-color: #ff9e5c;
     color: white;
     border-radius: 5px;
     border-style: solid;
-    margin-top: 10em;
+    margin-top: 2em;
 }
 
 .backBtn:enabled:hover{
     background-color: white;
     color: #ff9e5c;
+}
+
+.divMercado{
+    margin-bottom: 15px;
+}
+.divMercado h4{
+    margin-bottom: -15px;
+    margin-left: 25px;
+    text-align: justify;
+}
+
+.divTrnasfer{
+    margin: auto 25px;
+    text-align: justify;
+}
+
+.divTrnasfer span{
+    font-weight: 600;
 }

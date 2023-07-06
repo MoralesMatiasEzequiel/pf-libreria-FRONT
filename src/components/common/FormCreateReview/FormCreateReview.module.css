@@ -94,3 +94,20 @@
 	color: #ff9e5c;
 	border-color: #ff9e5c;
 }
+
+.p {
+    font-size: 22px;
+}
+.btnPrimary {
+	background-color: #ff9e5c;
+	border-color: #ff9e5c;
+	color: white;
+	border-radius: 5px;
+	border-style: solid;
+	align-items: center;
+}
+.btnPrimary:hover {
+	background-color: white;
+	color: #ff9e5c;
+	border-color: #ff9e5c;
+}

@@ -1,5 +1,8 @@
+.primcipalContainer{
+	min-height: 82vh;
+}
 .view {
-  min-height: 65vh;
+  min-height: 50vh;
 }
 
 .title {
@@ -14,7 +17,7 @@
 
 .container {
   border: 1px solid #ccc;
-  padding: 40px;
+  padding: 30px;
   margin: 25px auto;
   border-radius: 5px;
   display: flex;
@@ -74,6 +77,7 @@
 }
 
 .logout-button {
+	
   color: white;
   background-color: red;
   border-radius: 5px;
@@ -89,7 +93,7 @@
 }
 
 .favoriteBtn {
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   background-color: #ff9e5c;
   border-color: #ff9e5c;
   color: rgb(255, 255, 255);

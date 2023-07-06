@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { postReviews } from "../../../redux/ReviewsActions";
 import validation from "./Validation";
+import { Modal, Button } from "react-bootstrap";
 import style from "../FormCreateReview/FormCreateReview.module.css";
 
 const FormCreateReview = () => {
@@ -13,6 +14,17 @@ const FormCreateReview = () => {
     rating: 1,
     message: "",
   });
+
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [showErrorModal, setShowErrorModal] = useState(false);
+
+  const handleCloseSuccessModal = () => {
+    setShowSuccessModal(false);
+  };
+
+  const handleCloseErrorModal = () => {
+    setShowErrorModal(false);
+  };
 
   const isDisabled =
     !review.message ||
@@ -48,14 +60,19 @@ const FormCreateReview = () => {
       rating: parseInt(review.rating),
       message: review.message,
     };
-    dispatch(postReviews(sendReview));
+    dispatch(postReviews(sendReview))
+      .then((response) => {
+        setShowSuccessModal(true);
+      })
+      .catch((error) => {
+        setShowErrorModal(true);
+      });
     setErrors({});
     setReview({
       user: currentUser._id,
       rating: 1,
       message: "",
     });
-    alert("Review creada");
   };
 
   const renderStars = () => {
@@ -66,18 +83,28 @@ const FormCreateReview = () => {
         color: i <= review.rating ? "#FF9E5C" : "#ccc",
       };
       stars.push(
-        <span key={i} className={style.starClass} data-value={i} onClick={() => handleStarClick(i)}>
-          <i className="bi bi-star-fill" style={starStyle}> </i>
+        <span
+          key={i}
+          className={style.starClass}
+          data-value={i}
+          onClick={() => handleStarClick(i)}
+        >
+          <i className="bi bi-star-fill" style={starStyle}></i>
         </span>
       );
     }
     return stars;
   };
-  
 
   return (
     <div>
       <h2 className={style.h1}>Deja tu opinión sobre la tienda</h2>
+      <p className={style.p}>
+        Tu opinión es muy importante para nosotros, por eso te invitamos para
+        que puedas dejar una review sobre la tienda en el siguiente formulario.
+        La review creada sera visualizada en el Home de la tienda en la sección
+        "Reviews de usuarios sobre la tienda".
+      </p>
 
       <form action="" onSubmit={handleSubmit}>
         <div className={style.contfor1y2}>
@@ -119,14 +146,45 @@ const FormCreateReview = () => {
               id="exampleFormControlTextarea1"
               rows="4"
             ></textarea>
-            {errors.message && (
-              <p className={style.errors}>{errors.message}</p>
-            )}
+            {errors.message && <p className={style.errors}>{errors.message}</p>}
           </div>
         </div>
 
-        <button className={style.enviarBtn} disabled={isDisabled}>Enviar Review</button>
+        <button className={style.enviarBtn} disabled={isDisabled}>
+          Enviar Review
+        </button>
       </form>
+
+      <Modal show={showSuccessModal} onHide={handleCloseSuccessModal} centered>
+        <Modal.Body closeButton>
+          <div className="d-flex justify-content-between align-items-center">
+            <h6> ✔ Tu mensaje ha sido enviado exitosamente.</h6>
+            <Button
+              className={style.btnPrimary}
+              onClick={handleCloseSuccessModal}
+            >
+              Cerrar
+            </Button>
+          </div>
+        </Modal.Body>
+      </Modal>
+      <Modal show={showErrorModal} onHide={handleCloseErrorModal} centered>
+        <Modal.Body closeButton>
+          <div className="d-flex justify-content-between align-items-center">
+            <div>
+              {" "}
+              ❌ Hubo un error al enviar tu mensaje. Por favor, inténtalo
+              nuevamente más tarde.
+            </div>
+            <Button
+              className={style.btnPrimary}
+              onClick={handleCloseErrorModal}
+            >
+              Cerrar
+            </Button>
+          </div>
+        </Modal.Body>
+      </Modal>
     </div>
   );
 };

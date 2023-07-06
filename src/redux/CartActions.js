@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { pushProductOnCart, removeProductFromCart, postOrderCreated, setClientInfo,newCartState, setShipmentInfo, sendOrderToBack, cleanPaymentLinkState } from "./CartSlice";
+import { pushProductOnCart, removeProductFromCart, postOrderCreated, setClientInfo,newCartState, setShipmentInfo, sendOrderToBack, cleanPaymentLinkState, totalPrice } from "./CartSlice";
 
 export const addProductOnCart = (product) => {
     return (dispatch) => {
@@ -86,5 +86,11 @@ export const sendOrder = (clientInfo, shipmentInfo, productsOnCart) => {
         } catch (error) {
             
         }
+    };
+};
+
+export const sendTotalPrice = (price) => {
+    return (dispatch) => {
+        dispatch(totalPrice(price));
     };
 };

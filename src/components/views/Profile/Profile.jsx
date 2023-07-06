@@ -16,7 +16,7 @@ const Profile = () => {
   }, [isAuthenticated, navigate]);
 
   return (
-    <div>
+    <div className={styles.primcipalContainer}>
 			
       <ProfileData />
       

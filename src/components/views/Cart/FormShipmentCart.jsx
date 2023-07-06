@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import style from "./FormShipmentCart.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { setShipment } from "../../../redux/CartActions";
-
+import FormShipmentCartValidate from "./FormShipmentCartValidate";
 
 const FormShipmentCart = ({ state, setFormInfo, setFormShipment, setFormPay }) => {
 
@@ -27,6 +27,7 @@ const FormShipmentCart = ({ state, setFormInfo, setFormShipment, setFormPay }) =
     }
 
     const [FormShipmentCart, setFormShipmenCart] = useState(lSFormContact());
+    const [errors, setErrors] = useState({});
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -34,6 +35,11 @@ const FormShipmentCart = ({ state, setFormInfo, setFormShipment, setFormPay }) =
             ...FormShipmentCart,
             [name]: value
         })
+        setErrors(
+            FormShipmentCartValidate({
+                ...FormShipmentCart,
+                [name]: value,
+        }))
     }
 
     const handleSubmit = (event) => {
@@ -74,7 +80,9 @@ const FormShipmentCart = ({ state, setFormInfo, setFormShipment, setFormPay }) =
         FormShipmentCart.street.trim() === '' ||
         FormShipmentCart.number.trim() === '' ||
         FormShipmentCart.province.trim() === '' ||
-        FormShipmentCart.city.trim() === '';
+        FormShipmentCart.city.trim() === '' ||
+        !!errors.street || !!errors.number ||
+        !!errors.province || !!errors.city
 
     useEffect(() => {
         localStorage.setItem("FormShipmentCart", JSON.stringify(FormShipmentCart))
@@ -91,9 +99,11 @@ const FormShipmentCart = ({ state, setFormInfo, setFormShipment, setFormPay }) =
                     <div className={style.containerInfo}>
                         <div className={style.inputsContainer}>
                             <input type="text" name="street" placeholder="*Calle:" onChange={handleInputChange} value={FormShipmentCart.street} />
+                            {errors.street && (<p className={style.errors}>{errors.street}</p>)}
                         </div>
                         <div className={style.inputsContainer}>
                             <input type="text" name="number" placeholder="*Número:" onInput={validateNumberInput} onChange={handleInputChange} value={FormShipmentCart.number} />
+                            {errors.number && (<p className={style.errors}>{errors.number}</p>)}
                         </div>
                         <div className={style.inputsContainer}>
                             <input type="text" name="floor" placeholder="Piso:" onChange={handleInputChange} value={FormShipmentCart.floor} />
@@ -103,9 +113,11 @@ const FormShipmentCart = ({ state, setFormInfo, setFormShipment, setFormPay }) =
                         </div>
                         <div className={style.inputsContainer}>
                             <input type="text" name="province" placeholder="*Provincia:" onChange={handleInputChange} value={FormShipmentCart.province} />
+                            {errors.province && (<p className={style.errors}>{errors.province}</p>)}
                         </div>
                         <div className={style.inputsContainer}>
                             <input type="text" name="city" placeholder="*Ciudad:" onChange={handleInputChange} value={FormShipmentCart.city} />
+                            {errors.city && (<p className={style.errors}>{errors.city}</p>)}
                         </div>
                         <div className={style.inputsContainer}>
                             <textarea type="text" name="comentary" placeholder="Aclaración extra" className={style.aclaracion} onChange={handleInputChange} value={FormShipmentCart.comentary} />

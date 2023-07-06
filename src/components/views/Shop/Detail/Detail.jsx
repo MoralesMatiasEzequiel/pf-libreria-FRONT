@@ -3,41 +3,66 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, Link } from "react-router-dom";
 import ModalCart from "../../../common/Modals/ModalCart/ModalCart";
-import { addProductOnCart, deleteProductFromCart  } from "../../../../redux/CartActions";
+import { addProductOnCart, deleteProductFromCart } from "../../../../redux/CartActions";
 import { Rating } from '@mui/material';
-import { rateProduct } from "../../../../redux/productActions";
+import { rateProduct, getById, getProducts } from "../../../../redux/productActions";
 import { useAuth0 } from "@auth0/auth0-react";
 import { addFavorite, removeFavorite, updateFavorites } from "../../../../redux/favoriteActions";
+import { postUserToBack } from "../../../../redux/UserActions";
 
 const Detail = () => {
   const { id } = useParams();
+  
   const dispatch = useDispatch();
   const { products } = useSelector(state => state.products);
-  const product = products.find(item => item._id === id);
+  const { detail } = useSelector(state => state.products);
+  const { isAuthenticated, user, loginWithPopup } = useAuth0();
+  const [rating, setRating] = useState(0);
+  const [showEnableRating, setShowEnableRating] = useState(false); // Estado para controlar la visualización del componente Rating deshabilitado
+  
+  const [product, setProduct] = useState({});
+
+  useEffect(() => {
+    if(products?.length === 0){
+      dispatch(getProducts());
+    }
+    
+    if(products?.length !== 0){
+      dispatch(getById(id));
+      setProduct(detail);
+      setRating(detail.rating);
+    }
+    
+  }, [dispatch, id, products, detail]);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      dispatch(postUserToBack(user));
+      setShowEnableRating(true);
+    }
+  }, [dispatch, isAuthenticated])
 
   const { favItems } = useSelector((state) => state.favorites);
-
   const { currentUser } = useSelector((state) => state.user);
-
-  const userId = currentUser._id;
-
-  const { isAuthenticated } = useAuth0();
-
+  const userId = currentUser?._id;
+  
+ 
   const [modalShow, setModalShow] = useState(false);
-
-
+  
   const { oneStarReviews, twoStarsReviews, threeStarsReviews, fourStarsReviews, fiveStarsReviews } = product;
-  const total = oneStarReviews + twoStarsReviews + threeStarsReviews + fourStarsReviews + fiveStarsReviews;
-  console.log(total);
 
-  const [totalVotes, setTotalVotes] = useState(total); // Estado para almacenar el total de votos
+  const [totalVotes, setTotalVotes] = useState(0); // Inicializa totalVotes con 0
+
+  useEffect(() => {
+    const total = oneStarReviews + twoStarsReviews + threeStarsReviews + fourStarsReviews + fiveStarsReviews;
+    setTotalVotes(total);
+  }, [oneStarReviews, twoStarsReviews, threeStarsReviews, fourStarsReviews, fiveStarsReviews]);
 
   useEffect(() => {
     if (userId) {
-      console.log(favItems);
       dispatch(updateFavorites(userId, favItems));
     }
-  }, [favItems, dispatch, userId, isAuthenticated]);
+  }, [favItems, dispatch, userId, isAuthenticated, products]);
 
   const handleFavoriteClick = (productId) => {
     if (isAuthenticated) {
@@ -48,18 +73,15 @@ const Detail = () => {
         dispatch(addFavorite(productId));
       }
     } else {
-      alert("Debes estar autenticado para agregar productos a favoritos.");
+      loginWithPopup();
     }
   };
-
-  const [rating, setRating] = useState(product.rating);
-  const [showDisabledRating, setShowDisabledRating] = useState(false); // Estado para controlar la visualización del componente Rating deshabilitado
-
+ 
   const filledcart = () => {
     let datas = localStorage.getItem("protucts_cart");
     let datasParse = JSON.parse(datas);
     if (datas?.length > 0) {
-      let cartId = datasParse.map(pro => pro._id);
+      let cartId = datasParse.map(pro => pro?._id);
       return cartId;
     } else {
       return ["nada"];
@@ -73,7 +95,7 @@ const Detail = () => {
 
   const addToCart = (product) => {
     dispatch(addProductOnCart(product));
-    setProductsInCart([...productsInCart, product._id]);
+    setProductsInCart([...productsInCart, product?._id]);
     let datas = localStorage.getItem("protucts_cart");
     if (!datas) {
       localStorage.setItem("protucts_cart", JSON.stringify([product]));
@@ -90,7 +112,7 @@ const Detail = () => {
   
     let datas = localStorage.getItem("protucts_cart");
     if (datas) {
-      let newdata = JSON.parse(datas).filter(product => product._id !== productId);
+      let newdata = JSON.parse(datas).filter(product => product?._id !== productId);
       localStorage.setItem("protucts_cart", JSON.stringify(newdata));
     }
   };
@@ -99,13 +121,18 @@ const Detail = () => {
     return <div>Producto no encontrado</div>;
   }
 
-  const isFavorite = favItems?.some((item) => item === product._id);
+  const isFavorite = favItems?.some((item) => item === product?._id);
 
   return (
     <div className={style.container}>
       <div className="row">
+				<div className={style.linkDiv}>
+          <Link to={"/shop"} className={style.linkBack}>
+            {"Volver a Tienda"}
+          </Link>
+        </div>
         <div className="col-md-6 d-flex align-items-center">
-          <div
+					<div
             className="card"
             style={{
               width: "100%",
@@ -143,29 +170,30 @@ const Detail = () => {
               >
                 {product.name}
               </h5>
-              {showDisabledRating && (
-                <p style={{ color: "#3F3F3F", fontSize: "18px", padding: "10px" }}>
+              {!showEnableRating && (
+                <p style={{margin: 0}}>
                   <Rating name="disabled" value={rating} disabled /> ({totalVotes})
                 </p>
               )}
-              {!showDisabledRating && (
+              {showEnableRating && (
                 <p style={{ color: "#3F3F3F", fontSize: "18px", padding: "10px" }}>
                   <Rating
                     name="simple-controlled"
                     value={rating}
                     onChange={(event, newRating) => {
                       setRating(newRating);
-                      setShowDisabledRating(true); // Mostrar el Rating deshabilitado después de que el usuario haya ingresado un valor
-                      dispatch(rateProduct(product._id, newRating));
+                      setShowEnableRating(false); // Mostrar el Rating deshabilitado después de que el usuario haya ingresado un valor
+                      dispatch(rateProduct(product?._id, newRating));
                       setTotalVotes(prevVotes => prevVotes + 1);
                     }}
                   /> ({totalVotes})
                 </p>
               )}
-              <p style={{ color: "#3F3F3F", fontSize: "18px", padding: "10px" }}>Marca: {product.brand}</p>
-              <p style={{ color: "#3F3F3F", fontSize: "18px", padding: "10px" }}>Stock: {product.stock}</p>
-              <p style={{ color: "#3F3F3F", fontSize: "18px", padding: "10px" }}>Detalle del producto: {product.description}</p>
-              <h5
+              {!isAuthenticated && <p style={{ color: "#3F3F3F", fontSize: "12px"}}>Debés loguearte para dejar un puntaje.</p>}
+              <p style={{ color: "#3F3F3F", fontSize: "18px", padding: "5px" }}>Marca: {product.brand}</p>
+              <p style={{ color: "#3F3F3F", fontSize: "18px", padding: "5px" }}>Stock: {product.stock}</p>
+              <p style={{ color: "#3F3F3F", fontSize: "18px", padding: "5px" }}>Detalle del producto: {product.description}</p>
+              <div
                 style={{
                   color: "#191919",
                   fontFamily: "Montserrat, sans-serif",
@@ -174,12 +202,20 @@ const Detail = () => {
                   padding: "10px"
                 }}
               >
-                $ {product.price}
-              </h5>
+               {product.salePrice ? (
+										<div>
+											<p style={{textDecoration: "line-through", fontSize: "14px",fontWeight:"600"}}>${product.price}</p>
+											<p style={{color: '#FF9E5C', fontSize:'24px', fontWeight:"800"}}> ${product.salePrice}</p>
 
+										</div>
+                      
+                    ) : (
+                      <p style={{color: '#FF9E5C', fontSize:'24px', padding:"10px"}}>${product.price}</p>
+                    )}
+              </div>
               <div className={style.buttons}>
-                {productsInCart.includes(product._id) ? (
-                  <button className={style.btnCart} onClick={() => removeFromCart(product._id)}>
+                {productsInCart.includes(product?._id) ? (
+                  <button className={style.btnCart} onClick={() => removeFromCart(product?._id)}>
                     <i className="bi bi-cart-check"></i> Eliminar del carrito
                   </button>
                 ) : (
@@ -188,25 +224,20 @@ const Detail = () => {
                     <i className="bi bi-cart"></i> Agregar al carrito
                   </button>
                 )}
-                {
-                  isAuthenticated && (<button onClick={() => handleFavoriteClick(product._id)} className={style.btnFavorite}>
+                <button onClick={() => handleFavoriteClick(product?._id)} className={style.btnFavorite}>
                   {isFavorite ? (
                     <i className="bi bi-heart-fill"> Quitar de favoritos</i>
                   ) : (
                     <i className="bi bi-heart"> Agregar a favoritos</i>
                   )}
-                </button>)
-                }
+                </button>
+                
                 
               </div>
             </div>
           </div>
         </div>
-        <div className={style.linkDiv}>
-          <Link to={"/shop"} className={style.linkBack}>
-            {"Volver a Tienda"}
-          </Link>
-        </div>
+        
       </div>
       <ModalCart show={modalShow} onHide={() => setModalShow(false)} />
     </div>

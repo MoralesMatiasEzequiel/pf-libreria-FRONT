@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 import FormInfoCart from "./FormInfoCart";
 import FormShipmentCart from "./FormShipmentCart";
 import FormPayCart from "./FormPayCart";
-import CartProducts from "../CartProducts/CartProducts";
 
 const Cart = () => {
 
@@ -33,7 +32,7 @@ const Cart = () => {
     };
 
     const dispatch = useDispatch();
-    const { productsOnCart } = useSelector((state) => state.cart);
+    const { productsOnCart, finalPrice } = useSelector((state) => state.cart);
 
     const [selectedStock, setSelectedStock] = useState({});
     
@@ -68,8 +67,12 @@ const Cart = () => {
     }, [productsOnCart]);
 
     const totalPrice = productsOnCart.reduce((total, product) => {
-    const quantity = selectedStock[product._id] || product.quantity;
-    return total + product.price * quantity;
+        const quantity = selectedStock[product._id] || product.quantity;
+    
+        if(product.salePrice < product.price && product.salePrice > 0){
+          return total + product.salePrice * quantity;
+        }
+        return total + product.price * quantity;
     }, 0);
 
     useEffect(() => {
@@ -113,25 +116,22 @@ const Cart = () => {
                             <div className={style.productsContainer}>
                                 {productsOnCart &&
                                 productsOnCart.map((product, index) => {
-                                    const productTotalPrice =
-                                    (product.price || 0) * (selectedStock[product._id] || 1);
-
                                     return (
                                     <div key={index} className={style.product}>
                                         <div className={style.productDiv1}>
                                         <img src={product.image} alt={product.name} />
                                         <p>{product.name}</p>
                                         </div>
-                                        <div className={style.productDiv2}>
-                                        <p className={style.precio}>${isNaN(productTotalPrice) ? 0 : productTotalPrice}</p>
-                                        </div>
+                                        {/* <div className={style.productDiv2}>
+                                        <p className={style.precio}>${product.salePrice ? product.salePrice : product.price}</p>
+                                        </div> */}
                                     </div>
                                     );
                                 })}
                             </div>
 
                             <p className={style.totalPriceContainer}>
-                                Precio total: <span className={style.totalPrice}>${totalPrice}</span>
+                                Precio total: <span className={style.totalPrice}>${finalPrice}</span>
                             </p>
                         </div>
                     </div>

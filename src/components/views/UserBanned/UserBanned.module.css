@@ -1,0 +1,33 @@
+.container{
+    border: 2px solid #ff9e5c;
+    margin: 50px 100px;
+    border-radius: 5px;
+}
+
+.container h2{
+    margin: 15px 275px;
+    background-color: #ff9e5c;
+    color: white;
+    border-radius: 5px;
+}
+
+.imgDev{
+    height: 100%;
+    width: 1200px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.container button{
+    margin: 15px auto;
+    background-color: #ff9e5c;
+    color: white;
+    border: 1px solid #ff9e5c;
+    border-radius: 5px;
+}
+.container button:hover{
+    background-color: white;
+    color: #ff9e5c;
+    border-color: #ff9e5c;
+}

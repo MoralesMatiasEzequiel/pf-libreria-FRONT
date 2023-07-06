@@ -29,6 +29,7 @@ const CarouselRating = ({ clickDispatch, dispatchProductsRatingToShop }) => {
           items: 1
         }
       };
+			
 
 
 
@@ -41,12 +42,17 @@ const CarouselRating = ({ clickDispatch, dispatchProductsRatingToShop }) => {
           <Carousel responsive={responsive} className={style.carousel} infinite={true} >
             {
               productsRating && productsRating.map((product, index) => {
+								const price = product.salePrice ? product.salePrice: product.price;
                 return (
                   <div key={index} className={style.card} >
                     <img className={style.productImage} src={product.image} alt={product.name} />
                     <h5>{product.name}</h5>
-                    <p className={style.rating}>Rating: {product.rating}</p>
-                    <p className={style.priceNow}>Precio: ${product.price}</p>
+                    <p className={style.rating}>
+                      {Array.from({ length: product.rating }).map((_, index) => (
+                        <i key={index} className="bi bi-star-fill"></i>
+                      ))}
+                    </p>
+                    <p className={style.priceNow}>${price}</p>
                     <Link to={`/shop/${product._id}`}>
                       <button onClick={() => clickDispatch(product._id)} >Ver producto</button>
                     </Link>

@@ -27,6 +27,7 @@ const Favorites = () => {
   // };
 
   return (
+		
     <div className={style.container}>
       <div className={style.containerInfo}>
         <h2 className={style.containerTitle}>LISTA DE FAVORITOS</h2>
@@ -41,7 +42,7 @@ const Favorites = () => {
               <h4 className={style.subtitulo}>
                 No hay productos en tu lista de favoritos
               </h4>
-              <li>Inicia sesion en tu cuenta.</li>
+              
               <li>Agrega productos a tu lista.</li>
             </ul>
           </div>
@@ -59,7 +60,10 @@ const Favorites = () => {
           </div>
         )}
         <div className={style.productsContainer}>
-          {filteredProducts.map((product) => (
+          {filteredProducts.map((product) => {
+						const price =  product.salePrice ? product.salePrice: product.price;
+						return (
+						
             <div key={product?._id} className={style.product}>
               <div className={style.productDiv1}>
                 <Link to={`/shop/${product?._id}`}>
@@ -70,15 +74,9 @@ const Favorites = () => {
                 </Link>
               </div>
               <div className={style.productDiv2}>
-                <h4 className={style.precio}>${product?.price}</h4>
+                <h4 className={style.precio}>${price}</h4>
               </div>
               <div className={style.btnContainer}>
-                {/* <button
-                  onClick={() => addToCartHandler(product?._id)}
-                  className={style.cartAddButton}
-                >
-                  AGREGAR AL CARRITO
-                </button> */}
 
                 <button
                   onClick={() => removeFavsHandler(product?._id)}
@@ -88,7 +86,7 @@ const Favorites = () => {
                 </button>
               </div>
             </div>
-          ))}
+          )})}
         </div>
       </div>
     </div>

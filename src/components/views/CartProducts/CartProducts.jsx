@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { deleteProductFromCart, newCart } from "../../../redux/CartActions";
+import { deleteProductFromCart, newCart, sendTotalPrice } from "../../../redux/CartActions";
 import { Link } from "react-router-dom";
 import style from "./CartProducts.module.css";
 import { useState, useEffect } from "react";
@@ -7,28 +7,29 @@ import { useState, useEffect } from "react";
 const CartProducts = () => {
 
   const dispatch = useDispatch();
-  const { productsOnCart } = useSelector((state) => state.cart);
+  const { productsOnCart, finalPrice } = useSelector((state) => state.cart);
 
-  const [selectedStock, setSelectedStock] = useState({});
+  const [ selectedStock, setSelectedStock ] = useState({});
+  const [ updatedStock, setUpdatedStock ] = useState([...productsOnCart]);
+// console.log(updatedStock);
   const isDisabled = !productsOnCart.length
-
+  
   const removeProduct = (id) => {
     dispatch(deleteProductFromCart(id));
     let datos = localStorage.getItem("protucts_cart");
     let modify = JSON.parse(datos)
-
+    
     let newdatos = modify.filter(pro => pro._id !== id);
-
+    
     localStorage.setItem("protucts_cart", JSON.stringify(newdatos))
   };
 
   const handleStockChange = (change, productId) => {
     const currentStock = selectedStock[productId] || 1;
     const newStock = currentStock + change;
-
-
+    
     const product = productsOnCart.find((product) => product._id === productId);
-
+    
     if (newStock > 0 && newStock <= product.stock) {
       setSelectedStock((prevState) => ({
         ...prevState,
@@ -36,7 +37,7 @@ const CartProducts = () => {
       }));
     }
   };
-
+  
   useEffect(() => {
     const updatedStock = {};
     productsOnCart.forEach((product) => {
@@ -56,6 +57,10 @@ const CartProducts = () => {
 
   const totalPrice = productsOnCart.reduce((total, product) => {
     const quantity = selectedStock[product._id] || product.quantity;
+
+    if(product.salePrice < product.price && product.salePrice > 0){
+      return total + product.salePrice * quantity;
+    }
     return total + product.price * quantity;
   }, 0);
 
@@ -69,6 +74,27 @@ const CartProducts = () => {
     setSelectedStock(updatedStock);
   }, [productsOnCart]);
 
+  const putStock = (stock, amount) => {
+    const result = stock - amount;
+    return result;
+  }
+
+  // const totalPrices = () => {
+  //   if(product.salePrice < product.price && product.salePrice > 0){
+  //     const productTotalPrice =
+  //     (product.salePrice || 0) * (selectedStock[product._id] || 1);
+  //     return productTotalPrice;
+  //   }else if(product.salePrice === undefined || product.salePrice === null || !product.salePrice){
+  //     const productTotalPrice =
+  //     (product.price || 0) * (selectedStock[product._id] || 1);
+  //     return productTotalPrice;
+  //   }
+  // }
+
+  const sendFinalPrice = (price) => {
+    dispatch(sendTotalPrice(price))
+  }
+
   return (
     <div className={style.container}>
       <h1 className={style.containerTitle}>CARRITO</h1>
@@ -76,8 +102,19 @@ const CartProducts = () => {
       <div className={style.productsContainer}>
         {productsOnCart &&
           productsOnCart.map((product, index) => {
-            const productTotalPrice =
-              (product.price || 0) * (selectedStock[product._id] || 1);
+            // updatedStock.push({_id: product._id, stock: putStock(product.stock, selectedStock[product._id])})
+            // const robert = updatedStock[updatedStock.length - [...productsOnCart].length]
+            // // updatedStock = robert
+            // console.log(robert);
+            
+            const productTotalPrice = () => {
+              if(product.salePrice < product.price && product.salePrice > 0){
+                return (product.salePrice || 0) * (selectedStock[product._id] || 1);
+                }else if(!product.salePrice || product.salePrice === undefined || product.salePrice === null){
+                  return (product.price || 0) * (selectedStock[product._id] || 1);
+                }
+            }
+              // (product.price || 0) * (selectedStock[product._id] || 1);
 
             return (
               <div key={index} className={style.product}>
@@ -86,8 +123,8 @@ const CartProducts = () => {
                   <p>{product.name}</p>
                 </div>
                 <div className={style.productDiv2}>
-                  <p className={style.precio}>${isNaN(productTotalPrice) ? 0 : productTotalPrice}</p>
-                  <p>Stock: {product.stock}</p>
+                  <p className={style.precio}>${productTotalPrice()}</p>
+                  <p>Stock: {putStock(product.stock, selectedStock[product._id])}</p>
                   <div className={style.quantityContainer}>
                     <p className={style.quantityLabel}>Cantidad:</p>
                     <div className={style.stock}>
@@ -123,7 +160,7 @@ const CartProducts = () => {
       </p>
 
       <Link to={"/checkout"} className={style.link}>
-        <button disabled={isDisabled} className={style.compraBtn}>Hacer compra</button>
+        <button disabled={isDisabled} className={style.compraBtn} onClick={() => sendFinalPrice(totalPrice)} >Hacer compra</button>
       </Link>
     </div>
   );

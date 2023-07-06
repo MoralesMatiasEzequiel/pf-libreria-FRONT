@@ -7,9 +7,12 @@ import Navbar from 'react-bootstrap/Navbar';
 import { getProducts } from "../../../redux/productActions";
 import { useDispatch, useSelector } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { newCart } from "../../../redux/CartActions";
 
 const Navuno = () => {
+
+    const { productsOnCart } = useSelector(state => state.cart)
 
     const dispatch = useDispatch();
 
@@ -28,7 +31,7 @@ const Navuno = () => {
     // COLORES PARA POSICIONAMIENTO EN EL NAV
 
     const profileLink = isAuthenticated ? (
-        <NavLink style={{color: `${colorLog}`}} to={"/profile"} className={style.navLink} onClick={() => changeColor("log")}><img src={currentUser.picture} alt={currentUser.name}/></NavLink>
+        <NavLink style={{color: `${colorLog}`}} to={"/profile"} className={style.navLink} onClick={() => changeColor("log")}><img src={currentUser?.picture} alt={currentUser?.name}/></NavLink>
     ) : (
         <NavLink style={{color: `${colorLog}`}} to={"/login"} className={style.navLink} onClick={() => changeColor("log")}>Ingresar</NavLink>
     );
@@ -66,6 +69,14 @@ const Navuno = () => {
         } 
     }
 
+    useEffect(() => {
+        let data = localStorage.getItem("protucts_cart");
+        let cart = JSON.parse(data)
+        if (cart?.length > 0 && productsOnCart.length < 1) {
+            dispatch(newCart(cart))
+        }
+    }, [])
+
     return (
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
             <Container>
@@ -97,7 +108,7 @@ const Navuno = () => {
                         </Nav.Link>
 
                         <Nav.Link eventKey={2}>
-                            <NavLink style={{color: `${colorCarrito}`}} to={"/cart"} className={style.navLink} onClick={() => changeColor("carrito")}>Carrito</NavLink>
+                            <NavLink style={{color: `${colorCarrito}`}} to={"/cart"} className={style.navLink} onClick={() => changeColor("carrito")}>Carrito ({productsOnCart.length})</NavLink>
                         </Nav.Link>
                     </Nav>
 

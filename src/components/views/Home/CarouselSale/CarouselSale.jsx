@@ -43,8 +43,8 @@ const CarouselSale = ({ clickDispatch, dispatchProductsSalesToShop }) => {
                   <div key={index} className={style.card} >
                     <img className={style.productImage} src={product.image} alt={product.name} />
                     <h5>{product.name}</h5>
-                    <p className={style.priceBefore}>Antes: ${product.price}</p>
-                    <p className={style.priceNow}>Ahora: ${product.salePrice}</p>
+                    <p className={style.priceBefore}>${product.price}</p>
+                    <p className={style.priceNow}>${product.salePrice}</p>
                     <Link to={`/shop/${product._id}`}>
                       <button onClick={() => clickDispatch(product._id)} >Ver producto</button>
                     </Link>

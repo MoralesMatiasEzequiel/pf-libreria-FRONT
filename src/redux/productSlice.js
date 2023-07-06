@@ -26,7 +26,7 @@ export const productSlice = createSlice({
         },
         getProductById: (state, action) => {
 
-            state.detail = state.products.filter(pro => pro.id === action.payload)
+            state.detail = state.products.find(pro => pro._id === action.payload)
             state.productsExist = true
             state.subCategories = []
             state.branes = []
@@ -126,6 +126,7 @@ export const productSlice = createSlice({
         },
         upperBrandsSelectedState: (state, action) => {
             state.brandSelected = action.payload
+            state.pag = 1
 
         },
         getProductsOnSale: (state, action) => {

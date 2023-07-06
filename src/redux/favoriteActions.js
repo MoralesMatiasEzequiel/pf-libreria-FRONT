@@ -33,7 +33,6 @@ export const updateFavorites = (userId, favItems) => {
     };
 
     const { data } = await axios.put('/user', userFav);
-    console.log(data);
 	
     dispatch(updatedFavorites(userFav));
 }};
