@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 import FormInfoCart from "./FormInfoCart";
 import FormShipmentCart from "./FormShipmentCart";
 import FormPayCart from "./FormPayCart";
-import CartProducts from "../CartProducts/CartProducts";
 
 const Cart = () => {
 

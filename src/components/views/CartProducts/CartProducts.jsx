@@ -78,7 +78,18 @@ const CartProducts = () => {
     const result = stock - amount;
     return result;
   }
-  // console.log(updatedStock);
+
+  // const totalPrices = () => {
+  //   if(product.salePrice < product.price && product.salePrice > 0){
+  //     const productTotalPrice =
+  //     (product.salePrice || 0) * (selectedStock[product._id] || 1);
+  //     return productTotalPrice;
+  //   }else if(product.salePrice === undefined || product.salePrice === null || !product.salePrice){
+  //     const productTotalPrice =
+  //     (product.price || 0) * (selectedStock[product._id] || 1);
+  //     return productTotalPrice;
+  //   }
+  // }
 
   return (
     <div className={style.container}>
@@ -91,8 +102,15 @@ const CartProducts = () => {
             // const robert = updatedStock[updatedStock.length - [...productsOnCart].length]
             // // updatedStock = robert
             // console.log(robert);
-            const productTotalPrice =
-              (product.price || 0) * (selectedStock[product._id] || 1);
+            
+            const productTotalPrice = () => {
+              if(product.salePrice < product.price && product.salePrice > 0){
+                return (product.salePrice || product.salePrice) * (selectedStock[product._id] || 1);
+                }else if(product.salePrice === undefined || product.salePrice === null || !product.salePrice){
+                  return (product.price || product.salePrice) * (selectedStock[product._id] || 1);
+                }
+            }
+              // (product.price || product.salePrice) * (selectedStock[product._id] || 1);
 
             return (
               <div key={index} className={style.product}>
@@ -101,8 +119,7 @@ const CartProducts = () => {
                   <p>{product.name}</p>
                 </div>
                 <div className={style.productDiv2}>
-                  {/* <p className={style.precio}>${isNaN(productTotalPrice) ? 0 : productTotalPrice}</p> */}
-                  <p className={style.precio}>${product.salePrice ? product.salePrice : productTotalPrice}</p>
+                  <p className={style.precio}>${productTotalPrice()}</p>
                   <p>Stock: {putStock(product.stock, selectedStock[product._id])}</p>
                   <div className={style.quantityContainer}>
                     <p className={style.quantityLabel}>Cantidad:</p>
