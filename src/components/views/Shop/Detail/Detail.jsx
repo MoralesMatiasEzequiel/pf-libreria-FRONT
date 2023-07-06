@@ -166,7 +166,7 @@ const Detail = () => {
                 {product.name}
               </h5>
               {!showEnableRating && (
-                <p style={{ color: "#3F3F3F", fontSize: "18px", padding: "10px" }}>
+                <p style={{margin: 0}}>
                   <Rating name="disabled" value={rating} disabled /> ({totalVotes})
                 </p>
               )}
@@ -184,6 +184,7 @@ const Detail = () => {
                   /> ({totalVotes})
                 </p>
               )}
+              {!isAuthenticated && <p style={{ color: "#3F3F3F", fontSize: "12px"}}>Debés loguearte para dejar un puntaje.</p>}
               <p style={{ color: "#3F3F3F", fontSize: "18px", padding: "5px" }}>Marca: {product.brand}</p>
               <p style={{ color: "#3F3F3F", fontSize: "18px", padding: "5px" }}>Stock: {product.stock}</p>
               <p style={{ color: "#3F3F3F", fontSize: "18px", padding: "5px" }}>Detalle del producto: {product.description}</p>
