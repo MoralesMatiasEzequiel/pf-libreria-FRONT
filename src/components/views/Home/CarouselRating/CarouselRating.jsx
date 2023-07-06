@@ -50,7 +50,7 @@ const CarouselRating = ({ clickDispatch, dispatchProductsRatingToShop }) => {
                         <i key={index} className="bi bi-star-fill"></i>
                       ))}
                     </p>
-                    <p className={style.priceNow}>Precio: ${product.price}</p>
+                    <p className={style.priceNow}>${product.price}</p>
                     <Link to={`/shop/${product._id}`}>
                       <button onClick={() => clickDispatch(product._id)} >Ver producto</button>
                     </Link>

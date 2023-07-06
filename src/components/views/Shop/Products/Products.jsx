@@ -2,25 +2,31 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { totalPag, getProducts } from "../../../../redux/productActions";
-import { addProductOnCart, deleteProductFromCart } from "../../../../redux/CartActions";
+import {
+  addProductOnCart,
+  deleteProductFromCart,
+} from "../../../../redux/CartActions";
 import { useAuth0 } from "@auth0/auth0-react";
 import Paginado from "../Paginado/Paginado";
 import style from "./Products.module.css";
-import { addFavorite, removeFavorite, updateFavorites } from "../../../../redux/favoriteActions";
+import {
+  addFavorite,
+  removeFavorite,
+  updateFavorites,
+} from "../../../../redux/favoriteActions";
 import { postUserToBack } from "../../../../redux/UserActions";
 
 const Products = () => {
-
   const dispatch = useDispatch();
   const { productSee, pag, productsExist, brandSelected } = useSelector(
     (state) => state.products
   );
 
   const { favItems } = useSelector((state) => state.favorites);
-	
+
   const { currentUser } = useSelector((state) => state.user);
 
-	const userId = currentUser?._id;
+  const userId = currentUser?._id;
 
   const { isAuthenticated, user, loginWithPopup } = useAuth0();
 
@@ -28,13 +34,12 @@ const Products = () => {
     if (isAuthenticated) {
       dispatch(postUserToBack(user));
     }
-  }, [dispatch, isAuthenticated])
+  }, [dispatch, isAuthenticated]);
 
   const filledcart = () => {
     let datas = localStorage.getItem("protucts_cart");
     let datasParse = JSON.parse(datas);
     if (datas?.length > 0) {
-      
       let cartId = datasParse.map((pro) => pro?._id);
       //console.log(cartId);
       return cartId;
@@ -42,8 +47,6 @@ const Products = () => {
       return [];
     }
   };
-
-  
 
   const lSProductSee = () => {
     let datos = localStorage.getItem("ProductSee");
@@ -78,11 +81,11 @@ const Products = () => {
   }, [brandSelected, productSee, productsInCart]);
 
   useEffect(() => {
-    if(userId){
+    if (userId) {
       console.log(favItems);
       dispatch(updateFavorites(userId, favItems));
     }
-  }, [favItems, dispatch, userId, isAuthenticated])
+  }, [favItems, dispatch, userId, isAuthenticated]);
 
   let desde = (pag - 1) * 12;
   let hasta = pag * 12;
@@ -110,11 +113,13 @@ const Products = () => {
 
   const removeFromCart = (productId) => {
     dispatch(deleteProductFromCart(productId));
-    setProductsInCart(productsInCart.filter(id => id !== productId));
+    setProductsInCart(productsInCart.filter((id) => id !== productId));
 
     let datas = localStorage.getItem("protucts_cart");
     if (datas) {
-      let newdata = JSON.parse(datas).filter(product => product._id !== productId);
+      let newdata = JSON.parse(datas).filter(
+        (product) => product._id !== productId
+      );
       localStorage.setItem("protucts_cart", JSON.stringify(newdata));
     }
   };
@@ -134,10 +139,8 @@ const Products = () => {
 
   return (
     <div className={style.totalContainer}>
-      {
-        productsExist && <Paginado cantPages={pagines} />
-      }
-      
+      {productsExist && <Paginado cantPages={pagines} />}
+
       <div className={style.container}>
         {!productsExist && (
           <div className={style.noProduct}>
@@ -163,8 +166,12 @@ const Products = () => {
           viewsProducts?.map((base, index) => {
             const isFavorite = favItems.some((item) => item === base._id);
             return (
-							
               <div key={index} className={style.productCard}>
+                {base.salePrice ? (
+                  <div className={style.offerts}>OFERTA</div>
+                ) : (
+                  <br />
+                )}
                 <Link to={"/shop/" + base._id}>
                   <div className={style.productTumb}>
                     <img src={base.image} alt={base.name} />
@@ -176,7 +183,14 @@ const Products = () => {
                   </Link>
                   <div className={style.productBottomDetails}>
                     <div className={style.productPrice}>
-                      <small>${base.salePrice ? base.salePrice: base.price }</small>
+                      {/* <small>
+                        ${base.salePrice ? base.salePrice : base.price}
+                      </small> */}
+                      {base.salePrice ? (
+                        <div><small className={style.oldPrice}>{base.price}</small> {base.salePrice}</div>
+                      ) : (
+                        base.price 
+                      )}
                     </div>
 
                     <div className={style.productLinks}>
@@ -190,11 +204,9 @@ const Products = () => {
                           <i className="bi bi-heart"></i>
                         )}
                       </button>
-                      
+
                       {productsInCart.includes(base._id) ? (
-                        <button
-                          onClick={() => removeFromCart(base._id)}
-                        >
+                        <button onClick={() => removeFromCart(base._id)}>
                           <i className="bi bi-cart-check"></i>
                         </button>
                       ) : (
@@ -213,10 +225,9 @@ const Products = () => {
             );
           })}
       </div>
-      {
-        productsExist && <Paginado className={style.paginado} cantPages={pagines} />
-      }
-      
+      {productsExist && (
+        <Paginado className={style.paginado} cantPages={pagines} />
+      )}
     </div>
   );
 };
