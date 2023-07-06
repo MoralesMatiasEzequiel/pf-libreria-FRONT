@@ -41,7 +41,7 @@ const Favorites = () => {
               <h4 className={style.subtitulo}>
                 No hay productos en tu lista de favoritos
               </h4>
-              <li>Inicia sesion en tu cuenta.</li>
+              
               <li>Agrega productos a tu lista.</li>
             </ul>
           </div>

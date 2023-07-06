@@ -27,6 +27,7 @@
   width: 78%;
   margin: 5px auto;
   margin-bottom: 15px;
+	
 }
 
 .card {
@@ -39,6 +40,7 @@
   flex-direction: column;
   justify-content: space-between;
   height: 98%;
+	pointer-events: none;
 }
 .card:hover {
   box-shadow: 0 0 5px 1px #363636;
