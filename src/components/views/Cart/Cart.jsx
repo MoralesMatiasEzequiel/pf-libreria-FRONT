@@ -32,7 +32,7 @@ const Cart = () => {
     };
 
     const dispatch = useDispatch();
-    const { productsOnCart } = useSelector((state) => state.cart);
+    const { productsOnCart, finalPrice } = useSelector((state) => state.cart);
 
     const [selectedStock, setSelectedStock] = useState({});
     
@@ -122,16 +122,16 @@ const Cart = () => {
                                         <img src={product.image} alt={product.name} />
                                         <p>{product.name}</p>
                                         </div>
-                                        <div className={style.productDiv2}>
+                                        {/* <div className={style.productDiv2}>
                                         <p className={style.precio}>${product.salePrice ? product.salePrice : product.price}</p>
-                                        </div>
+                                        </div> */}
                                     </div>
                                     );
                                 })}
                             </div>
 
                             <p className={style.totalPriceContainer}>
-                                Precio total: <span className={style.totalPrice}>${totalPrice}</span>
+                                Precio total: <span className={style.totalPrice}>${finalPrice}</span>
                             </p>
                         </div>
                     </div>

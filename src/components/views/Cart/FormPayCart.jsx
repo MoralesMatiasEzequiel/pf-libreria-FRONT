@@ -8,7 +8,7 @@ import mpLogo from "./mpLogo.png";
 const FormPayCart = ({ state, setFormInfo, setFormShipment, setFormPay }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { productsOnCart, paymentLink, clientInfo, shipmentInfo } = useSelector((state) => state.cart);
+  const { productsOnCart, paymentLink, clientInfo, shipmentInfo, finalPrice } = useSelector((state) => state.cart);
   const [showPayButton, setShowPayButton] = useState(false);
 
   useEffect(() => {
@@ -21,6 +21,7 @@ const FormPayCart = ({ state, setFormInfo, setFormShipment, setFormPay }) => {
   const handleOnClick = (event) => {
     event.preventDefault();
     dispatch(createOrder(productsOnCart));
+    // dispatch(createOrder(finalPrice));
     dispatch(sendOrder(clientInfo, shipmentInfo, productsOnCart));
   };
 
