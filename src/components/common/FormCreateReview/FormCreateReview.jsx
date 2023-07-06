@@ -99,7 +99,12 @@ const FormCreateReview = () => {
   return (
     <div>
       <h2 className={style.h1}>Deja tu opinión sobre la tienda</h2>
-      <p className={style.p}>Tu opinión es muy importante para nosotros, por eso te invitamos para que puedas dejar una review sobre la tienda en el siguiente formulario. La review creada sera visualizada en el Home de la tienda en la sección "Reviews de usuarios sobre la tienda".</p>
+      <p className={style.p}>
+        Tu opinión es muy importante para nosotros, por eso te invitamos para
+        que puedas dejar una review sobre la tienda en el siguiente formulario.
+        La review creada sera visualizada en el Home de la tienda en la sección
+        "Reviews de usuarios sobre la tienda".
+      </p>
 
       <form action="" onSubmit={handleSubmit}>
         <div className={style.contfor1y2}>
@@ -141,38 +146,40 @@ const FormCreateReview = () => {
               id="exampleFormControlTextarea1"
               rows="4"
             ></textarea>
-            {errors.message && (
-              <p className={style.errors}>{errors.message}</p>
-            )}
+            {errors.message && <p className={style.errors}>{errors.message}</p>}
           </div>
         </div>
 
-        <button className={style.enviarBtn} disabled={isDisabled}>Enviar Review</button>
+        <button className={style.enviarBtn} disabled={isDisabled}>
+          Enviar Review
+        </button>
       </form>
 
-      <Modal
-        show={showSuccessModal}
-        onHide={handleCloseSuccessModal}
-        centered
-      >
+      <Modal show={showSuccessModal} onHide={handleCloseSuccessModal} centered>
         <Modal.Body closeButton>
           <div className="d-flex justify-content-between align-items-center">
-            <div> ✔ Tu mensaje ha sido enviado exitosamente.</div>
-            <Button variant="secondary" onClick={handleCloseSuccessModal}>
+            <h6> ✔ Tu mensaje ha sido enviado exitosamente.</h6>
+            <Button
+              className={style.btnPrimary}
+              onClick={handleCloseSuccessModal}
+            >
               Cerrar
             </Button>
           </div>
         </Modal.Body>
       </Modal>
-
       <Modal show={showErrorModal} onHide={handleCloseErrorModal} centered>
         <Modal.Body closeButton>
           <div className="d-flex justify-content-between align-items-center">
             <div>
+              {" "}
               ❌ Hubo un error al enviar tu mensaje. Por favor, inténtalo
               nuevamente más tarde.
             </div>
-            <Button variant="secondary" onClick={handleCloseErrorModal}>
+            <Button
+              className={style.btnPrimary}
+              onClick={handleCloseErrorModal}
+            >
               Cerrar
             </Button>
           </div>

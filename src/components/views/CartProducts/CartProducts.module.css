@@ -2,8 +2,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  min-height: 80vh;
+  justify-content: flex-start;
+  min-height: 89vh;
+	padding: 20px;
+
 }
 
 .containerTitle {
@@ -44,6 +46,21 @@
 
 .productsContainer::-webkit-scrollbar-corner {
   background-color: transparent; /* Color de la esquina de la barra de desplazamiento */
+}
+
+.clearCartButton {
+  background-color: #ff9e5c;
+  border-color: #ff9e5c;
+  color: rgb(255, 255, 255);
+  border-radius: 5px;
+  border-style: solid;
+  margin-bottom: 5px;
+  margin-left: 5px;
+  margin-right: 15px;
+}
+.clearCartButton:hover {
+  background-color: white;
+  color: #ff9e5c;
 }
 
 

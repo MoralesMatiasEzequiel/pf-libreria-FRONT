@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  min-height: 72	vh;
+  min-height: 84vh;
   padding: 20px;
 }
 
@@ -27,7 +27,7 @@
 	/* text-align:end; */
 	padding: 10px ;
 	margin: 10px;
-  max-height: 470px; /* Ajusta la altura máxima deseada */
+  max-height: 520px; /* Ajusta la altura máxima deseada */
   overflow: auto; /* Habilita el desplazamiento vertical */
 }
 

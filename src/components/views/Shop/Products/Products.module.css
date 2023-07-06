@@ -1,8 +1,8 @@
 .totalContainer {
-  min-height: 67vh;
+  min-height: 83vh;
   width: 100%;
   height: 100%;
-  margin-bottom: 3%;
+  /* margin-bottom: 3%; */
 }
 
 .noProduct {
