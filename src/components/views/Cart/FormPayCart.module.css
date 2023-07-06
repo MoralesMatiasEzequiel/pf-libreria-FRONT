@@ -35,17 +35,13 @@
     margin-right: 10px;
 }
 
-.imgMP:hover {
-
-}
-
 .backBtn {
     background-color: #ff9e5c;
     border-color: #ff9e5c;
     color: white;
     border-radius: 5px;
     border-style: solid;
-    margin-top: 10em;
+    margin-top: 2em;
 }
 
 .backBtn:enabled:hover{
