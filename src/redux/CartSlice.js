@@ -7,7 +7,8 @@ export const cartSlice = createSlice({
         paymentLink: '',
         clientInfo: {},
         shipmentInfo: {},
-        order: ''
+        order: '',
+        finalPrice: 0
     },
     reducers: {  //Anteriormente Switch
         pushProductOnCart: (state, action) => { 
@@ -41,6 +42,9 @@ export const cartSlice = createSlice({
         },
         cleanPaymentLinkState: (state, action) => {
             state.paymentLink = ''
+        },
+        totalPrice: (state, action) => {
+            state.finalPrice = action.payload
         }
         
     }
@@ -48,6 +52,6 @@ export const cartSlice = createSlice({
 
 
 
-export const { pushProductOnCart, removeProductFromCart, postOrderCreated, setClientInfo, setShipmentInfo, newCartState, sendOrderToBack, cleanPaymentLinkState} = cartSlice.actions
+export const { pushProductOnCart, removeProductFromCart, postOrderCreated, setClientInfo, setShipmentInfo, newCartState, sendOrderToBack, cleanPaymentLinkState, totalPrice } = cartSlice.actions
 
 export default cartSlice.reducer 
