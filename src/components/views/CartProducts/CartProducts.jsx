@@ -105,12 +105,12 @@ const CartProducts = () => {
             
             const productTotalPrice = () => {
               if(product.salePrice < product.price && product.salePrice > 0){
-                return (product.salePrice || product.salePrice) * (selectedStock[product._id] || 1);
-                }else if(product.salePrice === undefined || product.salePrice === null || !product.salePrice){
-                  return (product.price || product.salePrice) * (selectedStock[product._id] || 1);
+                return (product.salePrice || 0) * (selectedStock[product._id] || 1);
+                }else if(!product.salePrice || product.salePrice === undefined || product.salePrice === null){
+                  return (product.price || 0) * (selectedStock[product._id] || 1);
                 }
             }
-              // (product.price || product.salePrice) * (selectedStock[product._id] || 1);
+              // (product.price || 0) * (selectedStock[product._id] || 1);
 
             return (
               <div key={index} className={style.product}>
