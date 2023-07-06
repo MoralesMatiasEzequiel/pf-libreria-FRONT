@@ -3,13 +3,15 @@
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  width: 99%;
+  /* width: %; */
+	min-height: 80vh;
 }
 
 .sideContainer {
   width: 220px;
   margin-left: 10px;
   margin-top: 54px;
+	margin-right: 0px;
 }
 
 .productsContainer {

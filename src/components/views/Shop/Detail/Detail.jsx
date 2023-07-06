@@ -126,8 +126,13 @@ const Detail = () => {
   return (
     <div className={style.container}>
       <div className="row">
+				<div className={style.linkDiv}>
+          <Link to={"/shop"} className={style.linkBack}>
+            {"Volver a Tienda"}
+          </Link>
+        </div>
         <div className="col-md-6 d-flex align-items-center">
-          <div
+					<div
             className="card"
             style={{
               width: "100%",
@@ -232,11 +237,7 @@ const Detail = () => {
             </div>
           </div>
         </div>
-        <div className={style.linkDiv}>
-          <Link to={"/shop"} className={style.linkBack}>
-            {"Volver a Tienda"}
-          </Link>
-        </div>
+        
       </div>
       <ModalCart show={modalShow} onHide={() => setModalShow(false)} />
     </div>
