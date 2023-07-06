@@ -1,89 +1,93 @@
+.container{
+  min-height: 61.5vh;
+}
+
 .h2 {
-    text-align: left;
-    width: 76%;
-    margin: 40px auto 25px auto;
-  }
-  
-  .span {
-    background-color: #FF9E5C;
-    color: white;
-    font-size: 22px;
-    border-radius: 5px;
-    padding: 5px;
-  }
-  .span:hover{
-    background-color: white;
-    color:#FF9E5C;
-    border-color: #FF9E5C;
-    border-style: solid;
-    padding: 5px;
-  }
-  
-  .link {
-    text-decoration: none;
-  }
-  
-  .carousel {
-    width: 78%;
-    margin: 5px auto;
-    margin-bottom: 15px;
-  }
-  
-  .card {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
-    max-width: 300px;
-    margin: auto 1rem;
-    text-align: center;
-    /* font-family: arial; */
-  
-    /* Nuevos estilos para asegurar el mismo tamaño de las tarjetas */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
-  }
-  
-  .productImage {
-    padding-top: 5px;
-    height: 300px;
-    width: 95%;
-    padding: 40px;
-  }
-  
-  .priceBefore {
-    color: red;
-    font-size: 18px;
-  }
-  
-  .priceNow {
-    margin-top: -15px;
-    color: green;
-    font-size: 20px;
-  }
-  
-  .rating {
-    font-size: 20px;
-    color: #FF9E5C;
-  }
-  
-  .card button {
-    border: none;
-    outline: 0;
-    padding: 12px;
-    color: white;
-    background-color: #FF9E5C;
-    text-align: center;
-    cursor: pointer;
-    width: 100%;
-    font-size: 18px;
-    border-color: #FF9E5C;
-    border-style: solid;
-  }
-  
-  .card button:hover {
-    background-color: white;
-    color:#FF9E5C;
-    border-color: #FF9E5C;
-    border-style: solid;
-  }
-  
+  text-align: left;
+  width: 76%;
+  margin: 40px auto 25px auto;
+}
+
+.span {
+  background-color: #FF9E5C;
+  color: white;
+  font-size: 22px;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.span:hover {
+  background-color: white;
+  color: #FF9E5C;
+  border-color: #FF9E5C;
+  border-style: solid;
+  padding: 5px;
+}
+
+.link {
+  text-decoration: none;
+}
+
+.carousel {
+  width: 78%;
+  margin: 5px auto;
+  margin-bottom: 15px;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
+  max-width: 300px;
+  margin: auto 1rem;
+  text-align: center;
+  /* font-family: arial; */
+
+  /* Nuevos estilos para asegurar el mismo tamaño de las tarjetas */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.productImage {
+  padding-top: 5px;
+  height: 300px;
+  width: 95%;
+  padding: 40px;
+}
+
+.priceBefore {
+  color: red;
+  font-size: 18px;
+}
+
+.priceNow {
+  margin-top: -15px;
+  color: green;
+  font-size: 20px;
+}
+
+.rating {
+  font-size: 20px;
+  color: #FF9E5C;
+}
+
+.card button {
+  border: none;
+  outline: 0;
+  padding: 12px;
+  color: white;
+  background-color: #FF9E5C;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+  border-color: #FF9E5C;
+  border-style: solid;
+}
+
+.card button:hover {
+  background-color: white;
+  color: #FF9E5C;
+  border-color: #FF9E5C;
+  border-style: solid;
+}
