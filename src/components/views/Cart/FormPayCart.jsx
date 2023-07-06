@@ -40,13 +40,13 @@ const FormPayCart = ({ state, setFormInfo, setFormShipment, setFormPay }) => {
           <div>
             {showPayButton && 
             <div>
-              <div>
+              <div className={style.divMercado}>
                 <h4>Mercado Pago:</h4>
                 <button className={style.payBtn} onClick={handlePayButton}>
-                  <img src={mpLogo} alt="" className={style.imgMP}/>
-                Pagar con Mercado Pago</button>
+                  <img src={mpLogo} alt="" className={style.imgMP}/>Pagar con Mercado Pago
+                </button>
               </div>            
-              <div>
+              <div className={style.divTrnasfer}>
                 <h4>Transferencia bancaria directa:</h4>
                 <p>
                   Realizar tu pago directamente en nuestra cuenta bancaria. Por favor, usá el número del pedido como referencia de pago. Tu pedido no se procesará hasta que se haya recibido el importe en nuestra cuenta. 
@@ -54,28 +54,28 @@ const FormPayCart = ({ state, setFormInfo, setFormShipment, setFormPay }) => {
                 <br />
                 <div>
                   <p>
-                    Titular de la cuenta: Libería Pluma.
+                    <span>Titular de la cuenta:</span> Libería Pluma.
                   </p>
                   <p>
-                    Nro de cuenta: 200658799980
+                    <span>Nro de cuenta:</span> 200658799980
                   </p>
                   <p>
-                    Tipo de cuenta: Caja de ahorro en pesos.
+                    <span>Tipo de cuenta: </span> Caja de ahorro en pesos.
                   </p>
                   <p>
-                    CBU: 012345678921346
+                    <span>CBU: </span> 012345678921346
                   </p>
                   <p>
-                    Alias: PLUMA.LIBRERIA
+                    <span>Alias: </span> PLUMA.LIBRERIA
                   </p>
                   <p>
-                    -Banco Nación-
+                    <span>-Banco Nación-</span>
                   </p>
+                </div>
+              </div>
                   <Link to={'/success'}>
                     <button className={style.finishBtn}>¡Ya hice la transferencia!</button>
                   </Link>
-                </div>
-              </div>
             </div>}
               
           </div>
