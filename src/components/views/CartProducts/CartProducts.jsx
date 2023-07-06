@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { deleteProductFromCart, newCart } from "../../../redux/CartActions";
+import { deleteProductFromCart, newCart, sendTotalPrice } from "../../../redux/CartActions";
 import { Link } from "react-router-dom";
 import style from "./CartProducts.module.css";
 import { useState, useEffect } from "react";
@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 const CartProducts = () => {
 
   const dispatch = useDispatch();
-  const { productsOnCart } = useSelector((state) => state.cart);
+  const { productsOnCart, finalPrice } = useSelector((state) => state.cart);
 
   const [ selectedStock, setSelectedStock ] = useState({});
   const [ updatedStock, setUpdatedStock ] = useState([...productsOnCart]);
@@ -91,6 +91,10 @@ const CartProducts = () => {
   //   }
   // }
 
+  const sendFinalPrice = (price) => {
+    dispatch(sendTotalPrice(price))
+  }
+
   return (
     <div className={style.container}>
       <h1 className={style.containerTitle}>CARRITO</h1>
@@ -156,7 +160,7 @@ const CartProducts = () => {
       </p>
 
       <Link to={"/checkout"} className={style.link}>
-        <button disabled={isDisabled} className={style.compraBtn}>Hacer compra</button>
+        <button disabled={isDisabled} className={style.compraBtn} onClick={() => sendFinalPrice(totalPrice)} >Hacer compra</button>
       </Link>
     </div>
   );
